@@ -1,0 +1,72 @@
+name: DinoHatch
+options:
+  bundleIdPrefix: com.dinohatch
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+
+configs:
+  Debug: debug
+  Release: release
+
+targets:
+  DinoHatch:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: DinoHatch
+    info:
+      path: DinoHatch/Info.plist
+      properties:
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+    entitlements:
+      path: DinoHatch/DinoHatch.entitlements
+      properties:
+        com.apple.developer.icloud-container-identifiers:
+          - iCloud.com.dinohatch.app
+        com.apple.developer.icloud-services:
+          - CloudKit
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.dinohatch.app
+        CODE_SIGN_STYLE: Automatic
+        SWIFT_VERSION: "5.0"
+        TARGETED_DEVICE_FAMILY: "1,2"
+        ENABLE_PREVIEWS: YES
+
+  DinoHatchTests:
+    type: bundle.unit-test
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: DinoHatchTests
+    dependencies:
+      - target: DinoHatch
+    settings:
+      base:
+        SWIFT_VERSION: "5.0"
+
+schemes:
+  DinoHatch:
+    build:
+      targets:
+        DinoHatch: all
+        DinoHatchTests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - DinoHatchTests
+    archive:
+      config: Release

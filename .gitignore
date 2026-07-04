@@ -1,0 +1,12 @@
+## Xcode / XcodeGen generated
+*.xcodeproj
+*.xcworkspace
+xcuserdata/
+DerivedData/
+.build/
+
+## macOS
+.DS_Store
+
+## Swift Package Manager
+.swiftpm/
