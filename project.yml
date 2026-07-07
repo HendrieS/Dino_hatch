@@ -29,13 +29,6 @@ targets:
           - UIInterfaceOrientationPortraitUpsideDown
           - UIInterfaceOrientationLandscapeLeft
           - UIInterfaceOrientationLandscapeRight
-    entitlements:
-      path: DinoHatch/DinoHatch.entitlements
-      properties:
-        com.apple.developer.icloud-container-identifiers:
-          - iCloud.com.dinohatch.app
-        com.apple.developer.icloud-services:
-          - CloudKit
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.dinohatch.app

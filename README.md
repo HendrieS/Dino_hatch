@@ -28,19 +28,15 @@ Then in Xcode:
 
 1. Select the `DinoHatch` target → **Signing & Capabilities** → set your
    Team. Xcode will offer to fix the bundle identifier / provisioning
-   automatically — you can also change `PRODUCT_BUNDLE_IDENTIFIER` and the
-   iCloud container id in `project.yml` (search for `com.dinohatch.app`),
-   then re-run `xcodegen generate`.
-2. The iCloud + CloudKit capability is already declared in `project.yml`
-   (see the `entitlements` block for the `DinoHatch` target), so
-   `DinoHatch.entitlements` is generated automatically — you shouldn't need
-   to add the capability manually, but do confirm it appears under
-   **Signing & Capabilities** after generating.
-3. Build and run (`Cmd+R`) on an iPhone or iPad simulator.
-4. To see CloudKit sync actually work, sign into iCloud on the
-   Simulator/device (Settings → your Apple ID) — without that, SwiftData
-   still works fully locally, sync is just a no-op.
-5. Run the unit tests with `Cmd+U`.
+   automatically — you can also change `PRODUCT_BUNDLE_IDENTIFIER` in
+   `project.yml` (search for `com.dinohatch.app`), then re-run
+   `xcodegen generate`.
+2. Build and run (`Cmd+R`) on an iPhone or iPad simulator.
+3. Run the unit tests with `Cmd+U`.
+
+Persistence is **local-only for this alpha** (plain SwiftData, no iCloud) —
+see [Re-enabling iCloud sync](#re-enabling-icloud-sync-optional) below if you
+have a paid Apple Developer account and want cross-device sync.
 
 ## How it works
 
@@ -51,14 +47,38 @@ Then in Xcode:
 - **Dinosaur catalog**: `Data/DinosaurCatalog.swift` is a static, bundled
   list of 14 dinosaurs — no backend, no JSON parsing, just a Swift array.
 - **Collection**: `Models/UnlockedDinosaur.swift` is the only thing that
-  actually persists/syncs — a tiny record of which catalog IDs have been
-  unlocked and when.
+  actually persists — a tiny record of which catalog IDs have been unlocked
+  and when.
 - **Hatch selection**: `Stores/HatchSelector.swift` randomly picks a
   not-yet-unlocked dinosaur; once the whole catalog is unlocked it replays a
   random existing one rather than dead-ending the reward loop.
 - **Animation**: `Views/HatchAnimationView.swift` and `Views/EggView.swift`
   build the crack/wobble/burst/confetti sequence from plain SwiftUI shapes
   and animations — no image assets or third-party animation library.
+
+## Re-enabling iCloud sync (optional)
+
+Apple doesn't allow the iCloud capability on personal/free developer teams —
+Xcode will show "Cannot create a iOS App Development provisioning profile...
+Personal development teams... do not support the iCloud capability" if you
+try. If you enroll in the paid Apple Developer Program ($99/year) and want
+the collection to sync across a kid's devices:
+
+1. In `project.yml`, add back an `entitlements` block under the `DinoHatch`
+   target:
+   ```yaml
+   entitlements:
+     path: DinoHatch/DinoHatch.entitlements
+     properties:
+       com.apple.developer.icloud-container-identifiers:
+         - iCloud.com.dinohatch.app
+       com.apple.developer.icloud-services:
+         - CloudKit
+   ```
+2. In `DinoHatch/DinoHatchApp.swift`, change the `ModelConfiguration` call to
+   pass `cloudKitDatabase: .automatic`.
+3. Run `xcodegen generate`, select your paid Team under **Signing &
+   Capabilities**, and sign into iCloud on the Simulator/device to test sync.
 
 ## Known alpha limitations
 
@@ -89,5 +109,3 @@ verify on your Mac:
 - [ ] Force-quit the app mid-countdown, relaunch — timer resumes or
       immediately shows the hatch if time already elapsed
 - [ ] `Cmd+U` unit tests pass
-- [ ] iCloud/CloudKit sync (optional, needs two devices/simulators signed
-      into the same iCloud account)
