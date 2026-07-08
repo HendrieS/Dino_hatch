@@ -2,25 +2,35 @@ import SwiftUI
 
 struct DurationPickerView: View {
     @Binding var minutes: Int
-    let options: [Int]
+    @Binding var seconds: Int
 
     var body: some View {
         VStack(spacing: 12) {
-            Text("\(minutes) min")
+            Text(String(format: "%d:%02d", minutes, seconds))
                 .font(.system(size: 44, weight: .bold, design: .rounded))
+                .monospacedDigit()
 
-            Picker("Minutes", selection: $minutes) {
-                ForEach(options, id: \.self) { value in
-                    Text("\(value) min").tag(value)
+            HStack(spacing: 0) {
+                Picker("Minutes", selection: $minutes) {
+                    ForEach(0..<60, id: \.self) { value in
+                        Text("\(value) min").tag(value)
+                    }
                 }
+                .pickerStyle(.wheel)
+
+                Picker("Seconds", selection: $seconds) {
+                    ForEach(0..<60, id: \.self) { value in
+                        Text("\(value) sec").tag(value)
+                    }
+                }
+                .pickerStyle(.wheel)
             }
-            .pickerStyle(.wheel)
-            .frame(height: 120)
-            .padding(.horizontal, 32)
+            .frame(height: 140)
+            .padding(.horizontal, 16)
         }
     }
 }
 
 #Preview {
-    DurationPickerView(minutes: .constant(5), options: [1, 3, 5, 10, 15, 20, 30, 45, 60])
+    DurationPickerView(minutes: .constant(5), seconds: .constant(31))
 }

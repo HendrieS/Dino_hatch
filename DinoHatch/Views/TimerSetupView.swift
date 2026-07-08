@@ -6,9 +6,10 @@ struct TimerSetupView: View {
     var onStart: (Dinosaur) -> Void
 
     @Query private var unlockedDinosaurs: [UnlockedDinosaur]
-    @State private var durationMinutes: Int = 5
+    @State private var minutes: Int = 5
+    @State private var seconds: Int = 0
 
-    private let availableMinutes = [1, 3, 5, 10, 15, 20, 30, 45, 60]
+    private var totalSeconds: Int { minutes * 60 + seconds }
 
     var body: some View {
         NavigationStack {
@@ -22,7 +23,7 @@ struct TimerSetupView: View {
                     .font(.title2.bold())
                     .multilineTextAlignment(.center)
 
-                DurationPickerView(minutes: $durationMinutes, options: availableMinutes)
+                DurationPickerView(minutes: $minutes, seconds: $seconds)
 
                 Button {
                     startTimer()
@@ -31,10 +32,11 @@ struct TimerSetupView: View {
                         .font(.title3.bold())
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.dinoGreen)
+                        .background(totalSeconds > 0 ? Color.dinoGreen : Color.gray)
                         .foregroundStyle(.white)
                         .clipShape(RoundedRectangle(cornerRadius: 20))
                 }
+                .disabled(totalSeconds == 0)
                 .padding(.horizontal, 32)
 
                 Spacer()
@@ -42,19 +44,18 @@ struct TimerSetupView: View {
             }
             .navigationTitle("Dino Hatch")
             .onAppear {
-                durationMinutes = closestOption(to: max(1, engine.lastUsedDuration / 60))
+                let last = engine.lastUsedDuration
+                minutes = last / 60
+                seconds = last % 60
             }
         }
     }
 
-    private func closestOption(to value: Int) -> Int {
-        availableMinutes.min(by: { abs($0 - value) < abs($1 - value) }) ?? value
-    }
-
     private func startTimer() {
+        guard totalSeconds > 0 else { return }
         let unlockedIDs = Set(unlockedDinosaurs.map(\.dinosaurID))
         let dinosaur = HatchSelector.pickNext(unlockedIDs: unlockedIDs)
-        engine.start(duration: TimeInterval(durationMinutes * 60), hatching: dinosaur.id)
+        engine.start(duration: TimeInterval(totalSeconds), hatching: dinosaur.id)
         onStart(dinosaur)
     }
 }
