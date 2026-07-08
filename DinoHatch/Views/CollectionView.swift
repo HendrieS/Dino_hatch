@@ -11,10 +11,6 @@ struct CollectionView: View {
 
     private let columns = [GridItem(.adaptive(minimum: 140), spacing: 16)]
 
-    #if DEBUG
-    @State private var showAnatomyDemo = false
-    #endif
-
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -53,16 +49,10 @@ struct CollectionView: View {
                         Button("Reset Collection (Testing)", systemImage: "trash", role: .destructive) {
                             resetCollection()
                         }
-                        Button("Preview X-Ray Demo (Testing)", systemImage: "figure.walk") {
-                            showAnatomyDemo = true
-                        }
                     } label: {
                         Image(systemName: "ladybug.fill")
                     }
                 }
-            }
-            .sheet(isPresented: $showAnatomyDemo) {
-                AnatomyDemoView()
             }
             #endif
         }
