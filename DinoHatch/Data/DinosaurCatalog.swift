@@ -11,7 +11,7 @@ enum DinosaurCatalog {
             funFact: "T-Rex had teeth as long as bananas and one of the strongest bites of any animal ever!",
             symbolName: "flame.fill",
             emoji: "🦖",
-            imageAssetName: nil,
+            imageAssetName: "trex-skin",
             rarity: .rare
         ),
         Dinosaur(
@@ -23,7 +23,7 @@ enum DinosaurCatalog {
             funFact: "Triceratops had three horns and a giant bony frill to protect its neck from predators!",
             symbolName: "shield.fill",
             emoji: "🦕",
-            imageAssetName: nil,
+            imageAssetName: "triceratops-skin",
             rarity: .common
         ),
         Dinosaur(
@@ -35,7 +35,7 @@ enum DinosaurCatalog {
             funFact: "Velociraptors were fast, smart hunters that likely had feathers, just like birds today!",
             symbolName: "wind",
             emoji: "🐦",
-            imageAssetName: nil,
+            imageAssetName: "velociraptor-skin",
             rarity: .uncommon
         ),
         Dinosaur(
@@ -47,7 +47,7 @@ enum DinosaurCatalog {
             funFact: "Brachiosaurus had front legs longer than its back legs, kind of like a giraffe!",
             symbolName: "tree.fill",
             emoji: "🌿",
-            imageAssetName: nil,
+            imageAssetName: "brachiosaurus-skin",
             rarity: .common
         ),
         Dinosaur(
@@ -59,7 +59,7 @@ enum DinosaurCatalog {
             funFact: "Stegosaurus had bony plates on its back and dangerous spikes on its tail called a thagomizer!",
             symbolName: "triangle.fill",
             emoji: "🦕",
-            imageAssetName: nil,
+            imageAssetName: "stegosaurus-skin",
             rarity: .common
         ),
         Dinosaur(
@@ -71,7 +71,7 @@ enum DinosaurCatalog {
             funFact: "Spinosaurus had a huge sail on its back and loved to swim and hunt fish!",
             symbolName: "water.waves",
             emoji: "🐊",
-            imageAssetName: nil,
+            imageAssetName: "spinosaurus-skin",
             rarity: .rare
         ),
         Dinosaur(
@@ -83,7 +83,7 @@ enum DinosaurCatalog {
             funFact: "Ankylosaurus was covered in bony armor and had a big club at the end of its tail!",
             symbolName: "shield.lefthalf.filled",
             emoji: "🛡️",
-            imageAssetName: nil,
+            imageAssetName: "ankylosaurus-skin",
             rarity: .uncommon
         ),
         Dinosaur(
@@ -95,7 +95,7 @@ enum DinosaurCatalog {
             funFact: "Pteranodon wasn't a dinosaur at all, it was a flying reptile that soared over the oceans!",
             symbolName: "bird.fill",
             emoji: "🦅",
-            imageAssetName: nil,
+            imageAssetName: "pteranodon-skin",
             rarity: .uncommon
         ),
         Dinosaur(
