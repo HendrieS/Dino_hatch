@@ -12,6 +12,7 @@ enum DinosaurCatalog {
             symbolName: "flame.fill",
             emoji: "🦖",
             imageAssetName: "trex-skin",
+            skeletonAssetName: "trex-skeleton",
             rarity: .rare
         ),
         Dinosaur(
