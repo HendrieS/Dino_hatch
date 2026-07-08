@@ -7,7 +7,11 @@ struct DinosaurDetailView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                DinoImageView(dinosaur: dinosaur, size: 160)
+                // Was: DinoImageView(dinosaur: dinosaur, size: 160)
+                // Now the interactive press & hold x-ray viewer. It falls
+                // back to the emoji placeholder automatically for dinosaurs
+                // that don't have skin + skeleton art yet.
+                DinoAnatomyView(dinosaur: dinosaur, size: 300)
 
                 Text(dinosaur.name)
                     .font(.system(size: 30, weight: .bold, design: .rounded))
