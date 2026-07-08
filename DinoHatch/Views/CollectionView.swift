@@ -2,6 +2,7 @@ import SwiftUI
 import SwiftData
 
 struct CollectionView: View {
+    @Environment(\.modelContext) private var modelContext
     @Query(sort: \UnlockedDinosaur.unlockedAt) private var unlocked: [UnlockedDinosaur]
 
     private var unlockedIDs: Set<String> {
@@ -38,8 +39,38 @@ struct CollectionView: View {
                 .padding()
             }
             .navigationTitle("Dino-pedia")
+            #if DEBUG
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Menu {
+                        Button("Unlock All (Testing)", systemImage: "lock.open.fill") {
+                            unlockAll()
+                        }
+                        Button("Reset Collection (Testing)", systemImage: "trash", role: .destructive) {
+                            resetCollection()
+                        }
+                    } label: {
+                        Image(systemName: "ladybug.fill")
+                    }
+                }
+            }
+            #endif
         }
     }
+
+    #if DEBUG
+    private func unlockAll() {
+        for dinosaur in DinosaurCatalog.all where !unlockedIDs.contains(dinosaur.id) {
+            modelContext.insert(UnlockedDinosaur(dinosaurID: dinosaur.id))
+        }
+    }
+
+    private func resetCollection() {
+        for record in unlocked {
+            modelContext.delete(record)
+        }
+    }
+    #endif
 }
 
 #Preview {
