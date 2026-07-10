@@ -13,10 +13,10 @@ struct HatchRevealView: View {
 
             DinoImageView(dinosaur: dinosaur, size: 180)
 
-            Text(dinosaur.name)
+            Text(localizedContent: dinosaur.name)
                 .font(.system(size: 34, weight: .bold, design: .rounded))
 
-            Text(dinosaur.funFact)
+            Text(localizedContent: dinosaur.funFact)
                 .font(.body)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 32)

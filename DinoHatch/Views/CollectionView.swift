@@ -14,10 +14,19 @@ struct CollectionView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                Text("\(unlockedIDs.count) / \(DinosaurCatalog.all.count) discovered")
-                    .font(.headline)
-                    .foregroundStyle(.secondary)
-                    .padding(.top, 8)
+                // Composed from separate Text views (rather than one
+                // interpolated string) so the numeral formatting doesn't
+                // depend on guessing the exact %-format Xcode would have
+                // extracted for a hand-authored String Catalog.
+                HStack(spacing: 4) {
+                    Text(unlockedIDs.count, format: .number)
+                    Text(verbatim: "/")
+                    Text(DinosaurCatalog.all.count, format: .number)
+                    Text("discovered")
+                }
+                .font(.headline)
+                .foregroundStyle(.secondary)
+                .padding(.top, 8)
 
                 LazyVGrid(columns: columns, spacing: 16) {
                     ForEach(DinosaurCatalog.all) { dinosaur in

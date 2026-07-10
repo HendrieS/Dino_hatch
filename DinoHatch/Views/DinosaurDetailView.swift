@@ -13,13 +13,16 @@ struct DinosaurDetailView: View {
                 // that don't have skin + skeleton art yet.
                 DinoAnatomyView(dinosaur: dinosaur, size: 300)
 
-                Text(dinosaur.name)
+                Text(localizedContent: dinosaur.name)
                     .font(.system(size: 30, weight: .bold, design: .rounded))
 
                 VStack(spacing: 12) {
-                    FactRow(icon: "clock.fill", label: "Era", value: dinosaur.era)
-                    FactRow(icon: dinosaur.diet.symbolName, label: "Diet", value: dinosaur.diet.label)
-                    FactRow(icon: "ruler.fill", label: "Length", value: dinosaur.length)
+                    FactRow(icon: "clock.fill", label: "Era", value: Text(localizedContent: dinosaur.era))
+                    FactRow(icon: dinosaur.diet.symbolName, label: "Diet", value: dinosaur.diet.localizedLabel)
+                    // Length is a measurement notation (e.g. "12 m (40 ft)"),
+                    // not linguistic content, so it's shown as-is in every
+                    // language rather than routed through localization.
+                    FactRow(icon: "ruler.fill", label: "Length", value: Text(verbatim: dinosaur.length))
                 }
                 .padding()
                 .background(Color.dinoCardBackground)
@@ -28,7 +31,7 @@ struct DinosaurDetailView: View {
                 VStack(alignment: .leading, spacing: 8) {
                     Label("Fun Fact", systemImage: "sparkles")
                         .font(.headline)
-                    Text(dinosaur.funFact)
+                    Text(localizedContent: dinosaur.funFact)
                         .font(.body)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -37,29 +40,32 @@ struct DinosaurDetailView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 16))
 
                 if let unlockedAt {
-                    Text("Hatched on \(unlockedAt.formatted(date: .abbreviated, time: .omitted))")
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
+                    HStack(spacing: 4) {
+                        Text("Hatched on")
+                        Text(unlockedAt, style: .date)
+                    }
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
                 }
             }
             .padding()
         }
-        .navigationTitle(dinosaur.name)
+        .navigationTitle(Text(localizedContent: dinosaur.name))
         .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 private struct FactRow: View {
     let icon: String
-    let label: String
-    let value: String
+    let label: LocalizedStringKey
+    let value: Text
 
     var body: some View {
         HStack {
             Label(label, systemImage: icon)
                 .font(.subheadline.bold())
             Spacer()
-            Text(value)
+            value
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
         }

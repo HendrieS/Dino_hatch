@@ -6,7 +6,7 @@ struct DinoCardView: View {
     var body: some View {
         VStack(spacing: 8) {
             DinoImageView(dinosaur: dinosaur, size: 64)
-            Text(dinosaur.name)
+            Text(localizedContent: dinosaur.name)
                 .font(.subheadline.bold())
                 .multilineTextAlignment(.center)
                 .lineLimit(2)

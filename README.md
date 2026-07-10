@@ -56,6 +56,39 @@ have a paid Apple Developer account and want cross-device sync.
   build the crack/wobble/burst/confetti sequence from plain SwiftUI shapes
   and animations — no image assets or third-party animation library.
 
+## Localization
+
+The app supports English, German, Spanish, French, Dutch, and Russian via a
+single String Catalog at `DinoHatch/Localizable.xcstrings`. Two patterns are
+used, depending on where the text comes from:
+
+- **Static UI text** (buttons, labels, hints) is written as ordinary string
+  literals (`Text("Start Timer")`) — SwiftUI automatically looks these up in
+  the catalog by treating the literal as the key.
+- **Data-driven text** (dinosaur names/eras/fun facts, which come from
+  `DinosaurCatalog.swift` at runtime rather than a call-site literal) uses
+  the `Text(localizedContent:)` helper in `Extensions/Text+LocalizedContent.swift`,
+  which explicitly looks the English catalog string up as a key. The
+  `DinosaurCatalog.swift` content itself is unchanged — the English strings
+  double as the translation keys, so no restructuring was needed there.
+- `Dinosaur.length` (e.g. `"12 m (40 ft)"`) is intentionally shown as-is in
+  every language via `Text(verbatim:)` — it's a measurement notation, not
+  linguistic content.
+- The app's own name ("Dino Hatch") and the "Dino-pedia" nickname are kept
+  the same across languages, same as most apps don't translate their brand
+  name.
+
+**Adding another language**: open `Localizable.xcstrings` in Xcode (or edit
+the JSON directly), add the new language code to every key's
+`localizations`, and add it to the project's supported locales under
+**Project → Info → Localizations**.
+
+**Adding new dinosaurs/UI text**: add the English string to the Swift source
+as usual, then add a matching entry (with all six languages) to
+`Localizable.xcstrings` — anything missing silently falls back to the
+English source string, so the app won't break if a translation is missing,
+it'll just show English for that string.
+
 ## Re-enabling iCloud sync (optional)
 
 Apple doesn't allow the iCloud capability on personal/free developer teams —

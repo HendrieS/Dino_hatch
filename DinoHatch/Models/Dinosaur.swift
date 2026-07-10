@@ -22,14 +22,6 @@ struct Dinosaur: Identifiable, Codable, Hashable {
         case herbivore
         case omnivore
 
-        var label: String {
-            switch self {
-            case .carnivore: return "Carnivore"
-            case .herbivore: return "Herbivore"
-            case .omnivore: return "Omnivore"
-            }
-        }
-
         var symbolName: String {
             switch self {
             case .carnivore: return "fork.knife"

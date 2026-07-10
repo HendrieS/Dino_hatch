@@ -11,19 +11,29 @@ struct DurationPickerView: View {
                 .monospacedDigit()
 
             HStack(spacing: 0) {
-                Picker("Minutes", selection: $minutes) {
-                    ForEach(0..<60, id: \.self) { value in
-                        Text("\(value) min").tag(value)
+                VStack(spacing: 4) {
+                    Text("Minutes")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    Picker("Minutes", selection: $minutes) {
+                        ForEach(0..<60, id: \.self) { value in
+                            Text(value, format: .number).tag(value)
+                        }
                     }
+                    .pickerStyle(.wheel)
                 }
-                .pickerStyle(.wheel)
 
-                Picker("Seconds", selection: $seconds) {
-                    ForEach(0..<60, id: \.self) { value in
-                        Text("\(value) sec").tag(value)
+                VStack(spacing: 4) {
+                    Text("Seconds")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    Picker("Seconds", selection: $seconds) {
+                        ForEach(0..<60, id: \.self) { value in
+                            Text(value, format: .number).tag(value)
+                        }
                     }
+                    .pickerStyle(.wheel)
                 }
-                .pickerStyle(.wheel)
             }
             .frame(height: 140)
             .padding(.horizontal, 16)
