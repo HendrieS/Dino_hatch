@@ -83,6 +83,9 @@ struct CircularDurationPicker: View {
         if degrees < 0 { degrees += 360 }
 
         let rawSeconds = Int((degrees / 360) * Double(Self.maxSeconds))
+        // Self-qualified: an earlier version referenced `snapSeconds` bare
+        // here (unlike `Self.maxSeconds` above) and that failed to compile
+        // — always qualify static member references from instance scope.
         let snapped = (rawSeconds / Self.snapSeconds) * Self.snapSeconds
         totalSeconds = min(max(snapped, 0), Self.maxSeconds)
     }
