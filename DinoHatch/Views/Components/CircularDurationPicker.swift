@@ -1,18 +1,17 @@
 import SwiftUI
 
-/// Clock-face style duration picker: drag anywhere on the dial to set a
-/// duration up to 59:59, snapping to the nearest 5-minute stop — 12 stops
-/// around the circle, same as the numbers on an analog clock, so it's fast
-/// to land on a round time rather than fiddling for exact seconds. One
-/// full lap covers the entire range (0 min at the top, sweeping clockwise);
-/// dragging past the top wraps around, same as an analog clock hand has no
-/// "stop" at 12 — that's the expected feel here, not a bug to guard against.
+/// Clock-face style duration picker: drag anywhere on the dial to set any
+/// duration from 0:01 up to 59:59. One full lap of the circle covers the
+/// entire range (0:00 at the top, sweeping clockwise up to just under
+/// 60:00), same as how an analog clock hand has no "stop" at 12 —
+/// dragging past the top wraps around, which is the expected feel for a
+/// dial like this rather than a bug to guard against.
 struct CircularDurationPicker: View {
     @Binding var totalSeconds: Int
     var diameter: CGFloat = 260
 
     static let maxSeconds = 3599
-    static let snapSeconds = 300 // 5 minutes
+    static let snapSeconds = 5
     private let ringWidth: CGFloat = 18
 
     private var progress: Double {
@@ -29,7 +28,7 @@ struct CircularDurationPicker: View {
                 .stroke(Color.dinoGreen, style: StrokeStyle(lineWidth: ringWidth, lineCap: .round))
                 .rotationEffect(.degrees(-90))
 
-            ForEach(Array(stride(from: 0, to: 60, by: 5)), id: \.self) { minuteMark in
+            ForEach([0, 15, 30, 45], id: \.self) { minuteMark in
                 Text(minuteMark, format: .number)
                     .font(.caption2.bold())
                     .foregroundStyle(.secondary)
@@ -43,14 +42,9 @@ struct CircularDurationPicker: View {
                 .shadow(radius: 1)
                 .offset(offset(forProgress: progress, radius: diameter / 2))
 
-            VStack(spacing: 0) {
-                Text(totalSeconds / 60, format: .number)
-                    .font(.system(size: 48, weight: .bold, design: .rounded))
-                    .monospacedDigit()
-                Text("min")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }
+            Text(String(format: "%d:%02d", totalSeconds / 60, totalSeconds % 60))
+                .font(.system(size: 40, weight: .bold, design: .rounded))
+                .monospacedDigit()
         }
         .frame(width: diameter, height: diameter)
         .contentShape(Circle())
@@ -60,13 +54,13 @@ struct CircularDurationPicker: View {
         )
         .accessibilityElement()
         .accessibilityLabel(Text("Duration"))
-        .accessibilityValue(Text(totalSeconds / 60, format: .number) + Text(" ") + Text("min"))
+        .accessibilityValue(Text(String(format: "%d:%02d", totalSeconds / 60, totalSeconds % 60)))
         .accessibilityAdjustableAction { direction in
             switch direction {
             case .increment:
-                totalSeconds = min(totalSeconds + snapSeconds, Self.maxSeconds)
+                totalSeconds = min(totalSeconds + 30, Self.maxSeconds)
             case .decrement:
-                totalSeconds = max(totalSeconds - snapSeconds, 0)
+                totalSeconds = max(totalSeconds - 30, 0)
             default:
                 break
             }
@@ -89,12 +83,12 @@ struct CircularDurationPicker: View {
         if degrees < 0 { degrees += 360 }
 
         let rawSeconds = Int((degrees / 360) * Double(Self.maxSeconds))
-        let snapped = (rawSeconds / snapSeconds) * snapSeconds
+        let snapped = (rawSeconds / Self.snapSeconds) * Self.snapSeconds
         totalSeconds = min(max(snapped, 0), Self.maxSeconds)
     }
 }
 
 #Preview {
-    CircularDurationPicker(totalSeconds: .constant(1500))
+    CircularDurationPicker(totalSeconds: .constant(331))
         .padding()
 }

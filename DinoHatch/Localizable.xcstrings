@@ -351,16 +351,6 @@
         "ru" : { "stringUnit" : { "state" : "translated", "value" : "Средний мел" } }
       }
     },
-    "min" : {
-      "localizations" : {
-        "de" : { "stringUnit" : { "state" : "translated", "value" : "Min." } },
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "min" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "min" } },
-        "fr" : { "stringUnit" : { "state" : "translated", "value" : "min" } },
-        "nl" : { "stringUnit" : { "state" : "translated", "value" : "min" } },
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "мин" } }
-      }
-    },
     "Notifications are off, but you'll still get a new dinosaur whenever you open the app after your alarm time." : {
       "localizations" : {
         "de" : { "stringUnit" : { "state" : "translated", "value" : "Benachrichtigungen sind aus, aber du bekommst trotzdem einen neuen Dinosaurier, sobald du die App nach deiner Weckzeit öffnest." } },
