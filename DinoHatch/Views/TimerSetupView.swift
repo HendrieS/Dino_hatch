@@ -6,24 +6,18 @@ struct TimerSetupView: View {
     var onStart: (Dinosaur) -> Void
 
     @Query private var unlockedDinosaurs: [UnlockedDinosaur]
-    @State private var minutes: Int = 5
-    @State private var seconds: Int = 0
-
-    private var totalSeconds: Int { minutes * 60 + seconds }
+    @State private var totalSeconds: Int = 300
 
     var body: some View {
         NavigationStack {
             VStack(spacing: 32) {
                 Spacer()
 
-                Text("🥚")
-                    .font(.system(size: 120))
-
                 Text("Set a timer and watch\nan egg hatch!")
                     .font(.title2.bold())
                     .multilineTextAlignment(.center)
 
-                DurationPickerView(minutes: $minutes, seconds: $seconds)
+                CircularDurationPicker(totalSeconds: $totalSeconds)
 
                 Button {
                     startTimer()
@@ -42,11 +36,10 @@ struct TimerSetupView: View {
                 Spacer()
                 Spacer()
             }
+            .padding()
             .navigationTitle("Dino Hatch")
             .onAppear {
-                let last = engine.lastUsedDuration
-                minutes = last / 60
-                seconds = last % 60
+                totalSeconds = min(engine.lastUsedDuration, CircularDurationPicker.maxSeconds)
             }
         }
     }
