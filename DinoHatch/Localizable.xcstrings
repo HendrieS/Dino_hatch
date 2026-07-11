@@ -11,6 +11,16 @@
         "ru" : { "stringUnit" : { "state" : "translated", "value" : "???" } }
       }
     },
+    "A dinosaur egg is ready to hatch! Open Dino Hatch to see who it is." : {
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Ein Dinosaurier-Ei ist bereit zum Schlüpfen! Öffne Dino Hatch, um zu sehen, wer es ist." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "A dinosaur egg is ready to hatch! Open Dino Hatch to see who it is." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "¡Un huevo de dinosaurio está listo para nacer! Abre Dino Hatch para ver quién es." } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Un œuf de dinosaure est prêt à éclore ! Ouvre Dino Hatch pour découvrir qui c'est." } },
+        "nl" : { "stringUnit" : { "state" : "translated", "value" : "Er is een dino-ei klaar om uit te komen! Open Dino Hatch om te zien wie het is." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Яйцо динозавра готово вылупиться! Открой Dino Hatch, чтобы узнать, кто это." } }
+      }
+    },
     "A dinosaur hatched!" : {
       "localizations" : {
         "de" : { "stringUnit" : { "state" : "translated", "value" : "Ein Dinosaurier ist geschlüpft!" } },
@@ -19,6 +29,26 @@
         "fr" : { "stringUnit" : { "state" : "translated", "value" : "Un dinosaure est né !" } },
         "nl" : { "stringUnit" : { "state" : "translated", "value" : "Er is een dinosaurus uitgekomen!" } },
         "ru" : { "stringUnit" : { "state" : "translated", "value" : "Вылупился динозавр!" } }
+      }
+    },
+    "Alarm" : {
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Wecker" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Alarm" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Alarma" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Alarme" } },
+        "nl" : { "stringUnit" : { "state" : "translated", "value" : "Wekker" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Будильник" } }
+      }
+    },
+    "Alarm On" : {
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Wecker an" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Alarm On" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Alarma activada" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Alarme activée" } },
+        "nl" : { "stringUnit" : { "state" : "translated", "value" : "Wekker aan" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Будильник включён" } }
       }
     },
     "Allosaurus" : {
@@ -149,6 +179,16 @@
         "fr" : { "stringUnit" : { "state" : "translated", "value" : "Régime" } },
         "nl" : { "stringUnit" : { "state" : "translated", "value" : "Dieet" } },
         "ru" : { "stringUnit" : { "state" : "translated", "value" : "Питание" } }
+      }
+    },
+    "Dino Alarm" : {
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Dino-Wecker" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Dino Alarm" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Alarma Dino" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Alarme Dino" } },
+        "nl" : { "stringUnit" : { "state" : "translated", "value" : "Dino-wekker" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Дино-будильник" } }
       }
     },
     "Dino-pedia" : {
@@ -311,6 +351,16 @@
         "ru" : { "stringUnit" : { "state" : "translated", "value" : "Минуты" } }
       }
     },
+    "Notifications are off, but you'll still get a new dinosaur whenever you open the app after your alarm time." : {
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Benachrichtigungen sind aus, aber du bekommst trotzdem einen neuen Dinosaurier, sobald du die App nach deiner Weckzeit öffnest." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Notifications are off, but you'll still get a new dinosaur whenever you open the app after your alarm time." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Las notificaciones están desactivadas, pero igual conseguirás un nuevo dinosaurio cuando abras la app después de tu hora de alarma." } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Les notifications sont désactivées, mais vous recevrez quand même un nouveau dinosaure en ouvrant l'appli après l'heure de l'alarme." } },
+        "nl" : { "stringUnit" : { "state" : "translated", "value" : "Meldingen staan uit, maar je krijgt nog steeds een nieuwe dinosaurus zodra je de app opent na je wektijd." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Уведомления отключены, но ты всё равно получишь нового динозавра, когда откроешь приложение после времени будильника." } }
+      }
+    },
     "Omnivore" : {
       "localizations" : {
         "de" : { "stringUnit" : { "state" : "translated", "value" : "Allesfresser" } },
@@ -391,6 +441,16 @@
         "ru" : { "stringUnit" : { "state" : "translated", "value" : "Отпусти, чтобы увидеть кожу" } }
       }
     },
+    "Repeats on" : {
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Wiederholt sich am" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Repeats on" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Se repite el" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Se répète le" } },
+        "nl" : { "stringUnit" : { "state" : "translated", "value" : "Herhaalt op" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Повторяется по" } }
+      }
+    },
     "Reset Collection (Testing)" : {
       "localizations" : {
         "de" : { "stringUnit" : { "state" : "translated", "value" : "Sammlung zurücksetzen (Test)" } },
@@ -419,6 +479,16 @@
         "fr" : { "stringUnit" : { "state" : "translated", "value" : "Réglez une minuterie et regardez\nun œuf éclore !" } },
         "nl" : { "stringUnit" : { "state" : "translated", "value" : "Stel een timer in en kijk hoe\neen ei uitkomt!" } },
         "ru" : { "stringUnit" : { "state" : "translated", "value" : "Установи таймер и посмотри,\nкак вылупится яйцо!" } }
+      }
+    },
+    "Set a wake-up time and hatch\na dinosaur when you open the app!" : {
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Stelle eine Weckzeit ein und lass\nbeim Öffnen der App einen Dinosaurier schlüpfen!" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Set a wake-up time and hatch\na dinosaur when you open the app!" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "¡Configura una hora para despertar y\nabre la app para que nazca un dinosaurio!" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Réglez une heure de réveil et faites éclore\nun dinosaure en ouvrant l'appli !" } },
+        "nl" : { "stringUnit" : { "state" : "translated", "value" : "Stel een wektijd in en laat een dinosaurus\nuitkomen als je de app opent!" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Установи время пробуждения — и когда\nоткроешь приложение, вылупится динозавр!" } }
       }
     },
     "Spinosaurus" : {
@@ -479,6 +549,16 @@
         "fr" : { "stringUnit" : { "state" : "translated", "value" : "Le T-Rex avait des dents aussi longues que des bananes et l'une des morsures les plus puissantes de tous les animaux !" } },
         "nl" : { "stringUnit" : { "state" : "translated", "value" : "T-Rex had tanden zo lang als bananen en een van de sterkste beten van alle dieren!" } },
         "ru" : { "stringUnit" : { "state" : "translated", "value" : "У тираннозавра были зубы длиной с банан и один из самых сильных укусов среди всех животных!" } }
+      }
+    },
+    "Time to wake up!" : {
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Zeit zum Aufwachen!" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Time to wake up!" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "¡Hora de despertar!" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "C'est l'heure de se réveiller !" } },
+        "nl" : { "stringUnit" : { "state" : "translated", "value" : "Tijd om wakker te worden!" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Пора просыпаться!" } }
       }
     },
     "Timer" : {
@@ -549,6 +629,16 @@
         "fr" : { "stringUnit" : { "state" : "translated", "value" : "Les vélociraptors étaient des chasseurs rapides et intelligents qui avaient probablement des plumes, comme les oiseaux d'aujourd'hui !" } },
         "nl" : { "stringUnit" : { "state" : "translated", "value" : "Velociraptors waren snelle, slimme jagers die waarschijnlijk veren hadden, net als vogels vandaag!" } },
         "ru" : { "stringUnit" : { "state" : "translated", "value" : "Велоцирапторы были быстрыми и умными хищниками, у которых, вероятно, были перья, как у современных птиц!" } }
+      }
+    },
+    "Wake-up time" : {
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Weckzeit" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Wake-up time" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Hora de despertar" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Heure de réveil" } },
+        "nl" : { "stringUnit" : { "state" : "translated", "value" : "Wektijd" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Время пробуждения" } }
       }
     },
     "discovered" : {

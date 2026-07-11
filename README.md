@@ -55,6 +55,18 @@ have a paid Apple Developer account and want cross-device sync.
 - **Animation**: `Views/HatchAnimationView.swift` and `Views/EggView.swift`
   build the crack/wobble/burst/confetti sequence from plain SwiftUI shapes
   and animations — no image assets or third-party animation library.
+- **Dino alarm**: `Views/AlarmView.swift` sets a repeating wake-up time
+  (`Models/AlarmSettings.swift`). `Stores/AlarmScheduler.swift` schedules a
+  local notification per selected weekday purely as an attention-getter —
+  the actual reward doesn't depend on it firing or being tapped. Instead,
+  `Stores/AlarmClaimer.swift` is a pure function checked every time the app
+  becomes active (`RootTabView`'s `scenePhase` observer): if "now" is past
+  today's alarm time on a selected day and nothing's been claimed yet
+  today, it hatches a dinosaur via the same `HatchSelector` the timer uses.
+  This means the reward works whether the kid taps the notification,
+  ignores it, or notification permission was denied outright — the app
+  can't run custom code at the exact moment a background notification
+  fires anyway, so the design doesn't depend on it.
 
 ## Localization
 
@@ -124,6 +136,18 @@ the collection to sync across a kid's devices:
   above), but there's no push when the egg hatches while the app is closed.
 - **No parental gate, no multiple kid profiles, no accounts** — by design,
   kept as simple as possible for v1.
+- **Dino alarm is a notification, not a real alarm**: iOS doesn't let
+  third-party apps ring a continuous/escalating alarm like the built-in
+  Clock app (that needs a special critical-alerts entitlement Apple
+  reserves for health & safety apps) — it's a single notification sound a
+  few seconds long. It's meant as a fun morning incentive layered on top of
+  a real alarm clock, not a replacement for one.
+- **Alarm reward has one known gap**: the reward triggers on every
+  foreground transition (app launch, unlock-and-reopen, etc.), which
+  covers the realistic "phone was locked overnight" case. It won't fire if
+  the app happens to already be open and stays open through the exact
+  alarm moment without ever backgrounding — a rare case, not handled for
+  this alpha.
 - **Animation is basic**: functional and self-contained, but tuned for
   "works, is charming enough for an alpha" rather than fully polished timing
   — expect to want to tweak spring/duration values once you see it running.
@@ -141,4 +165,15 @@ verify on your Mac:
       still correct
 - [ ] Force-quit the app mid-countdown, relaunch — timer resumes or
       immediately shows the hatch if time already elapsed
+- [ ] Alarm tab: set a wake-up time ~2 minutes out, enable a weekday that
+      matches today, accept the notification permission prompt
+- [ ] Lock the phone before the alarm time, wait for the notification, then
+      unlock — the notification shows, and reopening the app immediately
+      presents the hatch animation/reveal for a new dinosaur
+- [ ] Set another near-future alarm, this time deny notification permission
+      (or leave the phone unlocked/app foregrounded) — confirm the hatch
+      still triggers the next time you background and reforeground the app
+      after the alarm time
+- [ ] Confirm only one dinosaur is awarded per day even if you foreground
+      the app multiple times after the alarm time
 - [ ] `Cmd+U` unit tests pass

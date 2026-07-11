@@ -9,7 +9,7 @@ struct DinoHatchApp: App {
         // iCloud capability). To re-enable sync once on a paid team, pass
         // `cloudKitDatabase: .automatic` here and restore the `entitlements`
         // block for the DinoHatch target in project.yml.
-        let schema = Schema([UnlockedDinosaur.self, AppSettings.self])
+        let schema = Schema([UnlockedDinosaur.self, AppSettings.self, AlarmSettings.self])
         let config = ModelConfiguration(schema: schema)
         do {
             return try ModelContainer(for: schema, configurations: [config])
