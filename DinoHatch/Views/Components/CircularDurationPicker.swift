@@ -64,9 +64,9 @@ struct CircularDurationPicker: View {
         .accessibilityAdjustableAction { direction in
             switch direction {
             case .increment:
-                totalSeconds = min(totalSeconds + snapSeconds, Self.maxSeconds)
+                totalSeconds = min(totalSeconds + CircularDurationPicker.snapSeconds, Self.maxSeconds)
             case .decrement:
-                totalSeconds = max(totalSeconds - snapSeconds, 0)
+                totalSeconds = max(totalSeconds - CircularDurationPicker.snapSeconds, 0)
             default:
                 break
             }
@@ -89,7 +89,7 @@ struct CircularDurationPicker: View {
         if degrees < 0 { degrees += 360 }
 
         let rawSeconds = Int((degrees / 360) * Double(Self.maxSeconds))
-        let snapped = (rawSeconds / snapSeconds) * snapSeconds
+        let snapped = (rawSeconds / CircularDurationPicker.snapSeconds) * CircularDurationPicker.snapSeconds
         totalSeconds = min(max(snapped, 0), Self.maxSeconds)
     }
 }
