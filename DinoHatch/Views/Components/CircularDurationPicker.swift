@@ -12,10 +12,16 @@ struct CircularDurationPicker: View {
 
     static let maxSeconds = 3599
     static let snapSeconds = 5
+    /// One full lap of the dial = 60 minutes exactly, so a round value like
+    /// 5:00 lands precisely on the "5" tick. `maxSeconds` (59:59) is a
+    /// separate clamp just short of that, not the angle denominator — using
+    /// 3599 for both would leave every tick a hair off from where the
+    /// pointer actually sits.
+    private static let secondsPerLap = 3600
     private let ringWidth: CGFloat = 18
 
     private var progress: Double {
-        Double(totalSeconds) / Double(Self.maxSeconds)
+        Double(totalSeconds) / Double(Self.secondsPerLap)
     }
 
     var body: some View {
@@ -28,7 +34,7 @@ struct CircularDurationPicker: View {
                 .stroke(Color.dinoGreen, style: StrokeStyle(lineWidth: ringWidth, lineCap: .round))
                 .rotationEffect(.degrees(-90))
 
-            ForEach([0, 15, 30, 45], id: \.self) { minuteMark in
+            ForEach(Array(stride(from: 0, to: 60, by: 5)), id: \.self) { minuteMark in
                 Text(minuteMark, format: .number)
                     .font(.caption2.bold())
                     .foregroundStyle(.secondary)
@@ -82,7 +88,7 @@ struct CircularDurationPicker: View {
         var degrees = atan2(vector.y, vector.x) * 180 / .pi + 90
         if degrees < 0 { degrees += 360 }
 
-        let rawSeconds = Int((degrees / 360) * Double(Self.maxSeconds))
+        let rawSeconds = Int((degrees / 360) * Double(Self.secondsPerLap))
         // Self-qualified: an earlier version referenced `snapSeconds` bare
         // here (unlike `Self.maxSeconds` above) and that failed to compile
         // — always qualify static member references from instance scope.
