@@ -221,6 +221,16 @@
         "ru" : { "stringUnit" : { "state" : "translated", "value" : "У диплодока был один из самых длинных хвостов среди всех динозавров, которым он, возможно, щёлкал, как кнутом!" } }
       }
     },
+    "Duration" : {
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Dauer" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Duration" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Duración" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Durée" } },
+        "nl" : { "stringUnit" : { "state" : "translated", "value" : "Duur" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Длительность" } }
+      }
+    },
     "Early Cretaceous" : {
       "localizations" : {
         "de" : { "stringUnit" : { "state" : "translated", "value" : "Unterkreide" } },
@@ -341,14 +351,14 @@
         "ru" : { "stringUnit" : { "state" : "translated", "value" : "Средний мел" } }
       }
     },
-    "Minutes" : {
+    "min" : {
       "localizations" : {
-        "de" : { "stringUnit" : { "state" : "translated", "value" : "Minuten" } },
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Minutes" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Minutos" } },
-        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Minutes" } },
-        "nl" : { "stringUnit" : { "state" : "translated", "value" : "Minuten" } },
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Минуты" } }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Min." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "min" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "min" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "min" } },
+        "nl" : { "stringUnit" : { "state" : "translated", "value" : "min" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "мин" } }
       }
     },
     "Notifications are off, but you'll still get a new dinosaur whenever you open the app after your alarm time." : {
@@ -459,16 +469,6 @@
         "fr" : { "stringUnit" : { "state" : "translated", "value" : "Réinitialiser la collection (Test)" } },
         "nl" : { "stringUnit" : { "state" : "translated", "value" : "Verzameling resetten (Test)" } },
         "ru" : { "stringUnit" : { "state" : "translated", "value" : "Сбросить коллекцию (Тест)" } }
-      }
-    },
-    "Seconds" : {
-      "localizations" : {
-        "de" : { "stringUnit" : { "state" : "translated", "value" : "Sekunden" } },
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Seconds" } },
-        "es" : { "stringUnit" : { "state" : "translated", "value" : "Segundos" } },
-        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Secondes" } },
-        "nl" : { "stringUnit" : { "state" : "translated", "value" : "Seconden" } },
-        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Секунды" } }
       }
     },
     "Set a timer and watch\nan egg hatch!" : {

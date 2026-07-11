@@ -39,7 +39,11 @@ struct TimerSetupView: View {
             .padding()
             .navigationTitle("Dino Hatch")
             .onAppear {
-                totalSeconds = min(engine.lastUsedDuration, CircularDurationPicker.maxSeconds)
+                // Round to the dial's 5-minute grid in case a duration was
+                // saved before this picker snapped to 5-minute stops.
+                let snap = CircularDurationPicker.snapSeconds
+                let clamped = min(engine.lastUsedDuration, CircularDurationPicker.maxSeconds)
+                totalSeconds = (clamped / snap) * snap
             }
         }
     }
