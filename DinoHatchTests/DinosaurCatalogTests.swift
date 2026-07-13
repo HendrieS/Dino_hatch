@@ -8,8 +8,8 @@ final class DinosaurCatalogTests: XCTestCase {
     }
 
     func testCatalogSizeInExpectedRange() {
-        XCTAssertGreaterThanOrEqual(DinosaurCatalog.all.count, 12)
-        XCTAssertLessThanOrEqual(DinosaurCatalog.all.count, 15)
+        XCTAssertGreaterThanOrEqual(DinosaurCatalog.all.count, 24)
+        XCTAssertLessThanOrEqual(DinosaurCatalog.all.count, 27)
     }
 
     func testNoEmptyRequiredFields() {
