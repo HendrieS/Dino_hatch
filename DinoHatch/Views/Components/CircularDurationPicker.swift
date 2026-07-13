@@ -36,8 +36,13 @@ struct CircularDurationPicker: View {
 
             ForEach(0..<60, id: \.self) { minute in
                 if minute % 5 != 0 {
+                    // dinoCardBackground (a near-white card-fill tone) was
+                    // originally used here and was essentially invisible at
+                    // this size — too little contrast against the screen
+                    // background for a 4pt dot. .secondary matches the
+                    // 5-minute number labels and actually shows up.
                     Circle()
-                        .fill(Color.dinoCardBackground)
+                        .fill(Color.secondary.opacity(0.5))
                         .frame(width: 4, height: 4)
                         .offset(offset(forProgress: Double(minute) / 60, radius: diameter / 2 + ringWidth / 2 + 5))
                 }
