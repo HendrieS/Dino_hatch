@@ -34,6 +34,15 @@ struct CircularDurationPicker: View {
                 .stroke(Color.dinoGreen, style: StrokeStyle(lineWidth: ringWidth, lineCap: .round))
                 .rotationEffect(.degrees(-90))
 
+            ForEach(0..<60, id: \.self) { minute in
+                if minute % 5 != 0 {
+                    Circle()
+                        .fill(Color.dinoCardBackground)
+                        .frame(width: 4, height: 4)
+                        .offset(offset(forProgress: Double(minute) / 60, radius: diameter / 2 + ringWidth / 2 + 5))
+                }
+            }
+
             ForEach(Array(stride(from: 0, to: 60, by: 5)), id: \.self) { minuteMark in
                 Text(minuteMark, format: .number)
                     .font(.caption2.bold())
