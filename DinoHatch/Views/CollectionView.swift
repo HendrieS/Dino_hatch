@@ -9,6 +9,13 @@ struct CollectionView: View {
         Set(unlocked.map(\.dinosaurID))
     }
 
+    /// Counter only ever reflects the regular (non-secret) set, so it caps
+    /// at "26/26" and stays there even once secret dinosaurs start being
+    /// found — nothing about the counter hints that more exist.
+    private var regularDinosaurs: [Dinosaur] {
+        DinosaurCatalog.all.filter { !$0.isSecret }
+    }
+
     private let columns = [GridItem(.adaptive(minimum: 140), spacing: 16)]
 
     var body: some View {
@@ -19,9 +26,9 @@ struct CollectionView: View {
                 // depend on guessing the exact %-format Xcode would have
                 // extracted for a hand-authored String Catalog.
                 HStack(spacing: 4) {
-                    Text(unlockedIDs.count, format: .number)
+                    Text(unlockedIDs.intersection(regularDinosaurs.map(\.id)).count, format: .number)
                     Text(verbatim: "/")
-                    Text(DinosaurCatalog.all.count, format: .number)
+                    Text(regularDinosaurs.count, format: .number)
                     Text("discovered")
                 }
                 .font(.headline)
@@ -40,9 +47,11 @@ struct CollectionView: View {
                                 DinoCardView(dinosaur: dinosaur)
                             }
                             .buttonStyle(.plain)
-                        } else {
+                        } else if !dinosaur.isSecret {
                             DinoSilhouetteView()
                         }
+                        // Locked secret dinosaurs render nothing at all —
+                        // no silhouette, no placeholder, no hint they exist.
                     }
                 }
                 .padding()

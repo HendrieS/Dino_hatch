@@ -7,9 +7,14 @@ final class DinosaurCatalogTests: XCTestCase {
         XCTAssertEqual(ids.count, Set(ids).count)
     }
 
-    func testCatalogSizeInExpectedRange() {
-        XCTAssertGreaterThanOrEqual(DinosaurCatalog.all.count, 24)
-        XCTAssertLessThanOrEqual(DinosaurCatalog.all.count, 27)
+    func testRegularCatalogSizeInExpectedRange() {
+        let regularCount = DinosaurCatalog.all.filter { !$0.isSecret }.count
+        XCTAssertGreaterThanOrEqual(regularCount, 24)
+        XCTAssertLessThanOrEqual(regularCount, 30)
+    }
+
+    func testHasFourSecretDinosaurs() {
+        XCTAssertEqual(DinosaurCatalog.all.filter(\.isSecret).count, 4)
     }
 
     func testNoEmptyRequiredFields() {

@@ -314,6 +314,63 @@ enum DinosaurCatalog {
             emoji: "🛩️",
             imageAssetName: nil,
             rarity: .rare
+        ),
+
+        // Secret dinosaurs: not shown in the Collection grid while locked
+        // (no silhouette, no hint they exist), and excluded from
+        // HatchSelector's pool until every dinosaur above has been
+        // unlocked. See Dinosaur.isSecret / HatchSelector.pickNext.
+        Dinosaur(
+            id: "utahraptor",
+            name: "Utahraptor",
+            era: "Early Cretaceous",
+            diet: .carnivore,
+            length: "6 m (20 ft)",
+            funFact: "Utahraptor was one of the biggest raptors ever discovered, armed with a huge curved claw on each foot!",
+            symbolName: "bolt.shield.fill",
+            emoji: "🦖",
+            imageAssetName: nil,
+            rarity: .rare,
+            isSecret: true
+        ),
+        Dinosaur(
+            id: "argentinosaurus",
+            name: "Argentinosaurus",
+            era: "Late Cretaceous",
+            diet: .herbivore,
+            length: "35 m (115 ft)",
+            funFact: "Argentinosaurus might be the biggest land animal that ever lived — ten elephants together wouldn't outweigh it!",
+            symbolName: "medal.fill",
+            emoji: "🦕",
+            imageAssetName: nil,
+            rarity: .rare,
+            isSecret: true
+        ),
+        Dinosaur(
+            id: "deinocheirus",
+            name: "Deinocheirus",
+            era: "Late Cretaceous",
+            diet: .omnivore,
+            length: "11 m (36 ft)",
+            funFact: "Deinocheirus had gigantic arms over two meters long and a big humped sail on its back — one of the strangest dinosaurs ever found!",
+            symbolName: "hand.raised.fill",
+            emoji: "🙌",
+            imageAssetName: nil,
+            rarity: .rare,
+            isSecret: true
+        ),
+        Dinosaur(
+            id: "archaeopteryx",
+            name: "Archaeopteryx",
+            era: "Late Jurassic",
+            diet: .carnivore,
+            length: "0.5 m (1.6 ft)",
+            funFact: "Archaeopteryx had feathers and wings like a bird but teeth and a bony tail like a dinosaur — one of the most important fossils ever found!",
+            symbolName: "sparkle",
+            emoji: "🪶",
+            imageAssetName: nil,
+            rarity: .rare,
+            isSecret: true
         )
     ]
 }

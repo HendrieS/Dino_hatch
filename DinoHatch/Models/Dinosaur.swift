@@ -16,6 +16,11 @@ struct Dinosaur: Identifiable, Codable, Hashable {
     /// older saved data decodes without this key.
     let skeletonAssetName: String?
     let rarity: Rarity
+    /// Excluded from the Collection grid entirely while locked (no
+    /// silhouette, no count) and from `HatchSelector`'s pool until every
+    /// non-secret dinosaur has been unlocked. Defaulted to `false` so
+    /// existing catalog entries are unaffected.
+    let isSecret: Bool
 
     enum Diet: String, Codable, CaseIterable {
         case carnivore
@@ -48,7 +53,8 @@ struct Dinosaur: Identifiable, Codable, Hashable {
         emoji: String,
         imageAssetName: String? = nil,
         skeletonAssetName: String? = nil,
-        rarity: Rarity
+        rarity: Rarity,
+        isSecret: Bool = false
     ) {
         self.id = id
         self.name = name
@@ -61,12 +67,14 @@ struct Dinosaur: Identifiable, Codable, Hashable {
         self.imageAssetName = imageAssetName
         self.skeletonAssetName = skeletonAssetName
         self.rarity = rarity
+        self.isSecret = isSecret
     }
 
-    // Decoding tolerates catalogs/saved data without `skeletonAssetName`.
+    // Decoding tolerates catalogs/saved data without `skeletonAssetName` or
+    // `isSecret`.
     enum CodingKeys: String, CodingKey {
         case id, name, era, diet, length, funFact
-        case symbolName, emoji, imageAssetName, skeletonAssetName, rarity
+        case symbolName, emoji, imageAssetName, skeletonAssetName, rarity, isSecret
     }
 
     init(from decoder: Decoder) throws {
@@ -82,5 +90,6 @@ struct Dinosaur: Identifiable, Codable, Hashable {
         imageAssetName = try c.decodeIfPresent(String.self, forKey: .imageAssetName)
         skeletonAssetName = try c.decodeIfPresent(String.self, forKey: .skeletonAssetName)
         rarity = try c.decode(Rarity.self, forKey: .rarity)
+        isSecret = try c.decodeIfPresent(Bool.self, forKey: .isSecret) ?? false
     }
 }
