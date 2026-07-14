@@ -450,166 +450,6 @@
         }
       }
     },
-    "Archaeopteryx": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Archaeopteryx"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Archaeopteryx"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Arqueopterix"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Archéoptéryx"
-          }
-        },
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Archaeopteryx"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Археоптерикс"
-          }
-        }
-      }
-    },
-    "Archaeopteryx had feathers and wings like a bird but teeth and a bony tail like a dinosaur — one of the most important fossils ever found!": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Der Archaeopteryx hatte Federn und Flügel wie ein Vogel, aber Zähne und einen knöchernen Schwanz wie ein Dinosaurier — eines der wichtigsten Fossilien, die je gefunden wurden!"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Archaeopteryx had feathers and wings like a bird but teeth and a bony tail like a dinosaur — one of the most important fossils ever found!"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "¡Arqueopterix tenía plumas y alas como un ave, pero dientes y una cola ósea como un dinosaurio — uno de los fósiles más importantes jamás encontrados!"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "L'Archéoptéryx avait des plumes et des ailes comme un oiseau, mais des dents et une queue osseuse comme un dinosaure — l'un des fossiles les plus importants jamais découverts !"
-          }
-        },
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Archaeopteryx had veren en vleugels zoals een vogel, maar tanden en een benen staart zoals een dinosaurus — een van de belangrijkste fossielen ooit gevonden!"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "У археоптерикса были перья и крылья, как у птицы, но зубы и костяной хвост, как у динозавра — одна из самых важных находок в истории палеонтологии!"
-          }
-        }
-      }
-    },
-    "Argentinosaurus": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Argentinosaurus"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Argentinosaurus"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Argentinosaurio"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Argentinosaure"
-          }
-        },
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Argentinosaurus"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Аргентинозавр"
-          }
-        }
-      }
-    },
-    "Argentinosaurus might be the biggest land animal that ever lived — ten elephants together wouldn't outweigh it!": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Der Argentinosaurus war vielleicht das größte Landtier, das je gelebt hat — zehn Elefanten zusammen wären nicht so schwer wie er!"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Argentinosaurus might be the biggest land animal that ever lived — ten elephants together wouldn't outweigh it!"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "¡Argentinosaurio podría ser el animal terrestre más grande que existió jamás — diez elefantes juntos no pesarían tanto como él!"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "L'Argentinosaure était peut-être le plus grand animal terrestre ayant jamais existé — dix éléphants réunis ne pèseraient pas aussi lourd que lui !"
-          }
-        },
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Argentinosaurus was misschien wel het grootste landdier ooit — tien olifanten samen zouden niet zo zwaar zijn als hij!"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Аргентинозавр, возможно, был самым большим сухопутным животным из когда-либо живших — десять слонов вместе не перевесили бы его!"
-          }
-        }
-      }
-    },
     "Awesome!": {
       "localizations": {
         "de": {
@@ -1182,86 +1022,6 @@
         }
       }
     },
-    "Deinocheirus": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deinocheirus"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deinocheirus"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deinocheirus"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deinocheirus"
-          }
-        },
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deinocheirus"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Дейнохейрус"
-          }
-        }
-      }
-    },
-    "Deinocheirus had gigantic arms over two meters long and a big humped sail on its back — one of the strangest dinosaurs ever found!": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Der Deinocheirus hatte riesige Arme von über zwei Metern Länge und ein großes Höckersegel auf dem Rücken — einer der seltsamsten Dinosaurier, die je gefunden wurden!"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deinocheirus had gigantic arms over two meters long and a big humped sail on its back — one of the strangest dinosaurs ever found!"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "¡Deinocheirus tenía brazos gigantescos de más de dos metros de largo y una gran joroba en forma de vela en la espalda — uno de los dinosaurios más extraños jamás encontrados!"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le Deinocheirus avait d'immenses bras de plus de deux mètres de long et une grosse bosse en forme de voile sur le dos — l'un des dinosaures les plus étranges jamais découverts !"
-          }
-        },
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deinocheirus had gigantische armen van meer dan twee meter lang en een grote bultvormige zeil op zijn rug — een van de vreemdste dinosaurussen ooit gevonden!"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "У дейнохейруса были гигантские руки длиной более двух метров и большой горбатый «парус» на спине — один из самых странных динозавров, когда-либо найденных!"
-          }
-        }
-      }
-    },
     "Diet": {
       "extractionState": "stale",
       "localizations": {
@@ -1545,6 +1305,86 @@
           "stringUnit": {
             "state": "translated",
             "value": "У диплодока был один из самых длинных хвостов среди всех динозавров, которым он, возможно, щёлкал, как кнутом!"
+          }
+        }
+      }
+    },
+    "Dreadnoughtus": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dreadnoughtus"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dreadnoughtus"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dreadnoughtus"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dreadnoughtus"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dreadnoughtus"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дреднотус"
+          }
+        }
+      }
+    },
+    "Dreadnoughtus means 'fears nothing' — it was so enormous that fully grown, no predator could ever have taken it down!": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dreadnoughtus bedeutet „fürchtet nichts“ — er war so riesig, dass ihn ausgewachsen kein Raubtier je hätte erlegen können!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dreadnoughtus means 'fears nothing' — it was so enormous that fully grown, no predator could ever have taken it down!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Dreadnoughtus significa 'no teme nada' — era tan enorme que, ya adulto, ningún depredador podría haberlo derribado!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dreadnoughtus signifie « qui ne craint rien » — il était si énorme qu'une fois adulte, aucun prédateur n'aurait pu le vaincre !"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dreadnoughtus betekent 'vreest niets' — hij was zo enorm dat volgroeid geen enkel roofdier hem ooit had kunnen vellen!"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дреднотус означает «не боящийся ничего» — он был настолько огромен, что взрослую особь не смог бы одолеть ни один хищник!"
           }
         }
       }
@@ -2651,6 +2491,86 @@
         }
       }
     },
+    "Patagotitan": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Patagotitan"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Patagotitan"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Patagotitán"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Patagotitan"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Patagotitan"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Патаготитан"
+          }
+        }
+      }
+    },
+    "Patagotitan was as long as three school buses lined up end to end — one of the biggest animals to ever walk on land!": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Patagotitan war so lang wie drei Schulbusse hintereinander — eines der größten Tiere, die je auf dem Land gelebt haben!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Patagotitan was as long as three school buses lined up end to end — one of the biggest animals to ever walk on land!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Patagotitán era tan largo como tres autobuses escolares puestos en fila — uno de los animales más grandes que jamás caminó sobre la tierra!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le Patagotitan était aussi long que trois bus scolaires mis bout à bout — l'un des plus grands animaux à avoir jamais marché sur terre !"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Patagotitan was zo lang als drie schoolbussen achter elkaar — een van de grootste dieren die ooit over land liepen!"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Патаготитан был длиной с три школьных автобуса, поставленных друг за другом, — одно из крупнейших животных, когда-либо ходивших по суше!"
+          }
+        }
+      }
+    },
     "Plateosaurus": {
       "extractionState": "stale",
       "localizations": {
@@ -2811,6 +2731,86 @@
           "stringUnit": {
             "state": "translated",
             "value": "Птеранодон вовсе не был динозавром — это была летающая рептилия, парившая над океанами!"
+          }
+        }
+      }
+    },
+    "Puertasaurus": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puertasaurus"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puertasaurus"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puertasaurio"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puertasaure"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puertasaurus"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Пуэртазавр"
+          }
+        }
+      }
+    },
+    "Puertasaurus had bones so wide that scientists think it might have been one of the heaviest dinosaurs ever to exist!": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Puertasaurus hatte so breite Knochen, dass Wissenschaftler glauben, er könnte einer der schwersten Dinosaurier gewesen sein, die je existierten!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puertasaurus had bones so wide that scientists think it might have been one of the heaviest dinosaurs ever to exist!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Puertasaurio tenía huesos tan anchos que los científicos creen que pudo haber sido uno de los dinosaurios más pesados que existieron!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le Puertasaurus avait des os si larges que les scientifiques pensent qu'il aurait pu être l'un des dinosaures les plus lourds ayant jamais existé !"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puertasaurus had zulke brede botten dat wetenschappers denken dat het een van de zwaarste dinosaurussen ooit kan zijn geweest!"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У пуэртазавра были настолько широкие кости, что учёные считают его одним из самых тяжёлых динозавров, когда-либо существовавших!"
           }
         }
       }
@@ -3590,6 +3590,86 @@
         }
       }
     },
+    "Titanosaurus": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Titanosaurus"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Titanosaurus"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Titanosaurio"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Titanosaure"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Titanosaurus"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Титанозавр"
+          }
+        }
+      }
+    },
+    "Titanosaurus gave its name to the titanosaurs, an entire group of the biggest plant-eating dinosaurs that ever roamed the Earth!": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Titanosaurus gab den Titanosauriern ihren Namen, einer ganzen Gruppe der größten pflanzenfressenden Dinosaurier, die je die Erde durchstreiften!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Titanosaurus gave its name to the titanosaurs, an entire group of the biggest plant-eating dinosaurs that ever roamed the Earth!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Titanosaurio dio su nombre a los titanosaurios, todo un grupo de los dinosaurios herbívoros más grandes que jamás recorrieron la Tierra!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le Titanosaure a donné son nom aux titanosaures, tout un groupe des plus grands dinosaures herbivores ayant jamais parcouru la Terre !"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Titanosaurus gaf zijn naam aan de titanosauriërs, een hele groep van de grootste planteneters die ooit over de aarde liepen!"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Титанозавр дал имя целой группе титанозавров — самым большим растительноядным динозаврам, когда-либо ходившим по Земле!"
+          }
+        }
+      }
+    },
     "Triceratops": {
       "extractionState": "stale",
       "localizations": {
@@ -3750,86 +3830,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Разблокировать всё (Тест)"
-          }
-        }
-      }
-    },
-    "Utahraptor": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Utahraptor"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Utahraptor"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Utahraptor"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Utahraptor"
-          }
-        },
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Utahraptor"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ютараптор"
-          }
-        }
-      }
-    },
-    "Utahraptor was one of the biggest raptors ever discovered, armed with a huge curved claw on each foot!": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Der Utahraptor war einer der größten jemals entdeckten Raptoren, bewaffnet mit einer riesigen gebogenen Kralle an jedem Fuß!"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Utahraptor was one of the biggest raptors ever discovered, armed with a huge curved claw on each foot!"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "¡Utahraptor fue uno de los mayores raptores jamás descubiertos, armado con una enorme garra curva en cada pata!"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "L'Utahraptor était l'un des plus grands raptors jamais découverts, armé d'une énorme griffe recourbée à chaque patte !"
-          }
-        },
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Utahraptor was een van de grootste raptors ooit ontdekt, gewapend met een enorme gebogen klauw aan elke poot!"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ютараптор был одним из крупнейших раптор, вооружённым огромным изогнутым когтем на каждой лапе!"
           }
         }
       }
