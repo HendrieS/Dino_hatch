@@ -9,11 +9,17 @@ struct CollectionView: View {
         Set(unlocked.map(\.dinosaurID))
     }
 
-    /// Counter only ever reflects the regular (non-secret) set, so it caps
-    /// at "26/26" and stays there even once secret dinosaurs start being
-    /// found — nothing about the counter hints that more exist.
+    /// The denominator only ever reflects the regular (non-secret) set, so
+    /// it stays "26" forever. The numerator counts everything unlocked —
+    /// regular and secret alike — so once a secret dinosaur is found it can
+    /// read e.g. "27 / 26", a small "wait, that's more than the total?"
+    /// hint without ever spelling out that secret dinosaurs exist.
     private var regularDinosaurs: [Dinosaur] {
         DinosaurCatalog.all.filter { !$0.isSecret }
+    }
+
+    private var hasFoundBonusDinosaurs: Bool {
+        unlockedIDs.count > regularDinosaurs.count
     }
 
     private let columns = [GridItem(.adaptive(minimum: 140), spacing: 16)]
@@ -26,7 +32,8 @@ struct CollectionView: View {
                 // depend on guessing the exact %-format Xcode would have
                 // extracted for a hand-authored String Catalog.
                 HStack(spacing: 4) {
-                    Text(unlockedIDs.intersection(regularDinosaurs.map(\.id)).count, format: .number)
+                    Text(unlockedIDs.count, format: .number)
+                        .foregroundStyle(hasFoundBonusDinosaurs ? .orange : .secondary)
                     Text(verbatim: "/")
                     Text(regularDinosaurs.count, format: .number)
                     Text("discovered")
