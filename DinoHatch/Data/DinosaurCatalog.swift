@@ -300,7 +300,7 @@ enum DinosaurCatalog {
             funFact: "Therizinosaurus was a plant-eating dinosaur with enormous claws as long as swords!",
             symbolName: "scissors",
             emoji: "🦥",
-            imageAssetName: nil,
+            imageAssetName: "therizinosaurus-skin",
             rarity: .rare
         ),
         Dinosaur(
