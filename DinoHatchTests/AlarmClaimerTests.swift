@@ -41,7 +41,7 @@ final class AlarmClaimerTests: XCTestCase {
     }
 
     func testReadyAtOrAfterAlarmTimeOnSelectedDay() {
-        let now = date(day: 8, hour: 7, minute: 15)
+        let now = date(day: 8, hour: 7, minute: 5)
         let ready = AlarmClaimer.isReady(
             hour: 7, minute: 0, weekdays: [4],
             lastHatchDate: nil, now: now, calendar: calendar
@@ -49,8 +49,26 @@ final class AlarmClaimerTests: XCTestCase {
         XCTAssertTrue(ready)
     }
 
+    func testReadyExactlyAtResponseWindowBoundary() {
+        let now = date(day: 8, hour: 7, minute: 15) // exactly +15 min
+        let ready = AlarmClaimer.isReady(
+            hour: 7, minute: 0, weekdays: [4],
+            lastHatchDate: nil, now: now, calendar: calendar
+        )
+        XCTAssertTrue(ready)
+    }
+
+    func testNotReadyPastResponseWindow() {
+        let now = date(day: 8, hour: 7, minute: 16) // one minute past the window
+        let ready = AlarmClaimer.isReady(
+            hour: 7, minute: 0, weekdays: [4],
+            lastHatchDate: nil, now: now, calendar: calendar
+        )
+        XCTAssertFalse(ready)
+    }
+
     func testNotReadyIfAlreadyClaimedToday() {
-        let now = date(day: 8, hour: 8, minute: 0)
+        let now = date(day: 8, hour: 7, minute: 10)
         let claimedEarlierToday = date(day: 8, hour: 7, minute: 5)
         let ready = AlarmClaimer.isReady(
             hour: 7, minute: 0, weekdays: [4],
@@ -60,7 +78,7 @@ final class AlarmClaimerTests: XCTestCase {
     }
 
     func testReadyAgainOnANewDay() {
-        let now = date(day: 9, hour: 7, minute: 30) // Thursday
+        let now = date(day: 9, hour: 7, minute: 10) // Thursday
         let claimedYesterday = date(day: 8, hour: 7, minute: 5) // Wednesday
         let ready = AlarmClaimer.isReady(
             hour: 7, minute: 0, weekdays: [4, 5],

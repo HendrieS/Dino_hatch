@@ -60,13 +60,17 @@ have a paid Apple Developer account and want cross-device sync.
   local notification per selected weekday purely as an attention-getter —
   the actual reward doesn't depend on it firing or being tapped. Instead,
   `Stores/AlarmClaimer.swift` is a pure function checked every time the app
-  becomes active (`RootTabView`'s `scenePhase` observer): if "now" is past
-  today's alarm time on a selected day and nothing's been claimed yet
-  today, it hatches a dinosaur via the same `HatchSelector` the timer uses.
-  This means the reward works whether the kid taps the notification,
-  ignores it, or notification permission was denied outright — the app
-  can't run custom code at the exact moment a background notification
-  fires anyway, so the design doesn't depend on it.
+  becomes active (`RootTabView`'s `scenePhase` observer): if "now" is within
+  `AlarmClaimer.responseWindow` (15 minutes) of today's alarm time on a
+  selected day and nothing's been claimed yet today, it hatches a dinosaur
+  via the same `HatchSelector` the timer uses. This means the reward works
+  whether the kid taps the notification or just opens the app themselves,
+  and whether or not notification permission was granted — the app can't
+  run custom code at the exact moment a background notification fires
+  anyway, so the design doesn't depend on it. Missing the 15-minute window
+  means no dinosaur until the alarm's next scheduled occurrence — it's a
+  deliberate "actually get up" incentive, not just a lenient catch-up
+  reward.
 
 ## Localization
 
@@ -173,7 +177,9 @@ verify on your Mac:
 - [ ] Set another near-future alarm, this time deny notification permission
       (or leave the phone unlocked/app foregrounded) — confirm the hatch
       still triggers the next time you background and reforeground the app
-      after the alarm time
+      within 15 minutes of the alarm time
 - [ ] Confirm only one dinosaur is awarded per day even if you foreground
-      the app multiple times after the alarm time
+      the app multiple times within the window
+- [ ] Set an alarm, then wait more than 15 minutes before opening the app —
+      confirm no dinosaur is awarded (window missed)
 - [ ] `Cmd+U` unit tests pass

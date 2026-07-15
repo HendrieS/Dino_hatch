@@ -5,8 +5,8 @@ import UserNotifications
 /// around wake-up time. The actual hatch reward is decided in-app by
 /// `AlarmClaimer` when the app becomes active, not by this notification —
 /// so if permission is denied, or the notification is dismissed unread,
-/// the reward still works whenever the app is next opened after the set
-/// time.
+/// the reward still works as long as the app is opened within
+/// `AlarmClaimer.responseWindow` of the set time.
 enum AlarmScheduler {
     private static let identifierPrefix = "dino-alarm-weekday-"
 
@@ -33,7 +33,7 @@ enum AlarmScheduler {
         let content = UNMutableNotificationContent()
         content.title = NSLocalizedString("Time to wake up!", comment: "Alarm notification title")
         content.body = NSLocalizedString(
-            "A dinosaur egg is ready to hatch! Open Dino Hatch to see who it is.",
+            "A dinosaur egg is ready to hatch! Open Dino Hatch in the next 15 minutes to see who it is.",
             comment: "Alarm notification body"
         )
         content.sound = .default

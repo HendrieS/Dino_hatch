@@ -48,8 +48,16 @@ struct AlarmView: View {
                 .disabled(!isEnabled)
                 .opacity(isEnabled ? 1 : 0.4)
 
+                if isEnabled {
+                    Text("Open the app within 15 minutes of your alarm to hatch a dinosaur!")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 32)
+                }
+
                 if notificationsDenied {
-                    Text("Notifications are off, but you'll still get a new dinosaur whenever you open the app after your alarm time.")
+                    Text("Notifications are off — you'll need to open the app yourself within that window.")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
