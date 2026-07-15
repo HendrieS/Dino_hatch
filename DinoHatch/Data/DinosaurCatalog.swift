@@ -300,7 +300,7 @@ enum DinosaurCatalog {
             funFact: "Therizinosaurus was a plant-eating dinosaur with enormous claws as long as swords!",
             symbolName: "scissors",
             emoji: "🦥",
-            imageAssetName: "therizinosaurus-skin",
+            imageAssetName: nil,
             rarity: .rare
         ),
         Dinosaur(
@@ -370,7 +370,7 @@ enum DinosaurCatalog {
             funFact: "Puertasaurus had bones so wide that scientists think it might have been one of the heaviest dinosaurs ever to exist!",
             symbolName: "scalemass.fill",
             emoji: "🦕",
-            imageAssetName: "plateosaurus-skin",
+            imageAssetName: "puertasaurus-skin",
             rarity: .rare,
             isSecret: true
         )
