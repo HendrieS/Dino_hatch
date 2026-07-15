@@ -108,7 +108,7 @@ enum DinosaurCatalog {
             funFact: "Parasaurolophus had a long curved crest that it may have used to make loud honking sounds!",
             symbolName: "speaker.wave.3.fill",
             emoji: "📯",
-            imageAssetName: nil,
+            imageAssetName: "parasaurolophus-skin",
             rarity: .common
         ),
         Dinosaur(
@@ -120,7 +120,7 @@ enum DinosaurCatalog {
             funFact: "Diplodocus had one of the longest tails of any dinosaur, which it may have cracked like a whip!",
             symbolName: "arrow.left.and.right",
             emoji: "🦕",
-            imageAssetName: nil,
+            imageAssetName: "diplodocus-skin",
             rarity: .rare
         ),
         Dinosaur(
@@ -132,7 +132,7 @@ enum DinosaurCatalog {
             funFact: "Allosaurus was one of the top predators of its time, with sharp teeth like curved knives!",
             symbolName: "bolt.fill",
             emoji: "🦖",
-            imageAssetName: nil,
+            imageAssetName: "allosaurus-skin",
             rarity: .uncommon
         ),
         Dinosaur(
@@ -144,7 +144,7 @@ enum DinosaurCatalog {
             funFact: "Pachycephalosaurus had a thick dome skull that may have been used for head-butting contests!",
             symbolName: "circle.fill",
             emoji: "🪨",
-            imageAssetName: nil,
+            imageAssetName: "pachycephalosaurus-skin",
             rarity: .uncommon
         ),
         Dinosaur(
@@ -156,7 +156,7 @@ enum DinosaurCatalog {
             funFact: "Iguanodon had a sharp thumb spike on each hand, maybe used for defense or finding food!",
             symbolName: "hand.point.up.fill",
             emoji: "👍",
-            imageAssetName: nil,
+            imageAssetName: "iguanodon-skin",
             rarity: .common
         ),
         Dinosaur(
@@ -168,7 +168,7 @@ enum DinosaurCatalog {
             funFact: "Compsognathus was about the size of a chicken, making it one of the smallest known dinosaurs!",
             symbolName: "hare.fill",
             emoji: "🐔",
-            imageAssetName: nil,
+            imageAssetName: "compsognathus-skin",
             rarity: .common
         ),
         Dinosaur(
@@ -180,7 +180,7 @@ enum DinosaurCatalog {
             funFact: "Coelophysis was one of the very first dinosaurs, living over 200 million years ago and hunting in packs!",
             symbolName: "figure.run",
             emoji: "🦎",
-            imageAssetName: nil,
+            imageAssetName: "coelophysis-skin",
             rarity: .common
         ),
         Dinosaur(
@@ -192,7 +192,7 @@ enum DinosaurCatalog {
             funFact: "Plateosaurus was one of the first giant plant-eating dinosaurs and could rear up on its back legs to reach tall leaves!",
             symbolName: "mountain.2.fill",
             emoji: "🦕",
-            imageAssetName: nil,
+            imageAssetName: "plateosaurus-skin",
             rarity: .uncommon
         ),
         Dinosaur(
@@ -204,7 +204,7 @@ enum DinosaurCatalog {
             funFact: "Dilophosaurus had two thin crests on its head and was one of the first big meat-eating dinosaurs of the early Jurassic!",
             symbolName: "crown.fill",
             emoji: "🦖",
-            imageAssetName: nil,
+            imageAssetName: "dilophosaurus-skin",
             rarity: .uncommon
         ),
         Dinosaur(
@@ -216,7 +216,7 @@ enum DinosaurCatalog {
             funFact: "Apatosaurus, once called Brontosaurus, was so huge that a single footprint could be bigger than a bathtub!",
             symbolName: "arrow.up.and.down.circle.fill",
             emoji: "🦕",
-            imageAssetName: nil,
+            imageAssetName: "apatosaurus-skin",
             rarity: .common
         ),
         Dinosaur(
@@ -228,7 +228,7 @@ enum DinosaurCatalog {
             funFact: "Baryonyx had a long crocodile-like snout and curved claws perfect for catching slippery fish!",
             symbolName: "fish.fill",
             emoji: "🐟",
-            imageAssetName: nil,
+            imageAssetName: "baryonyx-skin",
             rarity: .uncommon
         ),
         Dinosaur(
@@ -240,7 +240,7 @@ enum DinosaurCatalog {
             funFact: "Gallimimus looked like a giant ostrich and could run incredibly fast on its long, skinny legs!",
             symbolName: "bolt.horizontal.fill",
             emoji: "🏃",
-            imageAssetName: nil,
+            imageAssetName: "gallimimus-skin",
             rarity: .common
         ),
         Dinosaur(
@@ -252,7 +252,7 @@ enum DinosaurCatalog {
             funFact: "Oviraptor means 'egg thief,' but scientists later found it was actually caring for its own nest!",
             symbolName: "sparkles",
             emoji: "🥚",
-            imageAssetName: nil,
+            imageAssetName: "oviraptor-skin",
             rarity: .uncommon
         ),
         Dinosaur(
@@ -264,7 +264,7 @@ enum DinosaurCatalog {
             funFact: "Styracosaurus had a ring of long spikes around its frill, making it look like it was wearing a spiky crown!",
             symbolName: "sun.max.fill",
             emoji: "🦏",
-            imageAssetName: nil,
+            imageAssetName: "styracosaurus-skin",
             rarity: .uncommon
         ),
         Dinosaur(
@@ -276,7 +276,7 @@ enum DinosaurCatalog {
             funFact: "Carnotaurus means 'meat-eating bull' and had two short horns above its eyes and tiny, stubby arms!",
             symbolName: "bolt.trianglebadge.exclamationmark.fill",
             emoji: "🐂",
-            imageAssetName: nil,
+            imageAssetName: "carnotaurus-skin",
             rarity: .rare
         ),
         Dinosaur(
@@ -288,7 +288,7 @@ enum DinosaurCatalog {
             funFact: "Giganotosaurus was even longer than T-Rex, making it one of the biggest meat-eating dinosaurs ever found!",
             symbolName: "ruler.fill",
             emoji: "🦖",
-            imageAssetName: nil,
+            imageAssetName: "giganotosaurus-skin",
             rarity: .rare
         ),
         Dinosaur(
@@ -300,7 +300,7 @@ enum DinosaurCatalog {
             funFact: "Therizinosaurus was a plant-eating dinosaur with enormous claws as long as swords!",
             symbolName: "scissors",
             emoji: "🦥",
-            imageAssetName: nil,
+            imageAssetName: "therizinosaurus-skin",
             rarity: .rare
         ),
         Dinosaur(
@@ -312,7 +312,7 @@ enum DinosaurCatalog {
             funFact: "Quetzalcoatlus was a flying reptile as big as a small airplane, the largest flier ever known!",
             symbolName: "airplane",
             emoji: "🛩️",
-            imageAssetName: nil,
+            imageAssetName: "quetzalcoatlus-skin",
             rarity: .rare
         ),
 
@@ -331,7 +331,7 @@ enum DinosaurCatalog {
             funFact: "Titanosaurus gave its name to the titanosaurs, an entire group of the biggest plant-eating dinosaurs that ever roamed the Earth!",
             symbolName: "flag.fill",
             emoji: "🦕",
-            imageAssetName: nil,
+            imageAssetName: "titanosaurus-skin",
             rarity: .rare,
             isSecret: true
         ),
@@ -344,7 +344,7 @@ enum DinosaurCatalog {
             funFact: "Patagotitan was as long as three school buses lined up end to end — one of the biggest animals to ever walk on land!",
             symbolName: "arrow.up.circle.fill",
             emoji: "🦕",
-            imageAssetName: nil,
+            imageAssetName: "patagotitan-skin",
             rarity: .rare,
             isSecret: true
         ),
@@ -357,7 +357,7 @@ enum DinosaurCatalog {
             funFact: "Dreadnoughtus means 'fears nothing' — it was so enormous that fully grown, no predator could ever have taken it down!",
             symbolName: "shield.fill",
             emoji: "🦕",
-            imageAssetName: nil,
+            imageAssetName: "dreadnoughtus-skin",
             rarity: .rare,
             isSecret: true
         ),
@@ -370,7 +370,7 @@ enum DinosaurCatalog {
             funFact: "Puertasaurus had bones so wide that scientists think it might have been one of the heaviest dinosaurs ever to exist!",
             symbolName: "scalemass.fill",
             emoji: "🦕",
-            imageAssetName: nil,
+            imageAssetName: "plateosaurus-skin",
             rarity: .rare,
             isSecret: true
         )
