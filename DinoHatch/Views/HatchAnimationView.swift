@@ -1,9 +1,72 @@
 import SwiftUI
+import UIKit
 
-/// Egg-crack-and-hatch sequence built entirely from SwiftUI shapes/animations
-/// (no external art or animation libraries): crack overlay -> egg halves
-/// split apart -> dinosaur pops in -> confetti burst -> hand off to caller.
+/// Egg-crack-and-hatch sequence. Prefers a real 4-frame illustrated
+/// progression (egg -> cracking -> peeking -> hatched) when all four
+/// assets are present; otherwise falls back to the original SwiftUI-shape
+/// crack/burst/confetti animation, so the app works identically before
+/// and after the art is dropped in.
 struct HatchAnimationView: View {
+    let dinosaur: Dinosaur
+    var onComplete: () -> Void
+
+    private var hasIllustratedFrames: Bool {
+        IllustratedHatchSequence.frameNames.allSatisfy { UIImage(named: $0) != nil }
+    }
+
+    var body: some View {
+        Group {
+            if hasIllustratedFrames {
+                IllustratedHatchSequence(onComplete: onComplete)
+            } else {
+                VectorHatchSequence(dinosaur: dinosaur, onComplete: onComplete)
+            }
+        }
+    }
+}
+
+/// Real illustrated 4-frame hatch progression. Deliberately generic across
+/// every dinosaur (the species-specific reveal happens afterward in
+/// HatchRevealView) — cross-fades egg-hatch-1 through egg-hatch-4 in
+/// sequence rather than needing art per species.
+private struct IllustratedHatchSequence: View {
+    var onComplete: () -> Void
+
+    @State private var frameIndex = 0
+
+    static let frameNames = ["egg-hatch-1", "egg-hatch-2", "egg-hatch-3", "egg-hatch-4"]
+    private let frameInterval: Double = 0.55
+
+    var body: some View {
+        ZStack {
+            ForEach(Array(Self.frameNames.enumerated()), id: \.offset) { index, name in
+                Image(name)
+                    .resizable()
+                    .scaledToFit()
+                    .opacity(frameIndex == index ? 1 : 0)
+            }
+        }
+        .frame(height: 260)
+        .onAppear(perform: runSequence)
+    }
+
+    private func runSequence() {
+        for index in 1..<Self.frameNames.count {
+            DispatchQueue.main.asyncAfter(deadline: .now() + frameInterval * Double(index)) {
+                withAnimation(.easeInOut(duration: 0.35)) {
+                    frameIndex = index
+                }
+            }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + frameInterval * Double(Self.frameNames.count) + 0.3) {
+            onComplete()
+        }
+    }
+}
+
+/// Original SwiftUI-shape crack/burst/confetti animation — the fallback
+/// used until all four illustrated frames are present.
+private struct VectorHatchSequence: View {
     let dinosaur: Dinosaur
     var onComplete: () -> Void
 
