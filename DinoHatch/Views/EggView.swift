@@ -1,11 +1,21 @@
 import SwiftUI
+import UIKit
 
 /// A pure function of `remainingFraction` and `date` — no animation state of
 /// its own, so it stays perfectly in sync with the `TimelineView` tick that
-/// drives it in `CountdownView`.
+/// drives it in `CountdownView`. Prefers the real illustrated egg (the same
+/// asset used as the first frame of HatchAnimationView's illustrated
+/// sequence) when present, falling back to the original vector-drawn egg
+/// otherwise.
 struct EggView: View {
     let remainingFraction: Double
     let date: Date
+
+    private static let illustratedAssetName = "egg-hatch-1"
+
+    private var hasIllustratedEgg: Bool {
+        UIImage(named: Self.illustratedAssetName) != nil
+    }
 
     private var shakeIntensity: Double {
         let threshold = 0.2
@@ -27,12 +37,21 @@ struct EggView: View {
     ]
 
     var body: some View {
-        EggShape()
-            .fill(LinearGradient(colors: [Color(white: 0.98), Color(white: 0.88)], startPoint: .top, endPoint: .bottom))
-            .overlay(speckles)
-            .overlay(EggShape().stroke(Color.black.opacity(0.08), lineWidth: 2))
-            .frame(width: 160, height: 200)
-            .rotationEffect(.degrees(wobbleAngle))
+        Group {
+            if hasIllustratedEgg {
+                Image(Self.illustratedAssetName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 200, height: 200)
+            } else {
+                EggShape()
+                    .fill(LinearGradient(colors: [Color(white: 0.98), Color(white: 0.88)], startPoint: .top, endPoint: .bottom))
+                    .overlay(speckles)
+                    .overlay(EggShape().stroke(Color.black.opacity(0.08), lineWidth: 2))
+                    .frame(width: 160, height: 200)
+            }
+        }
+        .rotationEffect(.degrees(wobbleAngle))
     }
 
     private var speckles: some View {
