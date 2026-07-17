@@ -1964,6 +1964,47 @@
         }
       }
     },
+    "Everything lives only on this device. There's no account, no cloud sync, no analytics, and no ads — the app doesn't need an internet connection to work, and nothing is ever sent anywhere.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alles bleibt nur auf diesem Gerät. Es gibt kein Konto, keine Cloud-Synchronisierung, keine Analyse und keine Werbung — die App funktioniert ohne Internetverbindung, und es wird nie etwas irgendwohin gesendet."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Everything lives only on this device. There's no account, no cloud sync, no analytics, and no ads — the app doesn't need an internet connection to work, and nothing is ever sent anywhere."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todo permanece solo en este dispositivo. No hay cuenta, ni sincronización en la nube, ni análisis, ni anuncios: la app funciona sin conexión a internet y nunca se envía nada a ningún sitio."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout reste uniquement sur cet appareil. Pas de compte, pas de synchronisation cloud, pas d'analyse, pas de publicité — l'application fonctionne sans connexion internet et rien n'est jamais envoyé où que ce soit."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alles blijft alleen op dit apparaat. Er is geen account, geen cloudsynchronisatie, geen analyse en geen advertenties — de app werkt zonder internetverbinding en er wordt nooit iets ergens naartoe verstuurd."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Все данные остаются только на этом устройстве. Нет аккаунта, синхронизации с облаком, аналитики и рекламы — приложению не нужен интернет, и никакие данные никуда не отправляются."
+          }
+        }
+      }
+    },
     "Fun Fact": {
       "extractionState": "stale",
       "localizations": {
@@ -2250,6 +2291,47 @@
         }
       }
     },
+    "Help Center": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hilfe-Center"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Help Center"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Centro de ayuda"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Centre d'aide"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Helpcentrum"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Справочный центр"
+          }
+        }
+      }
+    },
     "Herbivore": {
       "localizations": {
         "de": {
@@ -2372,6 +2454,88 @@
         }
       }
     },
+    "How the dino alarm works": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "So funktioniert der Dino-Wecker"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How the dino alarm works"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cómo funciona la alarma dino"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comment fonctionne le réveil dino"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoe de dino-wekker werkt"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Как работает будильник с динозавром"
+          }
+        }
+      }
+    },
+    "How the timer works": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "So funktioniert der Timer"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How the timer works"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cómo funciona el temporizador"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comment fonctionne le minuteur"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoe de timer werkt"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Как работает таймер"
+          }
+        }
+      }
+    },
     "Iguanodon": {
       "extractionState": "stale",
       "localizations": {
@@ -2450,6 +2614,47 @@
           "stringUnit": {
             "state": "translated",
             "value": "У игуанодона на каждой руке был острый шип на большом пальце — возможно, для защиты или поиска еды!"
+          }
+        }
+      }
+    },
+    "Just their age": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nur das Alter"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Just their age"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo su edad"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uniquement son âge"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alleen de leeftijd"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Только возраст"
           }
         }
       }
@@ -2618,6 +2823,47 @@
         }
       }
     },
+    "Managing this data": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Daten verwalten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Managing this data"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gestionar estos datos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gérer ces données"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deze gegevens beheren"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Управление этими данными"
+          }
+        }
+      }
+    },
     "Mid Cretaceous": {
       "extractionState": "stale",
       "localizations": {
@@ -2655,6 +2901,47 @@
           "stringUnit": {
             "state": "translated",
             "value": "Средний мел"
+          }
+        }
+      }
+    },
+    "No name, birthday, email, photos, or location are ever asked for or stored.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Name, Geburtstag, E-Mail, Fotos oder Standort werden nie abgefragt oder gespeichert."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No name, birthday, email, photos, or location are ever asked for or stored."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nunca se pide ni se guarda el nombre, la fecha de nacimiento, el correo, fotos ni la ubicación."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun nom, date de naissance, e-mail, photo ou position n'est jamais demandé ni conservé."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naam, verjaardag, e-mail, foto's of locatie worden nooit gevraagd of bewaard."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Имя, дата рождения, email, фото или геоданные никогда не запрашиваются и не сохраняются."
           }
         }
       }
@@ -3639,6 +3926,88 @@
         }
       }
     },
+    "Set a countdown. When it reaches zero, an egg on screen hatches and adds a new dinosaur to the collection.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stelle einen Countdown ein. Wenn er null erreicht, schlüpft ein Ei auf dem Bildschirm und fügt der Sammlung einen neuen Dinosaurier hinzu."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Set a countdown. When it reaches zero, an egg on screen hatches and adds a new dinosaur to the collection."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Configura una cuenta atrás. Cuando llega a cero, un huevo en la pantalla nace y añade un nuevo dinosaurio a la colección."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réglez un compte à rebours. Lorsqu'il atteint zéro, un œuf à l'écran éclot et ajoute un nouveau dinosaure à la collection."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stel een afteltimer in. Zodra deze nul bereikt, komt een ei op het scherm uit en wordt er een nieuwe dino aan de collectie toegevoegd."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Запустите обратный отсчёт. Когда он достигнет нуля, яйцо на экране вылупится, и в коллекцию добавится новый динозавр."
+          }
+        }
+      }
+    },
+    "Set a repeating wake-up time. Opening the app within 15 minutes of it hatches a bonus dinosaur — a small incentive to actually get up, rather than a reward for opening the app whenever.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stelle eine wiederkehrende Weckzeit ein. Wenn du die App innerhalb von 15 Minuten danach öffnest, schlüpft ein Bonus-Dinosaurier — ein kleiner Anreiz, tatsächlich aufzustehen, statt einfach nur die App irgendwann zu öffnen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Set a repeating wake-up time. Opening the app within 15 minutes of it hatches a bonus dinosaur — a small incentive to actually get up, rather than a reward for opening the app whenever."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Configura una hora de despertar repetitiva. Abrir la app en los 15 minutos siguientes hace nacer un dinosaurio extra: un pequeño incentivo para levantarse de verdad, no solo por abrir la app en cualquier momento."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réglez une heure de réveil répétitive. Ouvrir l'application dans les 15 minutes qui suivent fait éclore un dinosaure bonus — une petite incitation à vraiment se lever, plutôt qu'une récompense pour ouvrir l'application n'importe quand."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stel een terugkerende wektijd in. Als je de app binnen 15 minuten daarna opent, komt er een bonusdino uit — een kleine stimulans om echt op te staan, in plaats van een beloning voor het op elk moment openen van de app."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Настройте повторяющееся время пробуждения. Если открыть приложение в течение 15 минут после будильника, вылупится дополнительный динозавр — небольшой стимул действительно встать, а не просто открыть приложение когда угодно."
+          }
+        }
+      }
+    },
     "Set a timer and watch\nan egg hatch!": {
       "localizations": {
         "de": {
@@ -4128,6 +4497,88 @@
         }
       }
     },
+    "Tap any hatched dinosaur to read kid-friendly facts about it. Press and hold to see an X-ray view — this unlocks once your child's age is set to 6 or older and at least two dinosaurs have been hatched.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tippe auf einen geschlüpften Dinosaurier, um kindgerechte Fakten über ihn zu lesen. Halte ihn gedrückt, um eine Röntgenansicht zu sehen — diese wird freigeschaltet, sobald das Alter des Kindes auf 6 oder älter eingestellt ist und mindestens zwei Dinosaurier geschlüpft sind."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap any hatched dinosaur to read kid-friendly facts about it. Press and hold to see an X-ray view — this unlocks once your child's age is set to 6 or older and at least two dinosaurs have been hatched."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toca cualquier dinosaurio nacido para leer datos aptos para niños sobre él. Mantén pulsado para ver una vista de rayos X: se desbloquea cuando la edad del niño o niña es de 6 años o más y han nacido al menos dos dinosaurios."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touchez un dinosaure éclos pour lire des informations adaptées aux enfants à son sujet. Appuyez de manière prolongée pour voir une vue aux rayons X — elle se débloque une fois que l'âge de l'enfant est réglé sur 6 ans ou plus et qu'au moins deux dinosaures ont éclos."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tik op een uitgekomen dino om kindvriendelijke feitjes te lezen. Houd ingedrukt voor een röntgenweergave — deze wordt ontgrendeld zodra de leeftijd van het kind op 6 jaar of ouder staat en er minstens twee dino's zijn uitgekomen."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Нажмите на любого вылупившегося динозавра, чтобы прочитать интересные факты о нём, понятные детям. Нажмите и удерживайте, чтобы увидеть рентген — он открывается, когда возраст ребёнка установлен на 6 лет и старше и вылупилось не менее двух динозавров."
+          }
+        }
+      }
+    },
+    "The collection": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Sammlung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The collection"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La colección"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La collection"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De collectie"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Коллекция"
+          }
+        }
+      }
+    },
     "Therizinosaurus": {
       "extractionState": "stale",
       "localizations": {
@@ -4370,6 +4821,47 @@
           "stringUnit": {
             "state": "translated",
             "value": "Таймер"
+          }
+        }
+      }
+    },
+    "Timer and alarm settings": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Timer- und Weckereinstellungen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Timer and alarm settings"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajustes del temporizador y la alarma"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réglages du minuteur et de l'alarme"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Timer- en wekkerinstellingen"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Настройки таймера и будильника"
           }
         }
       }
@@ -4780,6 +5272,170 @@
           "stringUnit": {
             "state": "translated",
             "value": "Время пробуждения"
+          }
+        }
+      }
+    },
+    "What we store about your child": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Was wir über dein Kind speichern"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What we store about your child"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qué guardamos sobre tu hijo o hija"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce que nous conservons sur votre enfant"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wat we over je kind bewaren"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Что мы храним о вашем ребёнке"
+          }
+        }
+      }
+    },
+    "Where it's stored": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wo es gespeichert wird"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Where it's stored"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dónde se guarda"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Où c'est conservé"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waar het wordt bewaard"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Где это хранится"
+          }
+        }
+      }
+    },
+    "Which dinosaurs they've hatched, and when": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Welche Dinosaurier geschlüpft sind, und wann"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Which dinosaurs they've hatched, and when"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qué dinosaurios ha nacido y cuándo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quels dinosaures ont éclos, et quand"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Welke dino's er zijn uitgekomen, en wanneer"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Какие динозавры вылупились и когда"
+          }
+        }
+      }
+    },
+    "You can change the age or erase everything (collection, timer, and alarm settings) from Settings at any time. A quick math question keeps small children from getting into Settings by accident.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Du kannst das Alter jederzeit in den Einstellungen ändern oder alles löschen (Sammlung, Timer- und Weckereinstellungen). Eine kurze Rechenaufgabe verhindert, dass kleine Kinder versehentlich in die Einstellungen gelangen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You can change the age or erase everything (collection, timer, and alarm settings) from Settings at any time. A quick math question keeps small children from getting into Settings by accident."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puedes cambiar la edad o borrar todo (colección, temporizador y ajustes de la alarma) desde Ajustes en cualquier momento. Una pregunta matemática rápida evita que los niños pequeños entren en Ajustes por accidente."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous pouvez modifier l'âge ou tout effacer (collection, minuteur et réglages de l'alarme) depuis les Réglages à tout moment. Une petite question de calcul empêche les jeunes enfants d'accéder accidentellement aux Réglages."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Je kunt de leeftijd altijd wijzigen of alles wissen (collectie, timer- en wekkerinstellingen) via Instellingen. Een korte rekenvraag voorkomt dat kleine kinderen per ongeluk in Instellingen terechtkomen."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вы можете в любой момент изменить возраст или удалить всё (коллекцию, настройки таймера и будильника) в Настройках. Простой математический вопрос не позволяет маленьким детям случайно попасть в Настройки."
           }
         }
       }

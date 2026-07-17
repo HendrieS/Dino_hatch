@@ -93,7 +93,12 @@ have a paid Apple Developer account and want cross-device sync.
   enough friction to keep a small child out) that only then reveals
   `Views/SettingsView.swift`, where the age can be changed or all data
   (collection, timer, alarm, and the age itself) can be wiped, which
-  re-triggers onboarding on next launch.
+  re-triggers onboarding on next launch. Settings also links to
+  `Views/HelpCenterView.swift`, a plain-language explainer for the adult —
+  what's stored (just the age, unlock progress, and timer/alarm settings —
+  no name, account, or contact info), that it's all local-only with no
+  cloud sync/analytics/ads, and a short walkthrough of how the timer, dino
+  alarm, and collection features work.
 - **X-ray age gating**: the press-and-hold x-ray view
   (`Views/DinoAnatomyView.swift`) only activates once
   `Stores/XRayEligibility.swift` — a pure, unit-tested function — reports

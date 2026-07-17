@@ -26,6 +26,12 @@ struct SettingsView: View {
                 }
 
                 Section {
+                    NavigationLink("Help Center") {
+                        HelpCenterView()
+                    }
+                }
+
+                Section {
                     Button("Reset All Data", role: .destructive) {
                         showResetConfirmation = true
                     }
