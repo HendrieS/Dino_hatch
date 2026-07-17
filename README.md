@@ -71,6 +71,20 @@ have a paid Apple Developer account and want cross-device sync.
   means no dinosaur until the alarm's next scheduled occurrence — it's a
   deliberate "actually get up" incentive, not just a lenient catch-up
   reward.
+- **Age onboarding & settings**: the first time the app is opened,
+  `Views/AgeOnboardingView.swift` asks for the child's general age and
+  gates the rest of the app (`Views/RootTabView.swift` shows it instead of
+  the `TabView` whenever `AppSettings.childAge` is `nil`). A gear icon on
+  the Collection tab opens `Views/SettingsView.swift`, where the age can be
+  changed or all data (collection, timer, alarm, and the age itself) can be
+  wiped, which re-triggers onboarding on next launch.
+- **X-ray age gating**: the press-and-hold x-ray view
+  (`Views/DinoAnatomyView.swift`) only activates once
+  `Stores/XRayEligibility.swift` — a pure, unit-tested function — reports
+  the child's age is 6+ *and* at least 2 dinosaurs have been hatched.
+  Below that, it silently falls back to the plain skin artwork with no
+  hint x-ray exists, the same silent-gating pattern used for the secret
+  dinosaurs.
 
 ## Localization
 

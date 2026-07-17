@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 import UIKit
 
 /// Interactive "press & hold to x-ray" viewer for a dinosaur.
@@ -7,10 +8,11 @@ import UIKit
 /// artwork fades in over it with a cool x-ray tint and a sweeping scan line.
 /// Releasing returns to the skin.
 ///
-/// Degrades gracefully: if a dinosaur is missing either its skin or its
-/// skeleton artwork, this shows the standard `DinoImageView` (emoji
-/// placeholder) and the x-ray interaction is disabled — so dinos without art
-/// yet keep working exactly as before.
+/// Degrades gracefully — falling back to the standard `DinoImageView` (emoji
+/// placeholder) with the x-ray interaction disabled — in two cases: the
+/// dinosaur is missing its skin/skeleton art, or `XRayEligibility` says the
+/// feature isn't unlocked yet. Neither case shows any hint that x-ray
+/// exists; it just quietly starts working once both are satisfied.
 ///
 /// Requires iOS 17+ for `onChange(of:_:)` (two-parameter form) and
 /// `sensoryFeedback`. If you target iOS 16, see the notes in README.md for
@@ -19,12 +21,19 @@ struct DinoAnatomyView: View {
     let dinosaur: Dinosaur
     var size: CGFloat = 300
 
+    @Query private var unlocked: [UnlockedDinosaur]
+    @Query private var appSettings: [AppSettings]
+
     @State private var isHeld = false
     @State private var scanPhase: CGFloat = 0
 
-    /// True only when BOTH the skin and skeleton assets are present in the
-    /// asset catalog. Anything less falls back to the emoji placeholder.
+    /// True only when x-ray is unlocked AND both the skin and skeleton
+    /// assets are present in the asset catalog. Anything less falls back
+    /// to the emoji/skin placeholder.
     private var hasAnatomy: Bool {
+        guard XRayEligibility.isUnlocked(childAge: appSettings.first?.childAge, totalHatched: unlocked.count) else {
+            return false
+        }
         guard let skin = dinosaur.imageAssetName,
               let skeleton = dinosaur.skeletonAssetName else { return false }
         return UIImage(named: skin) != nil && UIImage(named: skeleton) != nil

@@ -11,6 +11,11 @@ final class AppSettings {
     var activeTimerEndDate: Date?
     var activeTimerTotalSeconds: Int = 0
     var pendingDinosaurID: String?
+    /// nil until the first-launch age prompt is answered (see
+    /// AgeOnboardingView) — RootTabView gates the whole app behind that
+    /// prompt while this is nil, including for existing installs updating
+    /// into a build that first introduces this field.
+    var childAge: Int?
 
     init() {}
 }

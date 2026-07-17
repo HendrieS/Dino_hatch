@@ -5,6 +5,8 @@ struct CollectionView: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \UnlockedDinosaur.unlockedAt) private var unlocked: [UnlockedDinosaur]
 
+    @State private var showSettings = false
+
     private var unlockedIDs: Set<String> {
         Set(unlocked.map(\.dinosaurID))
     }
@@ -64,8 +66,15 @@ struct CollectionView: View {
                 .padding()
             }
             .navigationTitle("Dino-pedia")
-            #if DEBUG
             .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        showSettings = true
+                    } label: {
+                        Image(systemName: "gearshape.fill")
+                    }
+                }
+                #if DEBUG
                 ToolbarItem(placement: .topBarTrailing) {
                     Menu {
                         Button("Unlock All (Testing)", systemImage: "lock.open.fill") {
@@ -78,8 +87,11 @@ struct CollectionView: View {
                         Image(systemName: "ladybug.fill")
                     }
                 }
+                #endif
             }
-            #endif
+            .sheet(isPresented: $showSettings) {
+                SettingsView()
+            }
         }
     }
 
