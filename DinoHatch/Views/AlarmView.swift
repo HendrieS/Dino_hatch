@@ -12,13 +12,27 @@ struct AlarmView: View {
 
     private let orderedWeekdays = [2, 3, 4, 5, 6, 7, 1] // Monday...Sunday
 
+    /// Today's status, at a glance: the plain egg by default, or the
+    /// celebrating hatchling once today's alarm has actually been claimed
+    /// within its 15-minute window (see `AlarmClaimer`/`RootTabView`).
+    private var hasHatchedToday: Bool {
+        guard let lastHatchDate = alarms.first?.lastHatchDate else { return false }
+        return Calendar.current.isDateInToday(lastHatchDate)
+    }
+
+    private var headerImageName: String {
+        hasHatchedToday ? "alarm-reward" : "alarm-egg"
+    }
+
     var body: some View {
         NavigationStack {
             VStack(spacing: 28) {
                 Spacer()
 
-                Text("🦕⏰")
-                    .font(.system(size: 80))
+                Image(headerImageName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 150, height: 150)
 
                 Text("Set a wake-up time and hatch\na dinosaur when you open the app!")
                     .font(.title3.bold())
