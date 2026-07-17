@@ -55,6 +55,14 @@ have a paid Apple Developer account and want cross-device sync.
 - **Animation**: `Views/HatchAnimationView.swift` and `Views/EggView.swift`
   build the crack/wobble/burst/confetti sequence from plain SwiftUI shapes
   and animations — no image assets or third-party animation library.
+- **Cross-tab "egg ready" banner**: if the timer finishes while the kid is on
+  the Alarm or Collection tab, `Views/TimerHomeView.swift` deliberately holds
+  off playing the hatch animation (`advanceToHatching()`) until the Timer tab
+  is actually on screen, instead of running it invisibly in the background.
+  `Views/RootTabView.swift` polls the same `AppSettings.activeTimerEndDate`
+  once a second (`isTimerReady`) and shows `Views/Components/TimerReadyBanner.swift`
+  — a tap-to-jump banner — over whichever tab is active until the kid taps it
+  or switches back manually, at which point the animation plays live.
 - **Dino alarm**: `Views/AlarmView.swift` sets a repeating wake-up time
   (`Models/AlarmSettings.swift`). `Stores/AlarmScheduler.swift` schedules a
   local notification per selected weekday purely as an attention-getter —

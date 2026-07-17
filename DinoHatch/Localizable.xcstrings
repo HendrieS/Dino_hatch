@@ -327,6 +327,47 @@
         }
       }
     },
+    "An egg is ready to hatch!": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Ei ist bereit zum Schlüpfen!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An egg is ready to hatch!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Un huevo está listo para nacer!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un œuf est prêt à éclore !"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Een ei is klaar om uit te komen!"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Яйцо готово вылупиться!"
+          }
+        }
+      }
+    },
     "Ankylosaurus": {
       "extractionState": "stale",
       "localizations": {
