@@ -34,62 +34,64 @@ struct AlarmView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 28) {
-                Spacer()
+            ScrollView {
+                VStack(spacing: 24) {
+                    Image(headerImageName)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 130, height: 130)
+                        .padding(.top, 12)
 
-                Image(headerImageName)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 150, height: 150)
+                    Text("Set a wake-up time and hatch\na dinosaur when you open the app!")
+                        .font(.title3.bold())
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
 
-                Text("Set a wake-up time and hatch\na dinosaur when you open the app!")
-                    .font(.title3.bold())
-                    .multilineTextAlignment(.center)
+                    Toggle("Alarm On", isOn: $isEnabled)
+                        .padding(.horizontal, 40)
 
-                Toggle("Alarm On", isOn: $isEnabled)
-                    .padding(.horizontal, 40)
+                    DatePicker("Wake-up time", selection: $time, displayedComponents: .hourAndMinute)
+                        .datePickerStyle(.wheel)
+                        .labelsHidden()
+                        .disabled(!isEnabled)
+                        .opacity(isEnabled ? 1 : 0.4)
 
-                DatePicker("Wake-up time", selection: $time, displayedComponents: .hourAndMinute)
-                    .datePickerStyle(.wheel)
-                    .labelsHidden()
-                    .disabled(!isEnabled)
-                    .opacity(isEnabled ? 1 : 0.4)
-
-                VStack(spacing: 8) {
-                    Text("Repeats on")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                    HStack(spacing: 8) {
-                        ForEach(orderedWeekdays, id: \.self) { weekday in
-                            WeekdayToggle(weekday: weekday, isOn: weekdays.contains(weekday)) {
-                                toggle(weekday)
+                    VStack(spacing: 8) {
+                        Text("Repeats on")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                        HStack(spacing: 8) {
+                            ForEach(orderedWeekdays, id: \.self) { weekday in
+                                WeekdayToggle(weekday: weekday, isOn: weekdays.contains(weekday)) {
+                                    toggle(weekday)
+                                }
                             }
                         }
                     }
-                }
-                .disabled(!isEnabled)
-                .opacity(isEnabled ? 1 : 0.4)
+                    .disabled(!isEnabled)
+                    .opacity(isEnabled ? 1 : 0.4)
 
-                if isEnabled {
-                    Text("Open the app within 15 minutes of your alarm to hatch a dinosaur!")
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal, 32)
-                }
+                    if isEnabled {
+                        Text("Open the app within 15 minutes of your alarm to hatch a dinosaur!")
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                            .multilineTextAlignment(.center)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .padding(.horizontal, 32)
+                    }
 
-                if notificationsDenied {
-                    Text("Notifications are off — you'll need to open the app yourself within that window.")
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal, 32)
+                    if notificationsDenied {
+                        Text("Notifications are off — you'll need to open the app yourself within that window.")
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                            .multilineTextAlignment(.center)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .padding(.horizontal, 32)
+                    }
                 }
-
-                Spacer()
-                Spacer()
+                .padding()
+                .padding(.bottom, 24)
             }
-            .padding()
             .navigationTitle("Dino Alarm")
             .onAppear(perform: load)
             .onChange(of: isEnabled) { _, newValue in
