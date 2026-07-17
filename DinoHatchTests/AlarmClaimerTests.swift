@@ -86,4 +86,60 @@ final class AlarmClaimerTests: XCTestCase {
         )
         XCTAssertTrue(ready)
     }
+
+    func testNotMissedWhenWeekdayNotSelected() {
+        let now = date(day: 8, hour: 8, minute: 0) // Wednesday (4)
+        let missed = AlarmClaimer.wasMissedToday(
+            hour: 7, minute: 0, weekdays: [2, 3], // Mon, Tue only
+            lastHatchDate: nil, now: now, calendar: calendar
+        )
+        XCTAssertFalse(missed)
+    }
+
+    func testNotMissedBeforeResponseWindowCloses() {
+        let now = date(day: 8, hour: 7, minute: 10)
+        let missed = AlarmClaimer.wasMissedToday(
+            hour: 7, minute: 0, weekdays: [4],
+            lastHatchDate: nil, now: now, calendar: calendar
+        )
+        XCTAssertFalse(missed)
+    }
+
+    func testNotMissedExactlyAtResponseWindowBoundary() {
+        let now = date(day: 8, hour: 7, minute: 15) // exactly +15 min, still claimable
+        let missed = AlarmClaimer.wasMissedToday(
+            hour: 7, minute: 0, weekdays: [4],
+            lastHatchDate: nil, now: now, calendar: calendar
+        )
+        XCTAssertFalse(missed)
+    }
+
+    func testMissedOnceResponseWindowHasClosed() {
+        let now = date(day: 8, hour: 7, minute: 16) // one minute past the window
+        let missed = AlarmClaimer.wasMissedToday(
+            hour: 7, minute: 0, weekdays: [4],
+            lastHatchDate: nil, now: now, calendar: calendar
+        )
+        XCTAssertTrue(missed)
+    }
+
+    func testNotMissedIfAlreadyClaimedToday() {
+        let now = date(day: 8, hour: 7, minute: 30)
+        let claimedEarlierToday = date(day: 8, hour: 7, minute: 5)
+        let missed = AlarmClaimer.wasMissedToday(
+            hour: 7, minute: 0, weekdays: [4],
+            lastHatchDate: claimedEarlierToday, now: now, calendar: calendar
+        )
+        XCTAssertFalse(missed)
+    }
+
+    func testMissedIfLastClaimWasOnAPreviousDay() {
+        let now = date(day: 9, hour: 7, minute: 30) // Thursday, past today's window
+        let claimedYesterday = date(day: 8, hour: 7, minute: 5) // Wednesday
+        let missed = AlarmClaimer.wasMissedToday(
+            hour: 7, minute: 0, weekdays: [4, 5],
+            lastHatchDate: claimedYesterday, now: now, calendar: calendar
+        )
+        XCTAssertTrue(missed)
+    }
 }

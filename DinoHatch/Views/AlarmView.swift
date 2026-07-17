@@ -12,16 +12,24 @@ struct AlarmView: View {
 
     private let orderedWeekdays = [2, 3, 4, 5, 6, 7, 1] // Monday...Sunday
 
-    /// Today's status, at a glance: the plain egg by default, or the
+    /// Today's status, at a glance: the plain egg by default, the
     /// celebrating hatchling once today's alarm has actually been claimed
-    /// within its 15-minute window (see `AlarmClaimer`/`RootTabView`).
-    private var hasHatchedToday: Bool {
-        guard let lastHatchDate = alarms.first?.lastHatchDate else { return false }
-        return Calendar.current.isDateInToday(lastHatchDate)
-    }
-
+    /// within its 15-minute window, or the sad dino once that window has
+    /// closed without a claim (see `AlarmClaimer`/`RootTabView`).
     private var headerImageName: String {
-        hasHatchedToday ? "alarm-reward" : "alarm-egg"
+        guard let settings = alarms.first, settings.isEnabled else { return "alarm-egg" }
+        if let lastHatchDate = settings.lastHatchDate, Calendar.current.isDateInToday(lastHatchDate) {
+            return "alarm-reward"
+        }
+        if AlarmClaimer.wasMissedToday(
+            hour: settings.hour,
+            minute: settings.minute,
+            weekdays: settings.repeatWeekdays,
+            lastHatchDate: settings.lastHatchDate
+        ) {
+            return "alarm-sad"
+        }
+        return "alarm-egg"
     }
 
     var body: some View {

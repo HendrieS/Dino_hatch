@@ -34,4 +34,26 @@ enum AlarmClaimer {
         }
         return true
     }
+
+    /// True once today's response window has closed without a claim — used
+    /// purely for the sad-dino status art on `AlarmView`, not for gating the
+    /// reward itself (that stays `isReady`'s job).
+    static func wasMissedToday(
+        hour: Int,
+        minute: Int,
+        weekdays: [Int],
+        lastHatchDate: Date?,
+        now: Date = .now,
+        calendar: Calendar = .current
+    ) -> Bool {
+        guard weekdays.contains(calendar.component(.weekday, from: now)) else { return false }
+        guard let alarmTimeToday = calendar.date(bySettingHour: hour, minute: minute, second: 0, of: now) else {
+            return false
+        }
+        guard now > alarmTimeToday.addingTimeInterval(responseWindow) else { return false }
+        if let lastHatchDate, calendar.isDate(lastHatchDate, inSameDayAs: now) {
+            return false
+        }
+        return true
+    }
 }

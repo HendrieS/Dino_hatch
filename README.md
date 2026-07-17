@@ -78,10 +78,12 @@ have a paid Apple Developer account and want cross-device sync.
   anyway, so the design doesn't depend on it. Missing the 15-minute window
   means no dinosaur until the alarm's next scheduled occurrence — it's a
   deliberate "actually get up" incentive, not just a lenient catch-up
-  reward. The header illustration on the Alarm tab reflects today's status:
-  the plain `alarm-egg` art by default, switching to the celebrating
-  `alarm-reward` hatchling once `AlarmSettings.lastHatchDate` shows today's
-  alarm was actually claimed in time (`AlarmView.hasHatchedToday`).
+  reward. The header illustration on the Alarm tab reflects today's status
+  (`AlarmView.headerImageName`): the plain `alarm-egg` art by default, the
+  celebrating `alarm-reward` hatchling once `AlarmSettings.lastHatchDate`
+  shows today's alarm was actually claimed in time, or the sad `alarm-sad`
+  dino once `AlarmClaimer.wasMissedToday` says the window closed without a
+  claim.
 - **Age onboarding & settings**: the first time the app is opened,
   `Views/AgeOnboardingView.swift` asks for the child's general age and
   gates the rest of the app (`Views/RootTabView.swift` shows it instead of
