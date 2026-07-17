@@ -90,7 +90,7 @@ struct CollectionView: View {
                 #endif
             }
             .sheet(isPresented: $showSettings) {
-                SettingsView()
+                ParentalGateView()
             }
         }
     }

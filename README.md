@@ -75,9 +75,12 @@ have a paid Apple Developer account and want cross-device sync.
   `Views/AgeOnboardingView.swift` asks for the child's general age and
   gates the rest of the app (`Views/RootTabView.swift` shows it instead of
   the `TabView` whenever `AppSettings.childAge` is `nil`). A gear icon on
-  the Collection tab opens `Views/SettingsView.swift`, where the age can be
-  changed or all data (collection, timer, alarm, and the age itself) can be
-  wiped, which re-triggers onboarding on next launch.
+  the Collection tab opens `Views/ParentalGateView.swift` first — a quick
+  random single-digit multiplication question (not real security, just
+  enough friction to keep a small child out) that only then reveals
+  `Views/SettingsView.swift`, where the age can be changed or all data
+  (collection, timer, alarm, and the age itself) can be wiped, which
+  re-triggers onboarding on next launch.
 - **X-ray age gating**: the press-and-hold x-ray view
   (`Views/DinoAnatomyView.swift`) only activates once
   `Stores/XRayEligibility.swift` — a pure, unit-tested function — reports
