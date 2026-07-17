@@ -43,7 +43,7 @@ struct SettingsView: View {
                 age = settings.first?.childAge ?? 5
             }
             .confirmationDialog(
-                "Reset all data?",
+                "Are you sure?",
                 isPresented: $showResetConfirmation,
                 titleVisibility: .visible
             ) {
