@@ -38,7 +38,7 @@ private struct IllustratedHatchSequence: View {
     @State private var frameIndex = 0
 
     private var frameNames: [String] { EggHatchArt.frameNames(forDinosaurID: dinosaur.id) }
-    private let frameInterval: Double = 0.55
+    private let frameInterval: Double = 0.85
 
     var body: some View {
         ZStack {
@@ -57,12 +57,12 @@ private struct IllustratedHatchSequence: View {
         let frameNames = frameNames
         for index in 1..<frameNames.count {
             DispatchQueue.main.asyncAfter(deadline: .now() + frameInterval * Double(index)) {
-                withAnimation(.easeInOut(duration: 0.35)) {
+                withAnimation(.easeInOut(duration: 0.5)) {
                     frameIndex = index
                 }
             }
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + frameInterval * Double(frameNames.count) + 0.3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + frameInterval * Double(frameNames.count) + 0.4) {
             onComplete()
         }
     }
@@ -130,15 +130,15 @@ private struct VectorHatchSequence: View {
     private func runSequence() {
         confetti = ConfettiParticle.makeBurst(count: 20)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
             stage = .bursting
-            withAnimation(.spring(response: 0.5, dampingFraction: 0.6)) {
+            withAnimation(.spring(response: 0.65, dampingFraction: 0.6)) {
                 topOffset = CGSize(width: -40, height: -140)
                 topRotation = -50
                 bottomOffset = CGSize(width: 0, height: 30)
                 dinoScale = 1.0
             }
-            withAnimation(.easeOut(duration: 1.0)) {
+            withAnimation(.easeOut(duration: 1.3)) {
                 for index in confetti.indices {
                     confetti[index].offset = confetti[index].targetOffset
                     confetti[index].opacity = 0
@@ -146,11 +146,11 @@ private struct VectorHatchSequence: View {
             }
         }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             stage = .revealed
         }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             onComplete()
         }
     }
