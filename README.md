@@ -44,6 +44,11 @@ have a paid Apple Developer account and want cross-device sync.
   elapsed-tick counter) in the `AppSettings` SwiftData model, so a running
   timer survives backgrounding *and* a full app kill/relaunch — on relaunch
   it just compares `Date.now` to the stored end date.
+- **Duration picker**: `Views/Components/CircularDurationPicker.swift` sets
+  any duration by dragging around the dial, or by tapping one of the
+  5-minute numbers to jump straight to it (e.g. tapping "30" sets 30:00
+  without starting the timer) — sized up with a roomy tap target since the
+  number glyphs alone are too small to hit reliably.
 - **Dinosaur catalog**: `Data/DinosaurCatalog.swift` is a static, bundled
   list of 14 dinosaurs — no backend, no JSON parsing, just a Swift array.
 - **Collection**: `Models/UnlockedDinosaur.swift` is the only thing that

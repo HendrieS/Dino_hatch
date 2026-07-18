@@ -1,11 +1,12 @@
 import SwiftUI
 
 /// Clock-face style duration picker: drag anywhere on the dial to set any
-/// duration from 0:01 up to 59:59. One full lap of the circle covers the
-/// entire range (0:00 at the top, sweeping clockwise up to just under
-/// 60:00), same as how an analog clock hand has no "stop" at 12 —
-/// dragging past the top wraps around, which is the expected feel for a
-/// dial like this rather than a bug to guard against.
+/// duration from 0:01 up to 59:59, or tap one of the 5-minute numbers to
+/// jump straight to it (without starting the timer). One full lap of the
+/// circle covers the entire range (0:00 at the top, sweeping clockwise up
+/// to just under 60:00), same as how an analog clock hand has no "stop" at
+/// 12 — dragging past the top wraps around, which is the expected feel for
+/// a dial like this rather than a bug to guard against.
 struct CircularDurationPicker: View {
     @Binding var totalSeconds: Int
     var diameter: CGFloat = 260
@@ -19,6 +20,8 @@ struct CircularDurationPicker: View {
     /// pointer actually sits.
     private static let secondsPerLap = 3600
     private let ringWidth: CGFloat = 18
+
+    @State private var lastTappedMinuteMark: Int?
 
     private var progress: Double {
         Double(totalSeconds) / Double(Self.secondsPerLap)
@@ -48,11 +51,25 @@ struct CircularDurationPicker: View {
                 }
             }
 
+            // Each 5-minute label is individually tappable to jump straight
+            // to that duration (e.g. tapping "30" sets 30:00 without
+            // starting the timer) — a shortcut alongside the drag-anywhere
+            // dial, not a replacement for it. Sized up from the original
+            // caption-sized label and given a roomy invisible tap target,
+            // since a tiny number is hard to hit precisely. Positioned
+            // outside the ring's own drag contentShape (radius diameter/2)
+            // so the two gestures never compete for the same touch.
             ForEach(Array(stride(from: 0, to: 60, by: 5)), id: \.self) { minuteMark in
                 Text(minuteMark, format: .number)
-                    .font(.caption2.bold())
-                    .foregroundStyle(.secondary)
-                    .offset(offset(forProgress: Double(minuteMark) / 60, radius: diameter / 2 + 16))
+                    .font(.system(size: 15, weight: .bold, design: .rounded))
+                    .foregroundStyle(minuteMark * 60 == totalSeconds ? Color.dinoGreen : .secondary)
+                    .frame(width: 32, height: 32)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        totalSeconds = min(minuteMark * 60, Self.maxSeconds)
+                        lastTappedMinuteMark = minuteMark
+                    }
+                    .offset(offset(forProgress: Double(minuteMark) / 60, radius: diameter / 2 + 18))
             }
 
             Circle()
@@ -72,6 +89,11 @@ struct CircularDurationPicker: View {
             DragGesture(minimumDistance: 0)
                 .onChanged { value in updateFromDrag(value.location) }
         )
+        // Scoped to the tap shortcut specifically, rather than to every
+        // `totalSeconds` change — the drag gesture already re-snaps every 5
+        // seconds, so tying feedback to that instead would buzz constantly
+        // while dragging rather than confirming a deliberate tap.
+        .sensoryFeedback(.selection, trigger: lastTappedMinuteMark)
         .accessibilityElement()
         .accessibilityLabel(Text("Duration"))
         .accessibilityValue(Text(String(format: "%d:%02d", totalSeconds / 60, totalSeconds % 60)))
