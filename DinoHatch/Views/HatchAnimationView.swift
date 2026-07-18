@@ -11,13 +11,13 @@ struct HatchAnimationView: View {
     var onComplete: () -> Void
 
     private var hasIllustratedFrames: Bool {
-        IllustratedHatchSequence.frameNames.allSatisfy { UIImage(named: $0) != nil }
+        EggHatchArt.frameNames(forDinosaurID: dinosaur.id).allSatisfy { UIImage(named: $0) != nil }
     }
 
     var body: some View {
         Group {
             if hasIllustratedFrames {
-                IllustratedHatchSequence(onComplete: onComplete)
+                IllustratedHatchSequence(dinosaur: dinosaur, onComplete: onComplete)
             } else {
                 VectorHatchSequence(dinosaur: dinosaur, onComplete: onComplete)
             }
@@ -25,21 +25,24 @@ struct HatchAnimationView: View {
     }
 }
 
-/// Real illustrated 4-frame hatch progression. Deliberately generic across
-/// every dinosaur (the species-specific reveal happens afterward in
-/// HatchRevealView) — cross-fades egg-hatch-1 through egg-hatch-4 in
-/// sequence rather than needing art per species.
+/// Real illustrated 4-frame hatch progression. Stages 1-2 are shared across
+/// every dinosaur; stages 3-4 switch to species-family art when
+/// `EggHatchArt` has one (see there), so the peeking silhouette actually
+/// resembles what's about to hatch instead of always reading as the same
+/// generic shape. The species-specific reveal itself still happens
+/// afterward in HatchRevealView regardless.
 private struct IllustratedHatchSequence: View {
+    let dinosaur: Dinosaur
     var onComplete: () -> Void
 
     @State private var frameIndex = 0
 
-    static let frameNames = ["egg-hatch-1", "egg-hatch-2", "egg-hatch-3", "egg-hatch-4"]
+    private var frameNames: [String] { EggHatchArt.frameNames(forDinosaurID: dinosaur.id) }
     private let frameInterval: Double = 0.55
 
     var body: some View {
         ZStack {
-            ForEach(Array(Self.frameNames.enumerated()), id: \.offset) { index, name in
+            ForEach(Array(frameNames.enumerated()), id: \.offset) { index, name in
                 Image(name)
                     .resizable()
                     .scaledToFit()
@@ -51,14 +54,15 @@ private struct IllustratedHatchSequence: View {
     }
 
     private func runSequence() {
-        for index in 1..<Self.frameNames.count {
+        let frameNames = frameNames
+        for index in 1..<frameNames.count {
             DispatchQueue.main.asyncAfter(deadline: .now() + frameInterval * Double(index)) {
                 withAnimation(.easeInOut(duration: 0.35)) {
                     frameIndex = index
                 }
             }
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + frameInterval * Double(Self.frameNames.count) + 0.3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + frameInterval * Double(frameNames.count) + 0.3) {
             onComplete()
         }
     }

@@ -55,6 +55,13 @@ have a paid Apple Developer account and want cross-device sync.
 - **Animation**: `Views/HatchAnimationView.swift` and `Views/EggView.swift`
   build the crack/wobble/burst/confetti sequence from plain SwiftUI shapes
   and animations — no image assets or third-party animation library.
+- **Species-specific hatch art**: the illustrated 4-frame hatch sequence
+  shares generic art for stages 1-2 (the egg hasn't visibly differentiated
+  yet), but `Stores/EggHatchArt.swift` swaps stages 3-4 to body-plan-family
+  art — pterosaur, sauropod, or ceratopsid — for the dinosaurs mapped to one
+  of those families, so the peeking silhouette actually resembles what's
+  about to hatch instead of always looking like the same generic shape.
+  Every other dinosaur keeps the original generic stage-3/4 frames.
 - **Cross-tab "egg ready" banner**: if the timer finishes while the kid is on
   the Alarm or Collection tab, `Views/TimerHomeView.swift` deliberately holds
   off playing the hatch animation (`advanceToHatching()`) until the Timer tab
