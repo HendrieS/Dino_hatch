@@ -14,11 +14,18 @@ final class EggHatchArtTests: XCTestCase {
         XCTAssertEqual(EggHatchArt.family(forDinosaurID: "puertasaurus"), .sauropod)
         XCTAssertEqual(EggHatchArt.family(forDinosaurID: "triceratops"), .ceratopsid)
         XCTAssertEqual(EggHatchArt.family(forDinosaurID: "styracosaurus"), .ceratopsid)
+        XCTAssertEqual(EggHatchArt.family(forDinosaurID: "velociraptor"), .raptor)
+        XCTAssertEqual(EggHatchArt.family(forDinosaurID: "dilophosaurus"), .raptor)
+        XCTAssertEqual(EggHatchArt.family(forDinosaurID: "coelophysis"), .raptor)
+        XCTAssertEqual(EggHatchArt.family(forDinosaurID: "compsognathus"), .raptor)
+        XCTAssertEqual(EggHatchArt.family(forDinosaurID: "gallimimus"), .raptor)
+        XCTAssertEqual(EggHatchArt.family(forDinosaurID: "oviraptor"), .raptor)
+        XCTAssertEqual(EggHatchArt.family(forDinosaurID: "therizinosaurus"), .raptor)
     }
 
     func testUnmappedDinosaurHasNoFamily() {
         XCTAssertNil(EggHatchArt.family(forDinosaurID: "t-rex"))
-        XCTAssertNil(EggHatchArt.family(forDinosaurID: "velociraptor"))
+        XCTAssertNil(EggHatchArt.family(forDinosaurID: "stegosaurus"))
     }
 
     func testFrameNamesUseSpeciesArtForStagesThreeAndFour() {
@@ -33,6 +40,10 @@ final class EggHatchArtTests: XCTestCase {
         XCTAssertEqual(
             EggHatchArt.frameNames(forDinosaurID: "triceratops"),
             ["egg-hatch-1", "egg-hatch-2", "egg-hatch-3-ceratopsid", "egg-hatch-4-ceratopsid"]
+        )
+        XCTAssertEqual(
+            EggHatchArt.frameNames(forDinosaurID: "velociraptor"),
+            ["egg-hatch-1", "egg-hatch-2", "egg-hatch-3-raptor", "egg-hatch-4-raptor"]
         )
     }
 
