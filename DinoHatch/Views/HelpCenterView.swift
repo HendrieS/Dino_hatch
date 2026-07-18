@@ -30,7 +30,7 @@ struct HelpCenterView: View {
             }
 
             Section("The collection") {
-                Text("Tap any hatched dinosaur to read kid-friendly facts about it. Press and hold to see an X-ray view — this unlocks once your child's age is set to 6 or older and at least two dinosaurs have been hatched.")
+                Text("Tap any hatched dinosaur to read kid-friendly facts about it. Press and hold to see an X-ray view — this unlocks after the first hatch for children 5 and under, or after two hatches for children 6 and up.")
             }
 
             Section("Managing this data") {

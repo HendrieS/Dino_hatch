@@ -4497,43 +4497,43 @@
         }
       }
     },
-    "Tap any hatched dinosaur to read kid-friendly facts about it. Press and hold to see an X-ray view — this unlocks once your child's age is set to 6 or older and at least two dinosaurs have been hatched.": {
+    "Tap any hatched dinosaur to read kid-friendly facts about it. Press and hold to see an X-ray view — this unlocks after the first hatch for children 5 and under, or after two hatches for children 6 and up.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tippe auf einen geschlüpften Dinosaurier, um kindgerechte Fakten über ihn zu lesen. Halte ihn gedrückt, um eine Röntgenansicht zu sehen — diese wird freigeschaltet, sobald das Alter des Kindes auf 6 oder älter eingestellt ist und mindestens zwei Dinosaurier geschlüpft sind."
+            "value": "Tippe auf einen geschlüpften Dinosaurier, um kindgerechte Fakten über ihn zu lesen. Halte ihn gedrückt, um eine Röntgenansicht zu sehen — diese wird für Kinder bis 5 Jahre nach dem ersten Schlüpfen freigeschaltet, für Kinder ab 6 Jahren nach zwei geschlüpften Dinosauriern."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tap any hatched dinosaur to read kid-friendly facts about it. Press and hold to see an X-ray view — this unlocks once your child's age is set to 6 or older and at least two dinosaurs have been hatched."
+            "value": "Tap any hatched dinosaur to read kid-friendly facts about it. Press and hold to see an X-ray view — this unlocks after the first hatch for children 5 and under, or after two hatches for children 6 and up."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Toca cualquier dinosaurio nacido para leer datos aptos para niños sobre él. Mantén pulsado para ver una vista de rayos X: se desbloquea cuando la edad del niño o niña es de 6 años o más y han nacido al menos dos dinosaurios."
+            "value": "Toca cualquier dinosaurio nacido para leer datos aptos para niños sobre él. Mantén pulsado para ver una vista de rayos X: se desbloquea tras el primer nacimiento para niños de 5 años o menos, o tras dos nacimientos para niños de 6 años o más."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Touchez un dinosaure éclos pour lire des informations adaptées aux enfants à son sujet. Appuyez de manière prolongée pour voir une vue aux rayons X — elle se débloque une fois que l'âge de l'enfant est réglé sur 6 ans ou plus et qu'au moins deux dinosaures ont éclos."
+            "value": "Touchez un dinosaure éclos pour lire des informations adaptées aux enfants à son sujet. Appuyez de manière prolongée pour voir une vue aux rayons X — elle se débloque après la première éclosion pour les enfants de 5 ans et moins, ou après deux éclosions pour les enfants de 6 ans et plus."
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tik op een uitgekomen dino om kindvriendelijke feitjes te lezen. Houd ingedrukt voor een röntgenweergave — deze wordt ontgrendeld zodra de leeftijd van het kind op 6 jaar of ouder staat en er minstens twee dino's zijn uitgekomen."
+            "value": "Tik op een uitgekomen dino om kindvriendelijke feitjes te lezen. Houd ingedrukt voor een röntgenweergave — deze wordt ontgrendeld na het eerste uitkomen voor kinderen van 5 jaar en jonger, of na twee keer uitkomen voor kinderen van 6 jaar en ouder."
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "Нажмите на любого вылупившегося динозавра, чтобы прочитать интересные факты о нём, понятные детям. Нажмите и удерживайте, чтобы увидеть рентген — он открывается, когда возраст ребёнка установлен на 6 лет и старше и вылупилось не менее двух динозавров."
+            "value": "Нажмите на любого вылупившегося динозавра, чтобы прочитать интересные факты о нём, понятные детям. Нажмите и удерживайте, чтобы увидеть рентген — он открывается после первого вылупления для детей 5 лет и младше, или после двух вылуплений для детей от 6 лет."
           }
         }
       }

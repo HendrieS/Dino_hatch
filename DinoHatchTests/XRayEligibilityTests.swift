@@ -6,19 +6,33 @@ final class XRayEligibilityTests: XCTestCase {
         XCTAssertFalse(XRayEligibility.isUnlocked(childAge: nil, totalHatched: 5))
     }
 
-    func testLockedWhenUnderMinimumAge() {
-        XCTAssertFalse(XRayEligibility.isUnlocked(childAge: 5, totalHatched: 5))
+    func testYoungChildLockedBeforeAnyHatch() {
+        XCTAssertFalse(XRayEligibility.isUnlocked(childAge: 5, totalHatched: 0))
     }
 
-    func testLockedWhenBelowHatchCountEvenIfOldEnough() {
+    func testYoungChildUnlockedAfterFirstHatch() {
+        XCTAssertTrue(XRayEligibility.isUnlocked(childAge: 5, totalHatched: 1))
+    }
+
+    func testYoungChildStaysUnlockedWellPastFirstHatch() {
+        XCTAssertTrue(XRayEligibility.isUnlocked(childAge: 1, totalHatched: 8))
+    }
+
+    func testOlderChildLockedBelowHatchCountEvenIfOldEnough() {
         XCTAssertFalse(XRayEligibility.isUnlocked(childAge: 10, totalHatched: 1))
     }
 
-    func testUnlockedAtExactThresholds() {
+    func testOlderChildUnlockedAtExactThreshold() {
         XCTAssertTrue(XRayEligibility.isUnlocked(childAge: 6, totalHatched: 2))
     }
 
-    func testUnlockedWellPastThresholds() {
+    func testOlderChildUnlockedWellPastThreshold() {
         XCTAssertTrue(XRayEligibility.isUnlocked(childAge: 9, totalHatched: 12))
+    }
+
+    func testAgeThresholdBoundary() {
+        // Age 5 uses the younger, easier threshold (1 hatch); age 6 needs 2.
+        XCTAssertTrue(XRayEligibility.isUnlocked(childAge: 5, totalHatched: 1))
+        XCTAssertFalse(XRayEligibility.isUnlocked(childAge: 6, totalHatched: 1))
     }
 }
