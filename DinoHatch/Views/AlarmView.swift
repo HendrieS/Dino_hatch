@@ -42,6 +42,14 @@ struct AlarmView: View {
                         .frame(width: 130, height: 130)
                         .padding(.top, 12)
 
+                    if headerImageName == "alarm-sad" {
+                        Text("Missed it today — try again tomorrow!")
+                            .font(.subheadline.bold())
+                            .foregroundStyle(.secondary)
+                            .multilineTextAlignment(.center)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+
                     Text("Set a wake-up time and hatch\na dinosaur when you open the app!")
                         .font(.title3.bold())
                         .multilineTextAlignment(.center)

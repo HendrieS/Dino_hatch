@@ -2905,6 +2905,47 @@
         }
       }
     },
+    "Missed it today — try again tomorrow!": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heute verpasst — versuch's morgen wieder!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Missed it today — try again tomorrow!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoy se te pasó — ¡inténtalo de nuevo mañana!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Raté aujourd'hui — réessayez demain !"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vandaag gemist — morgen weer proberen!"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сегодня не успели — попробуйте завтра снова!"
+          }
+        }
+      }
+    },
     "No name, birthday, email, photos, or location are ever asked for or stored.": {
       "extractionState": "manual",
       "localizations": {

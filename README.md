@@ -96,7 +96,11 @@ have a paid Apple Developer account and want cross-device sync.
   celebrating `alarm-reward` hatchling once `AlarmSettings.lastHatchDate`
   shows today's alarm was actually claimed in time, or the sad `alarm-sad`
   dino once `AlarmClaimer.wasMissedToday` says the window closed without a
-  claim.
+  claim — alongside a short "Missed it today — try again tomorrow!" line.
+  A missed window also puts a small "!" badge on the Alarm tab itself
+  (`RootTabView.alarmWasMissedToday`, refreshed every minute and on every
+  foreground transition via a `Timer.publish`), so it's noticeable without
+  needing to open that tab.
 - **Age onboarding & settings**: the first time the app is opened,
   `Views/AgeOnboardingView.swift` asks for the child's general age and
   gates the rest of the app (`Views/RootTabView.swift` shows it instead of

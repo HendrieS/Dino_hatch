@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import Combine
 
 struct RootTabView: View {
     private enum Tab: Hashable {
@@ -14,6 +15,12 @@ struct RootTabView: View {
 
     @State private var pendingAlarmDinosaur: Dinosaur?
     @State private var selectedTab: Tab = .timer
+    /// Refreshed every minute (and on every foreground transition) purely
+    /// to keep the Alarm tab's missed-window badge current — unlike the
+    /// timer banner's TimelineView, this needs to tick even while the Timer
+    /// tab is showing, since the badge lives on the tab bar itself.
+    @State private var now: Date = .now
+    private let minuteTimer = Timer.publish(every: 60, on: .main, in: .common).autoconnect()
 
     var body: some View {
         Group {
@@ -39,6 +46,7 @@ struct RootTabView: View {
                         Label("Alarm", systemImage: "alarm.fill")
                     }
                     .tag(Tab.alarm)
+                    .badge(alarmWasMissedToday(at: now) ? Text(verbatim: "!") : nil)
 
                 CollectionView()
                     .tabItem {
@@ -49,8 +57,12 @@ struct RootTabView: View {
             .onAppear(perform: checkAlarmHatch)
             .onChange(of: scenePhase) { _, newPhase in
                 if newPhase == .active {
+                    now = .now
                     checkAlarmHatch()
                 }
+            }
+            .onReceive(minuteTimer) { date in
+                now = date
             }
             .fullScreenCover(item: $pendingAlarmDinosaur) { dinosaur in
                 AlarmHatchView(dinosaur: dinosaur) {
@@ -87,6 +99,21 @@ struct RootTabView: View {
               let endDate = settings.activeTimerEndDate,
               settings.pendingDinosaurID != nil else { return false }
         return date >= endDate
+    }
+
+    /// Drives the "!" badge on the Alarm tab so a missed window is
+    /// noticeable without needing to open that tab — the sad-dino art in
+    /// `AlarmView` shows the same thing, but only once you're already
+    /// looking at it.
+    private func alarmWasMissedToday(at date: Date) -> Bool {
+        guard let settings = alarms.first, settings.isEnabled else { return false }
+        return AlarmClaimer.wasMissedToday(
+            hour: settings.hour,
+            minute: settings.minute,
+            weekdays: settings.repeatWeekdays,
+            lastHatchDate: settings.lastHatchDate,
+            now: date
+        )
     }
 
     /// Checked on every foreground transition rather than tied to the
