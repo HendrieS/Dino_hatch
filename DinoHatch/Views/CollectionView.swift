@@ -66,6 +66,7 @@ struct CollectionView: View {
                 .padding()
             }
             .navigationTitle("Dino-pedia")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {

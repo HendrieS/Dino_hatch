@@ -101,6 +101,7 @@ struct AlarmView: View {
                 .padding(.bottom, 24)
             }
             .navigationTitle("Dino Alarm")
+            .navigationBarTitleDisplayMode(.inline)
             .onAppear(perform: load)
             .onChange(of: isEnabled) { _, newValue in
                 if newValue && weekdays.isEmpty {
