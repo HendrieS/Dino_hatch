@@ -56,20 +56,29 @@ struct CircularDurationPicker: View {
             // starting the timer) — a shortcut alongside the drag-anywhere
             // dial, not a replacement for it. Sized up from the original
             // caption-sized label and given a roomy invisible tap target,
-            // since a tiny number is hard to hit precisely. Positioned
-            // outside the ring's own drag contentShape (radius diameter/2)
-            // so the two gestures never compete for the same touch.
+            // since a tiny number is hard to hit precisely.
+            //
+            // `highPriorityGesture` (rather than plain `onTapGesture`)
+            // matters here: the ring's own `DragGesture(minimumDistance: 0)`
+            // recognizes on touch-down instantly, so any tap that lands even
+            // a couple points inside its contentShape circle — easy to do
+            // with a real fingertip — would otherwise get swallowed as a
+            // drag-snap instead of the intended exact jump. Marking the tap
+            // high-priority makes it win that race regardless of the small
+            // unavoidable overlap near the ring's edge.
             ForEach(Array(stride(from: 0, to: 60, by: 5)), id: \.self) { minuteMark in
                 Text(minuteMark, format: .number)
                     .font(.system(size: 15, weight: .bold, design: .rounded))
                     .foregroundStyle(minuteMark * 60 == totalSeconds ? Color.dinoGreen : .secondary)
-                    .frame(width: 32, height: 32)
+                    .frame(width: 34, height: 34)
                     .contentShape(Rectangle())
-                    .onTapGesture {
-                        totalSeconds = min(minuteMark * 60, Self.maxSeconds)
-                        lastTappedMinuteMark = minuteMark
-                    }
-                    .offset(offset(forProgress: Double(minuteMark) / 60, radius: diameter / 2 + 18))
+                    .highPriorityGesture(
+                        TapGesture().onEnded {
+                            totalSeconds = min(minuteMark * 60, Self.maxSeconds)
+                            lastTappedMinuteMark = minuteMark
+                        }
+                    )
+                    .offset(offset(forProgress: Double(minuteMark) / 60, radius: diameter / 2 + 20))
             }
 
             Circle()

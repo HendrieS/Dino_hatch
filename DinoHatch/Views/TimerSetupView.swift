@@ -10,33 +10,40 @@ struct TimerSetupView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 32) {
-                Spacer()
+            ScrollView {
+                VStack(spacing: 32) {
+                    Text("Set a timer and watch\nan egg hatch!")
+                        .font(.title2.bold())
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
 
-                Text("Set a timer and watch\nan egg hatch!")
-                    .font(.title2.bold())
-                    .multilineTextAlignment(.center)
+                    CircularDurationPicker(totalSeconds: $totalSeconds)
+                        // The dial's tappable minute labels sit outside its
+                        // own diameter x diameter frame (so they clear its
+                        // drag gesture area — see CircularDurationPicker),
+                        // which otherwise left the "30" label's tap target
+                        // close enough to the Start Timer button below to
+                        // occasionally hit it by mistake. This reserves the
+                        // real space they need.
+                        .padding(.bottom, 38)
 
-                CircularDurationPicker(totalSeconds: $totalSeconds)
-
-                Button {
-                    startTimer()
-                } label: {
-                    Text("Start Timer")
-                        .font(.title3.bold())
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(totalSeconds > 0 ? Color.dinoGreen : Color.gray)
-                        .foregroundStyle(.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                    Button {
+                        startTimer()
+                    } label: {
+                        Text("Start Timer")
+                            .font(.title3.bold())
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(totalSeconds > 0 ? Color.dinoGreen : Color.gray)
+                            .foregroundStyle(.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                    }
+                    .disabled(totalSeconds == 0)
+                    .padding(.horizontal, 32)
                 }
-                .disabled(totalSeconds == 0)
-                .padding(.horizontal, 32)
-
-                Spacer()
-                Spacer()
+                .padding()
+                .padding(.top, 24)
             }
-            .padding()
             .navigationTitle("Dino Hatch")
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
