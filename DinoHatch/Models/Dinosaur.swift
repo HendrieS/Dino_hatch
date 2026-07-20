@@ -15,6 +15,14 @@ struct Dinosaur: Identifiable, Codable, Hashable {
     /// defaulted to nil so existing catalog entries compile unchanged and
     /// older saved data decodes without this key.
     let skeletonAssetName: String?
+    /// Name of the shared region-map asset (one of a handful of reusable
+    /// world maps, not one per dinosaur) shown as a "Found in" card on the
+    /// detail screen — see `DinosaurDetailView`. Optional/defaulted to nil.
+    let rangeMapAssetName: String?
+    /// Short caption under the map, e.g. "Western North America". Routed
+    /// through `Text(localizedContent:)` like `era`/`funFact` since it's
+    /// user-facing copy. Optional/defaulted to nil.
+    let rangeLabel: String?
     let rarity: Rarity
     /// Excluded from the Collection grid entirely while locked (no
     /// silhouette, no count) and from `HatchSelector`'s pool until every
@@ -53,6 +61,8 @@ struct Dinosaur: Identifiable, Codable, Hashable {
         emoji: String,
         imageAssetName: String? = nil,
         skeletonAssetName: String? = nil,
+        rangeMapAssetName: String? = nil,
+        rangeLabel: String? = nil,
         rarity: Rarity,
         isSecret: Bool = false
     ) {
@@ -66,15 +76,18 @@ struct Dinosaur: Identifiable, Codable, Hashable {
         self.emoji = emoji
         self.imageAssetName = imageAssetName
         self.skeletonAssetName = skeletonAssetName
+        self.rangeMapAssetName = rangeMapAssetName
+        self.rangeLabel = rangeLabel
         self.rarity = rarity
         self.isSecret = isSecret
     }
 
-    // Decoding tolerates catalogs/saved data without `skeletonAssetName` or
-    // `isSecret`.
+    // Decoding tolerates catalogs/saved data without `skeletonAssetName`,
+    // `rangeMapAssetName`/`rangeLabel`, or `isSecret`.
     enum CodingKeys: String, CodingKey {
         case id, name, era, diet, length, funFact
-        case symbolName, emoji, imageAssetName, skeletonAssetName, rarity, isSecret
+        case symbolName, emoji, imageAssetName, skeletonAssetName
+        case rangeMapAssetName, rangeLabel, rarity, isSecret
     }
 
     init(from decoder: Decoder) throws {
@@ -89,6 +102,8 @@ struct Dinosaur: Identifiable, Codable, Hashable {
         emoji = try c.decode(String.self, forKey: .emoji)
         imageAssetName = try c.decodeIfPresent(String.self, forKey: .imageAssetName)
         skeletonAssetName = try c.decodeIfPresent(String.self, forKey: .skeletonAssetName)
+        rangeMapAssetName = try c.decodeIfPresent(String.self, forKey: .rangeMapAssetName)
+        rangeLabel = try c.decodeIfPresent(String.self, forKey: .rangeLabel)
         rarity = try c.decode(Rarity.self, forKey: .rarity)
         isSecret = try c.decodeIfPresent(Bool.self, forKey: .isSecret) ?? false
     }

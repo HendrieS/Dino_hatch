@@ -13,6 +13,8 @@ enum DinosaurCatalog {
             emoji: "🦖",
             imageAssetName: "trex-skin",
             skeletonAssetName: "trex-skeleton",
+            rangeMapAssetName: "region-north-america",
+            rangeLabel: "Western North America",
             rarity: .rare
         ),
         Dinosaur(
@@ -26,6 +28,8 @@ enum DinosaurCatalog {
             emoji: "🦕",
             imageAssetName: "triceratops-skin",
             skeletonAssetName: "triceratops-skeleton",
+            rangeMapAssetName: "region-north-america",
+            rangeLabel: "Western North America",
             rarity: .common
         ),
         Dinosaur(
@@ -39,6 +43,8 @@ enum DinosaurCatalog {
             emoji: "🐦",
             imageAssetName: "velociraptor-skin",
             skeletonAssetName: "velociraptor-skeleton",
+            rangeMapAssetName: "region-mongolia-china",
+            rangeLabel: "Mongolia & China",
             rarity: .uncommon
         ),
         Dinosaur(
@@ -51,6 +57,8 @@ enum DinosaurCatalog {
             symbolName: "tree.fill",
             emoji: "🌿",
             imageAssetName: "brachiosaurus-skin",
+            rangeMapAssetName: "region-north-america",
+            rangeLabel: "Western North America",
             rarity: .common
         ),
         Dinosaur(
@@ -63,6 +71,8 @@ enum DinosaurCatalog {
             symbolName: "triangle.fill",
             emoji: "🦕",
             imageAssetName: "stegosaurus-skin",
+            rangeMapAssetName: "region-north-america",
+            rangeLabel: "Western North America",
             rarity: .common
         ),
         Dinosaur(
@@ -75,6 +85,8 @@ enum DinosaurCatalog {
             symbolName: "water.waves",
             emoji: "🐊",
             imageAssetName: "spinosaurus-skin",
+            rangeMapAssetName: "region-north-africa",
+            rangeLabel: "North Africa",
             rarity: .rare
         ),
         Dinosaur(
@@ -87,6 +99,8 @@ enum DinosaurCatalog {
             symbolName: "shield.lefthalf.filled",
             emoji: "🛡️",
             imageAssetName: "ankylosaurus-skin",
+            rangeMapAssetName: "region-north-america",
+            rangeLabel: "Western North America",
             rarity: .uncommon
         ),
         Dinosaur(
@@ -99,6 +113,8 @@ enum DinosaurCatalog {
             symbolName: "bird.fill",
             emoji: "🦅",
             imageAssetName: "pteranodon-skin",
+            rangeMapAssetName: "region-north-america",
+            rangeLabel: "Western North America",
             rarity: .uncommon
         ),
         Dinosaur(
@@ -111,6 +127,8 @@ enum DinosaurCatalog {
             symbolName: "speaker.wave.3.fill",
             emoji: "📯",
             imageAssetName: "parasaurolophus-skin",
+            rangeMapAssetName: "region-north-america",
+            rangeLabel: "Western North America",
             rarity: .common
         ),
         Dinosaur(
@@ -123,6 +141,8 @@ enum DinosaurCatalog {
             symbolName: "arrow.left.and.right",
             emoji: "🦕",
             imageAssetName: "diplodocus-skin",
+            rangeMapAssetName: "region-north-america",
+            rangeLabel: "Western North America",
             rarity: .rare
         ),
         Dinosaur(
@@ -135,6 +155,8 @@ enum DinosaurCatalog {
             symbolName: "bolt.fill",
             emoji: "🦖",
             imageAssetName: "allosaurus-skin",
+            rangeMapAssetName: "region-north-america",
+            rangeLabel: "Western North America",
             rarity: .uncommon
         ),
         Dinosaur(
@@ -147,6 +169,8 @@ enum DinosaurCatalog {
             symbolName: "circle.fill",
             emoji: "🪨",
             imageAssetName: "pachycephalosaurus-skin",
+            rangeMapAssetName: "region-north-america",
+            rangeLabel: "Western North America",
             rarity: .uncommon
         ),
         Dinosaur(
@@ -159,6 +183,8 @@ enum DinosaurCatalog {
             symbolName: "hand.point.up.fill",
             emoji: "👍",
             imageAssetName: "iguanodon-skin",
+            rangeMapAssetName: "region-europe",
+            rangeLabel: "Western Europe",
             rarity: .common
         ),
         Dinosaur(
@@ -171,6 +197,8 @@ enum DinosaurCatalog {
             symbolName: "hare.fill",
             emoji: "🐔",
             imageAssetName: "compsognathus-skin",
+            rangeMapAssetName: "region-europe",
+            rangeLabel: "Western Europe",
             rarity: .common
         ),
         Dinosaur(
@@ -183,6 +211,8 @@ enum DinosaurCatalog {
             symbolName: "figure.run",
             emoji: "🦎",
             imageAssetName: "coelophysis-skin",
+            rangeMapAssetName: "region-north-america",
+            rangeLabel: "Western North America",
             rarity: .common
         ),
         Dinosaur(
@@ -195,6 +225,8 @@ enum DinosaurCatalog {
             symbolName: "mountain.2.fill",
             emoji: "🦕",
             imageAssetName: "plateosaurus-skin",
+            rangeMapAssetName: "region-europe",
+            rangeLabel: "Western Europe",
             rarity: .uncommon
         ),
         Dinosaur(
@@ -207,6 +239,8 @@ enum DinosaurCatalog {
             symbolName: "crown.fill",
             emoji: "🦖",
             imageAssetName: "dilophosaurus-skin",
+            rangeMapAssetName: "region-north-america",
+            rangeLabel: "Western North America",
             rarity: .uncommon
         ),
         Dinosaur(
@@ -219,6 +253,8 @@ enum DinosaurCatalog {
             symbolName: "arrow.up.and.down.circle.fill",
             emoji: "🦕",
             imageAssetName: "apatosaurus-skin",
+            rangeMapAssetName: "region-north-america",
+            rangeLabel: "Western North America",
             rarity: .common
         ),
         Dinosaur(
@@ -231,6 +267,8 @@ enum DinosaurCatalog {
             symbolName: "fish.fill",
             emoji: "🐟",
             imageAssetName: "baryonyx-skin",
+            rangeMapAssetName: "region-europe",
+            rangeLabel: "Western Europe",
             rarity: .uncommon
         ),
         Dinosaur(
@@ -243,6 +281,8 @@ enum DinosaurCatalog {
             symbolName: "bolt.horizontal.fill",
             emoji: "🏃",
             imageAssetName: "gallimimus-skin",
+            rangeMapAssetName: "region-mongolia-china",
+            rangeLabel: "Mongolia & China",
             rarity: .common
         ),
         Dinosaur(
@@ -255,6 +295,8 @@ enum DinosaurCatalog {
             symbolName: "sparkles",
             emoji: "🥚",
             imageAssetName: "oviraptor-skin",
+            rangeMapAssetName: "region-mongolia-china",
+            rangeLabel: "Mongolia & China",
             rarity: .uncommon
         ),
         Dinosaur(
@@ -267,6 +309,8 @@ enum DinosaurCatalog {
             symbolName: "sun.max.fill",
             emoji: "🦏",
             imageAssetName: "styracosaurus-skin",
+            rangeMapAssetName: "region-north-america",
+            rangeLabel: "Western North America",
             rarity: .uncommon
         ),
         Dinosaur(
@@ -279,6 +323,8 @@ enum DinosaurCatalog {
             symbolName: "bolt.trianglebadge.exclamationmark.fill",
             emoji: "🐂",
             imageAssetName: "carnotaurus-skin",
+            rangeMapAssetName: "region-south-america",
+            rangeLabel: "South America",
             rarity: .rare
         ),
         Dinosaur(
@@ -291,6 +337,8 @@ enum DinosaurCatalog {
             symbolName: "ruler.fill",
             emoji: "🦖",
             imageAssetName: "giganotosaurus-skin",
+            rangeMapAssetName: "region-south-america",
+            rangeLabel: "South America",
             rarity: .rare
         ),
         Dinosaur(
@@ -303,6 +351,8 @@ enum DinosaurCatalog {
             symbolName: "scissors",
             emoji: "🦥",
             imageAssetName: "therizinosaurus-skin",
+            rangeMapAssetName: "region-mongolia-china",
+            rangeLabel: "Mongolia & China",
             rarity: .rare
         ),
         Dinosaur(
@@ -315,6 +365,8 @@ enum DinosaurCatalog {
             symbolName: "airplane",
             emoji: "🛩️",
             imageAssetName: "quetzalcoatlus-skin",
+            rangeMapAssetName: "region-north-america",
+            rangeLabel: "Western North America",
             rarity: .rare
         ),
 
@@ -334,6 +386,8 @@ enum DinosaurCatalog {
             symbolName: "flag.fill",
             emoji: "🦕",
             imageAssetName: "titanosaurus-skin",
+            rangeMapAssetName: "region-south-asia",
+            rangeLabel: "South Asia",
             rarity: .rare,
             isSecret: true
         ),
@@ -347,6 +401,8 @@ enum DinosaurCatalog {
             symbolName: "arrow.up.circle.fill",
             emoji: "🦕",
             imageAssetName: "patagotitan-skin",
+            rangeMapAssetName: "region-south-america",
+            rangeLabel: "South America",
             rarity: .rare,
             isSecret: true
         ),
@@ -360,6 +416,8 @@ enum DinosaurCatalog {
             symbolName: "shield.fill",
             emoji: "🦕",
             imageAssetName: "dreadnoughtus-skin",
+            rangeMapAssetName: "region-south-america",
+            rangeLabel: "South America",
             rarity: .rare,
             isSecret: true
         ),
@@ -373,6 +431,8 @@ enum DinosaurCatalog {
             symbolName: "scalemass.fill",
             emoji: "🦕",
             imageAssetName: "puertasaurus-skin",
+            rangeMapAssetName: "region-south-america",
+            rangeLabel: "South America",
             rarity: .rare,
             isSecret: true
         )

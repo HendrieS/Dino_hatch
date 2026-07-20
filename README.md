@@ -126,6 +126,14 @@ have a paid Apple Developer account and want cross-device sync.
   needs at least 2. Below that, it silently falls back to the plain skin
   artwork with no hint x-ray exists, the same silent-gating pattern used
   for the secret dinosaurs.
+- **Found-in region maps**: `Views/DinosaurDetailView.swift` shows a
+  "Found in" card whenever `Dinosaur.rangeMapAssetName`/`rangeLabel` are
+  set — a shared world map (6 reusable region images, not one per
+  dinosaur) with the relevant area highlighted, plus a short caption. All
+  30 catalog entries are mapped to one of the 6 regions in
+  `Data/DinosaurCatalog.swift`, grouped by real fossil-discovery
+  geography (e.g. T-Rex/Triceratops → North America, Velociraptor/
+  Oviraptor → Mongolia & China).
 
 ## Localization
 

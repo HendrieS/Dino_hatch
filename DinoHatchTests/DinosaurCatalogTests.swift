@@ -27,4 +27,25 @@ final class DinosaurCatalogTests: XCTestCase {
             XCTAssertFalse(dinosaur.symbolName.isEmpty)
         }
     }
+
+    /// `rangeMapAssetName` and `rangeLabel` are meant to always be set (or
+    /// unset) together — a "Found in" card with a map but no caption, or a
+    /// caption with no map, would both be typos rather than intentional.
+    func testRangeMapAndLabelAreSetTogether() {
+        for dinosaur in DinosaurCatalog.all {
+            XCTAssertEqual(
+                dinosaur.rangeMapAssetName == nil,
+                dinosaur.rangeLabel == nil,
+                "\(dinosaur.id) should have both rangeMapAssetName and rangeLabel, or neither"
+            )
+        }
+    }
+
+    /// Every dinosaur is expected to have a region map for now — catches a
+    /// dinosaur silently falling through the region-grouping table.
+    func testEveryDinosaurHasARangeMap() {
+        for dinosaur in DinosaurCatalog.all {
+            XCTAssertNotNil(dinosaur.rangeMapAssetName, "\(dinosaur.id) is missing a rangeMapAssetName")
+        }
+    }
 }

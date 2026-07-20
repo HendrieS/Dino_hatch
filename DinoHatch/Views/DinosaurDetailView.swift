@@ -39,6 +39,27 @@ struct DinosaurDetailView: View {
                 .background(Color.yellow.opacity(0.15))
                 .clipShape(RoundedRectangle(cornerRadius: 16))
 
+                if let rangeMapAssetName = dinosaur.rangeMapAssetName {
+                    VStack(alignment: .leading, spacing: 9) {
+                        Label("Found in", systemImage: "map.fill")
+                            .font(.headline)
+                        Image(rangeMapAssetName)
+                            .resizable()
+                            .aspectRatio(568.0 / 248.0, contentMode: .fit)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                        if let rangeLabel = dinosaur.rangeLabel {
+                            Text(localizedContent: rangeLabel)
+                                .font(.footnote)
+                                .foregroundStyle(.secondary)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                    .background(Color.dinoCardBackground)
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                }
+
                 if let unlockedAt {
                     HStack(spacing: 4) {
                         Text("Hatched on")
