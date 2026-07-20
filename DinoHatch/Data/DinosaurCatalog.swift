@@ -25,6 +25,7 @@ enum DinosaurCatalog {
             symbolName: "shield.fill",
             emoji: "🦕",
             imageAssetName: "triceratops-skin",
+            skeletonAssetName: "triceratops-skeleton",
             rarity: .common
         ),
         Dinosaur(
