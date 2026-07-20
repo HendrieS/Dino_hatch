@@ -38,6 +38,7 @@ enum DinosaurCatalog {
             symbolName: "wind",
             emoji: "🐦",
             imageAssetName: "velociraptor-skin",
+            skeletonAssetName: "velociraptor-skeleton",
             rarity: .uncommon
         ),
         Dinosaur(
