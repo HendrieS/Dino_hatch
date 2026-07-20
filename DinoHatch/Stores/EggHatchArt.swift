@@ -14,6 +14,10 @@ enum EggHatchArt {
         case sauropod
         case ceratopsid
         case raptor
+        case armored
+        case duckbill
+        case sailback
+        case theropod
     }
 
     private static let familyByDinosaurID: [String: Family] = [
@@ -38,6 +42,20 @@ enum EggHatchArt {
         "gallimimus": .raptor,
         "oviraptor": .raptor,
         "therizinosaurus": .raptor,
+
+        "stegosaurus": .armored,
+        "ankylosaurus": .armored,
+
+        "parasaurolophus": .duckbill,
+        "iguanodon": .duckbill,
+
+        "spinosaurus": .sailback,
+        "baryonyx": .sailback,
+
+        "t-rex": .theropod,
+        "allosaurus": .theropod,
+        "carnotaurus": .theropod,
+        "giganotosaurus": .theropod,
     ]
 
     static func family(forDinosaurID dinosaurID: String) -> Family? {

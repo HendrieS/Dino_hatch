@@ -63,10 +63,12 @@ have a paid Apple Developer account and want cross-device sync.
 - **Species-specific hatch art**: the illustrated 4-frame hatch sequence
   shares generic art for stages 1-2 (the egg hasn't visibly differentiated
   yet), but `Stores/EggHatchArt.swift` swaps stages 3-4 to body-plan-family
-  art — pterosaur, sauropod, ceratopsid, or raptor — for the dinosaurs
-  mapped to one of those families, so the peeking silhouette actually
-  resembles what's about to hatch instead of always looking like the same
-  generic shape.
+  art — pterosaur, sauropod, ceratopsid, raptor, armored, duckbill,
+  sailback, or theropod — for the dinosaurs mapped to one of those
+  families, so the peeking silhouette actually resembles what's about to
+  hatch instead of always looking like the same generic shape. Only
+  Pachycephalosaurus and Plateosaurus still fall back to the generic
+  frames.
   Every other dinosaur keeps the original generic stage-3/4 frames.
 - **Cross-tab "egg ready" banner**: if the timer finishes while the kid is on
   the Alarm or Collection tab, `Views/TimerHomeView.swift` deliberately holds
