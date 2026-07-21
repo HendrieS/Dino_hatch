@@ -20,6 +20,8 @@ struct CircularDurationPicker: View {
     /// pointer actually sits.
     private static let secondsPerLap = 3600
     private let ringWidth: CGFloat = 18
+    private let labelRadiusOffset: CGFloat = 20
+    private let labelTapRadius: CGFloat = 18
 
     @State private var lastTappedMinuteMark: Int?
 
@@ -27,15 +29,37 @@ struct CircularDurationPicker: View {
         Double(totalSeconds) / Double(Self.secondsPerLap)
     }
 
+    private var labelRadius: CGFloat {
+        diameter / 2 + labelRadiusOffset
+    }
+
+    /// The dial's own ring/ticks stay a fixed `diameter x diameter` visual
+    /// size (each given an explicit frame below so they don't stretch), but
+    /// the view's overall hit-testable area is grown to also cover the
+    /// 5-minute labels sitting just outside that ring. Previously those
+    /// labels had their own separate tap gesture, positioned outside the
+    /// dial's hit area specifically so it wouldn't compete with the drag
+    /// gesture — but that meant the parent gesture never saw a touch there
+    /// at all, and the label's own gesture didn't reliably pick up the
+    /// slack either, so tapping a number did nothing. Folding tap detection
+    /// into the same already-working drag handler (`updateFromDrag`)
+    /// removes the competing recognizer entirely instead of trying to win
+    /// a priority race against it.
+    private var interactiveDiameter: CGFloat {
+        diameter + 2 * (labelRadiusOffset + labelTapRadius)
+    }
+
     var body: some View {
         ZStack {
             Circle()
                 .stroke(Color.dinoCardBackground, lineWidth: ringWidth)
+                .frame(width: diameter, height: diameter)
 
             Circle()
                 .trim(from: 0, to: progress)
                 .stroke(Color.dinoGreen, style: StrokeStyle(lineWidth: ringWidth, lineCap: .round))
                 .rotationEffect(.degrees(-90))
+                .frame(width: diameter, height: diameter)
 
             ForEach(0..<60, id: \.self) { minute in
                 if minute % 5 != 0 {
@@ -51,34 +75,15 @@ struct CircularDurationPicker: View {
                 }
             }
 
-            // Each 5-minute label is individually tappable to jump straight
-            // to that duration (e.g. tapping "30" sets 30:00 without
-            // starting the timer) — a shortcut alongside the drag-anywhere
-            // dial, not a replacement for it. Sized up from the original
-            // caption-sized label and given a roomy invisible tap target,
-            // since a tiny number is hard to hit precisely.
-            //
-            // `highPriorityGesture` (rather than plain `onTapGesture`)
-            // matters here: the ring's own `DragGesture(minimumDistance: 0)`
-            // recognizes on touch-down instantly, so any tap that lands even
-            // a couple points inside its contentShape circle — easy to do
-            // with a real fingertip — would otherwise get swallowed as a
-            // drag-snap instead of the intended exact jump. Marking the tap
-            // high-priority makes it win that race regardless of the small
-            // unavoidable overlap near the ring's edge.
+            // Purely visual now — tapping is handled by `updateFromDrag`
+            // via `interactiveDiameter`/`nearestMinuteMark`, not a gesture
+            // on the label itself. Sized up from the original
+            // caption-sized label since a tiny number is hard to read.
             ForEach(Array(stride(from: 0, to: 60, by: 5)), id: \.self) { minuteMark in
                 Text(minuteMark, format: .number)
                     .font(.system(size: 15, weight: .bold, design: .rounded))
                     .foregroundStyle(minuteMark * 60 == totalSeconds ? Color.dinoGreen : .secondary)
-                    .frame(width: 34, height: 34)
-                    .contentShape(Rectangle())
-                    .highPriorityGesture(
-                        TapGesture().onEnded {
-                            totalSeconds = min(minuteMark * 60, Self.maxSeconds)
-                            lastTappedMinuteMark = minuteMark
-                        }
-                    )
-                    .offset(offset(forProgress: Double(minuteMark) / 60, radius: diameter / 2 + 20))
+                    .offset(offset(forProgress: Double(minuteMark) / 60, radius: labelRadius))
             }
 
             Circle()
@@ -92,14 +97,14 @@ struct CircularDurationPicker: View {
                 .font(.system(size: 40, weight: .bold, design: .rounded))
                 .monospacedDigit()
         }
-        .frame(width: diameter, height: diameter)
+        .frame(width: interactiveDiameter, height: interactiveDiameter)
         .contentShape(Circle())
         .gesture(
             DragGesture(minimumDistance: 0)
                 .onChanged { value in updateFromDrag(value.location) }
         )
         // Scoped to the tap shortcut specifically, rather than to every
-        // `totalSeconds` change — the drag gesture already re-snaps every 5
+        // `totalSeconds` change — dragging already re-snaps every 5
         // seconds, so tying feedback to that instead would buzz constantly
         // while dragging rather than confirming a deliberate tap.
         .sensoryFeedback(.selection, trigger: lastTappedMinuteMark)
@@ -127,8 +132,30 @@ struct CircularDurationPicker: View {
         return CGSize(width: radius * sin(angle), height: -radius * cos(angle))
     }
 
+    /// The 5-minute mark, if any, whose label sits within `labelTapRadius`
+    /// of `location` — same center/offset math used to actually draw the
+    /// labels, so hit-testing always matches what's on screen.
+    private func nearestMinuteMark(to location: CGPoint, center: CGPoint) -> Int? {
+        for minuteMark in stride(from: 0, to: 60, by: 5) {
+            let labelOffset = offset(forProgress: Double(minuteMark) / 60, radius: labelRadius)
+            let dx = location.x - (center.x + labelOffset.width)
+            let dy = location.y - (center.y + labelOffset.height)
+            if dx * dx + dy * dy <= labelTapRadius * labelTapRadius {
+                return minuteMark
+            }
+        }
+        return nil
+    }
+
     private func updateFromDrag(_ location: CGPoint) {
-        let center = CGPoint(x: diameter / 2, y: diameter / 2)
+        let center = CGPoint(x: interactiveDiameter / 2, y: interactiveDiameter / 2)
+
+        if let minuteMark = nearestMinuteMark(to: location, center: center) {
+            totalSeconds = min(minuteMark * 60, Self.maxSeconds)
+            lastTappedMinuteMark = minuteMark
+            return
+        }
+
         let vector = CGPoint(x: location.x - center.x, y: location.y - center.y)
         var degrees = atan2(vector.y, vector.x) * 180 / .pi + 90
         if degrees < 0 { degrees += 360 }

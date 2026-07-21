@@ -47,8 +47,14 @@ have a paid Apple Developer account and want cross-device sync.
 - **Duration picker**: `Views/Components/CircularDurationPicker.swift` sets
   any duration by dragging around the dial, or by tapping one of the
   5-minute numbers to jump straight to it (e.g. tapping "30" sets 30:00
-  without starting the timer) — sized up with a roomy tap target since the
-  number glyphs alone are too small to hit reliably.
+  without starting the timer). Tap detection lives inside the same
+  `updateFromDrag` handler as normal dragging (via `interactiveDiameter`
+  growing the view's hit-testable area to cover the labels, and
+  `nearestMinuteMark` checking proximity before falling back to the
+  angle-based calculation) rather than a separate gesture on each label —
+  an earlier version tried a competing `highPriorityGesture` per label,
+  which turned out not to reliably win against the ring's own drag
+  gesture at all.
 - **Dinosaur catalog**: `Data/DinosaurCatalog.swift` is a static, bundled
   list of 14 dinosaurs — no backend, no JSON parsing, just a Swift array.
 - **Collection**: `Models/UnlockedDinosaur.swift` is the only thing that

@@ -18,14 +18,10 @@ struct TimerSetupView: View {
                         .fixedSize(horizontal: false, vertical: true)
 
                     CircularDurationPicker(totalSeconds: $totalSeconds)
-                        // The dial's tappable minute labels sit outside its
-                        // own diameter x diameter frame (so they clear its
-                        // drag gesture area — see CircularDurationPicker),
-                        // which otherwise left the "30" label's tap target
-                        // close enough to the Start Timer button below to
-                        // occasionally hit it by mistake. This reserves the
-                        // real space they need.
-                        .padding(.bottom, 38)
+                    // CircularDurationPicker's own frame already reserves
+                    // the full space its labels need (see
+                    // `interactiveDiameter`), so no extra padding is
+                    // required here to keep the Start Timer button clear.
 
                     Button {
                         startTimer()
