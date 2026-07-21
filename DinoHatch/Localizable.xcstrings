@@ -3190,6 +3190,47 @@
         }
       }
     },
+    "Open Dino Hatch to see which dinosaur hatched!": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Öffne Dino Hatch, um zu sehen, welcher Dinosaurier geschlüpft ist!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Dino Hatch to see which dinosaur hatched!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abre Dino Hatch para ver qué dinosaurio ha nacido."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrez Dino Hatch pour découvrir quel dinosaure a éclos !"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Dino Hatch om te zien welke dino is uitgekomen!"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Откройте Dino Hatch, чтобы узнать, какой динозавр вылупился!"
+          }
+        }
+      }
+    },
     "Open the app within 15 minutes of your alarm to hatch a dinosaur!": {
       "localizations": {
         "de": {
@@ -5805,6 +5846,47 @@
           "stringUnit": {
             "state": "translated",
             "value": "Вы можете в любой момент изменить возраст или удалить всё (коллекцию, настройки таймера и будильника) в Настройках. Простой математический вопрос не позволяет маленьким детям случайно попасть в Настройки."
+          }
+        }
+      }
+    },
+    "Your egg is ready!": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein Ei ist bereit!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your egg is ready!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Tu huevo está listo!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre œuf est prêt !"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Je ei is klaar!"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ваше яйцо готово!"
           }
         }
       }

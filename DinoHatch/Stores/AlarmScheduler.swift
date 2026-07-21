@@ -10,22 +10,6 @@ import UserNotifications
 enum AlarmScheduler {
     private static let identifierPrefix = "dino-alarm-weekday-"
 
-    static func requestAuthorizationIfNeeded(completion: @escaping (Bool) -> Void) {
-        let center = UNUserNotificationCenter.current()
-        center.getNotificationSettings { settings in
-            switch settings.authorizationStatus {
-            case .authorized, .provisional:
-                completion(true)
-            case .notDetermined:
-                center.requestAuthorization(options: [.alert, .sound]) { granted, _ in
-                    completion(granted)
-                }
-            default:
-                completion(false)
-            }
-        }
-    }
-
     static func reschedule(hour: Int, minute: Int, weekdays: [Int]) {
         let center = UNUserNotificationCenter.current()
         cancelAll()

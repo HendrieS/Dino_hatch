@@ -21,6 +21,11 @@ struct DinoHatchApp: App {
     var body: some Scene {
         WindowGroup {
             RootTabView()
+                // The app is aimed at kids and isn't designed with a dark
+                // palette in mind — UIUserInterfaceStyle in project.yml
+                // forces the system chrome (status bar, system alerts)
+                // light too; this covers the SwiftUI view hierarchy itself.
+                .preferredColorScheme(.light)
         }
         .modelContainer(sharedModelContainer)
     }

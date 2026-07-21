@@ -138,7 +138,7 @@ struct AlarmView: View {
         settings.repeatWeekdays = Array(weekdays)
 
         if isEnabled {
-            AlarmScheduler.requestAuthorizationIfNeeded { granted in
+            NotificationAuthorization.requestIfNeeded { granted in
                 DispatchQueue.main.async {
                     notificationsDenied = !granted
                 }

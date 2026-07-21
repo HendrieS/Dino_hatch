@@ -144,6 +144,16 @@ have a paid Apple Developer account and want cross-device sync.
   notation like `length` (e.g. "8,000 kg (17,600 lb)"), shown as its own
   fact row on the detail screen and, like `length`, displayed verbatim in
   every language rather than localized. All 30 catalog entries have one.
+- **Light mode only**: the app is aimed at kids and isn't designed with a
+  dark palette in mind, so dark mode is disabled at both levels —
+  `UIUserInterfaceStyle: Light` in `project.yml` forces system chrome
+  (status bar, system alerts) light, and `.preferredColorScheme(.light)`
+  on the root view in `DinoHatchApp.swift` forces the SwiftUI hierarchy.
+- **Notification permission**: `Stores/NotificationAuthorization.swift` is
+  a small shared helper for requesting local-notification permission,
+  used by both `AlarmScheduler` (the dino alarm) and
+  `TimerNotificationScheduler` (the timer) — extracted once both needed
+  the exact same request/completion logic.
 
 ## Localization
 
@@ -208,9 +218,12 @@ the collection to sync across a kid's devices:
   illustrations. `Dinosaur.imageAssetName` exists specifically so real
   artwork can be dropped into `Assets.xcassets` later without touching any
   view code — `DinoImageView` already prefers it when present.
-- **Foreground-only timer**: no local notifications, no background modes.
-  If the app is killed mid-countdown it resumes correctly on relaunch (see
-  above), but there's no push when the egg hatches while the app is closed.
+- **Timer has no background modes**, but does schedule a one-shot local
+  notification for when the egg finishes (`Stores/TimerNotificationScheduler.swift`,
+  best-effort like the dino alarm's — permission denied just means no
+  notification, everything else still works). If the app is killed
+  mid-countdown it resumes correctly on relaunch (see above) regardless of
+  whether the notification was tapped.
 - **No parental gate, no multiple kid profiles, no accounts** — by design,
   kept as simple as possible for v1.
 - **Dino alarm is a notification, not a real alarm**: iOS doesn't let

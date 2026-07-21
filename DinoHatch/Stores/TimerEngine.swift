@@ -43,6 +43,8 @@ final class TimerEngine {
         endDate = end
         totalSeconds = Int(duration)
         pendingDinosaurID = dinosaurID
+
+        TimerNotificationScheduler.scheduleHatchNotification(at: end)
     }
 
     func cancel() {
@@ -54,6 +56,8 @@ final class TimerEngine {
         endDate = nil
         totalSeconds = 0
         pendingDinosaurID = nil
+
+        TimerNotificationScheduler.cancelHatchNotification()
     }
 
     /// Same as `cancel()`, named separately so call sites read as "the hatch

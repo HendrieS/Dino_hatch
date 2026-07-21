@@ -21,6 +21,7 @@ targets:
       path: DinoHatch/Info.plist
       properties:
         UILaunchScreen: {}
+        UIUserInterfaceStyle: Light
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
           - UIInterfaceOrientationLandscapeLeft
