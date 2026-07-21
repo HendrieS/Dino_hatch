@@ -6,6 +6,11 @@ struct Dinosaur: Identifiable, Codable, Hashable {
     let era: String
     let diet: Diet
     let length: String
+    /// Estimated weight, formatted like `length` (e.g. "8,000 kg (17,600
+    /// lb)") — a measurement notation shown verbatim rather than routed
+    /// through localization. Optional/defaulted to nil so existing catalog
+    /// entries compile unchanged.
+    let weight: String?
     let funFact: String
     let symbolName: String
     let emoji: String
@@ -56,6 +61,7 @@ struct Dinosaur: Identifiable, Codable, Hashable {
         era: String,
         diet: Diet,
         length: String,
+        weight: String? = nil,
         funFact: String,
         symbolName: String,
         emoji: String,
@@ -71,6 +77,7 @@ struct Dinosaur: Identifiable, Codable, Hashable {
         self.era = era
         self.diet = diet
         self.length = length
+        self.weight = weight
         self.funFact = funFact
         self.symbolName = symbolName
         self.emoji = emoji
@@ -83,9 +90,9 @@ struct Dinosaur: Identifiable, Codable, Hashable {
     }
 
     // Decoding tolerates catalogs/saved data without `skeletonAssetName`,
-    // `rangeMapAssetName`/`rangeLabel`, or `isSecret`.
+    // `rangeMapAssetName`/`rangeLabel`, `weight`, or `isSecret`.
     enum CodingKeys: String, CodingKey {
-        case id, name, era, diet, length, funFact
+        case id, name, era, diet, length, weight, funFact
         case symbolName, emoji, imageAssetName, skeletonAssetName
         case rangeMapAssetName, rangeLabel, rarity, isSecret
     }
@@ -97,6 +104,7 @@ struct Dinosaur: Identifiable, Codable, Hashable {
         era = try c.decode(String.self, forKey: .era)
         diet = try c.decode(Diet.self, forKey: .diet)
         length = try c.decode(String.self, forKey: .length)
+        weight = try c.decodeIfPresent(String.self, forKey: .weight)
         funFact = try c.decode(String.self, forKey: .funFact)
         symbolName = try c.decode(String.self, forKey: .symbolName)
         emoji = try c.decode(String.self, forKey: .emoji)

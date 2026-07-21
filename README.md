@@ -140,6 +140,10 @@ have a paid Apple Developer account and want cross-device sync.
   `Data/DinosaurCatalog.swift`, grouped by real fossil-discovery
   geography (e.g. T-Rex/Triceratops → North America, Velociraptor/
   Oviraptor → Mongolia & China).
+- **Estimated weight**: `Dinosaur.weight` is an optional measurement
+  notation like `length` (e.g. "8,000 kg (17,600 lb)"), shown as its own
+  fact row on the detail screen and, like `length`, displayed verbatim in
+  every language rather than localized. All 30 catalog entries have one.
 
 ## Localization
 

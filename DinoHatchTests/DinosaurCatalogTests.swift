@@ -48,4 +48,13 @@ final class DinosaurCatalogTests: XCTestCase {
             XCTAssertNotNil(dinosaur.rangeMapAssetName, "\(dinosaur.id) is missing a rangeMapAssetName")
         }
     }
+
+    /// Every dinosaur is expected to have an estimated weight for now —
+    /// catches one silently missing from the catalog.
+    func testEveryDinosaurHasAWeight() {
+        for dinosaur in DinosaurCatalog.all {
+            XCTAssertNotNil(dinosaur.weight, "\(dinosaur.id) is missing a weight")
+            XCTAssertFalse(dinosaur.weight?.isEmpty ?? true, "\(dinosaur.id) has an empty weight")
+        }
+    }
 }

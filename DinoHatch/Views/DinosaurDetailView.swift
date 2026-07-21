@@ -19,10 +19,14 @@ struct DinosaurDetailView: View {
                 VStack(spacing: 12) {
                     FactRow(icon: "clock.fill", label: "Era", value: Text(localizedContent: dinosaur.era))
                     FactRow(icon: dinosaur.diet.symbolName, label: "Diet", value: dinosaur.diet.localizedLabel)
-                    // Length is a measurement notation (e.g. "12 m (40 ft)"),
-                    // not linguistic content, so it's shown as-is in every
-                    // language rather than routed through localization.
+                    // Length/weight are measurement notations (e.g. "12 m
+                    // (40 ft)"), not linguistic content, so they're shown
+                    // as-is in every language rather than routed through
+                    // localization.
                     FactRow(icon: "ruler.fill", label: "Length", value: Text(verbatim: dinosaur.length))
+                    if let weight = dinosaur.weight {
+                        FactRow(icon: "scalemass.fill", label: "Weight", value: Text(verbatim: weight))
+                    }
                 }
                 .padding()
                 .background(Color.dinoCardBackground)
