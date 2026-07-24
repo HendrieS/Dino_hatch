@@ -1,8 +1,12 @@
 import SwiftUI
+import UIKit
 
 struct DinosaurDetailView: View {
     let dinosaur: Dinosaur
     let unlockedAt: Date?
+
+    @State private var shareURL: URL?
+    @State private var shareImage: UIImage?
 
     var body: some View {
         ScrollView {
@@ -77,6 +81,40 @@ struct DinosaurDetailView: View {
         }
         .navigationTitle(Text(localizedContent: dinosaur.name))
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                if let shareURL, let shareImage {
+                    ShareLink(
+                        item: shareURL,
+                        preview: SharePreview(
+                            Text(localizedContent: dinosaur.name),
+                            image: Image(uiImage: shareImage)
+                        )
+                    ) {
+                        Image(systemName: "square.and.arrow.up")
+                    }
+                }
+            }
+        }
+        .task {
+            renderShareImage()
+        }
+    }
+
+    /// Renders `DinoShareCard` offscreen to a PNG on disk once, so the
+    /// share button can present it via `ShareLink` — a file URL shares
+    /// cleanly to Messages/Mail/Photos/AirDrop without any extra plumbing.
+    @MainActor
+    private func renderShareImage() {
+        let renderer = ImageRenderer(content: DinoShareCard(dinosaur: dinosaur))
+        renderer.scale = 3
+        guard let uiImage = renderer.uiImage, let data = uiImage.pngData() else { return }
+
+        let url = FileManager.default.temporaryDirectory.appendingPathComponent("\(dinosaur.id)-dino-hatch-share.png")
+        guard (try? data.write(to: url)) != nil else { return }
+
+        shareImage = uiImage
+        shareURL = url
     }
 }
 
