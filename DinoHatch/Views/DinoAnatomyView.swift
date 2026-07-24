@@ -132,6 +132,17 @@ struct DinoAnatomyView: View {
                 .onChanged { _ in if !isHeld { isHeld = true } }
                 .onEnded { _ in isHeld = false }
         )
+        // VoiceOver can't perform a press-and-hold drag, so it gets its own
+        // element with a double-tap action that toggles the same state a
+        // sighted child would get by holding down.
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(Text(localizedContent: dinosaur.name))
+        .accessibilityValue(isHeld ? Text("Showing x-ray skeleton") : Text("Showing skin"))
+        .accessibilityHint(Text("Double tap to toggle x-ray view"))
+        .accessibilityAddTraits(.isButton)
+        .accessibilityAction {
+            isHeld.toggle()
+        }
         .onChange(of: isHeld) { _, held in
             if held {
                 scanPhase = 0

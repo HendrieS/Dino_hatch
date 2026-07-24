@@ -14,6 +14,13 @@ struct WeekdayToggle: View {
         Calendar.current.veryShortWeekdaySymbols[weekday - 1]
     }
 
+    /// `veryShortWeekdaySymbols` is ambiguous for VoiceOver (English has two
+    /// "T"s and two "S"s), so the accessible name uses the full day name
+    /// instead of the on-screen glyph.
+    private var accessibilityDayName: String {
+        Calendar.current.standaloneWeekdaySymbols[weekday - 1]
+    }
+
     var body: some View {
         Button(action: action) {
             Text(verbatim: label)
@@ -24,6 +31,8 @@ struct WeekdayToggle: View {
                 .clipShape(Circle())
         }
         .buttonStyle(.plain)
+        .accessibilityLabel(Text(verbatim: accessibilityDayName))
+        .accessibilityAddTraits(isOn ? .isSelected : [])
     }
 }
 

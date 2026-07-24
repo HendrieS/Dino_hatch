@@ -124,6 +124,8 @@ struct AlarmView: View {
                 }
                 .padding()
                 .padding(.bottom, 24)
+                .frame(maxWidth: 500)
+                .frame(maxWidth: .infinity)
             }
             .navigationTitle("Dino Alarm")
             .navigationBarTitleDisplayMode(.inline)

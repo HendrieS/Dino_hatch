@@ -39,6 +39,8 @@ struct TimerSetupView: View {
                 }
                 .padding()
                 .padding(.top, 24)
+                .frame(maxWidth: 500)
+                .frame(maxWidth: .infinity)
             }
             .navigationTitle("Dino Hatch")
             .navigationBarTitleDisplayMode(.inline)

@@ -18,7 +18,9 @@ struct DinosaurDetailView: View {
                 DinoAnatomyView(dinosaur: dinosaur, size: 300)
 
                 Text(localizedContent: dinosaur.name)
-                    .font(.system(size: 30, weight: .bold, design: .rounded))
+                    .font(.largeTitle.bold())
+                    .fontDesign(.rounded)
+                    .multilineTextAlignment(.center)
 
                 VStack(spacing: 12) {
                     FactRow(icon: "clock.fill", label: "Era", value: Text(localizedContent: dinosaur.era))
@@ -78,6 +80,8 @@ struct DinosaurDetailView: View {
                 }
             }
             .padding()
+            .frame(maxWidth: 500)
+            .frame(maxWidth: .infinity)
         }
         .navigationTitle(Text(localizedContent: dinosaur.name))
         .navigationBarTitleDisplayMode(.inline)

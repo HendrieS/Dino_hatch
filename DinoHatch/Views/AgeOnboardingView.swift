@@ -52,6 +52,8 @@ struct AgeOnboardingView: View {
             Spacer()
         }
         .padding()
+        .frame(maxWidth: 500)
+        .frame(maxWidth: .infinity)
     }
 
     private func save() {

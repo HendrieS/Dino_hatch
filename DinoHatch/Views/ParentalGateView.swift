@@ -36,12 +36,14 @@ struct ParentalGateView: View {
                         Text(factorB, format: .number)
                         Text(verbatim: "=")
                     }
-                    .font(.system(size: 36, weight: .bold, design: .rounded))
+                    .font(.largeTitle.bold())
+                    .fontDesign(.rounded)
 
                     TextField("Answer", text: $answer)
                         .keyboardType(.numberPad)
                         .multilineTextAlignment(.center)
-                        .font(.system(size: 28, weight: .semibold, design: .rounded))
+                        .font(.title.weight(.semibold))
+                        .fontDesign(.rounded)
                         .frame(width: 120)
                         .padding(.vertical, 10)
                         .background(Color.dinoCardBackground, in: RoundedRectangle(cornerRadius: 14))
@@ -69,6 +71,8 @@ struct ParentalGateView: View {
                     Spacer()
                 }
                 .padding()
+                .frame(maxWidth: 500)
+                .frame(maxWidth: .infinity)
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
                         Button("Cancel") { dismiss() }

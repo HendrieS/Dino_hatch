@@ -170,6 +170,30 @@ have a paid Apple Developer account and want cross-device sync.
   used by both `AlarmScheduler` (the dino alarm) and
   `TimerNotificationScheduler` (the timer) — extracted once both needed
   the exact same request/completion logic.
+- **Accessibility & iPad pass**: `Views/DinoAnatomyView.swift`'s
+  press-and-hold x-ray gesture (a raw `DragGesture`) had no VoiceOver
+  equivalent, since VoiceOver intercepts touches instead of passing
+  through press-and-hold — it now exposes a single accessibility element
+  with a label/value describing skin vs. skeleton and an
+  `accessibilityAction` that toggles the same state a double-tap would
+  trigger. `Components/WeekdayToggle.swift`'s on-screen glyph comes from
+  `veryShortWeekdaySymbols` (ambiguous for VoiceOver — English has two
+  "T"s and two "S"s), so its accessible name now uses the full
+  `standaloneWeekdaySymbols` day name instead, plus `.isSelected` when a
+  day is on. Several headline-style labels that were hardcoded
+  `.font(.system(size:...))` (the dinosaur name on the detail and
+  hatch-reveal screens, the parental-gate math question and answer field)
+  now use scalable text styles (`.largeTitle`/`.title` + `.fontDesign(.rounded)`)
+  so they grow with Dynamic Type instead of staying pinned at one size;
+  purely decorative/graphical sizes (the countdown digits, the circular
+  duration picker's dial numbers, the share card meant for export) were
+  left fixed on purpose. On iPad, the single-column forms
+  (`TimerSetupView`, `AlarmView`, `DinosaurDetailView`,
+  `ParentalGateView`, `AgeOnboardingView`, `HatchRevealView`) now cap
+  their content at 500pt wide and center it, instead of stretching
+  buttons and text edge-to-edge on a big screen; `CollectionView`'s grid
+  already used `GridItem(.adaptive(...))` so it reflows into more columns
+  on iPad with no changes needed.
 
 ## Localization
 
