@@ -36,6 +36,25 @@ struct HelpCenterView: View {
             Section("Managing this data") {
                 Text("You can change the age or erase everything (collection, timer, and alarm settings) from Settings at any time. A quick math question keeps small children from getting into Settings by accident.")
             }
+
+            // The address itself isn't linguistic content, so it's shown
+            // verbatim rather than routed through localization — same
+            // reasoning as `Dinosaur.length`/`weight`.
+            Section {
+                if let url = URL(string: "mailto:Dinohatch@spijker.pro?subject=Dino%20Hatch%20Bug%20Report") {
+                    Link(destination: url) {
+                        Label {
+                            Text(verbatim: "Dinohatch@spijker.pro")
+                        } icon: {
+                            Image(systemName: "envelope.fill")
+                        }
+                    }
+                }
+            } header: {
+                Text("Found a bug?")
+            } footer: {
+                Text("Send us an email and we'll take a look.")
+            }
         }
         .navigationTitle("Help Center")
         .navigationBarTitleDisplayMode(.inline)

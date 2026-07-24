@@ -2005,6 +2005,47 @@
         }
       }
     },
+    "Found a bug?": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einen Fehler gefunden?"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Found a bug?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Encontraste un error?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous avez trouvé un bug ?"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Een bug gevonden?"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Нашли ошибку?"
+          }
+        }
+      }
+    },
     "Found in": {
       "extractionState": "manual",
       "localizations": {
@@ -4127,6 +4168,47 @@
           "stringUnit": {
             "state": "translated",
             "value": "Сбросить всё"
+          }
+        }
+      }
+    },
+    "Send us an email and we'll take a look.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schick uns eine E-Mail, wir schauen es uns an."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Send us an email and we'll take a look."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Envíanos un correo y le echaremos un vistazo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Envoyez-nous un e-mail, nous y jetterons un œil."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stuur ons een e-mail en we bekijken het."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Напишите нам письмо, и мы разберёмся."
           }
         }
       }

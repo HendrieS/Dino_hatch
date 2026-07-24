@@ -123,7 +123,9 @@ have a paid Apple Developer account and want cross-device sync.
   what's stored (just the age, unlock progress, and timer/alarm settings —
   no name, account, or contact info), that it's all local-only with no
   cloud sync/analytics/ads, and a short walkthrough of how the timer, dino
-  alarm, and collection features work.
+  alarm, and collection features work. It ends with a "Found a bug?"
+  section — a `Link` to `mailto:Dinohatch@spijker.pro` (with a prefilled
+  subject) that opens the device's Mail app.
 - **X-ray age gating**: the press-and-hold x-ray view
   (`Views/DinoAnatomyView.swift`) only activates once
   `Stores/XRayEligibility.swift` — a pure, unit-tested function — says
