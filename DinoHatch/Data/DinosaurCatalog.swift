@@ -61,6 +61,7 @@ enum DinosaurCatalog {
             symbolName: "tree.fill",
             emoji: "🌿",
             imageAssetName: "brachiosaurus-skin",
+            skeletonAssetName: "brachiosaurus-skeleton",
             rangeMapAssetName: "region-north-america",
             rangeLabel: "Western North America",
             rarity: .common
@@ -76,6 +77,7 @@ enum DinosaurCatalog {
             symbolName: "triangle.fill",
             emoji: "🦕",
             imageAssetName: "stegosaurus-skin",
+            skeletonAssetName: "stegosaurus-skeleton",
             rangeMapAssetName: "region-north-america",
             rangeLabel: "Western North America",
             rarity: .common
@@ -91,6 +93,7 @@ enum DinosaurCatalog {
             symbolName: "water.waves",
             emoji: "🐊",
             imageAssetName: "spinosaurus-skin",
+            skeletonAssetName: "spinosaurus-skeleton",
             rangeMapAssetName: "region-north-africa",
             rangeLabel: "North Africa",
             rarity: .rare
@@ -106,6 +109,7 @@ enum DinosaurCatalog {
             symbolName: "shield.lefthalf.filled",
             emoji: "🛡️",
             imageAssetName: "ankylosaurus-skin",
+            skeletonAssetName: "ankylosaurus-skeleton",
             rangeMapAssetName: "region-north-america",
             rangeLabel: "Western North America",
             rarity: .uncommon
