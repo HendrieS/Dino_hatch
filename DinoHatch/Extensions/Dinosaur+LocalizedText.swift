@@ -20,15 +20,17 @@ extension Dinosaur.Rarity {
         case .common: Text("Common")
         case .uncommon: Text("Uncommon")
         case .rare: Text("Rare")
+        case .secretRare: Text("Secret Rare")
         }
     }
 
-    /// Trading-card-style star count: 1 for common up to 3 for rare.
+    /// Trading-card-style star count: 1 for common up to 4 for secret rare.
     var starCount: Int {
         switch self {
         case .common: 1
         case .uncommon: 2
         case .rare: 3
+        case .secretRare: 4
         }
     }
 
@@ -37,6 +39,7 @@ extension Dinosaur.Rarity {
         case .common: Color(red: 0.55, green: 0.58, blue: 0.62)
         case .uncommon: Color(red: 0.20, green: 0.62, blue: 0.42)
         case .rare: Color(red: 0.83, green: 0.62, blue: 0.09)
+        case .secretRare: Color(red: 0.56, green: 0.27, blue: 0.68)
         }
     }
 }

@@ -145,9 +145,12 @@ have a paid Apple Developer account and want cross-device sync.
   no custom plumbing. The card is a fixed white background regardless of
   the app's own theming, since it needs to look right once it's out of
   the app, not just inside it. It also carries a star-rank badge in the
-  corner (`Dinosaur.rarity` — common/uncommon/rare, already stored in
-  `Data/DinosaurCatalog.swift` but unused elsewhere in the UI until now)
-  for a trading-card feel.
+  corner (`Dinosaur.rarity` — common/uncommon/rare/secret rare, already
+  stored in `Data/DinosaurCatalog.swift` but unused elsewhere in the UI
+  until now) for a trading-card feel. The four `isSecret` dinosaurs sit
+  in their own `secretRare` tier (4 stars, purple) above the regular
+  `rare` tier (3 stars, gold), so they stand apart once unlocked instead
+  of blending into the rest of the rare pool.
 - **Found-in region maps**: `Views/DinosaurDetailView.swift` shows a
   "Found in" card whenever `Dinosaur.rangeMapAssetName`/`rangeLabel` are
   set — a shared world map (6 reusable region images, not one per

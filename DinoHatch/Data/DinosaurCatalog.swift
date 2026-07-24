@@ -419,7 +419,7 @@ enum DinosaurCatalog {
             imageAssetName: "titanosaurus-skin",
             rangeMapAssetName: "region-south-asia",
             rangeLabel: "South Asia",
-            rarity: .rare,
+            rarity: .secretRare,
             isSecret: true
         ),
         Dinosaur(
@@ -435,7 +435,7 @@ enum DinosaurCatalog {
             imageAssetName: "patagotitan-skin",
             rangeMapAssetName: "region-south-america",
             rangeLabel: "South America",
-            rarity: .rare,
+            rarity: .secretRare,
             isSecret: true
         ),
         Dinosaur(
@@ -451,7 +451,7 @@ enum DinosaurCatalog {
             imageAssetName: "dreadnoughtus-skin",
             rangeMapAssetName: "region-south-america",
             rangeLabel: "South America",
-            rarity: .rare,
+            rarity: .secretRare,
             isSecret: true
         ),
         Dinosaur(
@@ -467,7 +467,7 @@ enum DinosaurCatalog {
             imageAssetName: "puertasaurus-skin",
             rangeMapAssetName: "region-south-america",
             rangeLabel: "South America",
-            rarity: .rare,
+            rarity: .secretRare,
             isSecret: true
         )
     ]
