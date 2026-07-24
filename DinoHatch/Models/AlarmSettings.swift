@@ -14,6 +14,11 @@ final class AlarmSettings {
     var minute: Int = 0
     var repeatWeekdays: [Int] = []
     var lastHatchDate: Date?
+    /// Consecutive scheduled alarms claimed in a row — see `AlarmStreak`.
+    /// Not tied to literal calendar days, since the alarm might only be set
+    /// for a subset of weekdays (e.g. weekdays only); missing a day that
+    /// isn't even selected shouldn't break the streak.
+    var streakCount: Int = 0
 
     init() {}
 }

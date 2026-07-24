@@ -130,6 +130,11 @@ struct RootTabView: View {
             lastHatchDate: settings.lastHatchDate
         ) else { return }
 
+        settings.streakCount = AlarmStreak.nextStreak(
+            currentStreak: settings.streakCount,
+            lastHatchDate: settings.lastHatchDate,
+            weekdays: settings.repeatWeekdays
+        )
         settings.lastHatchDate = .now
         let unlockedIDs = Set(unlocked.map(\.dinosaurID))
         pendingAlarmDinosaur = HatchSelector.pickNext(unlockedIDs: unlockedIDs)

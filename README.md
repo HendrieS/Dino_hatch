@@ -107,7 +107,11 @@ have a paid Apple Developer account and want cross-device sync.
   A missed window also puts a small "!" badge on the Alarm tab itself
   (`RootTabView.alarmWasMissedToday`, refreshed every minute and on every
   foreground transition via a `Timer.publish`), so it's noticeable without
-  needing to open that tab.
+  needing to open that tab. `AlarmSettings.streakCount` tracks consecutive
+  *scheduled* claims via `Stores/AlarmStreak.swift` — not literal calendar
+  days, so a weekdays-only alarm doesn't get its streak broken by a
+  weekend it was never going to fire on. Shown as a "🔥 N day streak" line
+  in the same spot the missed-window message would go.
 - **Age onboarding & settings**: the first time the app is opened,
   `Views/AgeOnboardingView.swift` asks for the child's general age and
   gates the rest of the app (`Views/RootTabView.swift` shows it instead of
@@ -133,6 +137,14 @@ have a paid Apple Developer account and want cross-device sync.
   needs at least 2. Below that, it silently falls back to the plain skin
   artwork with no hint x-ray exists, the same silent-gating pattern used
   for the secret dinosaurs.
+- **Share a hatched dinosaur**: the detail screen's toolbar has a share
+  button that renders `Views/Components/DinoShareCard.swift` (skin art,
+  name, fun fact, a small "Dino Hatch" watermark) offscreen via
+  `ImageRenderer`, writes it to a temp PNG, and presents it through
+  `ShareLink` — works with Messages, Mail, Save Image, AirDrop, etc. with
+  no custom plumbing. The card is a fixed white background regardless of
+  the app's own theming, since it needs to look right once it's out of
+  the app, not just inside it.
 - **Found-in region maps**: `Views/DinosaurDetailView.swift` shows a
   "Found in" card whenever `Dinosaur.rangeMapAssetName`/`rangeLabel` are
   set — a shared world map (6 reusable region images, not one per

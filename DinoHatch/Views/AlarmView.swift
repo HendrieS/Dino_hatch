@@ -32,6 +32,23 @@ struct AlarmView: View {
         return "alarm-egg"
     }
 
+    /// Consecutive scheduled alarms claimed in a row, zeroed out the moment
+    /// today's window closes unclaimed rather than waiting for the next
+    /// claim to overwrite the persisted count — matches how `headerImageName`
+    /// reacts immediately to a missed window too.
+    private var displayedStreak: Int {
+        guard let settings = alarms.first, settings.isEnabled else { return 0 }
+        if AlarmClaimer.wasMissedToday(
+            hour: settings.hour,
+            minute: settings.minute,
+            weekdays: settings.repeatWeekdays,
+            lastHatchDate: settings.lastHatchDate
+        ) {
+            return 0
+        }
+        return settings.streakCount
+    }
+
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -48,6 +65,14 @@ struct AlarmView: View {
                             .foregroundStyle(.secondary)
                             .multilineTextAlignment(.center)
                             .fixedSize(horizontal: false, vertical: true)
+                    } else if displayedStreak > 0 {
+                        HStack(spacing: 4) {
+                            Text("🔥")
+                            Text(displayedStreak, format: .number)
+                            Text("day streak")
+                        }
+                        .font(.subheadline.bold())
+                        .foregroundStyle(Color.dinoGreen)
                     }
 
                     Text("Set a wake-up time and hatch\na dinosaur when you open the app!")
