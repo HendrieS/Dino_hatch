@@ -31,11 +31,15 @@ final class EggHatchArtTests: XCTestCase {
         XCTAssertEqual(EggHatchArt.family(forDinosaurID: "allosaurus"), .theropod)
         XCTAssertEqual(EggHatchArt.family(forDinosaurID: "carnotaurus"), .theropod)
         XCTAssertEqual(EggHatchArt.family(forDinosaurID: "giganotosaurus"), .theropod)
+        XCTAssertEqual(EggHatchArt.family(forDinosaurID: "pachycephalosaurus"), .domehead)
+        XCTAssertEqual(EggHatchArt.family(forDinosaurID: "plateosaurus"), .prosauropod)
     }
 
+    /// Every current catalog dinosaur is mapped to a family now, so there's
+    /// no real "unmapped" example left — use a made-up ID to confirm the
+    /// fallback path itself still works for whatever dinosaur comes next.
     func testUnmappedDinosaurHasNoFamily() {
-        XCTAssertNil(EggHatchArt.family(forDinosaurID: "pachycephalosaurus"))
-        XCTAssertNil(EggHatchArt.family(forDinosaurID: "plateosaurus"))
+        XCTAssertNil(EggHatchArt.family(forDinosaurID: "future-dino"))
     }
 
     func testFrameNamesUseSpeciesArtForStagesThreeAndFour() {
@@ -71,15 +75,19 @@ final class EggHatchArtTests: XCTestCase {
             EggHatchArt.frameNames(forDinosaurID: "t-rex"),
             ["egg-hatch-1", "egg-hatch-2", "egg-hatch-3-theropod", "egg-hatch-4-theropod"]
         )
+        XCTAssertEqual(
+            EggHatchArt.frameNames(forDinosaurID: "pachycephalosaurus"),
+            ["egg-hatch-1", "egg-hatch-2", "egg-hatch-3-domehead", "egg-hatch-4-domehead"]
+        )
+        XCTAssertEqual(
+            EggHatchArt.frameNames(forDinosaurID: "plateosaurus"),
+            ["egg-hatch-1", "egg-hatch-2", "egg-hatch-3-prosauropod", "egg-hatch-4-prosauropod"]
+        )
     }
 
     func testFrameNamesFallBackToGenericArt() {
         XCTAssertEqual(
-            EggHatchArt.frameNames(forDinosaurID: "pachycephalosaurus"),
-            ["egg-hatch-1", "egg-hatch-2", "egg-hatch-3", "egg-hatch-4"]
-        )
-        XCTAssertEqual(
-            EggHatchArt.frameNames(forDinosaurID: "plateosaurus"),
+            EggHatchArt.frameNames(forDinosaurID: "future-dino"),
             ["egg-hatch-1", "egg-hatch-2", "egg-hatch-3", "egg-hatch-4"]
         )
     }
