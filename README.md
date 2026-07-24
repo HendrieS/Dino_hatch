@@ -144,7 +144,10 @@ have a paid Apple Developer account and want cross-device sync.
   `ShareLink` — works with Messages, Mail, Save Image, AirDrop, etc. with
   no custom plumbing. The card is a fixed white background regardless of
   the app's own theming, since it needs to look right once it's out of
-  the app, not just inside it.
+  the app, not just inside it. It also carries a star-rank badge in the
+  corner (`Dinosaur.rarity` — common/uncommon/rare, already stored in
+  `Data/DinosaurCatalog.swift` but unused elsewhere in the UI until now)
+  for a trading-card feel.
 - **Found-in region maps**: `Views/DinosaurDetailView.swift` shows a
   "Found in" card whenever `Dinosaur.rangeMapAssetName`/`rangeLabel` are
   set — a shared world map (6 reusable region images, not one per
