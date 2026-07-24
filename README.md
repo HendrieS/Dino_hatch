@@ -150,6 +150,9 @@ have a paid Apple Developer account and want cross-device sync.
   `UIUserInterfaceStyle: Light` in `project.yml` forces system chrome
   (status bar, system alerts) light, and `.preferredColorScheme(.light)`
   on the root view in `DinoHatchApp.swift` forces the SwiftUI hierarchy.
+  `Views/HelpCenterView.swift` has a "Why no dark mode?" section explaining
+  the reasoning to the adult (bright colors for young eyes, not
+  encouraging bedtime screen use).
 - **Notification permission**: `Stores/NotificationAuthorization.swift` is
   a small shared helper for requesting local-notification permission,
   used by both `AlarmScheduler` (the dino alarm) and

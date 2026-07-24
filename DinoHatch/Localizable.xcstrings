@@ -1514,6 +1514,47 @@
         }
       }
     },
+    "Dino Hatch always uses its light look, even if your device is set to dark mode. It's a daytime app for kids — bright colors are easier for young eyes to read, and a dark, glowing screen isn't something we want to encourage at bedtime.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dino Hatch verwendet immer sein helles Design, auch wenn dein Gerät auf Dark Mode eingestellt ist. Es ist eine Tages-App für Kinder — helle Farben sind für junge Augen leichter zu lesen, und ein dunkler, leuchtender Bildschirm ist nichts, wozu wir vor dem Schlafengehen ermutigen möchten."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dino Hatch always uses its light look, even if your device is set to dark mode. It's a daytime app for kids — bright colors are easier for young eyes to read, and a dark, glowing screen isn't something we want to encourage at bedtime."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dino Hatch siempre usa su aspecto claro, aunque tu dispositivo esté en modo oscuro. Es una app pensada para el día — los colores brillantes son más fáciles de leer para ojos jóvenes, y una pantalla oscura y brillante no es algo que queramos fomentar antes de dormir."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dino Hatch utilise toujours son apparence claire, même si votre appareil est en mode sombre. C'est une application de jour pour les enfants — les couleurs vives sont plus faciles à lire pour de jeunes yeux, et un écran sombre et lumineux n'est pas quelque chose que nous voulons encourager au coucher."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dino Hatch gebruikt altijd de lichte weergave, zelfs als je apparaat op donkere modus staat. Het is een dagapp voor kinderen — heldere kleuren zijn makkelijker leesbaar voor jonge ogen, en een donker, oplichtend scherm is niets wat we willen aanmoedigen voor het slapengaan."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dino Hatch всегда использует светлое оформление, даже если на вашем устройстве включена тёмная тема. Это дневное приложение для детей — яркие цвета легче читать юным глазам, а тёмный светящийся экран — это не то, что мы хотим поощрять перед сном."
+          }
+        }
+      }
+    },
     "Dino-pedia": {
       "extractionState": "stale",
       "localizations": {
@@ -5887,6 +5928,47 @@
           "stringUnit": {
             "state": "translated",
             "value": "Какие динозавры вылупились и когда"
+          }
+        }
+      }
+    },
+    "Why no dark mode?": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Warum kein Dark Mode?"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Why no dark mode?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Por qué no hay modo oscuro?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pourquoi pas de mode sombre ?"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waarom geen donkere modus?"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Почему нет тёмной темы?"
           }
         }
       }

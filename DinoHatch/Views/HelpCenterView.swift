@@ -37,6 +37,10 @@ struct HelpCenterView: View {
                 Text("You can change the age or erase everything (collection, timer, and alarm settings) from Settings at any time. A quick math question keeps small children from getting into Settings by accident.")
             }
 
+            Section("Why no dark mode?") {
+                Text("Dino Hatch always uses its light look, even if your device is set to dark mode. It's a daytime app for kids — bright colors are easier for young eyes to read, and a dark, glowing screen isn't something we want to encourage at bedtime.")
+            }
+
             // The address itself isn't linguistic content, so it's shown
             // verbatim rather than routed through localization — same
             // reasoning as `Dinosaur.length`/`weight`.
