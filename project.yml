@@ -17,6 +17,7 @@ targets:
     deploymentTarget: "17.0"
     sources:
       - path: DinoHatch
+      - path: DinoHatchShared
     info:
       path: DinoHatch/Info.plist
       properties:
@@ -31,6 +32,11 @@ targets:
           - UIInterfaceOrientationPortraitUpsideDown
           - UIInterfaceOrientationLandscapeLeft
           - UIInterfaceOrientationLandscapeRight
+    entitlements:
+      path: DinoHatch/DinoHatch.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.dinohatch.app
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.dinohatch.app
@@ -40,6 +46,36 @@ targets:
         ENABLE_PREVIEWS: YES
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES: "icon-trex icon-triceratops icon-pteranodon icon-patagotitan"
+    dependencies:
+      - target: DinoHatchWidget
+        embed: true
+
+  DinoHatchWidget:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: DinoHatchWidget
+      - path: DinoHatchShared
+      - path: DinoHatch/Localizable.xcstrings
+    info:
+      path: DinoHatchWidget/Info.plist
+      properties:
+        CFBundleDisplayName: Dino Hatch
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    entitlements:
+      path: DinoHatchWidget/DinoHatchWidget.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.dinohatch.app
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.dinohatch.app.widget
+        CODE_SIGN_STYLE: Automatic
+        SWIFT_VERSION: "5.0"
+        TARGETED_DEVICE_FAMILY: "1,2"
+        SKIP_INSTALL: NO
 
   DinoHatchTests:
     type: bundle.unit-test
@@ -58,6 +94,7 @@ schemes:
     build:
       targets:
         DinoHatch: all
+        DinoHatchWidget: all
         DinoHatchTests: [test]
     run:
       config: Debug

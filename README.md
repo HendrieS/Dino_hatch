@@ -27,12 +27,19 @@ open DinoHatch.xcodeproj
 Then in Xcode:
 
 1. Select the `DinoHatch` target → **Signing & Capabilities** → set your
-   Team. Xcode will offer to fix the bundle identifier / provisioning
-   automatically — you can also change `PRODUCT_BUNDLE_IDENTIFIER` in
-   `project.yml` (search for `com.dinohatch.app`), then re-run
-   `xcodegen generate`.
+   Team, then repeat for the `DinoHatchWidget` target. Xcode will offer to
+   fix the bundle identifiers / provisioning automatically — you can also
+   change `PRODUCT_BUNDLE_IDENTIFIER` in `project.yml` (search for
+   `com.dinohatch.app`), then re-run `xcodegen generate`. Both targets share
+   the `group.com.dinohatch.app` App Group (see
+   [Home Screen widget](#home-screen-widget) below) — with automatic
+   signing this should provision itself, but if Xcode complains, add the
+   **App Groups** capability manually on each target and confirm the same
+   group is checked on both.
 2. Build and run (`Cmd+R`) on an iPhone or iPad simulator.
 3. Run the unit tests with `Cmd+U`.
+4. To see the widget, long-press the Home Screen → **Edit Home Screen** →
+   **+** → search "Dino Hatch" → add it.
 
 Persistence is **local-only for this alpha** (plain SwiftData, no iCloud) —
 see [Re-enabling iCloud sync](#re-enabling-icloud-sync-optional) below if you
@@ -226,6 +233,36 @@ have a paid Apple Developer account and want cross-device sync.
   buttons and text edge-to-edge on a big screen; `CollectionView`'s grid
   already used `GridItem(.adaptive(...))` so it reflows into more columns
   on iPad with no changes needed.
+- **Home Screen widget**: see [Home Screen widget](#home-screen-widget)
+  below.
+
+## Home Screen widget
+
+`DinoHatchWidget` is a small/medium WidgetKit extension showing collection
+progress ("X / Y discovered") and, at medium size, the most recently hatched
+dinosaur's emoji and name. It's read-only and static — no live countdown —
+so it uses a single-entry `TimelineProvider` with `policy: .never` rather
+than polling on a schedule.
+
+Since the widget runs in its own process, it can't query the main app's
+SwiftData store directly. Instead:
+
+- `DinoHatchShared/WidgetSnapshot.swift` (compiled into both targets) defines
+  a small `Codable` struct plus a `UserDefaults(suiteName:)` read/write pair,
+  using the `group.com.dinohatch.app` App Group.
+- `Stores/WidgetSnapshotBuilder.swift` (main app only, unit-tested) turns the
+  unlocked collection into a `WidgetSnapshot` — resolving the most recent
+  dinosaur's localized name and emoji *in the app*, so the widget target
+  doesn't need `DinosaurCatalog`, dinosaur art, or (beyond its own couple of
+  UI strings) the localization catalog at all.
+- `RootTabView` calls `WidgetSnapshotBuilder`/`WidgetSnapshotStore.save` and
+  `WidgetCenter.shared.reloadTimelines` on every launch/foreground and
+  whenever the unlocked count changes, covering both the timer's and the
+  alarm's unlock paths without the widget needing to know which one fired.
+
+The App Group is declared identically on both targets' entitlements in
+`project.yml`; with automatic signing this provisions itself, but see step 1
+in [Getting started](#getting-started) if Xcode asks for it manually.
 
 ## Localization
 

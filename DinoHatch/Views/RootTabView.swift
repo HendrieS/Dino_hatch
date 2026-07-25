@@ -1,6 +1,7 @@
 import SwiftUI
 import SwiftData
 import Combine
+import WidgetKit
 
 struct RootTabView: View {
     private enum Tab: Hashable {
@@ -55,11 +56,15 @@ struct RootTabView: View {
                     .tag(Tab.collection)
             }
             .onAppear(perform: checkAlarmHatch)
+            .onAppear(perform: refreshWidgetSnapshot)
             .onChange(of: scenePhase) { _, newPhase in
                 if newPhase == .active {
                     now = .now
                     checkAlarmHatch()
                 }
+            }
+            .onChange(of: unlocked.count) { _, _ in
+                refreshWidgetSnapshot()
             }
             .onReceive(minuteTimer) { date in
                 now = date
@@ -143,6 +148,18 @@ struct RootTabView: View {
     private func unlock(_ dinosaur: Dinosaur) {
         guard !unlocked.contains(where: { $0.dinosaurID == dinosaur.id }) else { return }
         modelContext.insert(UnlockedDinosaur(dinosaurID: dinosaur.id))
+    }
+
+    /// Keeps the Home Screen widget's App Group snapshot in sync — called on
+    /// every launch/foreground (to cover first install with existing data)
+    /// and whenever the unlocked count changes (covers both the alarm's
+    /// `unlock(_:)` above and the timer's own insert in `TimerHomeView`).
+    private func refreshWidgetSnapshot() {
+        let records = unlocked.map {
+            WidgetSnapshotBuilder.UnlockRecord(dinosaurID: $0.dinosaurID, unlockedAt: $0.unlockedAt)
+        }
+        WidgetSnapshotStore.save(WidgetSnapshotBuilder.build(unlocked: records))
+        WidgetCenter.shared.reloadTimelines(ofKind: WidgetSnapshotStore.widgetKind)
     }
 }
 
