@@ -29,7 +29,7 @@ struct AppIconPicker: View {
         Button {
             select(nil)
         } label: {
-            Image("AppIcon")
+            Image("app-icon-thumb")
                 .resizable()
                 .scaledToFit()
                 .frame(width: thumbnailSize, height: thumbnailSize)
@@ -46,7 +46,7 @@ struct AppIconPicker: View {
         return Button {
             select(option)
         } label: {
-            Image(option.assetName)
+            Image(option.thumbnailAssetName)
                 .resizable()
                 .scaledToFit()
                 .frame(width: thumbnailSize, height: thumbnailSize)

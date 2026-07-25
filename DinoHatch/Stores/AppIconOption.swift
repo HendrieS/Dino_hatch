@@ -20,6 +20,14 @@ enum AppIconOption: CaseIterable, Identifiable {
         }
     }
 
+    /// A plain (non-App-Icon-typed) copy of the same artwork, purely for
+    /// `AppIconPicker`'s preview thumbnail — `.appiconset` entries aren't
+    /// reliably loadable through `Image(_:)`/`UIImage(named:)` across Xcode
+    /// versions, so the picker can't just point at `assetName` directly.
+    var thumbnailAssetName: String {
+        "\(assetName)-thumb"
+    }
+
     /// The catalog entry this icon is unlocked by and named after.
     var dinosaurID: String {
         switch self {

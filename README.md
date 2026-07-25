@@ -161,7 +161,11 @@ have a paid Apple Developer account and want cross-device sync.
   `UIApplication.setAlternateIconName`. The four alternates are declared
   as ordinary single-size `.appiconset` entries in `Assets.xcassets` plus
   `ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES` in `project.yml` — no
-  manual `Info.plist` `CFBundleIcons` entries needed.
+  manual `Info.plist` `CFBundleIcons` entries needed. `.appiconset`-typed
+  entries aren't reliably loadable through `Image(_:)` for an in-app
+  preview, so each one has a plain duplicate `*-thumb` `.imageset` (same
+  artwork, ordinary content type) that `AppIconPicker` reads from instead
+  — `AppIconOption.thumbnailAssetName` points at those.
 - **Found-in region maps**: `Views/DinosaurDetailView.swift` shows a
   "Found in" card whenever `Dinosaur.rangeMapAssetName`/`rangeLabel` are
   set — a shared world map (6 reusable region images, not one per
