@@ -66,9 +66,16 @@ struct RootTabView: View {
                 if newPhase == .active {
                     now = .now
                     checkAlarmHatch()
+                    // Also covers the alarm's next-fire date having simply
+                    // passed since the last save, with no settings change
+                    // to key off of.
+                    refreshWidgetSnapshot()
                 }
             }
             .onChange(of: unlocked.count) { _, _ in
+                refreshWidgetSnapshot()
+            }
+            .onChange(of: alarmFingerprint) { _, _ in
                 refreshWidgetSnapshot()
             }
             .onReceive(minuteTimer) { date in
@@ -102,6 +109,16 @@ struct RootTabView: View {
                 }
             }
         }
+    }
+
+    /// A cheap, `Equatable` stand-in for "have the alarm's settings
+    /// changed" — `AlarmSettings` is a SwiftData reference type, so
+    /// `.onChange(of: alarms)` wouldn't reliably fire on in-place property
+    /// edits (toggling on/off, changing the time or weekdays) the way it
+    /// does for a value type.
+    private var alarmFingerprint: String {
+        guard let settings = alarms.first else { return "none" }
+        return "\(settings.isEnabled)-\(settings.hour)-\(settings.minute)-\(settings.repeatWeekdays.sorted())"
     }
 
     /// True once a running timer's egg has finished counting down but the
@@ -160,16 +177,22 @@ struct RootTabView: View {
         modelContext.insert(UnlockedDinosaur(dinosaurID: dinosaur.id))
     }
 
-    /// Keeps the Home Screen widget's App Group snapshot in sync — called on
-    /// every launch/foreground (to cover first install with existing data)
-    /// and whenever the unlocked count changes (covers both the alarm's
-    /// `unlock(_:)` above and the timer's own insert in `TimerHomeView`).
+    /// Keeps the Home Screen widgets' App Group snapshot in sync — called on
+    /// every launch/foreground (to cover first install with existing data,
+    /// and the alarm's next-fire date simply having passed), whenever the
+    /// unlocked count changes (covers both the alarm's `unlock(_:)` above
+    /// and the timer's own insert in `TimerHomeView`), and whenever the
+    /// alarm's settings change (`alarmFingerprint`).
     private func refreshWidgetSnapshot() {
         let records = unlocked.map {
             WidgetSnapshotBuilder.UnlockRecord(dinosaurID: $0.dinosaurID, unlockedAt: $0.unlockedAt)
         }
-        WidgetSnapshotStore.save(WidgetSnapshotBuilder.build(unlocked: records))
+        let alarmInfo = alarms.first.map {
+            WidgetSnapshotBuilder.AlarmInfo(hour: $0.hour, minute: $0.minute, weekdays: $0.repeatWeekdays, isEnabled: $0.isEnabled)
+        }
+        WidgetSnapshotStore.save(WidgetSnapshotBuilder.build(unlocked: records, alarm: alarmInfo))
         WidgetCenter.shared.reloadTimelines(ofKind: WidgetSnapshotStore.widgetKind)
+        WidgetCenter.shared.reloadTimelines(ofKind: WidgetSnapshotStore.alarmWidgetKind)
     }
 }
 

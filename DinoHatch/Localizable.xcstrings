@@ -3643,6 +3643,47 @@
         }
       }
     },
+    "No alarm set": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kein Wecker eingestellt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No alarm set"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin alarma programada"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune alarme réglée"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geen wekker ingesteld"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Будильник не установлен"
+          }
+        }
+      }
+    },
     "No dinosaurs yet": {
       "extractionState": "manual",
       "localizations": {
@@ -5029,6 +5070,47 @@
           "stringUnit": {
             "state": "translated",
             "value": "Узнайте, сколько динозавров вы вылупили."
+          }
+        }
+      }
+    },
+    "See the countdown to your next dino alarm.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sieh den Countdown bis zu deinem nächsten Dino-Wecker."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "See the countdown to your next dino alarm."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consulta la cuenta regresiva para tu próxima alarma de dinosaurio."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Découvre le compte à rebours jusqu'à ta prochaine alarme dino."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bekijk het aftellen tot je volgende dino-wekker."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Смотрите обратный отсчёт до следующего будильника с динозавром."
           }
         }
       }

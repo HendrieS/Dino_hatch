@@ -12,17 +12,35 @@ enum WidgetSnapshotBuilder {
         let unlockedAt: Date
     }
 
-    static func build(unlocked: [UnlockRecord], catalog: [Dinosaur] = DinosaurCatalog.all) -> WidgetSnapshot {
+    struct AlarmInfo {
+        let hour: Int
+        let minute: Int
+        let weekdays: [Int]
+        let isEnabled: Bool
+    }
+
+    static func build(
+        unlocked: [UnlockRecord],
+        alarm: AlarmInfo? = nil,
+        catalog: [Dinosaur] = DinosaurCatalog.all,
+        now: Date = .now
+    ) -> WidgetSnapshot {
         let totalCount = catalog.filter { !$0.isSecret }.count
-        guard let mostRecent = unlocked.max(by: { $0.unlockedAt < $1.unlockedAt }) else {
-            return WidgetSnapshot(unlockedCount: 0, totalCount: totalCount, lastDinosaurEmoji: nil, lastDinosaurName: nil)
+        let mostRecent = unlocked.max(by: { $0.unlockedAt < $1.unlockedAt })
+        let dinosaur = mostRecent.flatMap { record in catalog.first { $0.id == record.dinosaurID } }
+
+        let alarmEnabled = alarm?.isEnabled ?? false
+        let nextAlarmFireDate = alarm.flatMap { alarm in
+            alarm.isEnabled ? AlarmNextFireDate.next(hour: alarm.hour, minute: alarm.minute, weekdays: alarm.weekdays, now: now) : nil
         }
-        let dinosaur = catalog.first { $0.id == mostRecent.dinosaurID }
+
         return WidgetSnapshot(
             unlockedCount: unlocked.count,
             totalCount: totalCount,
             lastDinosaurEmoji: dinosaur?.emoji,
-            lastDinosaurName: dinosaur?.localizedName
+            lastDinosaurName: dinosaur?.localizedName,
+            alarmEnabled: alarmEnabled,
+            nextAlarmFireDate: nextAlarmFireDate
         )
     }
 }

@@ -11,8 +11,17 @@ import Foundation
 struct WidgetSnapshot: Codable, Equatable {
     var unlockedCount: Int
     var totalCount: Int
-    var lastDinosaurEmoji: String?
-    var lastDinosaurName: String?
+    var lastDinosaurEmoji: String? = nil
+    var lastDinosaurName: String? = nil
+    /// Whether an alarm is currently enabled — kept separate from
+    /// `nextAlarmFireDate` being non-nil so the alarm widget can tell "off"
+    /// apart from "on, but the fire date happens to be stale/unresolved".
+    var alarmEnabled: Bool = false
+    /// The next concrete alarm firing, computed by `AlarmNextFireDate` at
+    /// write time — the widget just hands this straight to
+    /// `Text(_:style: .timer)`, which ticks down live with no further
+    /// timeline reloads needed.
+    var nextAlarmFireDate: Date? = nil
 
     static let empty = WidgetSnapshot(unlockedCount: 0, totalCount: 0, lastDinosaurEmoji: nil, lastDinosaurName: nil)
 }
@@ -22,6 +31,7 @@ struct WidgetSnapshot: Codable, Equatable {
 enum WidgetSnapshotStore {
     static let appGroupID = "group.com.dinohatch.app"
     static let widgetKind = "DinoHatchCollectionWidget"
+    static let alarmWidgetKind = "DinoHatchAlarmWidget"
 
     private static let key = "widgetSnapshot"
 

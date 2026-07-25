@@ -35,4 +35,28 @@ final class WidgetSnapshotBuilderTests: XCTestCase {
         XCTAssertNil(snapshot.lastDinosaurEmoji)
         XCTAssertNil(snapshot.lastDinosaurName)
     }
+
+    func testNoAlarmLeavesAlarmFieldsAtDefault() {
+        let snapshot = WidgetSnapshotBuilder.build(unlocked: [])
+        XCTAssertFalse(snapshot.alarmEnabled)
+        XCTAssertNil(snapshot.nextAlarmFireDate)
+    }
+
+    func testDisabledAlarmHasNoNextFireDate() {
+        let alarm = WidgetSnapshotBuilder.AlarmInfo(hour: 7, minute: 0, weekdays: [1, 2, 3, 4, 5, 6, 7], isEnabled: false)
+        let snapshot = WidgetSnapshotBuilder.build(unlocked: [], alarm: alarm)
+        XCTAssertFalse(snapshot.alarmEnabled)
+        XCTAssertNil(snapshot.nextAlarmFireDate)
+    }
+
+    func testEnabledAlarmComputesNextFireDate() {
+        let now = Date(timeIntervalSince1970: 1_800_000_000) // fixed reference instant
+        let alarm = WidgetSnapshotBuilder.AlarmInfo(hour: 7, minute: 0, weekdays: Array(1...7), isEnabled: true)
+        let snapshot = WidgetSnapshotBuilder.build(unlocked: [], alarm: alarm, now: now)
+        XCTAssertTrue(snapshot.alarmEnabled)
+        XCTAssertEqual(
+            snapshot.nextAlarmFireDate,
+            AlarmNextFireDate.next(hour: 7, minute: 0, weekdays: Array(1...7), now: now)
+        )
+    }
 }

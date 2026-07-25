@@ -238,8 +238,12 @@ have a paid Apple Developer account and want cross-device sync.
 
 ## Home Screen widget
 
-`DinoHatchWidget` is a small/medium WidgetKit extension showing collection
-progress ("X / Y discovered") and, at medium size, the most recently hatched
+`DinoHatchWidget` is a WidgetKit extension with three widgets in one
+`DinoHatchWidgetBundle`: a Dino Collection widget (below), a Quick Timer
+widget, and a Dino Alarm widget (both further down this section).
+
+The Dino Collection widget (small/medium) shows collection progress
+("X / Y discovered") and, at medium size, the most recently hatched
 dinosaur's emoji and name. It's read-only and static — no live countdown —
 so it uses a single-entry `TimelineProvider` with `policy: .never` rather
 than polling on a schedule.
@@ -284,6 +288,25 @@ duration to `TimerHomeView` via a `Binding<Int?>`, which starts the timer
 immediately if it's showing the setup screen — a tap while a timer's already
 running is silently ignored rather than overwriting it. The `dinohatch://`
 scheme is registered via `CFBundleURLTypes` in `project.yml`.
+
+### Alarm widget
+
+A third, small-only widget (`DinoHatchAlarmWidget`) shows a live countdown to
+the next dino alarm once one's set — `Text(fireDate, style: .timer)`, the
+same system-rendered date style `CountdownView` already uses for the running
+timer, so it ticks down on its own with no per-second app/widget work. With
+no alarm enabled it just shows "No alarm set".
+
+`Stores/AlarmNextFireDate.swift` (pure, unit-tested) is the mirror image of
+`AlarmStreak.previousScheduledDay` — given an hour/minute/weekdays and now,
+it walks forward up to 7 days to find the next matching occurrence.
+`WidgetSnapshotBuilder` calls it when building the snapshot, and
+`RootTabView` keeps that snapshot's `nextAlarmFireDate` fresh by reloading
+on: any alarm settings change (`alarmFingerprint`, a cheap string stand-in
+for `.onChange` since `AlarmSettings` is a SwiftData reference type and
+in-place property edits don't reliably trigger `.onChange(of:)` on the
+array itself), and every foreground (covers the fire date having simply
+passed, with no settings change to key off of).
 
 ## Localization
 

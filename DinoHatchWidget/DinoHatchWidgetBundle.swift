@@ -6,5 +6,6 @@ struct DinoHatchWidgetBundle: WidgetBundle {
     var body: some Widget {
         DinoHatchCollectionWidget()
         DinoHatchQuickTimerWidget()
+        DinoHatchAlarmWidget()
     }
 }
