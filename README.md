@@ -264,6 +264,27 @@ The App Group is declared identically on both targets' entitlements in
 `project.yml`; with automatic signing this provisions itself, but see step 1
 in [Getting started](#getting-started) if Xcode asks for it manually.
 
+### Quick Timer widget
+
+A second, medium-only widget (`DinoHatchQuickTimerWidget`, added to the same
+`DinoHatchWidgetBundle`) shows four buttons — 5/10/15/30 minutes — that each
+start a timer in one tap. Each duration is its own `Link` (medium+ widgets
+support multiple tap targets since iOS 14), pointing at a
+`dinohatch://start-timer?minutes=N` URL.
+
+This is a deep link rather than a true background action (no
+`AppIntent`/interactive-widget button) on purpose: starting a timer picks a
+random unhatched dinosaur via `HatchSelector` and should show the countdown
+screen, so opening the app to it is the right behavior, not a limitation
+worked around. `DinoHatchShared/QuickStartLink.swift` builds/parses the URL
+(compiled into both targets) and rejects anything outside the fixed
+5/10/15/30 set, since any app can invoke a custom URL scheme.
+`RootTabView.onOpenURL` parses it, switches to the Timer tab, and hands the
+duration to `TimerHomeView` via a `Binding<Int?>`, which starts the timer
+immediately if it's showing the setup screen — a tap while a timer's already
+running is silently ignored rather than overwriting it. The `dinohatch://`
+scheme is registered via `CFBundleURLTypes` in `project.yml`.
+
 ## Localization
 
 The app supports English, German, Spanish, French, Dutch, and Russian via a

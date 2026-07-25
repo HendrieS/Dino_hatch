@@ -4583,6 +4583,47 @@
         }
       }
     },
+    "Quick Timer": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schnelltimer"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quick Timer"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Temporizador rápido"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minuteur rapide"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Snelle timer"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Быстрый таймер"
+          }
+        }
+      }
+    },
     "Rare": {
       "extractionState": "manual",
       "localizations": {
@@ -5641,6 +5682,47 @@
           "stringUnit": {
             "state": "translated",
             "value": "Запустить таймер"
+          }
+        }
+      }
+    },
+    "Start a 5, 10, 15, or 30 minute timer right from the Home Screen.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Starte direkt vom Startbildschirm aus einen 5-, 10-, 15- oder 30-Minuten-Timer."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start a 5, 10, 15, or 30 minute timer right from the Home Screen."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inicia un temporizador de 5, 10, 15 o 30 minutos directamente desde la pantalla de inicio."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Démarre une minuterie de 5, 10, 15 ou 30 minutes directement depuis l'écran d'accueil."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start direct vanaf het beginscherm een timer van 5, 10, 15 of 30 minuten."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Запустите таймер на 5, 10, 15 или 30 минут прямо с главного экрана."
           }
         }
       }
@@ -7157,6 +7239,47 @@
           "stringUnit": {
             "state": "translated",
             "value": "найдено"
+          }
+        }
+      }
+    },
+    "min": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Min."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "min"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "min"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "min"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "min"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "мин"
           }
         }
       }
