@@ -1,5 +1,15 @@
 import SwiftUI
 
+extension Dinosaur {
+    /// Resolves `name` (the English catalog string, doubling as its own
+    /// localization key — see `Text(localizedContent:)`) against the
+    /// current locale as a plain `String`, for contexts like search
+    /// matching where a `Text` view won't do.
+    var localizedName: String {
+        String(localized: String.LocalizationValue(name))
+    }
+}
+
 extension Dinosaur.Diet {
     /// Enum-driven, so these are real call-site literals (unlike
     /// `dinosaur.era`/`funFact`, which come from the runtime catalog and

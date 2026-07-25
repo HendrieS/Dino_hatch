@@ -2,10 +2,28 @@ import SwiftUI
 import SwiftData
 
 struct CollectionView: View {
+    private enum SortOption: String, CaseIterable, Identifiable {
+        case collectionOrder, name, rarity
+
+        var id: String { rawValue }
+
+        var label: Text {
+            switch self {
+            case .collectionOrder: Text("Collection Order")
+            case .name: Text("Name")
+            case .rarity: Text("Rarity")
+            }
+        }
+    }
+
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \UnlockedDinosaur.unlockedAt) private var unlocked: [UnlockedDinosaur]
 
     @State private var showSettings = false
+    @State private var searchText = ""
+    @State private var dietFilter: Dinosaur.Diet?
+    @State private var rarityFilter: Dinosaur.Rarity?
+    @State private var sortOption: SortOption = .collectionOrder
 
     private var unlockedIDs: Set<String> {
         Set(unlocked.map(\.dinosaurID))
@@ -22,6 +40,38 @@ struct CollectionView: View {
 
     private var hasFoundBonusDinosaurs: Bool {
         unlockedIDs.count > regularDinosaurs.count
+    }
+
+    private var isFiltering: Bool {
+        dietFilter != nil || rarityFilter != nil
+    }
+
+    /// Search/filter/sort all operate on the full catalog, including locked
+    /// (and, if unlocked, secret) entries — which species exist was never
+    /// hidden, only their art and facts are (via `DinoSilhouetteView`), so
+    /// none of this reveals anything the grid didn't already structurally
+    /// show. A locked match still renders as a plain silhouette below.
+    private var visibleDinosaurs: [Dinosaur] {
+        var list = DinosaurCatalog.all
+        if let dietFilter {
+            list = list.filter { $0.diet == dietFilter }
+        }
+        if let rarityFilter {
+            list = list.filter { $0.rarity == rarityFilter }
+        }
+        let trimmedSearch = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        if !trimmedSearch.isEmpty {
+            list = list.filter { $0.localizedName.localizedCaseInsensitiveContains(trimmedSearch) }
+        }
+        switch sortOption {
+        case .collectionOrder:
+            break
+        case .name:
+            list.sort { $0.localizedName.localizedCaseInsensitiveCompare($1.localizedName) == .orderedAscending }
+        case .rarity:
+            list.sort { $0.rarity.starCount > $1.rarity.starCount }
+        }
+        return list
     }
 
     private let columns = [GridItem(.adaptive(minimum: 140), spacing: 16)]
@@ -44,30 +94,81 @@ struct CollectionView: View {
                 .foregroundStyle(.secondary)
                 .padding(.top, 8)
 
-                LazyVGrid(columns: columns, spacing: 16) {
-                    ForEach(DinosaurCatalog.all) { dinosaur in
-                        if unlockedIDs.contains(dinosaur.id) {
-                            NavigationLink {
-                                DinosaurDetailView(
-                                    dinosaur: dinosaur,
-                                    unlockedAt: unlocked.first(where: { $0.dinosaurID == dinosaur.id })?.unlockedAt
-                                )
-                            } label: {
-                                DinoCardView(dinosaur: dinosaur)
-                            }
-                            .buttonStyle(.plain)
-                        } else if !dinosaur.isSecret {
-                            DinoSilhouetteView()
-                        }
-                        // Locked secret dinosaurs render nothing at all —
-                        // no silhouette, no placeholder, no hint they exist.
+                if visibleDinosaurs.isEmpty {
+                    ContentUnavailableView {
+                        Label("No Dinosaurs Found", systemImage: "questionmark.square.dashed")
+                    } description: {
+                        Text("Try a different search or filter.")
                     }
+                    .padding(.top, 40)
+                } else {
+                    LazyVGrid(columns: columns, spacing: 16) {
+                        ForEach(visibleDinosaurs) { dinosaur in
+                            if unlockedIDs.contains(dinosaur.id) {
+                                NavigationLink {
+                                    DinosaurDetailView(
+                                        dinosaur: dinosaur,
+                                        unlockedAt: unlocked.first(where: { $0.dinosaurID == dinosaur.id })?.unlockedAt
+                                    )
+                                } label: {
+                                    DinoCardView(dinosaur: dinosaur)
+                                }
+                                .buttonStyle(.plain)
+                            } else if !dinosaur.isSecret {
+                                DinoSilhouetteView()
+                            }
+                            // Locked secret dinosaurs render nothing at all —
+                            // no silhouette, no placeholder, no hint they exist.
+                        }
+                    }
+                    .padding()
                 }
-                .padding()
             }
             .navigationTitle("Dino-pedia")
             .navigationBarTitleDisplayMode(.inline)
+            .searchable(text: $searchText, prompt: Text("Search dinosaurs"))
             .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Menu {
+                        Picker(selection: $sortOption) {
+                            ForEach(SortOption.allCases) { option in
+                                option.label.tag(option)
+                            }
+                        } label: {
+                            Text("Sort By")
+                        }
+
+                        Picker(selection: $dietFilter) {
+                            Text("All").tag(Dinosaur.Diet?.none)
+                            ForEach(Dinosaur.Diet.allCases, id: \.self) { diet in
+                                diet.localizedLabel.tag(Dinosaur.Diet?.some(diet))
+                            }
+                        } label: {
+                            Text("Diet")
+                        }
+
+                        Picker(selection: $rarityFilter) {
+                            Text("All").tag(Dinosaur.Rarity?.none)
+                            ForEach(Dinosaur.Rarity.allCases, id: \.self) { rarity in
+                                rarity.localizedLabel.tag(Dinosaur.Rarity?.some(rarity))
+                            }
+                        } label: {
+                            Text("Rarity")
+                        }
+
+                        if isFiltering {
+                            Button(role: .destructive) {
+                                dietFilter = nil
+                                rarityFilter = nil
+                            } label: {
+                                Text("Clear Filters")
+                            }
+                        }
+                    } label: {
+                        Image(systemName: isFiltering ? "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease.circle")
+                    }
+                    .accessibilityLabel(Text("Sort and Filter"))
+                }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         showSettings = true

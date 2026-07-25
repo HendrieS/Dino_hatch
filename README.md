@@ -166,6 +166,17 @@ have a paid Apple Developer account and want cross-device sync.
   preview, so each one has a plain duplicate `*-thumb` `.imageset` (same
   artwork, ordinary content type) that `AppIconPicker` reads from instead
   — `AppIconOption.thumbnailAssetName` points at those.
+- **Collection search/filter/sort**: `Views/CollectionView.swift` adds a
+  `.searchable` field (matched against `Dinosaur.localizedName`, a new
+  `String`-returning counterpart to `Text(localizedContent:)` for
+  contexts a `Text` view won't work in) plus a toolbar filter/sort menu
+  (diet, rarity, and sort by collection order/name/rarity — reusing the
+  existing `Diet`/`Rarity` enums and labels rather than inventing new
+  ones). All three operate on the full catalog, including locked
+  entries — species names were never secret, only their art/facts are
+  (via `DinoSilhouetteView`), so a locked match still renders as a plain
+  silhouette rather than revealing anything. An empty result shows a
+  `ContentUnavailableView` rather than a blank grid.
 - **Found-in region maps**: `Views/DinosaurDetailView.swift` shows a
   "Found in" card whenever `Dinosaur.rangeMapAssetName`/`rangeLabel` are
   set — a shared world map (6 reusable region images, not one per
