@@ -22,6 +22,13 @@ struct WidgetSnapshot: Codable, Equatable {
     /// `Text(_:style: .timer)`, which ticks down live with no further
     /// timeline reloads needed.
     var nextAlarmFireDate: Date? = nil
+    /// Mirrors `AppSettings.activeTimerEndDate` — non-nil while a timer is
+    /// running (whether or not it's already past, see
+    /// `DinoHatchQuickTimerWidgetView`), nil once cancelled or hatched.
+    var activeTimerEndDate: Date? = nil
+    /// The emoji of the dinosaur the running timer is hatching, resolved in
+    /// the app the same way `lastDinosaurEmoji` is.
+    var activeTimerDinosaurEmoji: String? = nil
 
     static let empty = WidgetSnapshot(unlockedCount: 0, totalCount: 0, lastDinosaurEmoji: nil, lastDinosaurName: nil)
 }
@@ -32,6 +39,7 @@ enum WidgetSnapshotStore {
     static let appGroupID = "group.com.dinohatch.app"
     static let widgetKind = "DinoHatchCollectionWidget"
     static let alarmWidgetKind = "DinoHatchAlarmWidget"
+    static let quickTimerWidgetKind = "DinoHatchQuickTimerWidget"
 
     private static let key = "widgetSnapshot"
 

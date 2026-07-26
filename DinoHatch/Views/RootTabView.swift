@@ -78,6 +78,9 @@ struct RootTabView: View {
             .onChange(of: alarmFingerprint) { _, _ in
                 refreshWidgetSnapshot()
             }
+            .onChange(of: timerFingerprint) { _, _ in
+                refreshWidgetSnapshot()
+            }
             .onReceive(minuteTimer) { date in
                 now = date
             }
@@ -119,6 +122,15 @@ struct RootTabView: View {
     private var alarmFingerprint: String {
         guard let settings = alarms.first else { return "none" }
         return "\(settings.isEnabled)-\(settings.hour)-\(settings.minute)-\(settings.repeatWeekdays.sorted())"
+    }
+
+    /// Same reasoning as `alarmFingerprint`, but for the running timer —
+    /// `AppSettings` is also a SwiftData reference type, so starting,
+    /// cancelling, or completing a timer (all in-place property edits from
+    /// `TimerEngine`) needs an explicit key to react to.
+    private var timerFingerprint: String {
+        guard let settings = appSettings.first else { return "none" }
+        return "\(settings.activeTimerEndDate?.timeIntervalSince1970 ?? -1)-\(settings.pendingDinosaurID ?? "")"
     }
 
     /// True once a running timer's egg has finished counting down but the
@@ -182,7 +194,8 @@ struct RootTabView: View {
     /// and the alarm's next-fire date simply having passed), whenever the
     /// unlocked count changes (covers both the alarm's `unlock(_:)` above
     /// and the timer's own insert in `TimerHomeView`), and whenever the
-    /// alarm's settings change (`alarmFingerprint`).
+    /// alarm's or timer's settings change (`alarmFingerprint`/
+    /// `timerFingerprint`).
     private func refreshWidgetSnapshot() {
         let records = unlocked.map {
             WidgetSnapshotBuilder.UnlockRecord(dinosaurID: $0.dinosaurID, unlockedAt: $0.unlockedAt)
@@ -190,9 +203,15 @@ struct RootTabView: View {
         let alarmInfo = alarms.first.map {
             WidgetSnapshotBuilder.AlarmInfo(hour: $0.hour, minute: $0.minute, weekdays: $0.repeatWeekdays, isEnabled: $0.isEnabled)
         }
-        WidgetSnapshotStore.save(WidgetSnapshotBuilder.build(unlocked: records, alarm: alarmInfo))
+        let activeTimerInfo = appSettings.first.flatMap { settings in
+            settings.activeTimerEndDate.map {
+                WidgetSnapshotBuilder.ActiveTimerInfo(endDate: $0, dinosaurID: settings.pendingDinosaurID)
+            }
+        }
+        WidgetSnapshotStore.save(WidgetSnapshotBuilder.build(unlocked: records, alarm: alarmInfo, activeTimer: activeTimerInfo))
         WidgetCenter.shared.reloadTimelines(ofKind: WidgetSnapshotStore.widgetKind)
         WidgetCenter.shared.reloadTimelines(ofKind: WidgetSnapshotStore.alarmWidgetKind)
+        WidgetCenter.shared.reloadTimelines(ofKind: WidgetSnapshotStore.quickTimerWidgetKind)
     }
 }
 

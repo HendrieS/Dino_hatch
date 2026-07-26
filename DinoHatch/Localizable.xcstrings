@@ -5768,43 +5768,43 @@
         }
       }
     },
-    "Start a 5, 10, 15, or 30 minute timer right from the Home Screen.": {
+    "Start a 5, 10, 15, or 30 minute timer right from the Home Screen, and see the time left.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Starte direkt vom Startbildschirm aus einen 5-, 10-, 15- oder 30-Minuten-Timer."
+            "value": "Starte direkt vom Startbildschirm aus einen 5-, 10-, 15- oder 30-Minuten-Timer und sieh die verbleibende Zeit."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Start a 5, 10, 15, or 30 minute timer right from the Home Screen."
+            "value": "Start a 5, 10, 15, or 30 minute timer right from the Home Screen, and see the time left."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Inicia un temporizador de 5, 10, 15 o 30 minutos directamente desde la pantalla de inicio."
+            "value": "Inicia un temporizador de 5, 10, 15 o 30 minutos directamente desde la pantalla de inicio y consulta el tiempo restante."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Démarre une minuterie de 5, 10, 15 ou 30 minutes directement depuis l'écran d'accueil."
+            "value": "Démarre une minuterie de 5, 10, 15 ou 30 minutes directement depuis l'écran d'accueil et découvre le temps restant."
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Start direct vanaf het beginscherm een timer van 5, 10, 15 of 30 minuten."
+            "value": "Start direct vanaf het beginscherm een timer van 5, 10, 15 of 30 minuten en bekijk de resterende tijd."
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "Запустите таймер на 5, 10, 15 или 30 минут прямо с главного экрана."
+            "value": "Запустите таймер на 5, 10, 15 или 30 минут прямо с главного экрана и следите за оставшимся временем."
           }
         }
       }

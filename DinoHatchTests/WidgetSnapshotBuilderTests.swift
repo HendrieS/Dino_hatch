@@ -59,4 +59,31 @@ final class WidgetSnapshotBuilderTests: XCTestCase {
             AlarmNextFireDate.next(hour: 7, minute: 0, weekdays: Array(1...7), now: now)
         )
     }
+
+    func testNoActiveTimerLeavesTimerFieldsNil() {
+        let snapshot = WidgetSnapshotBuilder.build(unlocked: [])
+        XCTAssertNil(snapshot.activeTimerEndDate)
+        XCTAssertNil(snapshot.activeTimerDinosaurEmoji)
+    }
+
+    func testActiveTimerCarriesEndDateAndDinosaurEmoji() {
+        let endDate = Date(timeIntervalSince1970: 2_000_000_000)
+        let triceratops = DinosaurCatalog.all.first { $0.id == "triceratops" }!
+        let activeTimer = WidgetSnapshotBuilder.ActiveTimerInfo(endDate: endDate, dinosaurID: "triceratops")
+
+        let snapshot = WidgetSnapshotBuilder.build(unlocked: [], activeTimer: activeTimer)
+
+        XCTAssertEqual(snapshot.activeTimerEndDate, endDate)
+        XCTAssertEqual(snapshot.activeTimerDinosaurEmoji, triceratops.emoji)
+    }
+
+    func testActiveTimerWithUnknownDinosaurIDStillCarriesEndDate() {
+        let endDate = Date(timeIntervalSince1970: 2_000_000_000)
+        let activeTimer = WidgetSnapshotBuilder.ActiveTimerInfo(endDate: endDate, dinosaurID: "not-a-real-id")
+
+        let snapshot = WidgetSnapshotBuilder.build(unlocked: [], activeTimer: activeTimer)
+
+        XCTAssertEqual(snapshot.activeTimerEndDate, endDate)
+        XCTAssertNil(snapshot.activeTimerDinosaurEmoji)
+    }
 }

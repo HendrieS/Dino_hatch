@@ -289,6 +289,18 @@ immediately if it's showing the setup screen — a tap while a timer's already
 running is silently ignored rather than overwriting it. The `dinohatch://`
 scheme is registered via `CFBundleURLTypes` in `project.yml`.
 
+Once a timer's running, the widget swaps the four buttons for a live
+countdown — `Text(endDate, style: .timer)`, the same system-rendered date
+style the Alarm widget and `CountdownView` use — plus the hatching
+dinosaur's emoji, mirroring `AppSettings.activeTimerEndDate`/
+`pendingDinosaurID` via the shared `WidgetSnapshot`. If the end date has
+already passed (finished, but the app hasn't been opened yet to play the
+hatch animation) it shows an "egg is ready" state instead of a countdown
+ticking past zero. `RootTabView` keeps this in sync with a
+`timerFingerprint` (the same reference-type-`.onChange` workaround as
+`alarmFingerprint`, keyed on the timer's end date and pending dinosaur ID)
+alongside the existing foreground/unlock-count refresh triggers.
+
 ### Alarm widget
 
 A third, small-only widget (`DinoHatchAlarmWidget`) shows a live countdown to
