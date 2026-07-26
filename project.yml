@@ -32,10 +32,6 @@ targets:
           - UIInterfaceOrientationPortraitUpsideDown
           - UIInterfaceOrientationLandscapeLeft
           - UIInterfaceOrientationLandscapeRight
-        CFBundleURLTypes:
-          - CFBundleURLName: com.dinohatch.app
-            CFBundleURLSchemes:
-              - dinohatch
     entitlements:
       path: DinoHatch/DinoHatch.entitlements
       properties:

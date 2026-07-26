@@ -5728,6 +5728,47 @@
         }
       }
     },
+    "Start Dino Timer": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dino-Timer starten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start Dino Timer"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Iniciar temporizador de dinosaurio"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Démarrer le minuteur dino"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dino-timer starten"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Запустить таймер динозавра"
+          }
+        }
+      }
+    },
     "Start Timer": {
       "localizations": {
         "de": {
@@ -5805,6 +5846,47 @@
           "stringUnit": {
             "state": "translated",
             "value": "Запустите таймер на 5, 10, 15 или 30 минут прямо с главного экрана и следите за оставшимся временем."
+          }
+        }
+      }
+    },
+    "Starts a Dino Hatch timer without opening the app.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Startet einen Dino-Hatch-Timer, ohne die App zu öffnen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Starts a Dino Hatch timer without opening the app."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inicia un temporizador de Dino Hatch sin abrir la app."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Démarre une minuterie Dino Hatch sans ouvrir l'app."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start een Dino Hatch-timer zonder de app te openen."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Запускает таймер Dino Hatch без открытия приложения."
           }
         }
       }

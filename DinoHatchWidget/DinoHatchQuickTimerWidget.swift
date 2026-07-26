@@ -25,13 +25,16 @@ struct QuickTimerProvider: TimelineProvider {
     }
 }
 
-/// Three states: no timer running shows the four quick-start buttons; a
-/// running timer shows a live countdown instead (buttons are hidden rather
-/// than left tappable-but-ignored, matching `TimerHomeView`'s silent-ignore
-/// behavior for a stray tap while already counting down); and a timer whose
-/// end date has already passed — finished, but not yet opened in the app to
-/// play the hatch animation — shows a "ready" state instead of an
-/// odd-looking countdown ticking past zero.
+/// Three states: no timer running shows the four quick-start buttons, which
+/// start a timer via `StartTimerIntent` without opening the app; a running
+/// timer shows a live countdown instead (buttons are hidden rather than
+/// left tappable-but-ignored, matching `TimerHomeView`'s silent-ignore
+/// behavior for a stray tap while already counting down) — tapping the
+/// countdown *does* open the app, since there's no `Link`/`Button`
+/// intercepting that region; and a timer whose end date has already
+/// passed — finished, but not yet opened in the app to play the hatch
+/// animation — shows a "ready" state instead of an odd-looking countdown
+/// ticking past zero, also tappable to open the app.
 struct DinoHatchQuickTimerWidgetView: View {
     var entry: QuickTimerProvider.Entry
 
@@ -91,15 +94,16 @@ struct DinoHatchQuickTimerWidgetView: View {
         }
     }
 
-    /// Each duration is its own `Link` (a distinct tap target within the
-    /// same medium-sized widget, supported since iOS 14) rather than one
-    /// button that opens the app to a picker — tapping "10" should start a
-    /// 10-minute timer immediately, the same one-tap promise as the rest of
-    /// this feature.
+    /// Each duration is an `AppIntent`-backed `Button` (interactive widgets,
+    /// iOS 17+) rather than a `Link` — starting a timer this way runs
+    /// `StartTimerIntent` right in the widget extension process and never
+    /// opens the app, unlike the countdown/ready states below, which fall
+    /// back to the default "tap anywhere opens the app" behavior since they
+    /// contain no `Link`/`Button` of their own.
     private var buttonsView: some View {
         HStack(spacing: 8) {
-            ForEach(QuickStartLink.allowedMinutes, id: \.self) { minutes in
-                Link(destination: QuickStartLink.url(forMinutes: minutes)) {
+            ForEach(QuickTimerDurations.allowedMinutes, id: \.self) { minutes in
+                Button(intent: StartTimerIntent(minutes: minutes)) {
                     VStack(spacing: 2) {
                         Text(minutes, format: .number)
                             .font(.system(size: 20, weight: .bold, design: .rounded))
@@ -114,6 +118,7 @@ struct DinoHatchQuickTimerWidgetView: View {
                         in: RoundedRectangle(cornerRadius: 12, style: .continuous)
                     )
                 }
+                .buttonStyle(.plain)
             }
         }
     }

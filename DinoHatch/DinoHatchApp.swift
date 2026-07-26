@@ -3,20 +3,13 @@ import SwiftData
 
 @main
 struct DinoHatchApp: App {
-    var sharedModelContainer: ModelContainer = {
-        // Local-only for now: iCloud/CloudKit sync requires a paid Apple
-        // Developer Program membership (personal/free teams can't use the
-        // iCloud capability). To re-enable sync once on a paid team, pass
-        // `cloudKitDatabase: .automatic` here and restore the `entitlements`
-        // block for the DinoHatch target in project.yml.
-        let schema = Schema([UnlockedDinosaur.self, AppSettings.self, AlarmSettings.self])
-        let config = ModelConfiguration(schema: schema)
-        do {
-            return try ModelContainer(for: schema, configurations: [config])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+    // Backed by the App Group container (see SharedModelContainer) rather
+    // than the app's own default location, so the Quick Timer widget's
+    // StartTimerIntent can write AppSettings directly from the widget
+    // extension process. Still local-only, no iCloud/CloudKit — that
+    // requires a paid Apple Developer Program membership; see
+    // "Re-enabling iCloud sync" in README.md.
+    var sharedModelContainer: ModelContainer = SharedModelContainer.make()
 
     var body: some Scene {
         WindowGroup {

@@ -16,11 +16,6 @@ struct RootTabView: View {
 
     @State private var pendingAlarmDinosaur: Dinosaur?
     @State private var selectedTab: Tab = .timer
-    /// Set from the Quick Timer widget's `dinohatch://start-timer` link (see
-    /// `QuickStartLink`) and cleared once `TimerHomeView` consumes it —
-    /// `Binding` rather than a callback so `TimerHomeView` can ignore it
-    /// while a timer's already running instead of stomping on one.
-    @State private var pendingQuickStartMinutes: Int?
     /// Refreshed every minute (and on every foreground transition) purely
     /// to keep the Alarm tab's missed-window badge current — unlike the
     /// timer banner's TimelineView, this needs to tick even while the Timer
@@ -41,7 +36,7 @@ struct RootTabView: View {
     private var mainTabView: some View {
         ZStack(alignment: .top) {
             TabView(selection: $selectedTab) {
-                TimerHomeView(isActive: selectedTab == .timer, pendingQuickStartMinutes: $pendingQuickStartMinutes)
+                TimerHomeView(isActive: selectedTab == .timer)
                     .tabItem {
                         Label("Timer", systemImage: "hourglass")
                     }
@@ -83,11 +78,6 @@ struct RootTabView: View {
             }
             .onReceive(minuteTimer) { date in
                 now = date
-            }
-            .onOpenURL { url in
-                guard let minutes = QuickStartLink.minutes(from: url) else { return }
-                pendingQuickStartMinutes = minutes
-                selectedTab = .timer
             }
             .fullScreenCover(item: $pendingAlarmDinosaur) { dinosaur in
                 AlarmHatchView(dinosaur: dinosaur) {

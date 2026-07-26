@@ -9,9 +9,9 @@ struct TimerHomeView: View {
     /// still shows the full reveal instead of a dinosaur that's already sat
     /// there waiting.
     var isActive: Bool
-    @Binding var pendingQuickStartMinutes: Int?
 
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.scenePhase) private var scenePhase
     @Query private var unlockedDinosaurs: [UnlockedDinosaur]
     @State private var engine = TimerEngine()
     @State private var phase: Phase = .setup
@@ -57,35 +57,25 @@ struct TimerHomeView: View {
         .onAppear {
             engine.configure(context: modelContext)
             resumeIfNeeded()
-            consumePendingQuickStart()
         }
         .onChange(of: isActive) { _, active in
             guard active, isReadyToHatch else { return }
             isReadyToHatch = false
             phase = .hatching
         }
-        .onChange(of: pendingQuickStartMinutes) { _, _ in
-            consumePendingQuickStart()
+        .onChange(of: scenePhase) { _, newPhase in
+            // Only while still on the setup screen — engine.isRunning stays
+            // true through .hatching/.reveal too (cleared only once the
+            // animation finishes), so re-running this unconditionally would
+            // yank a mid-animation view back to .counting. Needed because
+            // the Quick Timer widget's StartTimerIntent can now start a
+            // timer while this view was already on screen but the app was
+            // merely backgrounded (not relaunched, so .onAppear above
+            // doesn't fire again).
+            guard newPhase == .active, phase == .setup else { return }
+            engine.restoreFromSettings()
+            resumeIfNeeded()
         }
-    }
-
-    /// Handles a `dinohatch://start-timer` tap from the Quick Timer widget
-    /// (see `QuickStartLink`/`RootTabView.onOpenURL`) — silently ignored if
-    /// a timer's already running rather than overwriting it, same
-    /// no-hint-either-way spirit as the app's other gating.
-    private func consumePendingQuickStart() {
-        guard let minutes = pendingQuickStartMinutes else { return }
-        pendingQuickStartMinutes = nil
-        guard phase == .setup else { return }
-        startTimer(seconds: minutes * 60)
-    }
-
-    private func startTimer(seconds: Int) {
-        let unlockedIDs = Set(unlockedDinosaurs.map(\.dinosaurID))
-        let dinosaur = HatchSelector.pickNext(unlockedIDs: unlockedIDs)
-        engine.start(duration: TimeInterval(seconds), hatching: dinosaur.id)
-        hatchedDinosaur = dinosaur
-        phase = .counting
     }
 
     /// The countdown finished. Plays the hatch animation immediately if the
@@ -117,6 +107,6 @@ struct TimerHomeView: View {
 }
 
 #Preview {
-    TimerHomeView(isActive: true, pendingQuickStartMinutes: .constant(nil))
+    TimerHomeView(isActive: true)
         .modelContainer(for: [UnlockedDinosaur.self, AppSettings.self], inMemory: true)
 }

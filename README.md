@@ -32,10 +32,11 @@ Then in Xcode:
    change `PRODUCT_BUNDLE_IDENTIFIER` in `project.yml` (search for
    `com.dinohatch.app`), then re-run `xcodegen generate`. Both targets share
    the `group.com.dinohatch.app` App Group (see
-   [Home Screen widget](#home-screen-widget) below) — with automatic
-   signing this should provision itself, but if Xcode complains, add the
-   **App Groups** capability manually on each target and confirm the same
-   group is checked on both.
+   [Home Screen widget](#home-screen-widget) below) — it now backs the
+   app's actual SwiftData store, not just widget data, so the app won't
+   launch at all without it — with automatic signing this should provision
+   itself, but if Xcode complains, add the **App Groups** capability
+   manually on each target and confirm the same group is checked on both.
 2. Build and run (`Cmd+R`) on an iPhone or iPad simulator.
 3. Run the unit tests with `Cmd+U`.
 4. To see the widget, long-press the Home Screen → **Edit Home Screen** →
@@ -271,35 +272,55 @@ in [Getting started](#getting-started) if Xcode asks for it manually.
 ### Quick Timer widget
 
 A second, medium-only widget (`DinoHatchQuickTimerWidget`, added to the same
-`DinoHatchWidgetBundle`) shows four buttons — 5/10/15/30 minutes — that each
-start a timer in one tap. Each duration is its own `Link` (medium+ widgets
-support multiple tap targets since iOS 14), pointing at a
-`dinohatch://start-timer?minutes=N` URL.
+`DinoHatchWidgetBundle`) has three states:
 
-This is a deep link rather than a true background action (no
-`AppIntent`/interactive-widget button) on purpose: starting a timer picks a
-random unhatched dinosaur via `HatchSelector` and should show the countdown
-screen, so opening the app to it is the right behavior, not a limitation
-worked around. `DinoHatchShared/QuickStartLink.swift` builds/parses the URL
-(compiled into both targets) and rejects anything outside the fixed
-5/10/15/30 set, since any app can invoke a custom URL scheme.
-`RootTabView.onOpenURL` parses it, switches to the Timer tab, and hands the
-duration to `TimerHomeView` via a `Binding<Int?>`, which starts the timer
-immediately if it's showing the setup screen — a tap while a timer's already
-running is silently ignored rather than overwriting it. The `dinohatch://`
-scheme is registered via `CFBundleURLTypes` in `project.yml`.
+- **No timer running**: four duration buttons — 5/10/15/30 minutes. Each is
+  an `AppIntent`-backed `Button` (`StartTimerIntent`, interactive widgets,
+  iOS 17+) rather than a `Link` — tapping one starts the timer **without
+  opening the app**, running entirely in the widget extension's process.
+- **Timer running**: the buttons are replaced by a live countdown —
+  `Text(endDate, style: .timer)`, the same system-rendered date style the
+  Alarm widget and `CountdownView` use — plus the hatching dinosaur's emoji.
+  This region has no `Link`/`Button` of its own, so it falls back to
+  WidgetKit's default behavior: tapping it opens the app.
+- **Timer finished, not yet opened**: an "egg is ready to hatch!" state
+  instead of a countdown ticking past zero, also tappable to open the app.
 
-Once a timer's running, the widget swaps the four buttons for a live
-countdown — `Text(endDate, style: .timer)`, the same system-rendered date
-style the Alarm widget and `CountdownView` use — plus the hatching
-dinosaur's emoji, mirroring `AppSettings.activeTimerEndDate`/
-`pendingDinosaurID` via the shared `WidgetSnapshot`. If the end date has
-already passed (finished, but the app hasn't been opened yet to play the
-hatch animation) it shows an "egg is ready" state instead of a countdown
-ticking past zero. `RootTabView` keeps this in sync with a
-`timerFingerprint` (the same reference-type-`.onChange` workaround as
-`alarmFingerprint`, keyed on the timer's end date and pending dinosaur ID)
-alongside the existing foreground/unlock-count refresh triggers.
+Making the buttons a true background action (rather than the deep link an
+earlier version of this feature used) meant `StartTimerIntent` needs to do
+everything `TimerEngine.start()` normally does — pick a dinosaur, write
+`AppSettings`, schedule the hatch notification — from a process that never
+launches the app. That's only possible if the widget extension can open the
+*exact same* SwiftData store the app uses, which took a bigger change than
+the button itself:
+
+- The app's `ModelContainer` now lives inside the `group.com.dinohatch.app`
+  App Group container (`DinoHatchShared/SharedModelContainer.swift`) instead
+  of its own default location, so both processes can open the same file.
+  **This resets any local data from before this change** — the store moved,
+  it didn't migrate.
+- `AppSettings`, `UnlockedDinosaur`, `AlarmSettings`, `Dinosaur`,
+  `DinosaurCatalog`, `HatchSelector`, `TimerNotificationScheduler`, and
+  `NotificationAuthorization` all moved from `DinoHatch/` into
+  `DinoHatchShared/`, so the widget target can construct an identical
+  `Schema` (SwiftData rejects a store as incompatible if the schema doesn't
+  include every entity it was created with, even ones a given process never
+  touches) and pick/schedule a dinosaur the same way the app does.
+- `StartTimerIntent` writes `AppSettings` through the shared container,
+  updates `WidgetSnapshot` directly (so the countdown appears immediately,
+  without waiting for the app to run `refreshWidgetSnapshot()`), and calls
+  `WidgetCenter.reloadTimelines` itself.
+- `TimerHomeView` now also re-syncs from `AppSettings` on every foreground
+  (not just first appearance), guarded to only do so while still on the
+  setup screen — a timer can now start while the app was merely
+  backgrounded rather than relaunched, so it needs to notice the change
+  itself rather than relying on `.onAppear` firing again.
+
+If a future Xcode build reports the widget's cross-process `AppSettings`
+write isn't showing up promptly when resuming the app from the background
+(as opposed to a fresh launch), that's the one part of this that couldn't be
+verified without a real device/simulator — worth an explicit test after
+building.
 
 ### Alarm widget
 
@@ -361,19 +382,23 @@ Personal development teams... do not support the iCloud capability" if you
 try. If you enroll in the paid Apple Developer Program ($99/year) and want
 the collection to sync across a kid's devices:
 
-1. In `project.yml`, add back an `entitlements` block under the `DinoHatch`
-   target:
+1. In `project.yml`, add the iCloud keys to the `DinoHatch` target's
+   existing `entitlements` block (alongside `com.apple.security.
+   application-groups`, which stays — the Quick Timer widget's
+   `StartTimerIntent` still needs it):
    ```yaml
    entitlements:
      path: DinoHatch/DinoHatch.entitlements
      properties:
+       com.apple.security.application-groups:
+         - group.com.dinohatch.app
        com.apple.developer.icloud-container-identifiers:
          - iCloud.com.dinohatch.app
        com.apple.developer.icloud-services:
          - CloudKit
    ```
-2. In `DinoHatch/DinoHatchApp.swift`, change the `ModelConfiguration` call to
-   pass `cloudKitDatabase: .automatic`.
+2. In `DinoHatchShared/SharedModelContainer.swift`, pass
+   `cloudKitDatabase: .automatic` to the `ModelConfiguration` call.
 3. Run `xcodegen generate`, select your paid Team under **Signing &
    Capabilities**, and sign into iCloud on the Simulator/device to test sync.
 
