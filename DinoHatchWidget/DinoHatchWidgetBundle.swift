@@ -7,5 +7,6 @@ struct DinoHatchWidgetBundle: WidgetBundle {
         DinoHatchCollectionWidget()
         DinoHatchQuickTimerWidget()
         DinoHatchAlarmWidget()
+        DinoTimerLiveActivity()
     }
 }

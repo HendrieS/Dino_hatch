@@ -341,6 +341,33 @@ in-place property edits don't reliably trigger `.onChange(of:)` on the
 array itself), and every foreground (covers the fire date having simply
 passed, with no settings change to key off of).
 
+### Lock Screen / Dynamic Island Live Activity
+
+While a timer's running, `DinoTimerLiveActivity.swift` shows it on the Lock
+Screen and, on supported devices, in the Dynamic Island — a live countdown
+(`Text(endDate, style: .timer)`, same technique as everywhere else) plus the
+hatching dinosaur's emoji. Tapping it anywhere opens the app, the default
+behavior for a Live Activity with no `Link` of its own.
+
+- `DinoHatchShared/DinoTimerActivityAttributes.swift` defines the
+  `ActivityAttributes`/`ContentState` (just `endDate` and an optional
+  emoji) — compiled into both targets since either side can start one.
+- `DinoHatchShared/DinoTimerActivityController.swift` wraps
+  `Activity<DinoTimerActivityAttributes>.request`/`.end` — best-effort,
+  same philosophy as `NotificationAuthorization` (a timer works identically
+  whether or not the activity could start; Live Activities can be turned
+  off system-wide in Settings).
+- `TimerEngine.start()`/`cancel()` (in-app path) and `StartTimerIntent.
+  perform()` (Quick Timer widget path — see below) both call it, so a Live
+  Activity shows up regardless of where the timer was started.
+- `NSSupportsLiveActivities` is set on the `DinoHatch` target in
+  `project.yml` — required for Live Activities to work at all.
+
+Once the countdown reaches zero the Live Activity keeps showing (ticking
+past zero, same accepted limitation as the Quick Timer widget's countdown)
+until the app is actually opened and the hatch plays through —
+`TimerEngine.cancel()`/`completeHatch()` is what ends it.
+
 ## Localization
 
 The app supports English, German, Spanish, French, Dutch, and Russian via a

@@ -7,9 +7,10 @@ import Foundation
 /// extension's process without ever opening the app — the whole point of
 /// this feature — so it has to do everything `TimerEngine.start()` does
 /// itself: write `AppSettings` directly (via the shared App Group store,
-/// see `SharedModelContainer`), schedule the hatch notification, and update
-/// the widget's own `WidgetSnapshot` so the countdown appears immediately
-/// rather than waiting for the app to next run `refreshWidgetSnapshot()`.
+/// see `SharedModelContainer`), schedule the hatch notification, start the
+/// Lock Screen/Dynamic Island Live Activity, and update the widget's own
+/// `WidgetSnapshot` so the countdown appears immediately rather than
+/// waiting for the app to next run `refreshWidgetSnapshot()`.
 struct StartTimerIntent: AppIntent {
     static var title: LocalizedStringResource = "Start Dino Timer"
     static var description = IntentDescription("Starts a Dino Hatch timer without opening the app.")
@@ -51,6 +52,7 @@ struct StartTimerIntent: AppIntent {
         try context.save()
 
         TimerNotificationScheduler.scheduleHatchNotification(at: end)
+        DinoTimerActivityController.start(endDate: end, dinosaurEmoji: dinosaur.emoji)
 
         var snapshot = WidgetSnapshotStore.load() ?? .empty
         snapshot.activeTimerEndDate = end

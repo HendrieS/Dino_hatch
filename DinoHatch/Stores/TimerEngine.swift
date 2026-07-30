@@ -45,6 +45,8 @@ final class TimerEngine {
         pendingDinosaurID = dinosaurID
 
         TimerNotificationScheduler.scheduleHatchNotification(at: end)
+        let dinosaurEmoji = DinosaurCatalog.all.first { $0.id == dinosaurID }?.emoji
+        DinoTimerActivityController.start(endDate: end, dinosaurEmoji: dinosaurEmoji)
     }
 
     func cancel() {
@@ -58,6 +60,7 @@ final class TimerEngine {
         pendingDinosaurID = nil
 
         TimerNotificationScheduler.cancelHatchNotification()
+        DinoTimerActivityController.end()
     }
 
     /// Same as `cancel()`, named separately so call sites read as "the hatch

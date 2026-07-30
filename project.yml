@@ -23,6 +23,7 @@ targets:
       properties:
         UILaunchScreen: {}
         UIUserInterfaceStyle: Light
+        NSSupportsLiveActivities: true
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
           - UIInterfaceOrientationLandscapeLeft
