@@ -597,3 +597,18 @@ verify on your Mac:
 - [ ] Set an alarm, then wait more than 15 minutes before opening the app —
       confirm no dinosaur is awarded (window missed)
 - [ ] `Cmd+U` unit tests pass
+
+## Before you release
+
+Steps that only make sense once, right before shipping to the App Store —
+not needed for day-to-day development:
+
+- [ ] Sign Apple's Paid Applications Agreement in App Store Connect
+      (required for any In-App Purchase, even though Dino Hatch itself
+      stays free) — see [Supporting the app](#supporting-the-app)
+- [ ] Create the four supporter IAP products in App Store Connect with real
+      pricing and localized display names, matching
+      `com.dinohatchtimer.app.support.{gray,green,gold,purple}` exactly
+- [ ] Test a real (sandbox) purchase and Restore Purchases on a physical
+      device via TestFlight, not just the local `Products.storekit`
+      Simulator config
