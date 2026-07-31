@@ -65,7 +65,7 @@ struct DinoHatchQuickTimerWidgetView: View {
 
     private var header: some View {
         HStack(spacing: 6) {
-            Image("egg-hatch-1")
+            Image("egg-hatch-1-widget")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 20, height: 20)

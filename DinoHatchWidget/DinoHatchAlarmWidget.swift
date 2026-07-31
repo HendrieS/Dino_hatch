@@ -34,7 +34,7 @@ struct DinoHatchAlarmWidgetView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             HStack(spacing: 6) {
-                Image("alarm-egg")
+                Image("alarm-egg-widget")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 22, height: 22)

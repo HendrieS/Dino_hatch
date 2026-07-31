@@ -55,7 +55,7 @@ struct DinoHatchCollectionWidgetView: View {
 
     private var smallView: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Image("egg-hatch-1")
+            Image("egg-hatch-1-widget")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 32, height: 32)
