@@ -41,8 +41,12 @@ struct HelpCenterView: View {
                 Text("Every dinosaur has a rarity — Common, Uncommon, Rare, or Secret Rare — shown as a colored border and star count on its card, like a trading card. This is just for fun and doesn't change the odds: every not-yet-hatched dinosaur has an equal chance of being the next one, regardless of rarity. Secret Rare is reserved for the collection's four hidden dinosaurs, which only become hatchable after every other dinosaur has been found.")
             }
 
-            Section("App icons") {
-                Text("Settings → App Icon lets you change the Home Screen icon. The default is always available; each of the four dinosaur icons unlocks once you've hatched that specific dinosaur — Tyrannosaurus Rex, Triceratops, and Pteranodon are regular hatches, while the fourth, Patagotitan, is one of the collection's secret dinosaurs, so it only unlocks after every other dinosaur has been hatched first.")
+            Section {
+                Text("Settings → App Icon lets you change the Home Screen icon. The default is always available; each of the six dinosaur icons unlocks once you've hatched that specific dinosaur — Tyrannosaurus Rex, Triceratops, Pteranodon, Velociraptor, and Spinosaurus are regular hatches, while the sixth, Patagotitan, is one of the collection's secret dinosaurs, so it only unlocks after every other dinosaur has been hatched first.")
+            } header: {
+                Text("App icons")
+            } footer: {
+                Text("The Velociraptor and Spinosaurus icons were illustrated by Alexis.")
             }
 
             Section("Managing this data") {

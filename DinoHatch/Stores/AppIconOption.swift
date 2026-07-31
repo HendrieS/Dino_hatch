@@ -7,7 +7,8 @@ import UIKit
 /// must match both the `.appiconset` name in `Assets.xcassets` and an
 /// entry in project.yml's `ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES`.
 enum AppIconOption: CaseIterable, Identifiable {
-    case trex, triceratops, pteranodon, patagotitan
+    /// `velociraptor` and `spinosaurus` were illustrated by Alexis.
+    case trex, triceratops, pteranodon, patagotitan, velociraptor, spinosaurus
 
     var id: String { assetName }
 
@@ -17,6 +18,8 @@ enum AppIconOption: CaseIterable, Identifiable {
         case .triceratops: "icon-triceratops"
         case .pteranodon: "icon-pteranodon"
         case .patagotitan: "icon-patagotitan"
+        case .velociraptor: "icon-velociraptor"
+        case .spinosaurus: "icon-spinosaurus"
         }
     }
 
@@ -35,6 +38,8 @@ enum AppIconOption: CaseIterable, Identifiable {
         case .triceratops: "triceratops"
         case .pteranodon: "pteranodon"
         case .patagotitan: "patagotitan"
+        case .velociraptor: "velociraptor"
+        case .spinosaurus: "spinosaurus"
         }
     }
 

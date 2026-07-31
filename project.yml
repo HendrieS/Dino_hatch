@@ -52,7 +52,7 @@ targets:
         TARGETED_DEVICE_FAMILY: "1,2"
         ENABLE_PREVIEWS: YES
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
-        ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES: "icon-trex icon-triceratops icon-pteranodon icon-patagotitan"
+        ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES: "icon-trex icon-triceratops icon-pteranodon icon-patagotitan icon-velociraptor icon-spinosaurus"
     dependencies:
       - target: DinoHatchWidget
         embed: true
