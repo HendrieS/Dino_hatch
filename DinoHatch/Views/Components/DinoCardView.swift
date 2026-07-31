@@ -16,6 +16,10 @@ struct DinoCardView: View {
         .padding()
         .background(Color.dinoCardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 16))
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .strokeBorder(dinosaur.rarity.tint, lineWidth: 2)
+        )
     }
 }
 
