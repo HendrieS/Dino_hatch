@@ -6834,6 +6834,47 @@
         }
       }
     },
+    "Thank you so much for supporting Dino Hatch! Your kindness means a lot to our small team.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vielen herzlichen Dank, dass du Dino Hatch unterstützt! Deine Großzügigkeit bedeutet unserem kleinen Team sehr viel."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thank you so much for supporting Dino Hatch! Your kindness means a lot to our small team."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Muchísimas gracias por apoyar a Dino Hatch! Tu generosidad significa mucho para nuestro pequeño equipo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un grand merci de soutenir Dino Hatch ! Votre générosité compte énormément pour notre petite équipe."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heel erg bedankt voor het steunen van Dino Hatch! Jouw vriendelijkheid betekent veel voor ons kleine team."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Большое спасибо за поддержку Dino Hatch! Ваша доброта очень много значит для нашей небольшой команды."
+          }
+        }
+      }
+    },
     "Thank you!": {
       "extractionState": "manual",
       "localizations": {

@@ -433,6 +433,12 @@ the corner of the main screens (`Views/Components/SupporterBadgeView.swift`)
   ownership and `Restore Purchases`, so there's no custom purchase ledger to
   get wrong. A parent can "upgrade" later by buying a higher tier's product;
   `SupportUsView` always shows whichever owned tier ranks highest.
+- **The badge is never a path to StoreKit.** `SupporterBadgeView` is
+  reachable from the Timer/Alarm/Collection tabs, which a child can tap
+  unsupervised, so tapping it opens `SupporterThankYouView` — a pure
+  thank-you message with no purchase UI at all — rather than
+  `SupportUsView`. The only way to reach the actual purchase flow is
+  Settings → Support Dino Hatch, behind `ParentalGateView`'s math check.
 - **`Stores/SupporterStore.swift`** wraps StoreKit 2: loads the four
   `Product`s, handles `purchase(_:)`, and rebuilds the owned tier from
   `Transaction.currentEntitlements` (both on launch and whenever
