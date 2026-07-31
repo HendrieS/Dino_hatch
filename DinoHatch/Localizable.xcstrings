@@ -1637,6 +1637,47 @@
         }
       }
     },
+    "Default": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Standard"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Default"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Predeterminado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Par défaut"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Standaard"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "По умолчанию"
+          }
+        }
+      }
+    },
     "Default icon": {
       "extractionState": "manual",
       "localizations": {
@@ -3112,43 +3153,248 @@
         }
       }
     },
-    "Hatch a dinosaur to unlock its icon.": {
+    "Hatch 10 dinosaurs to unlock": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Lass einen Dinosaurier schlüpfen, um sein Symbol freizuschalten."
+            "value": "Schlüpfe 10 Dinosaurier, um freizuschalten"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hatch a dinosaur to unlock its icon."
+            "value": "Hatch 10 dinosaurs to unlock"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Incuba un dinosaurio para desbloquear su icono."
+            "value": "Eclosiona 10 dinosaurios para desbloquear"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fais éclore un dinosaure pour débloquer son icône."
+            "value": "Faites éclore 10 dinosaures pour débloquer"
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Laat een dinosaurus uitkomen om zijn icoon te ontgrendelen."
+            "value": "Broed 10 dinosaurussen uit om te ontgrendelen"
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "Вылупи динозавра, чтобы открыть его значок."
+            "value": "Вылупите 10 динозавров, чтобы открыть"
+          }
+        }
+      }
+    },
+    "Hatch 5 dinosaurs to unlock": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schlüpfe 5 Dinosaurier, um freizuschalten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hatch 5 dinosaurs to unlock"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eclosiona 5 dinosaurios para desbloquear"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faites éclore 5 dinosaures pour débloquer"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Broed 5 dinosaurussen uit om te ontgrendelen"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вылупите 5 динозавров, чтобы открыть"
+          }
+        }
+      }
+    },
+    "Hatch a Pteranodon to unlock": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schlüpfe einen Pteranodon, um freizuschalten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hatch a Pteranodon to unlock"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eclosiona un Pteranodon para desbloquear"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faites éclore un Ptéranodon pour débloquer"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Broed een Pteranodon uit om te ontgrendelen"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вылупите Pteranodon, чтобы открыть"
+          }
+        }
+      }
+    },
+    "Hatch a Triceratops to unlock": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schlüpfe einen Triceratops, um freizuschalten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hatch a Triceratops to unlock"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eclosiona un Triceratops para desbloquear"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faites éclore un Triceratops pour débloquer"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Broed een Triceratops uit om te ontgrendelen"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вылупите Triceratops, чтобы открыть"
+          }
+        }
+      }
+    },
+    "Hatch a Tyrannosaurus Rex to unlock": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schlüpfe einen Tyrannosaurus Rex, um freizuschalten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hatch a Tyrannosaurus Rex to unlock"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eclosiona un Tyrannosaurus Rex para desbloquear"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faites éclore un Tyrannosaurus Rex pour débloquer"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Broed een Tyrannosaurus Rex uit om te ontgrendelen"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вылупите Tyrannosaurus Rex, чтобы открыть"
+          }
+        }
+      }
+    },
+    "Hatch every other dinosaur to unlock this secret icon": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schlüpfe alle anderen Dinosaurier, um dieses geheime Symbol freizuschalten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hatch every other dinosaur to unlock this secret icon"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eclosiona todos los demás dinosaurios para desbloquear este icono secreto"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faites éclore tous les autres dinosaures pour débloquer cette icône secrète"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Broed alle andere dinosaurussen uit om dit geheime icoon te ontgrendelen"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вылупите всех остальных динозавров, чтобы открыть этот секретный значок"
           }
         }
       }
@@ -3516,6 +3762,47 @@
           "stringUnit": {
             "state": "translated",
             "value": "У игуанодона на каждой руке был острый шип на большом пальце — возможно, для защиты или поиска еды!"
+          }
+        }
+      }
+    },
+    "Illustrated by Alexis": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Illustriert von Alexis"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Illustrated by Alexis"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ilustrado por Alexis"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Illustré par Alexis"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geïllustreerd door Alexis"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Иллюстрация: Alexis"
           }
         }
       }

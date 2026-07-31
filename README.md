@@ -173,16 +173,22 @@ Then in Xcode:
   `rare` tier (3 stars, gold), so they stand apart once unlocked instead
   of blending into the rest of the rare pool.
 - **Alternate app icons**: `Views/SettingsView.swift` has an "App Icon"
-  section (`Components/AppIconPicker.swift`) offering the default icon
-  plus one per `AppIconOption` (T. Rex, Triceratops, Pteranodon,
-  Patagotitan, plus two illustrated by Alexis: a brown dino and a green
-  dino), each gated behind an `AppIconOption.UnlockRequirement`
-  (`AppIconOption.isUnlocked`) — shown dimmed with a lock badge rather
-  than hidden, so it doubles as a small collection goal. Four use
-  `.hatch(dinosaurID:)` (locked behind hatching that specific dinosaur);
-  the brown and green dino icons instead use `.collectionSize(_:)` —
-  unlocked once 5 and 10 dinosaurs (any species) have been hatched in
-  total, rather than one particular one. Picking an icon calls
+  section (`Components/AppIconPicker.swift`) — a native-styled list (icon,
+  name, and an unlock hint or art credit as a subtitle, a checkmark on the
+  selected row) rather than a bare row of thumbnails, so the unlock
+  condition is visible up front. Offers the default icon plus one per
+  `AppIconOption` (T. Rex, Triceratops, Pteranodon, Patagotitan, plus two
+  illustrated by Alexis: a brown dino and a green dino), each gated behind
+  an `AppIconOption.UnlockRequirement` (`AppIconOption.isUnlocked`) — shown
+  dimmed with a lock badge rather than hidden, so it doubles as a small
+  collection goal. Four use `.hatch(dinosaurID:)` (locked behind hatching
+  that specific dinosaur); the brown and green dino icons instead use
+  `.collectionSize(_:)` — unlocked once 5 and 10 dinosaurs (any species)
+  have been hatched in total, rather than one particular one.
+  `AppIconOption.pickerTitle`/`pickerSubtitle` supply the row text, and
+  deliberately don't name Patagotitan (a secret dinosaur) in its locked
+  hint — same "no UI hints it exists" rule the Collection grid follows,
+  showing "???" until it's actually unlocked. Picking an icon calls
   `AppIconOption.apply`, a thin wrapper around
   `UIApplication.setAlternateIconName`. The alternates are declared as
   ordinary single-size `.appiconset` entries in `Assets.xcassets` plus

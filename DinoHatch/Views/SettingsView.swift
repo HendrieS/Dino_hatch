@@ -28,13 +28,8 @@ struct SettingsView: View {
 
                 Section {
                     AppIconPicker(unlockedIDs: Set(unlocked.map(\.dinosaurID)))
-                        .listRowInsets(EdgeInsets())
-                        .padding(.horizontal)
-                        .padding(.vertical, 8)
                 } header: {
                     Text("App Icon")
-                } footer: {
-                    Text("Hatch a dinosaur to unlock its icon.")
                 }
 
                 Section {

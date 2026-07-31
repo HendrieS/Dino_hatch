@@ -1,77 +1,124 @@
 import SwiftUI
 
-/// Row of tappable Home Screen icon choices — the default plus one per
-/// `AppIconOption`, each locked behind having hatched that dinosaur. Mirrors
-/// `CollectionView`'s locked/unlocked treatment (dimmed + a lock badge)
-/// rather than hiding locked choices outright, since seeing what's still to
-/// unlock is part of the reward.
+/// List of tappable Home Screen icon choices — the default plus one row per
+/// `AppIconOption` — styled like a native list (icon, name, an unlock hint
+/// or art credit as a subtitle, a checkmark on the selected row) rather
+/// than a bare row of thumbnails, so the unlock condition is visible
+/// without having to guess from a dimmed icon alone. Locked rows are shown
+/// dimmed with a lock badge rather than hidden, since seeing what's still
+/// to unlock is part of the reward — `AppIconOption.pickerTitle`/
+/// `pickerSubtitle` are responsible for not naming a locked secret
+/// dinosaur (Patagotitan) in that hint.
+///
+/// `body` is a bare `ForEach`/`Group` rather than a `List` of its own —
+/// this view is meant to be placed directly inside the caller's `Form`
+/// `Section` (see `SettingsView`), so each row gets that Section's native
+/// row insets and separators instead of nesting a second scroll surface.
 struct AppIconPicker: View {
     let unlockedIDs: Set<String>
 
     @State private var selected: AppIconOption?
 
-    private let thumbnailSize: CGFloat = 56
+    private let thumbnailSize: CGFloat = 52
 
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 14) {
-                defaultThumbnail
-                ForEach(AppIconOption.allCases) { option in
-                    thumbnail(for: option)
-                }
+        Group {
+            defaultRow
+            ForEach(AppIconOption.allCases) { option in
+                row(for: option)
             }
-            .padding(.vertical, 4)
         }
         .onAppear { selected = AppIconOption.current }
     }
 
-    private var defaultThumbnail: some View {
+    private var defaultRow: some View {
         Button {
             select(nil)
         } label: {
-            Image("app-icon-thumb")
-                .resizable()
-                .scaledToFit()
-                .frame(width: thumbnailSize, height: thumbnailSize)
-                .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-                .overlay(selectionRing(isSelected: selected == nil))
+            HStack(spacing: 14) {
+                Image("app-icon-thumb")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: thumbnailSize, height: thumbnailSize)
+                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+
+                Text("Default")
+                    .foregroundStyle(.primary)
+
+                Spacer()
+
+                if selected == nil {
+                    checkmark
+                }
+            }
+            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .accessibilityLabel(Text("Default icon"))
         .accessibilityAddTraits(selected == nil ? .isSelected : [])
     }
 
-    private func thumbnail(for option: AppIconOption) -> some View {
+    private func row(for option: AppIconOption) -> some View {
         let isUnlocked = AppIconOption.isUnlocked(option, unlockedIDs: unlockedIDs)
         return Button {
             select(option)
         } label: {
-            Image(option.thumbnailAssetName)
-                .resizable()
-                .scaledToFit()
-                .frame(width: thumbnailSize, height: thumbnailSize)
-                .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-                .overlay(selectionRing(isSelected: selected == option))
-                .overlay {
-                    if !isUnlocked {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                .fill(.black.opacity(0.55))
-                            Image(systemName: "lock.fill")
-                                .foregroundStyle(.white)
-                        }
+            HStack(spacing: 14) {
+                thumbnail(for: option, isUnlocked: isUnlocked)
+
+                VStack(alignment: .leading, spacing: 2) {
+                    option.pickerTitle(isUnlocked: isUnlocked)
+                        .foregroundStyle(.primary)
+                    if let subtitle = option.pickerSubtitle(isUnlocked: isUnlocked) {
+                        subtitle
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
                     }
                 }
+
+                Spacer()
+
+                if isUnlocked {
+                    if selected == option {
+                        checkmark
+                    }
+                } else {
+                    Image(systemName: "lock.fill")
+                        .foregroundStyle(.secondary)
+                }
+            }
+            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .disabled(!isUnlocked)
-        .accessibilityLabel(isUnlocked ? option.displayLabel : Text("Locked"))
+        .accessibilityLabel(accessibilityLabel(for: option, isUnlocked: isUnlocked))
         .accessibilityAddTraits(selected == option ? .isSelected : [])
     }
 
-    private func selectionRing(isSelected: Bool) -> some View {
-        RoundedRectangle(cornerRadius: 12, style: .continuous)
-            .stroke(isSelected ? Color.dinoGreen : .clear, lineWidth: 3)
+    private func thumbnail(for option: AppIconOption, isUnlocked: Bool) -> some View {
+        Image(option.thumbnailAssetName)
+            .resizable()
+            .scaledToFit()
+            .frame(width: thumbnailSize, height: thumbnailSize)
+            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .overlay {
+                if !isUnlocked {
+                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        .fill(.black.opacity(0.55))
+                }
+            }
+    }
+
+    private var checkmark: some View {
+        Image(systemName: "checkmark")
+            .font(.body.bold())
+            .foregroundStyle(Color.dinoGreen)
+    }
+
+    private func accessibilityLabel(for option: AppIconOption, isUnlocked: Bool) -> Text {
+        let title = option.pickerTitle(isUnlocked: isUnlocked)
+        guard let subtitle = option.pickerSubtitle(isUnlocked: isUnlocked) else { return title }
+        return title + Text(verbatim: ". ") + subtitle
     }
 
     private func select(_ option: AppIconOption?) {
@@ -81,6 +128,9 @@ struct AppIconPicker: View {
 }
 
 #Preview {
-    AppIconPicker(unlockedIDs: ["t-rex", "triceratops"])
-        .padding()
+    Form {
+        Section("App Icon") {
+            AppIconPicker(unlockedIDs: ["t-rex", "triceratops"])
+        }
+    }
 }

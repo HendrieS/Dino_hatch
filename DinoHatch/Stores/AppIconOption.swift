@@ -72,6 +72,44 @@ enum AppIconOption: CaseIterable, Identifiable {
         }
     }
 
+    /// Title shown in `AppIconPicker`'s list — same as `displayLabel`,
+    /// except a locked Patagotitan (a secret dinosaur) shows "???" instead
+    /// of giving away its name, matching the Collection grid's silhouette
+    /// treatment for secret dinosaurs (no UI hints they exist before
+    /// they're unlocked). If more secret-dinosaur-gated icons are added
+    /// later, they'll need the same case added here.
+    func pickerTitle(isUnlocked: Bool) -> Text {
+        if !isUnlocked, self == .patagotitan {
+            return Text("???")
+        }
+        return displayLabel
+    }
+
+    /// Subtitle shown under the title: the unlock hint while locked (never
+    /// naming the secret dinosaur for `.patagotitan`), or an art credit
+    /// once unlocked (nil for options with no credited illustrator). Fixed
+    /// per-case strings rather than a template built from the catalog
+    /// name, so every sentence stays fully formed for localization instead
+    /// of relying on runtime string interpolation.
+    func pickerSubtitle(isUnlocked: Bool) -> Text? {
+        guard !isUnlocked else { return credit }
+        switch self {
+        case .trex: return Text("Hatch a Tyrannosaurus Rex to unlock")
+        case .triceratops: return Text("Hatch a Triceratops to unlock")
+        case .pteranodon: return Text("Hatch a Pteranodon to unlock")
+        case .patagotitan: return Text("Hatch every other dinosaur to unlock this secret icon")
+        case .velociraptor: return Text("Hatch 5 dinosaurs to unlock")
+        case .spinosaurus: return Text("Hatch 10 dinosaurs to unlock")
+        }
+    }
+
+    private var credit: Text? {
+        switch self {
+        case .velociraptor, .spinosaurus: Text("Illustrated by Alexis")
+        default: nil
+        }
+    }
+
     static func isUnlocked(_ option: AppIconOption, unlockedIDs: Set<String>) -> Bool {
         switch option.unlockRequirement {
         case .hatch(let dinosaurID):
