@@ -51,6 +51,17 @@ struct ParentalGateView: View {
                         .background(Color.dinoCardBackground, in: RoundedRectangle(cornerRadius: 14))
                         .focused($isFocused)
                         .onSubmit(check)
+                        .onChange(of: answer) { _, newValue in
+                            // Auto-checks once enough digits are typed to
+                            // match the correct answer's length, so solving
+                            // it doesn't require an explicit submit action
+                            // (Enter or tapping Check) at all — matches
+                            // partial input length only, not value, so
+                            // typing the first digit of a two-digit answer
+                            // doesn't prematurely fail it.
+                            guard newValue.count == String(factorA * factorB).count else { return }
+                            check()
+                        }
 
                     Text("Try again")
                         .font(.footnote.bold())
