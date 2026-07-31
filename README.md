@@ -16,6 +16,11 @@ art and a hand-rolled (no external library) hatch animation. See
   ```
   brew install xcodegen
   ```
+- A paid Apple Developer Program membership ($99/year). The project has
+  iCloud/CloudKit sync enabled by default (see
+  [iCloud sync](#icloud-sync) below) — personal/free teams can't provision
+  the iCloud capability at all, so the build won't sign without one. If you
+  don't have one, see that section for the two-line revert to local-only.
 
 ## Getting started
 
@@ -27,24 +32,24 @@ open DinoHatch.xcodeproj
 Then in Xcode:
 
 1. Select the `DinoHatch` target → **Signing & Capabilities** → set your
-   Team, then repeat for the `DinoHatchWidget` target. Xcode will offer to
-   fix the bundle identifiers / provisioning automatically — you can also
-   change `PRODUCT_BUNDLE_IDENTIFIER` in `project.yml` (search for
+   (paid) Team, then repeat for the `DinoHatchWidget` target. Xcode will
+   offer to fix the bundle identifiers / provisioning automatically — you
+   can also change `PRODUCT_BUNDLE_IDENTIFIER` in `project.yml` (search for
    `com.dinohatch.app`), then re-run `xcodegen generate`. Both targets share
    the `group.com.dinohatch.app` App Group (see
-   [Home Screen widget](#home-screen-widget) below) — it now backs the
-   app's actual SwiftData store, not just widget data, so the app won't
-   launch at all without it — with automatic signing this should provision
-   itself, but if Xcode complains, add the **App Groups** capability
-   manually on each target and confirm the same group is checked on both.
-2. Build and run (`Cmd+R`) on an iPhone or iPad simulator.
+   [Home Screen widget](#home-screen-widget) below) — it backs the app's
+   actual SwiftData store, not just widget data, so the app won't launch at
+   all without it — and the `iCloud.com.dinohatch.app` container (see
+   [iCloud sync](#icloud-sync) below). With automatic signing both should
+   provision themselves; if Xcode complains, add the **App Groups** and
+   **iCloud** (with **CloudKit** checked) capabilities manually on each
+   target and confirm the same group/container are checked on both.
+2. Build and run (`Cmd+R`) on an iPhone or iPad simulator. Sign into iCloud
+   on the simulator/device (Settings → sign in) to actually exercise sync —
+   the app works fine without it, it just stays local-only on that device.
 3. Run the unit tests with `Cmd+U`.
 4. To see the widget, long-press the Home Screen → **Edit Home Screen** →
    **+** → search "Dino Hatch" → add it.
-
-Persistence is **local-only for this alpha** (plain SwiftData, no iCloud) —
-see [Re-enabling iCloud sync](#re-enabling-icloud-sync-optional) below if you
-have a paid Apple Developer account and want cross-device sync.
 
 ## How it works
 
@@ -436,33 +441,42 @@ as usual, then add a matching entry (with all six languages) to
 English source string, so the app won't break if a translation is missing,
 it'll just show English for that string.
 
-## Re-enabling iCloud sync (optional)
+## iCloud sync
 
-Apple doesn't allow the iCloud capability on personal/free developer teams —
-Xcode will show "Cannot create a iOS App Development provisioning profile...
-Personal development teams... do not support the iCloud capability" if you
-try. If you enroll in the paid Apple Developer Program ($99/year) and want
-the collection to sync across a kid's devices:
+The collection, timer, and alarm settings sync across a kid's devices via
+CloudKit — `DinoHatchShared/SharedModelContainer.swift` passes
+`cloudKitDatabase: .automatic` to the shared `ModelConfiguration`, and both
+the `DinoHatch` and `DinoHatchWidget` targets carry identical
+`com.apple.developer.icloud-container-identifiers`/`-services` entitlements
+(alongside the `com.apple.security.application-groups` entitlement they
+already needed — see [Home Screen widget](#home-screen-widget) — both
+targets need matching entitlements since the widget's `StartTimerIntent`
+opens the same CloudKit-mirrored store directly).
 
-1. In `project.yml`, add the iCloud keys to the `DinoHatch` target's
-   existing `entitlements` block (alongside `com.apple.security.
-   application-groups`, which stays — the Quick Timer widget's
-   `StartTimerIntent` still needs it):
-   ```yaml
-   entitlements:
-     path: DinoHatch/DinoHatch.entitlements
-     properties:
-       com.apple.security.application-groups:
-         - group.com.dinohatch.app
-       com.apple.developer.icloud-container-identifiers:
-         - iCloud.com.dinohatch.app
-       com.apple.developer.icloud-services:
-         - CloudKit
-   ```
-2. In `DinoHatchShared/SharedModelContainer.swift`, pass
-   `cloudKitDatabase: .automatic` to the `ModelConfiguration` call.
-3. Run `xcodegen generate`, select your paid Team under **Signing &
-   Capabilities**, and sign into iCloud on the Simulator/device to test sync.
+This requires a paid Apple Developer Program membership — Apple doesn't
+allow the iCloud capability on personal/free teams at all (Xcode shows
+"Cannot create an iOS App Development provisioning profile... Personal
+development teams... do not support the iCloud capability" and refuses to
+sign). It degrades gracefully at *runtime* with no code changes if iCloud
+just isn't available on a given device (not signed in, sync disabled in
+Settings) — the app stays local-only on that device rather than failing.
+The *build-time* provisioning requirement is the hard blocker, not runtime
+availability.
+
+The SwiftData models (`AppSettings`, `UnlockedDinosaur`, `AlarmSettings`)
+were written CloudKit-compatible from the start — no `@Attribute(.unique)`
+constraints, every stored property either optional or defaulted, no
+relationships between them — so no model changes were needed to turn this
+on.
+
+**If you're on a personal/free team** and want to build this without a paid
+membership, revert to local-only:
+
+1. Remove the `com.apple.developer.icloud-container-identifiers`/
+   `com.apple.developer.icloud-services` entries from both targets'
+   `entitlements` blocks in `project.yml` (and re-run `xcodegen generate`).
+2. In `DinoHatchShared/SharedModelContainer.swift`, drop the
+   `cloudKitDatabase: .automatic` argument (or set it to `.none`).
 
 ## Known alpha limitations
 

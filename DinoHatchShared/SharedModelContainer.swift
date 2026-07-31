@@ -11,6 +11,15 @@ import SwiftData
 /// store file. Both targets must declare the identical `Schema` (all three
 /// model types, even ones a given process never touches) or SwiftData
 /// rejects the store as incompatible.
+///
+/// `cloudKitDatabase: .automatic` syncs the collection/timer/alarm state
+/// across a kid's devices via the `iCloud.com.dinohatch.app` container
+/// (entitled identically on both targets, same reasoning as the App Group
+/// above). This needs a paid Apple Developer Program membership — personal/
+/// free teams can't provision the iCloud capability at all. It degrades
+/// gracefully with no code change if iCloud isn't available on the device
+/// (not signed in, sync disabled) — the app just stays local-only for that
+/// device, same as before this was enabled.
 enum SharedModelContainer {
     static func make() -> ModelContainer {
         let schema = Schema([UnlockedDinosaur.self, AppSettings.self, AlarmSettings.self])
@@ -18,7 +27,7 @@ enum SharedModelContainer {
             fatalError("App Group container unavailable — check the \(WidgetSnapshotStore.appGroupID) entitlement")
         }
         let storeURL = groupURL.appendingPathComponent("DinoHatch.sqlite")
-        let config = ModelConfiguration(schema: schema, url: storeURL)
+        let config = ModelConfiguration(schema: schema, url: storeURL, cloudKitDatabase: .automatic)
         do {
             return try ModelContainer(for: schema, configurations: [config])
         } catch {
