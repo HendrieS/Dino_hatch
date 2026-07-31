@@ -33,8 +33,16 @@ struct HelpCenterView: View {
                 Text("Tap any hatched dinosaur to read kid-friendly facts about it. Press and hold to see an X-ray view — this unlocks after the first hatch for children 5 and under, or after two hatches for children 6 and up.")
             }
 
+            Section("App icons") {
+                Text("Settings → App Icon lets you change the Home Screen icon. The default is always available; each of the four dinosaur icons unlocks once you've hatched that specific dinosaur — Tyrannosaurus Rex, Triceratops, and Pteranodon are regular hatches, while the fourth, Patagotitan, is one of the collection's secret dinosaurs, so it only unlocks after every other dinosaur has been hatched first.")
+            }
+
             Section("Managing this data") {
                 Text("You can change the age or erase everything (collection, timer, and alarm settings) from Settings at any time. A quick math question keeps small children from getting into Settings by accident.")
+            }
+
+            Section("Supporting Dino Hatch") {
+                Text("Settings → Support Dino Hatch offers an optional one-time purchase, in four tiers, for families who'd like to support development. It never unlocks anything in the game — it only adds a small heart-shaped badge (colored gray, green, gold, or purple depending on the tier) shown in the corner of the main screens and Home Screen widgets. Dino Hatch stays completely free either way.")
             }
 
             Section("Why no dark mode?") {

@@ -655,6 +655,47 @@
         }
       }
     },
+    "App icons": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App-Icons"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App icons"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Iconos de la app"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Icônes de l'app"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App-iconen"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Значки приложения"
+          }
+        }
+      }
+    },
     "Are you sure?": {
       "extractionState": "manual",
       "localizations": {
@@ -5646,6 +5687,88 @@
         }
       }
     },
+    "Settings → App Icon lets you change the Home Screen icon. The default is always available; each of the four dinosaur icons unlocks once you've hatched that specific dinosaur — Tyrannosaurus Rex, Triceratops, and Pteranodon are regular hatches, while the fourth, Patagotitan, is one of the collection's secret dinosaurs, so it only unlocks after every other dinosaur has been hatched first.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unter Einstellungen → App-Icon kannst du das Home-Bildschirm-Symbol ändern. Das Standardsymbol ist immer verfügbar; jedes der vier Dinosaurier-Symbole wird freigeschaltet, sobald du genau diesen Dinosaurier geschlüpft hast — Tyrannosaurus Rex, Triceratops und Pteranodon sind normale Schlüpfvorgänge, während das vierte, Patagotitan, einer der geheimen Dinosaurier der Sammlung ist und sich erst freischaltet, nachdem alle anderen Dinosaurier geschlüpft sind."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings → App Icon lets you change the Home Screen icon. The default is always available; each of the four dinosaur icons unlocks once you've hatched that specific dinosaur — Tyrannosaurus Rex, Triceratops, and Pteranodon are regular hatches, while the fourth, Patagotitan, is one of the collection's secret dinosaurs, so it only unlocks after every other dinosaur has been hatched first."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En Ajustes → Icono de la app puedes cambiar el icono de la pantalla de inicio. El icono predeterminado siempre está disponible; cada uno de los cuatro iconos de dinosaurio se desbloquea al eclosionar ese dinosaurio en concreto — Tyrannosaurus Rex, Triceratops y Pteranodon son eclosiones normales, mientras que el cuarto, Patagotitan, es uno de los dinosaurios secretos de la colección, por lo que solo se desbloquea después de haber eclosionado todos los demás dinosaurios."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réglages → Icône de l'app permet de changer l'icône de l'écran d'accueil. L'icône par défaut est toujours disponible ; chacune des quatre icônes de dinosaure se débloque une fois que vous avez fait éclore ce dinosaure précis — Tyrannosaurus Rex, Triceratops et Ptéranodon sont des éclosions classiques, tandis que la quatrième, Patagotitan, est l'un des dinosaures secrets de la collection et ne se débloque qu'une fois tous les autres dinosaures éclos."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instellingen → App-icoon laat je het beginschermpictogram wijzigen. Het standaardicoon is altijd beschikbaar; elk van de vier dino-iconen wordt ontgrendeld zodra je die specifieke dinosaurus hebt uitgebroed — Tyrannosaurus Rex, Triceratops en Pteranodon zijn gewone uitbroedingen, terwijl de vierde, Patagotitan, een van de geheime dinosaurussen van de collectie is en pas ontgrendelt nadat alle andere dinosaurussen zijn uitgebroed."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "В разделе Настройки → Значок приложения можно изменить значок на главном экране. Значок по умолчанию доступен всегда; каждый из четырёх значков с динозаврами открывается после того, как вылупится именно этот динозавр — Tyrannosaurus Rex, Triceratops и Pteranodon вылупляются обычным образом, а четвёртый, Patagotitan, — один из секретных динозавров коллекции, поэтому он открывается только после того, как вылупятся все остальные динозавры."
+          }
+        }
+      }
+    },
+    "Settings → Support Dino Hatch offers an optional one-time purchase, in four tiers, for families who'd like to support development. It never unlocks anything in the game — it only adds a small heart-shaped badge (colored gray, green, gold, or purple depending on the tier) shown in the corner of the main screens and Home Screen widgets. Dino Hatch stays completely free either way.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unter Einstellungen → Dino Hatch unterstützen gibt es einen optionalen einmaligen Kauf in vier Stufen für Familien, die die Entwicklung unterstützen möchten. Dadurch wird nie etwas im Spiel freigeschaltet — es fügt lediglich ein kleines herzförmiges Abzeichen hinzu (je nach Stufe grau, grün, gold oder violett), das in der Ecke der Hauptbildschirme und der Home-Bildschirm-Widgets angezeigt wird. Dino Hatch bleibt so oder so vollständig kostenlos."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings → Support Dino Hatch offers an optional one-time purchase, in four tiers, for families who'd like to support development. It never unlocks anything in the game — it only adds a small heart-shaped badge (colored gray, green, gold, or purple depending on the tier) shown in the corner of the main screens and Home Screen widgets. Dino Hatch stays completely free either way."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En Ajustes → Apoyar a Dino Hatch encontrarás una compra única opcional, en cuatro niveles, para las familias que quieran apoyar el desarrollo. Nunca desbloquea nada dentro del juego — solo añade una pequeña insignia con forma de corazón (de color gris, verde, dorado o morado según el nivel) que se muestra en la esquina de las pantallas principales y de los widgets de la pantalla de inicio. Dino Hatch sigue siendo completamente gratis de todos modos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réglages → Soutenir Dino Hatch propose un achat unique facultatif, en quatre niveaux, pour les familles qui souhaitent soutenir le développement. Cela ne débloque jamais rien dans le jeu — cela ajoute seulement un petit badge en forme de cœur (gris, vert, or ou violet selon le niveau) affiché dans un coin des écrans principaux et des widgets de l'écran d'accueil. Dino Hatch reste de toute façon entièrement gratuit."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instellingen → Dino Hatch steunen biedt een optionele eenmalige aankoop, in vier niveaus, voor gezinnen die de ontwikkeling willen steunen. Dit ontgrendelt nooit iets in het spel — het voegt alleen een klein hartvormig insigne toe (grijs, groen, goud of paars, afhankelijk van het niveau) dat in de hoek van de hoofdschermen en de beginschermwidgets wordt getoond. Dino Hatch blijft hoe dan ook volledig gratis."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "В разделе Настройки → Поддержать Dino Hatch можно сделать необязательную разовую покупку одного из четырёх уровней — для семей, которые хотят поддержать разработку. Это никогда не открывает ничего в самой игре — только добавляет маленький значок в форме сердца (серый, зелёный, золотой или фиолетовый в зависимости от уровня), который показывается в углу основных экранов и виджетов на главном экране. В любом случае Dino Hatch остаётся полностью бесплатным."
+          }
+        }
+      }
+    },
     "Showing skin": {
       "extractionState": "manual",
       "localizations": {
@@ -6502,6 +6625,47 @@
           "stringUnit": {
             "state": "translated",
             "value": "Спонсор"
+          }
+        }
+      }
+    },
+    "Supporting Dino Hatch": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dino Hatch unterstützen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supporting Dino Hatch"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apoyar a Dino Hatch"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Soutenir Dino Hatch"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dino Hatch steunen"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Поддержка Dino Hatch"
           }
         }
       }
