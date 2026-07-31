@@ -453,7 +453,13 @@ the `DinoHatch` and `DinoHatchWidget` targets carry identical
 (alongside the `com.apple.security.application-groups` entitlement they
 already needed — see [Home Screen widget](#home-screen-widget) — both
 targets need matching entitlements since the widget's `StartTimerIntent`
-opens the same CloudKit-mirrored store directly).
+opens the same CloudKit-mirrored store directly). `DinoHatch`'s
+`Info.plist` also declares `UIBackgroundModes: remote-notification` — a
+plain Info.plist entry, no extra entitlement or portal registration
+needed — since CloudKit relies on silent push notifications to know when
+to fetch remote changes promptly; without it, SwiftData throws "BUG IN
+CLIENT OF CLOUDKIT: CloudKit push notifications require the
+'remote-notification' background mode" at runtime.
 
 This requires a paid Apple Developer Program membership — Apple doesn't
 allow the iCloud capability on personal/free teams at all (Xcode shows

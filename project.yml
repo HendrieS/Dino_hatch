@@ -24,6 +24,8 @@ targets:
         UILaunchScreen: {}
         UIUserInterfaceStyle: Light
         NSSupportsLiveActivities: true
+        UIBackgroundModes:
+          - remote-notification
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
           - UIInterfaceOrientationLandscapeLeft
