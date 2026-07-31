@@ -1,6 +1,6 @@
 name: DinoHatch
 options:
-  bundleIdPrefix: com.dinohatch7567gl
+  bundleIdPrefix: com.dinohatchtimer
   deploymentTarget:
     iOS: "17.0"
   createIntermediateGroups: true
@@ -37,14 +37,14 @@ targets:
       path: DinoHatch/DinoHatch.entitlements
       properties:
         com.apple.security.application-groups:
-          - group.com.dinohatch7567gl.app
+          - group.com.dinohatchtimer.app
         com.apple.developer.icloud-container-identifiers:
-          - iCloud.com.dinohatch7567gl.app
+          - iCloud.com.dinohatchtimer.app
         com.apple.developer.icloud-services:
           - CloudKit
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.dinohatch7567gl.app
+        PRODUCT_BUNDLE_IDENTIFIER: com.dinohatchtimer.app
         CODE_SIGN_STYLE: Automatic
         SWIFT_VERSION: "5.0"
         TARGETED_DEVICE_FAMILY: "1,2"
@@ -74,14 +74,14 @@ targets:
       path: DinoHatchWidget/DinoHatchWidget.entitlements
       properties:
         com.apple.security.application-groups:
-          - group.com.dinohatch7567gl.app
+          - group.com.dinohatchtimer.app
         com.apple.developer.icloud-container-identifiers:
-          - iCloud.com.dinohatch7567gl.app
+          - iCloud.com.dinohatchtimer.app
         com.apple.developer.icloud-services:
           - CloudKit
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.dinohatch7567gl.app.widget
+        PRODUCT_BUNDLE_IDENTIFIER: com.dinohatchtimer.app.widget
         CODE_SIGN_STYLE: Automatic
         SWIFT_VERSION: "5.0"
         TARGETED_DEVICE_FAMILY: "1,2"
