@@ -85,11 +85,31 @@ struct CollectionView: View {
                 }
                 .map(\.element)
         case .name:
-            list.sort { $0.localizedName.localizedCaseInsensitiveCompare($1.localizedName) == .orderedAscending }
+            list.sort {
+                if let unlockedFirst = unlockedFirstComparison($0, $1) { return unlockedFirst }
+                return $0.localizedName.localizedCaseInsensitiveCompare($1.localizedName) == .orderedAscending
+            }
         case .rarity:
-            list.sort { $0.rarity.starCount < $1.rarity.starCount }
+            list.sort {
+                if let unlockedFirst = unlockedFirstComparison($0, $1) { return unlockedFirst }
+                return $0.rarity.starCount < $1.rarity.starCount
+            }
         }
         return list
+    }
+
+    /// Unlocked dinosaurs always sort before any locked one, regardless of
+    /// which sort option is active — otherwise a locked "???" card would
+    /// land wherever its hidden real name/rarity happens to fall, breaking
+    /// up the run of visible, named cards in a way the user has no way to
+    /// make sense of (they can't see what they're being sorted against).
+    /// Returns nil when both share the same unlock status, meaning the
+    /// caller's own comparator should decide the order between them.
+    private func unlockedFirstComparison(_ lhs: Dinosaur, _ rhs: Dinosaur) -> Bool? {
+        let lhsUnlocked = unlockedIDs.contains(lhs.id)
+        let rhsUnlocked = unlockedIDs.contains(rhs.id)
+        guard lhsUnlocked != rhsUnlocked else { return nil }
+        return lhsUnlocked
     }
 
     private let columns = [GridItem(.adaptive(minimum: 140), spacing: 16)]
