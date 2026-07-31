@@ -91,4 +91,16 @@ final class WidgetSnapshotBuilderTests: XCTestCase {
         XCTAssertNil(snapshot.activeTimerDinosaurEmoji)
         XCTAssertNil(snapshot.activeTimerDinosaurImageAssetName)
     }
+
+    func testNoSupporterTierLeavesSupporterFieldNil() {
+        let snapshot = WidgetSnapshotBuilder.build(unlocked: [])
+        XCTAssertNil(snapshot.supporterTierRawValue)
+        XCTAssertNil(snapshot.supporterTier)
+    }
+
+    func testSupporterTierRoundTripsThroughTheSnapshot() {
+        let snapshot = WidgetSnapshotBuilder.build(unlocked: [], supporterTier: .gold)
+        XCTAssertEqual(snapshot.supporterTierRawValue, SupporterTier.gold.rawValue)
+        XCTAssertEqual(snapshot.supporterTier, .gold)
+    }
 }

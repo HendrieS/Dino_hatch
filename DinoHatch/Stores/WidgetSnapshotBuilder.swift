@@ -28,6 +28,7 @@ enum WidgetSnapshotBuilder {
         unlocked: [UnlockRecord],
         alarm: AlarmInfo? = nil,
         activeTimer: ActiveTimerInfo? = nil,
+        supporterTier: SupporterTier? = nil,
         catalog: [Dinosaur] = DinosaurCatalog.all,
         now: Date = .now
     ) -> WidgetSnapshot {
@@ -52,7 +53,8 @@ enum WidgetSnapshotBuilder {
             nextAlarmFireDate: nextAlarmFireDate,
             activeTimerEndDate: activeTimer?.endDate,
             activeTimerDinosaurEmoji: activeTimerDinosaur?.emoji,
-            activeTimerDinosaurImageAssetName: activeTimerDinosaur?.imageAssetName
+            activeTimerDinosaurImageAssetName: activeTimerDinosaur?.imageAssetName,
+            supporterTierRawValue: supporterTier?.rawValue
         )
     }
 }

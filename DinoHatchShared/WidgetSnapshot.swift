@@ -36,8 +36,16 @@ struct WidgetSnapshot: Codable, Equatable {
     /// `lastDinosaurImageAssetName` are.
     var activeTimerDinosaurEmoji: String? = nil
     var activeTimerDinosaurImageAssetName: String? = nil
+    /// Raw `SupporterTier` of the highest-owned support purchase (see
+    /// `AppSettings.supporterTier`), nil if none — drives the small corner
+    /// badge on the Home Screen widgets (`WidgetSupporterBadge`).
+    var supporterTierRawValue: String? = nil
 
     static let empty = WidgetSnapshot(unlockedCount: 0, totalCount: 0, lastDinosaurEmoji: nil, lastDinosaurName: nil)
+
+    var supporterTier: SupporterTier? {
+        supporterTierRawValue.flatMap(SupporterTier.init(rawValue:))
+    }
 }
 
 /// Shared App Group read/write for `WidgetSnapshot`. Both targets link this

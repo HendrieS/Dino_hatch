@@ -45,6 +45,10 @@ struct DinoHatchCollectionWidgetView: View {
                 smallView
             }
         }
+        .overlay(alignment: .topTrailing) {
+            WidgetSupporterBadge(tier: snapshot.supporterTier)
+                .padding(6)
+        }
         .containerBackground(for: .widget) {
             LinearGradient(
                 colors: [Color(red: 0.93, green: 0.96, blue: 1.00), Color(red: 0.89, green: 0.94, blue: 0.84)],

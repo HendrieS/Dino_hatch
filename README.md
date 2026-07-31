@@ -443,6 +443,21 @@ the corner of the main screens (`Views/Components/SupporterBadgeView.swift`)
   instead of waiting on a StoreKit round trip; StoreKit's own entitlements
   (tied to the Apple ID, not iCloud) remain the actual source of truth, so
   the badge recovers via **Restore Purchases** even with iCloud sync off.
+- **Also shown on the Home Screen widgets and the Lock Screen Live
+  Activity** (`DinoHatchWidget/WidgetSupporterBadge.swift`) — a
+  non-interactive version of the same badge, since widgets/Live Activities
+  can't present a sheet. The Collection/Alarm/Quick Timer widgets get it via
+  `WidgetSnapshot.supporterTierRawValue` (written by
+  `RootTabView.refreshWidgetSnapshot()`, same path as everything else those
+  widgets display); the Live Activity gets it via
+  `DinoTimerActivityAttributes.ContentState.supporterTierRawValue`, captured
+  once when the timer starts (same as `dinosaurEmoji`/
+  `dinosaurImageAssetName` — it doesn't update mid-countdown if a purchase
+  happens while a timer's already running). **Deliberately not shown in the
+  Dynamic Island** — its compact/minimal regions are too small (~16-20pt)
+  for another visual element without compromising the existing "stay plain
+  emoji" design there (see [Custom art in the
+  widgets](#custom-art-in-the-widgets)).
 - `SupporterTier`'s colors intentionally match `Dinosaur.Rarity.tint`'s
   palette (gray/green/gold/purple) but are a separate enum — donor status
   isn't dinosaur game data, kept decoupled even though today's palette is

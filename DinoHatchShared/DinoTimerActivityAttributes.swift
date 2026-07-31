@@ -10,5 +10,9 @@ struct DinoTimerActivityAttributes: ActivityAttributes {
         var endDate: Date
         var dinosaurEmoji: String?
         var dinosaurImageAssetName: String?
+        /// Raw `SupporterTier`, captured once at Live Activity start —
+        /// same reasoning as `dinosaurEmoji`/`dinosaurImageAssetName` not
+        /// updating mid-countdown, see `DinoTimerActivityController`.
+        var supporterTierRawValue: String?
     }
 }

@@ -61,6 +61,7 @@ struct DinoTimerLiveActivity: Widget {
                     .monospacedDigit()
             }
             Spacer()
+            WidgetSupporterBadge(tier: context.state.supporterTierRawValue.flatMap(SupporterTier.init(rawValue:)))
         }
         .padding(16)
     }

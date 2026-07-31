@@ -76,6 +76,9 @@ struct RootTabView: View {
             .onChange(of: timerFingerprint) { _, _ in
                 refreshWidgetSnapshot()
             }
+            .onChange(of: appSettings.first?.supporterTierRawValue) { _, _ in
+                refreshWidgetSnapshot()
+            }
             .onReceive(minuteTimer) { date in
                 now = date
             }
@@ -199,7 +202,8 @@ struct RootTabView: View {
                 WidgetSnapshotBuilder.ActiveTimerInfo(endDate: $0, dinosaurID: settings.pendingDinosaurID)
             }
         }
-        WidgetSnapshotStore.save(WidgetSnapshotBuilder.build(unlocked: records, alarm: alarmInfo, activeTimer: activeTimerInfo))
+        let supporterTier = appSettings.first?.supporterTier
+        WidgetSnapshotStore.save(WidgetSnapshotBuilder.build(unlocked: records, alarm: alarmInfo, activeTimer: activeTimerInfo, supporterTier: supporterTier))
         WidgetCenter.shared.reloadTimelines(ofKind: WidgetSnapshotStore.widgetKind)
         WidgetCenter.shared.reloadTimelines(ofKind: WidgetSnapshotStore.alarmWidgetKind)
         WidgetCenter.shared.reloadTimelines(ofKind: WidgetSnapshotStore.quickTimerWidgetKind)
