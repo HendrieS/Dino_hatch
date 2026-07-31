@@ -42,11 +42,11 @@ struct HelpCenterView: View {
             }
 
             Section {
-                Text("Settings → App Icon lets you change the Home Screen icon. The default is always available; each of the six dinosaur icons unlocks once you've hatched that specific dinosaur — Tyrannosaurus Rex, Triceratops, Pteranodon, Velociraptor, and Spinosaurus are regular hatches, while the sixth, Patagotitan, is one of the collection's secret dinosaurs, so it only unlocks after every other dinosaur has been hatched first.")
+                Text("Settings → App Icon lets you change the Home Screen icon. The default is always available. Four of the dinosaur icons unlock once you've hatched that specific dinosaur — Tyrannosaurus Rex, Triceratops, and Pteranodon are regular hatches, while the fourth, Patagotitan, is one of the collection's secret dinosaurs, so it only unlocks after every other dinosaur has been hatched first. The other two work differently: the brown dino icon unlocks once you've hatched 5 dinosaurs in total, and the green dino icon once you've hatched 10.")
             } header: {
                 Text("App icons")
             } footer: {
-                Text("The Velociraptor and Spinosaurus icons were illustrated by Alexis.")
+                Text("The brown and green dino icons were illustrated by Alexis.")
             }
 
             Section("Managing this data") {

@@ -941,6 +941,47 @@
         }
       }
     },
+    "Brown dino icon": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Braunes Dino-Symbol"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brown dino icon"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Icono de dinosaurio marrón"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Icône de dinosaure marron"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bruin dino-icoon"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Коричневый значок динозавра"
+          }
+        }
+      }
+    },
     "Cancel": {
       "extractionState": "manual",
       "localizations": {
@@ -2985,6 +3026,47 @@
           "stringUnit": {
             "state": "translated",
             "value": "Зелёный спонсор"
+          }
+        }
+      }
+    },
+    "Green dino icon": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grünes Dino-Symbol"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Green dino icon"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Icono de dinosaurio verde"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Icône de dinosaure vert"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Groen dino-icoon"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зелёный значок динозавра"
           }
         }
       }
@@ -5769,43 +5851,43 @@
         }
       }
     },
-    "Settings → App Icon lets you change the Home Screen icon. The default is always available; each of the six dinosaur icons unlocks once you've hatched that specific dinosaur — Tyrannosaurus Rex, Triceratops, Pteranodon, Velociraptor, and Spinosaurus are regular hatches, while the sixth, Patagotitan, is one of the collection's secret dinosaurs, so it only unlocks after every other dinosaur has been hatched first.": {
+    "Settings → App Icon lets you change the Home Screen icon. The default is always available. Four of the dinosaur icons unlock once you've hatched that specific dinosaur — Tyrannosaurus Rex, Triceratops, and Pteranodon are regular hatches, while the fourth, Patagotitan, is one of the collection's secret dinosaurs, so it only unlocks after every other dinosaur has been hatched first. The other two work differently: the brown dino icon unlocks once you've hatched 5 dinosaurs in total, and the green dino icon once you've hatched 10.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Unter Einstellungen → App-Icon kannst du das Home-Bildschirm-Symbol ändern. Das Standardsymbol ist immer verfügbar; jedes der sechs Dinosaurier-Symbole wird freigeschaltet, sobald du genau diesen Dinosaurier geschlüpft hast — Tyrannosaurus Rex, Triceratops, Pteranodon, Velociraptor und Spinosaurus sind normale Schlüpfvorgänge, während das sechste, Patagotitan, einer der geheimen Dinosaurier der Sammlung ist und sich erst freischaltet, nachdem alle anderen Dinosaurier geschlüpft sind."
+            "value": "Unter Einstellungen → App-Icon kannst du das Home-Bildschirm-Symbol ändern. Das Standardsymbol ist immer verfügbar. Vier der Dinosaurier-Symbole werden freigeschaltet, sobald du genau diesen Dinosaurier geschlüpft hast — Tyrannosaurus Rex, Triceratops und Pteranodon sind normale Schlüpfvorgänge, während das vierte, Patagotitan, einer der geheimen Dinosaurier der Sammlung ist und sich erst freischaltet, nachdem alle anderen Dinosaurier geschlüpft sind. Die anderen beiden funktionieren anders: Das braune Dino-Symbol wird freigeschaltet, sobald du insgesamt 5 Dinosaurier geschlüpft hast, und das grüne Dino-Symbol, sobald du 10 geschlüpft hast."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Settings → App Icon lets you change the Home Screen icon. The default is always available; each of the six dinosaur icons unlocks once you've hatched that specific dinosaur — Tyrannosaurus Rex, Triceratops, Pteranodon, Velociraptor, and Spinosaurus are regular hatches, while the sixth, Patagotitan, is one of the collection's secret dinosaurs, so it only unlocks after every other dinosaur has been hatched first."
+            "value": "Settings → App Icon lets you change the Home Screen icon. The default is always available. Four of the dinosaur icons unlock once you've hatched that specific dinosaur — Tyrannosaurus Rex, Triceratops, and Pteranodon are regular hatches, while the fourth, Patagotitan, is one of the collection's secret dinosaurs, so it only unlocks after every other dinosaur has been hatched first. The other two work differently: the brown dino icon unlocks once you've hatched 5 dinosaurs in total, and the green dino icon once you've hatched 10."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "En Ajustes → Icono de la app puedes cambiar el icono de la pantalla de inicio. El icono predeterminado siempre está disponible; cada uno de los seis iconos de dinosaurio se desbloquea al eclosionar ese dinosaurio en concreto — Tyrannosaurus Rex, Triceratops, Pteranodon, Velociraptor y Spinosaurus son eclosiones normales, mientras que el sexto, Patagotitan, es uno de los dinosaurios secretos de la colección, por lo que solo se desbloquea después de haber eclosionado todos los demás dinosaurios."
+            "value": "En Ajustes → Icono de la app puedes cambiar el icono de la pantalla de inicio. El icono predeterminado siempre está disponible. Cuatro de los iconos de dinosaurio se desbloquean al eclosionar ese dinosaurio en concreto — Tyrannosaurus Rex, Triceratops y Pteranodon son eclosiones normales, mientras que el cuarto, Patagotitan, es uno de los dinosaurios secretos de la colección, por lo que solo se desbloquea después de haber eclosionado todos los demás dinosaurios. Los otros dos funcionan de otra forma: el icono del dinosaurio marrón se desbloquea al eclosionar 5 dinosaurios en total, y el del dinosaurio verde al eclosionar 10."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Réglages → Icône de l'app permet de changer l'icône de l'écran d'accueil. L'icône par défaut est toujours disponible ; chacune des six icônes de dinosaure se débloque une fois que vous avez fait éclore ce dinosaure précis — Tyrannosaurus Rex, Triceratops, Ptéranodon, Velociraptor et Spinosaurus sont des éclosions classiques, tandis que la sixième, Patagotitan, est l'un des dinosaures secrets de la collection et ne se débloque qu'une fois tous les autres dinosaures éclos."
+            "value": "Réglages → Icône de l'app permet de changer l'icône de l'écran d'accueil. L'icône par défaut est toujours disponible. Quatre des icônes de dinosaure se débloquent une fois que vous avez fait éclore ce dinosaure précis — Tyrannosaurus Rex, Triceratops et Ptéranodon sont des éclosions classiques, tandis que la quatrième, Patagotitan, est l'un des dinosaures secrets de la collection et ne se débloque qu'une fois tous les autres dinosaures éclos. Les deux autres fonctionnent différemment : l'icône du dinosaure marron se débloque après l'éclosion de 5 dinosaures au total, et celle du dinosaure vert après 10."
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Instellingen → App-icoon laat je het beginschermpictogram wijzigen. Het standaardicoon is altijd beschikbaar; elk van de zes dino-iconen wordt ontgrendeld zodra je die specifieke dinosaurus hebt uitgebroed — Tyrannosaurus Rex, Triceratops, Pteranodon, Velociraptor en Spinosaurus zijn gewone uitbroedingen, terwijl de zesde, Patagotitan, een van de geheime dinosaurussen van de collectie is en pas ontgrendelt nadat alle andere dinosaurussen zijn uitgebroed."
+            "value": "Instellingen → App-icoon laat je het beginschermpictogram wijzigen. Het standaardicoon is altijd beschikbaar. Vier van de dino-iconen worden ontgrendeld zodra je die specifieke dinosaurus hebt uitgebroed — Tyrannosaurus Rex, Triceratops en Pteranodon zijn gewone uitbroedingen, terwijl de vierde, Patagotitan, een van de geheime dinosaurussen van de collectie is en pas ontgrendelt nadat alle andere dinosaurussen zijn uitgebroed. De andere twee werken anders: het bruine dino-icoon ontgrendelt zodra je in totaal 5 dinosaurussen hebt uitgebroed, en het groene dino-icoon zodra je er 10 hebt uitgebroed."
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "В разделе Настройки → Значок приложения можно изменить значок на главном экране. Значок по умолчанию доступен всегда; каждый из шести значков с динозаврами открывается после того, как вылупится именно этот динозавр — Tyrannosaurus Rex, Triceratops, Pteranodon, Velociraptor и Spinosaurus вылупляются обычным образом, а шестой, Patagotitan, — один из секретных динозавров коллекции, поэтому он открывается только после того, как вылупятся все остальные динозавры."
+            "value": "В разделе Настройки → Значок приложения можно изменить значок на главном экране. Значок по умолчанию доступен всегда. Четыре значка с динозаврами открываются после того, как вылупится именно этот динозавр — Tyrannosaurus Rex, Triceratops и Pteranodon вылупляются обычным образом, а четвёртый, Patagotitan, — один из секретных динозавров коллекции, поэтому он открывается только после того, как вылупятся все остальные динозавры. Два других значка работают иначе: коричневый значок динозавра открывается, когда вылупится в общей сложности 5 динозавров, а зелёный — когда вылупится 10."
           }
         }
       }
@@ -6916,43 +6998,43 @@
         }
       }
     },
-    "The Velociraptor and Spinosaurus icons were illustrated by Alexis.": {
+    "The brown and green dino icons were illustrated by Alexis.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Die Symbole für Velociraptor und Spinosaurus wurden von Alexis gestaltet."
+            "value": "Die braunen und grünen Dino-Symbole wurden von Alexis gestaltet."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The Velociraptor and Spinosaurus icons were illustrated by Alexis."
+            "value": "The brown and green dino icons were illustrated by Alexis."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Los iconos de Velociraptor y Spinosaurus fueron ilustrados por Alexis."
+            "value": "Los iconos de dinosaurio marrón y verde fueron ilustrados por Alexis."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Les icônes du Velociraptor et du Spinosaurus ont été illustrées par Alexis."
+            "value": "Les icônes de dinosaure marron et vert ont été illustrées par Alexis."
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "De iconen van Velociraptor en Spinosaurus zijn getekend door Alexis."
+            "value": "De bruine en groene dino-iconen zijn getekend door Alexis."
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "Значки Velociraptor и Spinosaurus нарисовала Alexis."
+            "value": "Коричневый и зелёный значки динозавров нарисовала Alexis."
           }
         }
       }

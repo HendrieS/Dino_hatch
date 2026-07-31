@@ -175,19 +175,23 @@ Then in Xcode:
 - **Alternate app icons**: `Views/SettingsView.swift` has an "App Icon"
   section (`Components/AppIconPicker.swift`) offering the default icon
   plus one per `AppIconOption` (T. Rex, Triceratops, Pteranodon,
-  Patagotitan, Velociraptor, Spinosaurus) — each locked behind having
-  hatched that specific dinosaur (`AppIconOption.isUnlocked`), shown
-  dimmed with a lock badge rather than hidden, so it doubles as a small
-  collection goal. Picking one calls `AppIconOption.apply`, a thin wrapper
-  around `UIApplication.setAlternateIconName`. The alternates are declared
-  as ordinary single-size `.appiconset` entries in `Assets.xcassets` plus
+  Patagotitan, plus two illustrated by Alexis: a brown dino and a green
+  dino), each gated behind an `AppIconOption.UnlockRequirement`
+  (`AppIconOption.isUnlocked`) — shown dimmed with a lock badge rather
+  than hidden, so it doubles as a small collection goal. Four use
+  `.hatch(dinosaurID:)` (locked behind hatching that specific dinosaur);
+  the brown and green dino icons instead use `.collectionSize(_:)` —
+  unlocked once 5 and 10 dinosaurs (any species) have been hatched in
+  total, rather than one particular one. Picking an icon calls
+  `AppIconOption.apply`, a thin wrapper around
+  `UIApplication.setAlternateIconName`. The alternates are declared as
+  ordinary single-size `.appiconset` entries in `Assets.xcassets` plus
   `ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES` in `project.yml` — no
   manual `Info.plist` `CFBundleIcons` entries needed. `.appiconset`-typed
   entries aren't reliably loadable through `Image(_:)` for an in-app
   preview, so each one has a plain duplicate `*-thumb` `.imageset` (same
   artwork, ordinary content type) that `AppIconPicker` reads from instead
-  — `AppIconOption.thumbnailAssetName` points at those. The Velociraptor
-  and Spinosaurus icons were illustrated by Alexis.
+  — `AppIconOption.thumbnailAssetName` points at those.
 - **Collection search/filter/sort**: `Views/CollectionView.swift` adds a
   `.searchable` field (matched against `Dinosaur.localizedName`, a new
   `String`-returning counterpart to `Text(localizedContent:)` for
