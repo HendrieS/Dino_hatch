@@ -78,8 +78,8 @@ enum DinosaurCatalog {
             emoji: "🦕",
             imageAssetName: "stegosaurus-skin",
             skeletonAssetName: "stegosaurus-skeleton",
-            rangeMapAssetName: "region-north-america",
-            rangeLabel: "Western North America",
+            rangeMapAssetName: "region-europe",
+            rangeLabel: "Western Europe",
             rarity: .common
         ),
         Dinosaur(
@@ -174,8 +174,8 @@ enum DinosaurCatalog {
             emoji: "🦖",
             imageAssetName: "allosaurus-skin",
             skeletonAssetName: "allosaurus-skeleton",
-            rangeMapAssetName: "region-north-america",
-            rangeLabel: "Western North America",
+            rangeMapAssetName: "region-europe",
+            rangeLabel: "Western Europe",
             rarity: .uncommon
         ),
         Dinosaur(
