@@ -17,8 +17,12 @@ struct HelpCenterView: View {
                 Text("No name, birthday, email, photos, or location are ever asked for or stored.")
             }
 
-            Section("Where it's stored") {
-                Text("Everything is stored on this device, and syncs privately through your iCloud account to your family's other devices — so the same collection, timer, and alarm show up whether your child uses an iPhone or an iPad. There's no separate account, no analytics, and no ads. This uses your own iCloud storage, not ours — nothing is ever sent to us. You can turn this off for Dino Hatch at any time in your device's Settings app under your name → iCloud → Saved to iCloud.")
+            Section {
+                Text("Everything is stored on this device, and syncs privately through your iCloud account to your family's other devices — so the same collection, timer, and alarm show up whether your child uses an iPhone or an iPad. There's no separate account, no analytics, and no ads. This uses your own iCloud storage, not ours — nothing is ever sent to us.")
+            } header: {
+                Text("Where it's stored")
+            } footer: {
+                Text("To turn this off: open the Settings app on your device → tap your name at the top → iCloud → Saved to iCloud (tap See All if Dino Hatch isn't shown right away) → turn off Dino Hatch.")
             }
 
             Section("How the timer works") {

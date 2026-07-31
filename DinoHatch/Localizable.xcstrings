@@ -2456,43 +2456,43 @@
         }
       }
     },
-    "Everything is stored on this device, and syncs privately through your iCloud account to your family's other devices — so the same collection, timer, and alarm show up whether your child uses an iPhone or an iPad. There's no separate account, no analytics, and no ads. This uses your own iCloud storage, not ours — nothing is ever sent to us. You can turn this off for Dino Hatch at any time in your device's Settings app under your name → iCloud → Saved to iCloud.": {
+    "Everything is stored on this device, and syncs privately through your iCloud account to your family's other devices — so the same collection, timer, and alarm show up whether your child uses an iPhone or an iPad. There's no separate account, no analytics, and no ads. This uses your own iCloud storage, not ours — nothing is ever sent to us.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Alles wird auf diesem Gerät gespeichert und synchronisiert sich über euer iCloud-Konto privat mit den anderen Geräten eurer Familie — so zeigen iPhone und iPad dieselbe Sammlung, denselben Timer und denselben Wecker. Es gibt kein separates Konto, keine Analyse und keine Werbung. Dabei wird euer eigener iCloud-Speicher genutzt, nicht unserer — es wird nie etwas an uns gesendet. Ihr könnt dies jederzeit für Dino Hatch in den Geräteeinstellungen unter [Euer Name] → iCloud → In iCloud sichern deaktivieren."
+            "value": "Alles wird auf diesem Gerät gespeichert und synchronisiert sich über euer iCloud-Konto privat mit den anderen Geräten eurer Familie — so zeigen iPhone und iPad dieselbe Sammlung, denselben Timer und denselben Wecker. Es gibt kein separates Konto, keine Analyse und keine Werbung. Dabei wird euer eigener iCloud-Speicher genutzt, nicht unserer — es wird nie etwas an uns gesendet."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Everything is stored on this device, and syncs privately through your iCloud account to your family's other devices — so the same collection, timer, and alarm show up whether your child uses an iPhone or an iPad. There's no separate account, no analytics, and no ads. This uses your own iCloud storage, not ours — nothing is ever sent to us. You can turn this off for Dino Hatch at any time in your device's Settings app under your name → iCloud → Saved to iCloud."
+            "value": "Everything is stored on this device, and syncs privately through your iCloud account to your family's other devices — so the same collection, timer, and alarm show up whether your child uses an iPhone or an iPad. There's no separate account, no analytics, and no ads. This uses your own iCloud storage, not ours — nothing is ever sent to us."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Todo se guarda en este dispositivo y se sincroniza de forma privada a través de tu cuenta de iCloud con los demás dispositivos de tu familia — así, la misma colección, el mismo temporizador y la misma alarma aparecen tanto en el iPhone como en el iPad. No hay una cuenta aparte, ni analítica, ni anuncios. Esto usa tu propio almacenamiento de iCloud, no el nuestro — nunca se nos envía nada. Puedes desactivarlo para Dino Hatch en cualquier momento desde los Ajustes del dispositivo, en tu nombre → iCloud → Guardado en iCloud."
+            "value": "Todo se guarda en este dispositivo y se sincroniza de forma privada a través de tu cuenta de iCloud con los demás dispositivos de tu familia — así, la misma colección, el mismo temporizador y la misma alarma aparecen tanto en el iPhone como en el iPad. No hay una cuenta aparte, ni analítica, ni anuncios. Esto usa tu propio almacenamiento de iCloud, no el nuestro — nunca se nos envía nada."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tout est stocké sur cet appareil et se synchronise de façon privée, via votre compte iCloud, avec les autres appareils de votre famille — la même collection, le même minuteur et la même alarme apparaissent donc aussi bien sur iPhone que sur iPad. Il n'y a pas de compte séparé, pas de suivi statistique, pas de publicité. Cela utilise votre propre espace iCloud, pas le nôtre — rien ne nous est jamais envoyé. Vous pouvez désactiver cela pour Dino Hatch à tout moment dans les Réglages de l'appareil, sous votre nom → iCloud → Enregistré dans iCloud."
+            "value": "Tout est stocké sur cet appareil et se synchronise de façon privée, via votre compte iCloud, avec les autres appareils de votre famille — la même collection, le même minuteur et la même alarme apparaissent donc aussi bien sur iPhone que sur iPad. Il n'y a pas de compte séparé, pas de suivi statistique, pas de publicité. Cela utilise votre propre espace iCloud, pas le nôtre — rien ne nous est jamais envoyé."
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Alles wordt op dit apparaat opgeslagen en wordt privé via jouw iCloud-account gesynchroniseerd met de andere apparaten van je gezin — zo zie je dezelfde verzameling, timer en wekker op zowel iPhone als iPad. Er is geen apart account, geen analyse en geen reclame. Hiervoor wordt jouw eigen iCloud-opslag gebruikt, niet die van ons — er wordt nooit iets naar ons verzonden. Je kunt dit op elk moment uitschakelen voor Dino Hatch via de instellingen-app van je apparaat, onder jouw naam → iCloud → Opgeslagen in iCloud."
+            "value": "Alles wordt op dit apparaat opgeslagen en wordt privé via jouw iCloud-account gesynchroniseerd met de andere apparaten van je gezin — zo zie je dezelfde verzameling, timer en wekker op zowel iPhone als iPad. Er is geen apart account, geen analyse en geen reclame. Hiervoor wordt jouw eigen iCloud-opslag gebruikt, niet die van ons — er wordt nooit iets naar ons verzonden."
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "Все данные хранятся на этом устройстве и синхронизируются в частном порядке через вашу учётную запись iCloud с другими устройствами вашей семьи — поэтому одна и та же коллекция, таймер и будильник отображаются как на iPhone, так и на iPad. Отдельной учётной записи, аналитики и рекламы нет. Для этого используется ваше собственное хранилище iCloud, а не наше — нам никогда ничего не отправляется. Вы можете в любой момент отключить это для Dino Hatch в настройках устройства: [Ваше имя] → iCloud → Программы, использующие iCloud."
+            "value": "Все данные хранятся на этом устройстве и синхронизируются в частном порядке через вашу учётную запись iCloud с другими устройствами вашей семьи — поэтому одна и та же коллекция, таймер и будильник отображаются как на iPhone, так и на iPad. Отдельной учётной записи, аналитики и рекламы нет. Для этого используется ваше собственное хранилище iCloud, а не наше — нам никогда ничего не отправляется."
           }
         }
       }
@@ -7199,6 +7199,47 @@
           "stringUnit": {
             "state": "translated",
             "value": "Титанозавр дал имя целой группе титанозавров — самым большим растительноядным динозаврам, когда-либо ходившим по Земле!"
+          }
+        }
+      }
+    },
+    "To turn this off: open the Settings app on your device → tap your name at the top → iCloud → Saved to iCloud (tap See All if Dino Hatch isn't shown right away) → turn off Dino Hatch.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "So deaktiviert ihr das: Öffnet die Einstellungen-App auf eurem Gerät → tippt oben auf euren Namen → iCloud → In iCloud sichern (tippt auf „Alle anzeigen“, falls Dino Hatch nicht sofort angezeigt wird) → schaltet Dino Hatch aus."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To turn this off: open the Settings app on your device → tap your name at the top → iCloud → Saved to iCloud (tap See All if Dino Hatch isn't shown right away) → turn off Dino Hatch."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para desactivarlo: abre la app Ajustes en tu dispositivo → toca tu nombre en la parte superior → iCloud → Guardado en iCloud (toca \"Ver todo\" si Dino Hatch no aparece de inmediato) → desactiva Dino Hatch."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour le désactiver : ouvrez l'app Réglages sur votre appareil → touchez votre nom en haut → iCloud → Enregistré dans iCloud (touchez « Tout afficher » si Dino Hatch n'apparaît pas tout de suite) → désactivez Dino Hatch."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zo schakel je dit uit: open de instellingen-app op je apparaat → tik bovenaan op je naam → iCloud → Opgeslagen in iCloud (tik op 'Alles weergeven' als Dino Hatch niet meteen wordt getoond) → schakel Dino Hatch uit."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Чтобы отключить: откройте приложение «Настройки» на устройстве → нажмите на своё имя вверху → iCloud → Программы, использующие iCloud (нажмите «Показать все», если Dino Hatch не отображается сразу) → отключите Dino Hatch."
           }
         }
       }
