@@ -38,11 +38,17 @@ enum AlarmClaimer {
     /// True once today's response window has closed without a claim — used
     /// purely for the sad-dino status art on `AlarmView`, not for gating the
     /// reward itself (that stays `isReady`'s job).
+    ///
+    /// - Parameter enabledAt: when the alarm was last turned on (see
+    ///   `AlarmSettings.enabledAt`). If the alarm was only armed after
+    ///   today's window had already closed, there was never a real chance
+    ///   to claim it — that's not a miss, see `isPendingFirstChance`.
     static func wasMissedToday(
         hour: Int,
         minute: Int,
         weekdays: [Int],
         lastHatchDate: Date?,
+        enabledAt: Date? = nil,
         now: Date = .now,
         calendar: Calendar = .current
     ) -> Bool {
@@ -51,6 +57,36 @@ enum AlarmClaimer {
             return false
         }
         guard now > alarmTimeToday.addingTimeInterval(responseWindow) else { return false }
+        if let lastHatchDate, calendar.isDate(lastHatchDate, inSameDayAs: now) {
+            return false
+        }
+        if let enabledAt, enabledAt > alarmTimeToday.addingTimeInterval(responseWindow) {
+            return false
+        }
+        return true
+    }
+
+    /// True the first time today's window closes after the alarm was armed
+    /// too late to catch it — the flip side of `wasMissedToday`'s
+    /// `enabledAt` guard. Drives an encouraging "get ready for tomorrow"
+    /// message instead of the sad "missed it" one, since there was nothing
+    /// to actually miss.
+    static func isPendingFirstChance(
+        hour: Int,
+        minute: Int,
+        weekdays: [Int],
+        lastHatchDate: Date?,
+        enabledAt: Date?,
+        now: Date = .now,
+        calendar: Calendar = .current
+    ) -> Bool {
+        guard let enabledAt else { return false }
+        guard weekdays.contains(calendar.component(.weekday, from: now)) else { return false }
+        guard let alarmTimeToday = calendar.date(bySettingHour: hour, minute: minute, second: 0, of: now) else {
+            return false
+        }
+        guard now > alarmTimeToday.addingTimeInterval(responseWindow) else { return false }
+        guard enabledAt > alarmTimeToday.addingTimeInterval(responseWindow) else { return false }
         if let lastHatchDate, calendar.isDate(lastHatchDate, inSameDayAs: now) {
             return false
         }

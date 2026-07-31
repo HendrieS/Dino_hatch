@@ -146,6 +146,7 @@ struct RootTabView: View {
             minute: settings.minute,
             weekdays: settings.repeatWeekdays,
             lastHatchDate: settings.lastHatchDate,
+            enabledAt: settings.enabledAt,
             now: date
         )
     }

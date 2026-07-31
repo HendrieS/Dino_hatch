@@ -15,7 +15,10 @@ struct AlarmView: View {
     /// Today's status, at a glance: the plain egg by default, the
     /// celebrating hatchling once today's alarm has actually been claimed
     /// within its 15-minute window, or the sad dino once that window has
-    /// closed without a claim (see `AlarmClaimer`/`RootTabView`).
+    /// closed without a claim (see `AlarmClaimer`/`RootTabView`). Stays the
+    /// plain egg — not sad — if the alarm was only armed after today's
+    /// window already closed (`isPendingFirstChance`), since there was
+    /// nothing to actually miss.
     private var headerImageName: String {
         guard let settings = alarms.first, settings.isEnabled else { return "alarm-egg" }
         if let lastHatchDate = settings.lastHatchDate, Calendar.current.isDateInToday(lastHatchDate) {
@@ -25,11 +28,26 @@ struct AlarmView: View {
             hour: settings.hour,
             minute: settings.minute,
             weekdays: settings.repeatWeekdays,
-            lastHatchDate: settings.lastHatchDate
+            lastHatchDate: settings.lastHatchDate,
+            enabledAt: settings.enabledAt
         ) {
             return "alarm-sad"
         }
         return "alarm-egg"
+    }
+
+    /// True right after the alarm is armed too late to catch today's window
+    /// — shows an encouraging "get ready for tomorrow" message instead of
+    /// the sad "missed it" one.
+    private var isPendingFirstChance: Bool {
+        guard let settings = alarms.first, settings.isEnabled else { return false }
+        return AlarmClaimer.isPendingFirstChance(
+            hour: settings.hour,
+            minute: settings.minute,
+            weekdays: settings.repeatWeekdays,
+            lastHatchDate: settings.lastHatchDate,
+            enabledAt: settings.enabledAt
+        )
     }
 
     /// Consecutive scheduled alarms claimed in a row, zeroed out the moment
@@ -42,7 +60,8 @@ struct AlarmView: View {
             hour: settings.hour,
             minute: settings.minute,
             weekdays: settings.repeatWeekdays,
-            lastHatchDate: settings.lastHatchDate
+            lastHatchDate: settings.lastHatchDate,
+            enabledAt: settings.enabledAt
         ) {
             return 0
         }
@@ -63,6 +82,12 @@ struct AlarmView: View {
                         Text("Missed it today — try again tomorrow!")
                             .font(.subheadline.bold())
                             .foregroundStyle(.secondary)
+                            .multilineTextAlignment(.center)
+                            .fixedSize(horizontal: false, vertical: true)
+                    } else if isPendingFirstChance {
+                        Text("Get ready to wake up on time tomorrow!")
+                            .font(.subheadline.bold())
+                            .foregroundStyle(Color.dinoGreen)
                             .multilineTextAlignment(.center)
                             .fixedSize(horizontal: false, vertical: true)
                     } else if displayedStreak > 0 {
@@ -158,11 +183,16 @@ struct AlarmView: View {
 
     private func save() {
         let settings = alarmSettings()
+        let wasEnabled = settings.isEnabled
         let components = Calendar.current.dateComponents([.hour, .minute], from: time)
         settings.isEnabled = isEnabled
         settings.hour = components.hour ?? 7
         settings.minute = components.minute ?? 0
         settings.repeatWeekdays = Array(weekdays)
+
+        if isEnabled && !wasEnabled {
+            settings.enabledAt = .now
+        }
 
         if isEnabled {
             NotificationAuthorization.requestIfNeeded { granted in

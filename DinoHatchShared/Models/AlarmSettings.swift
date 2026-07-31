@@ -14,6 +14,11 @@ final class AlarmSettings {
     var minute: Int = 0
     var repeatWeekdays: [Int] = []
     var lastHatchDate: Date?
+    /// Stamped whenever the alarm transitions from off to on (see
+    /// `AlarmView.save()`), so `AlarmClaimer` can tell a genuine missed
+    /// window apart from the alarm simply having been armed after today's
+    /// window already closed — nothing was actually missed in that case.
+    var enabledAt: Date?
     /// Consecutive scheduled alarms claimed in a row — see `AlarmStreak`.
     /// Not tied to literal calendar days, since the alarm might only be set
     /// for a subset of weekdays (e.g. weekdays only); missing a day that

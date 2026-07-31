@@ -142,4 +142,74 @@ final class AlarmClaimerTests: XCTestCase {
         )
         XCTAssertTrue(missed)
     }
+
+    func testNotMissedWhenEnabledAfterTodaysWindowClosed() {
+        let now = date(day: 8, hour: 9, minute: 0) // well past today's 7:00 window
+        let enabledAt = date(day: 8, hour: 8, minute: 30) // armed after the window closed
+        let missed = AlarmClaimer.wasMissedToday(
+            hour: 7, minute: 0, weekdays: [4],
+            lastHatchDate: nil, enabledAt: enabledAt, now: now, calendar: calendar
+        )
+        XCTAssertFalse(missed)
+    }
+
+    func testStillMissedWhenEnabledBeforeTodaysWindowClosed() {
+        let now = date(day: 8, hour: 9, minute: 0)
+        let enabledAt = date(day: 8, hour: 6, minute: 0) // armed before the window even opened
+        let missed = AlarmClaimer.wasMissedToday(
+            hour: 7, minute: 0, weekdays: [4],
+            lastHatchDate: nil, enabledAt: enabledAt, now: now, calendar: calendar
+        )
+        XCTAssertTrue(missed)
+    }
+
+    func testStillMissedWhenEnabledOnAnEarlierDay() {
+        let now = date(day: 9, hour: 7, minute: 30) // Thursday, past today's window
+        let enabledAt = date(day: 8, hour: 9, minute: 0) // armed Wednesday, well before today
+        let missed = AlarmClaimer.wasMissedToday(
+            hour: 7, minute: 0, weekdays: [4, 5],
+            lastHatchDate: nil, enabledAt: enabledAt, now: now, calendar: calendar
+        )
+        XCTAssertTrue(missed)
+    }
+
+    func testPendingFirstChanceWhenEnabledAfterTodaysWindowClosed() {
+        let now = date(day: 8, hour: 9, minute: 0)
+        let enabledAt = date(day: 8, hour: 8, minute: 30)
+        let pending = AlarmClaimer.isPendingFirstChance(
+            hour: 7, minute: 0, weekdays: [4],
+            lastHatchDate: nil, enabledAt: enabledAt, now: now, calendar: calendar
+        )
+        XCTAssertTrue(pending)
+    }
+
+    func testNotPendingFirstChanceWhenEnabledBeforeTodaysWindowClosed() {
+        let now = date(day: 8, hour: 9, minute: 0)
+        let enabledAt = date(day: 8, hour: 6, minute: 0)
+        let pending = AlarmClaimer.isPendingFirstChance(
+            hour: 7, minute: 0, weekdays: [4],
+            lastHatchDate: nil, enabledAt: enabledAt, now: now, calendar: calendar
+        )
+        XCTAssertFalse(pending)
+    }
+
+    func testNotPendingFirstChanceWithoutEnabledAt() {
+        let now = date(day: 8, hour: 9, minute: 0)
+        let pending = AlarmClaimer.isPendingFirstChance(
+            hour: 7, minute: 0, weekdays: [4],
+            lastHatchDate: nil, enabledAt: nil, now: now, calendar: calendar
+        )
+        XCTAssertFalse(pending)
+    }
+
+    func testNotPendingFirstChanceOnceAlreadyClaimedToday() {
+        let now = date(day: 8, hour: 9, minute: 0)
+        let enabledAt = date(day: 8, hour: 8, minute: 30)
+        let claimedAfterEnabling = date(day: 8, hour: 8, minute: 45)
+        let pending = AlarmClaimer.isPendingFirstChance(
+            hour: 7, minute: 0, weekdays: [4],
+            lastHatchDate: claimedAfterEnabling, enabledAt: enabledAt, now: now, calendar: calendar
+        )
+        XCTAssertFalse(pending)
+    }
 }

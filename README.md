@@ -120,7 +120,13 @@ Then in Xcode:
   A missed window also puts a small "!" badge on the Alarm tab itself
   (`RootTabView.alarmWasMissedToday`, refreshed every minute and on every
   foreground transition via a `Timer.publish`), so it's noticeable without
-  needing to open that tab. `AlarmSettings.streakCount` tracks consecutive
+  needing to open that tab. `AlarmSettings.enabledAt` is stamped whenever
+  the alarm toggles from off to on, so turning it on after today's window
+  has already closed doesn't show the sad "missed it" state — there was
+  never a real chance to catch it. `AlarmClaimer.isPendingFirstChance`
+  detects that case and `AlarmView` shows an encouraging "Get ready to wake
+  up on time tomorrow!" line (plain egg art, no "!" badge) instead.
+  `AlarmSettings.streakCount` tracks consecutive
   *scheduled* claims via `Stores/AlarmStreak.swift` — not literal calendar
   days, so a weekdays-only alarm doesn't get its streak broken by a
   weekend it was never going to fire on. Shown as a "🔥 N day streak" line

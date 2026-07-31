@@ -2579,6 +2579,47 @@
         }
       }
     },
+    "Get ready to wake up on time tomorrow!": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mach dich bereit, morgen pünktlich aufzuwachen!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Get ready to wake up on time tomorrow!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Prepárate para despertarte a tiempo mañana!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prépare-toi à te réveiller à l'heure demain !"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maak je klaar om morgen op tijd wakker te worden!"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Готовься проснуться вовремя завтра!"
+          }
+        }
+      }
+    },
     "Giganotosaurus": {
       "extractionState": "stale",
       "localizations": {
