@@ -154,6 +154,11 @@ struct AlarmView: View {
             }
             .navigationTitle("Dino Alarm")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    SupporterBadgeView()
+                }
+            }
             .onAppear(perform: load)
             .onChange(of: isEnabled) { _, newValue in
                 if newValue && weekdays.isEmpty {

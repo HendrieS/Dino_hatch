@@ -54,6 +54,14 @@ struct TimerHomeView: View {
                 }
             }
         }
+        // Unlike AlarmView/CollectionView, this tab has no NavigationStack
+        // of its own to hang a .topBarLeading toolbar item off of, so the
+        // badge is a plain corner overlay here instead — may need a
+        // padding/position tweak once seen on a real device.
+        .overlay(alignment: .topLeading) {
+            SupporterBadgeView()
+                .padding()
+        }
         .onAppear {
             engine.configure(context: modelContext)
             resumeIfNeeded()

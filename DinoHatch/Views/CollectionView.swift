@@ -128,6 +128,10 @@ struct CollectionView: View {
             .navigationBarTitleDisplayMode(.inline)
             .searchable(text: $searchText, prompt: Text("Search dinosaurs"))
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    SupporterBadgeView()
+                }
+
                 ToolbarItem(placement: .topBarTrailing) {
                     Menu {
                         Picker(selection: $sortOption) {

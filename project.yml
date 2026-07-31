@@ -110,6 +110,7 @@ schemes:
         DinoHatchTests: [test]
     run:
       config: Debug
+      storeKitConfiguration: Products.storekit
     test:
       config: Debug
       targets:

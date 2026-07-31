@@ -416,6 +416,54 @@ the app's real illustrated art instead:
   scaled-down illustration would blur there while the system's own emoji
   rendering stays crisp at any size.
 
+## Supporting the app
+
+Dino Hatch is free with no ads, no tracking, and nothing paywalled — but a
+parent can optionally leave a small one-time tip from **Settings → Support
+Dino Hatch** (behind the same `ParentalGateView` math check that already
+guards Settings). It only ever unlocks a small heart-shaped badge shown in
+the corner of the main screens (`Views/Components/SupporterBadgeView.swift`)
+— never gameplay content.
+
+- **Apple In-App Purchase only, non-consumable.** Four separate
+  non-consumable products (`SupporterTier`: `gray`/`green`/`gold`/`purple`,
+  IDs `com.dinohatchtimer.app.support.{tier}`), one per badge color.
+  Non-consumable rather than consumable because a badge is a permanent
+  unlock, not something spent — this also means StoreKit itself tracks
+  ownership and `Restore Purchases`, so there's no custom purchase ledger to
+  get wrong. A parent can "upgrade" later by buying a higher tier's product;
+  `SupportUsView` always shows whichever owned tier ranks highest.
+- **`Stores/SupporterStore.swift`** wraps StoreKit 2: loads the four
+  `Product`s, handles `purchase(_:)`, and rebuilds the owned tier from
+  `Transaction.currentEntitlements` (both on launch and whenever
+  `Transaction.updates` reports something completed outside the purchase
+  flow, e.g. Ask to Buy approval) rather than keeping its own ledger. The
+  result is cached into `AppSettings.supporterTier` — already synced via
+  [iCloud sync](#icloud-sync) — purely so the badge renders instantly
+  instead of waiting on a StoreKit round trip; StoreKit's own entitlements
+  (tied to the Apple ID, not iCloud) remain the actual source of truth, so
+  the badge recovers via **Restore Purchases** even with iCloud sync off.
+- `SupporterTier`'s colors intentionally match `Dinosaur.Rarity.tint`'s
+  palette (gray/green/gold/purple) but are a separate enum — donor status
+  isn't dinosaur game data, kept decoupled even though today's palette is
+  shared.
+- **Badge placement**: `.topBarLeading` toolbar item on `AlarmView`/
+  `CollectionView` (each already has its own `NavigationStack`). The Timer
+  tab has no nav bar of its own, so there it's a plain `.overlay(alignment:
+  .topLeading)` corner badge on `TimerHomeView` instead — noted in-code as a
+  spot that may need a position tweak once seen on a real device.
+- **Local testing**: `Products.storekit` (repo root) is a StoreKit
+  Configuration file with all four products, wired into the `DinoHatch`
+  scheme's run options via `project.yml`'s `storeKitConfiguration` key — so
+  the whole purchase flow (including simulated purchase sheets) works in
+  Simulator with zero App Store Connect setup. If a given XcodeGen version
+  doesn't support that key, set it manually once in Xcode: **Product → Scheme
+  → Edit Scheme → Run → Options → StoreKit Configuration**.
+- **Manual App Store Connect steps before shipping** (can't be scripted):
+  sign Apple's Paid Applications Agreement (required for any IAP, even
+  giving away a free app), then create the four products there with real
+  pricing/localized display names, matching the product IDs above exactly.
+
 ## Localization
 
 The app supports English, German, Spanish, French, Dutch, and Russian via a

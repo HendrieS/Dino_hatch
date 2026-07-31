@@ -10,6 +10,7 @@ struct SettingsView: View {
 
     @State private var age = 5
     @State private var showResetConfirmation = false
+    @State private var showSupportUs = false
 
     var body: some View {
         NavigationStack {
@@ -43,6 +44,14 @@ struct SettingsView: View {
                 }
 
                 Section {
+                    Button("Support Dino Hatch") {
+                        showSupportUs = true
+                    }
+                } footer: {
+                    Text("Dino Hatch is free and always will be — this is completely optional.")
+                }
+
+                Section {
                     Button("Reset All Data", role: .destructive) {
                         showResetConfirmation = true
                     }
@@ -68,6 +77,9 @@ struct SettingsView: View {
                 Button("Cancel", role: .cancel) {}
             } message: {
                 Text("This can't be undone.")
+            }
+            .sheet(isPresented: $showSupportUs) {
+                SupportUsView()
             }
         }
     }

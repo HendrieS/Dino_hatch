@@ -1,0 +1,76 @@
+{
+  "identifier": "E7439E5F-E573-4B94-8154-679F4CDDA56C",
+  "nonRenewingSubscriptions": [],
+  "products": [
+    {
+      "displayPrice": "0.99",
+      "familyShareable": false,
+      "internalID": "88EBFB91-A70E-4F58-AF69-470BA7AD1F84",
+      "localizations": [
+        {
+          "description": "A small thank-you badge for supporting Dino Hatch.",
+          "displayName": "Supporter",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "com.dinohatchtimer.app.support.gray",
+      "referenceName": "Supporter (Gray)",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "2.99",
+      "familyShareable": false,
+      "internalID": "2DD88477-B251-4968-9ADC-F85B3EB2E9C8",
+      "localizations": [
+        {
+          "description": "A green thank-you badge for supporting Dino Hatch.",
+          "displayName": "Green Supporter",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "com.dinohatchtimer.app.support.green",
+      "referenceName": "Supporter (Green)",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "4.99",
+      "familyShareable": false,
+      "internalID": "886E75D4-6776-41FF-997E-37CCD743354E",
+      "localizations": [
+        {
+          "description": "A gold thank-you badge for supporting Dino Hatch.",
+          "displayName": "Gold Supporter",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "com.dinohatchtimer.app.support.gold",
+      "referenceName": "Supporter (Gold)",
+      "type": "NonConsumable"
+    },
+    {
+      "displayPrice": "9.99",
+      "familyShareable": false,
+      "internalID": "A95D8906-6E5A-4BE3-BDBD-7F452736A86D",
+      "localizations": [
+        {
+          "description": "A purple thank-you badge for supporting Dino Hatch.",
+          "displayName": "Purple Supporter",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "com.dinohatchtimer.app.support.purple",
+      "referenceName": "Supporter (Purple)",
+      "type": "NonConsumable"
+    }
+  ],
+  "settings": {
+    "_applicationInternalID": "0",
+    "_developerTeamID": "0",
+    "_lastSynchronizedDate": 0
+  },
+  "subscriptionGroups": [],
+  "version": {
+    "major": 3,
+    "minor": 0
+  }
+}

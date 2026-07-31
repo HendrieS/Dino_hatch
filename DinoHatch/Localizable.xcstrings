@@ -1842,6 +1842,88 @@
         }
       }
     },
+    "Dino Hatch is free and always will be — this is completely optional.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dino Hatch ist kostenlos und wird es immer bleiben — das hier ist völlig freiwillig."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dino Hatch is free and always will be — this is completely optional."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dino Hatch es gratis y siempre lo será — esto es completamente opcional."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dino Hatch est gratuit et le restera toujours — ceci est entièrement facultatif."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dino Hatch is gratis en zal dat altijd blijven — dit is volledig optioneel."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dino Hatch бесплатно и всегда будет бесплатным — это совершенно необязательно."
+          }
+        }
+      }
+    },
+    "Dino Hatch is free and always will be. If your family enjoys it, you can leave a little support here — it only ever unlocks a small thank-you badge, never anything in the game itself.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dino Hatch ist kostenlos und wird es immer bleiben. Wenn eure Familie Spaß daran hat, könnt ihr hier eine kleine Unterstützung dalassen — das schaltet nur ein kleines Dankeschön-Abzeichen frei, niemals etwas im Spiel selbst."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dino Hatch is free and always will be. If your family enjoys it, you can leave a little support here — it only ever unlocks a small thank-you badge, never anything in the game itself."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dino Hatch es gratis y siempre lo será. Si a tu familia le gusta, puedes dejar un pequeño apoyo aquí — esto solo desbloquea una pequeña insignia de agradecimiento, nunca nada dentro del juego."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dino Hatch est gratuit et le restera toujours. Si votre famille l'apprécie, vous pouvez laisser un petit soutien ici — cela ne débloque qu'un petit badge de remerciement, jamais quoi que ce soit dans le jeu lui-même."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dino Hatch is gratis en zal dat altijd blijven. Als jullie gezin er plezier aan beleeft, kun je hier een kleine bijdrage achterlaten — dit ontgrendelt alleen een klein bedankje-insigne, nooit iets in het spel zelf."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dino Hatch бесплатно и всегда будет бесплатным. Если вашей семье нравится приложение, вы можете оставить здесь небольшую поддержку — это лишь открывает небольшой значок благодарности, а не что-то в самой игре."
+          }
+        }
+      }
+    },
     "Dino-pedia": {
       "extractionState": "stale",
       "localizations": {
@@ -2698,6 +2780,88 @@
           "stringUnit": {
             "state": "translated",
             "value": "Гиганотозавр был даже длиннее тираннозавра, что делает его одним из крупнейших хищных динозавров, когда-либо найденных!"
+          }
+        }
+      }
+    },
+    "Gold Supporter": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Goldener Unterstützer"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gold Supporter"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Colaborador dorado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contributeur or"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gouden steuner"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Золотой спонсор"
+          }
+        }
+      }
+    },
+    "Green Supporter": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grüner Unterstützer"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Green Supporter"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Colaborador verde"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contributeur vert"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Groene steuner"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зелёный спонсор"
           }
         }
       }
@@ -4583,6 +4747,47 @@
         }
       }
     },
+    "Purple Supporter": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Violetter Unterstützer"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Purple Supporter"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Colaborador morado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contributeur violet"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paarse steuner"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Фиолетовый спонсор"
+          }
+        }
+      }
+    },
     "Quetzalcoatlus": {
       "extractionState": "stale",
       "localizations": {
@@ -4988,6 +5193,47 @@
           "stringUnit": {
             "state": "translated",
             "value": "Сбросить всё"
+          }
+        }
+      }
+    },
+    "Restore Purchases": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Käufe wiederherstellen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restore Purchases"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurar compras"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurer les achats"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aankopen herstellen"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Восстановить покупки"
           }
         }
       }
@@ -6096,6 +6342,170 @@
         }
       }
     },
+    "Support": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unterstützen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Support"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apoyar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Soutenir"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Steunen"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Поддержать"
+          }
+        }
+      }
+    },
+    "Support Dino Hatch": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dino Hatch unterstützen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Support Dino Hatch"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apoyar a Dino Hatch"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Soutenir Dino Hatch"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dino Hatch steunen"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Поддержать Dino Hatch"
+          }
+        }
+      }
+    },
+    "Support Us": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unterstützen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Support Us"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apóyanos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nous soutenir"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Steun ons"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Поддержать нас"
+          }
+        }
+      }
+    },
+    "Supporter": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unterstützer"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supporter"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Colaborador"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contributeur"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Steuner"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Спонсор"
+          }
+        }
+      }
+    },
     "T-Rex had teeth as long as bananas and one of the strongest bites of any animal ever!": {
       "extractionState": "stale",
       "localizations": {
@@ -6174,6 +6584,47 @@
           "stringUnit": {
             "state": "translated",
             "value": "Нажмите на любого вылупившегося динозавра, чтобы прочитать интересные факты о нём, понятные детям. Нажмите и удерживайте, чтобы увидеть рентген — он открывается после первого вылупления для детей 5 лет и младше, или после двух вылуплений для детей от 6 лет."
+          }
+        }
+      }
+    },
+    "Thank you!": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Danke!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thank you!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Gracias!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Merci !"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dank je wel!"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Спасибо!"
           }
         }
       }
@@ -7326,6 +7777,47 @@
         }
       }
     },
+    "You're welcome": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gern geschehen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You're welcome"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De nada"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De rien"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Graag gedaan"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Пожалуйста"
+          }
+        }
+      }
+    },
     "Your egg is ready!": {
       "extractionState": "manual",
       "localizations": {
@@ -7363,6 +7855,47 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ваше яйцо готово!"
+          }
+        }
+      }
+    },
+    "Your support means a lot — enjoy your new badge!": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Unterstützung bedeutet uns viel — viel Freude mit deinem neuen Abzeichen!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your support means a lot — enjoy your new badge!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu apoyo significa mucho — ¡disfruta de tu nueva insignia!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre soutien compte beaucoup — profitez de votre nouveau badge !"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jouw steun betekent veel — geniet van je nieuwe insigne!"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ваша поддержка значит очень много — наслаждайтесь новым значком!"
           }
         }
       }
