@@ -112,7 +112,7 @@ enum DinosaurCatalog {
             skeletonAssetName: "ankylosaurus-skeleton",
             rangeMapAssetName: "region-north-america",
             rangeLabel: "Western North America",
-            rarity: .uncommon
+            rarity: .common
         ),
         Dinosaur(
             id: "pteranodon",
@@ -160,7 +160,7 @@ enum DinosaurCatalog {
             skeletonAssetName: "diplodocus-skeleton",
             rangeMapAssetName: "region-north-america",
             rangeLabel: "Western North America",
-            rarity: .rare
+            rarity: .uncommon
         ),
         Dinosaur(
             id: "allosaurus",
@@ -192,7 +192,7 @@ enum DinosaurCatalog {
             skeletonAssetName: "pachycephalosaurus-skeleton",
             rangeMapAssetName: "region-north-america",
             rangeLabel: "Western North America",
-            rarity: .uncommon
+            rarity: .common
         ),
         Dinosaur(
             id: "iguanodon",
@@ -256,7 +256,7 @@ enum DinosaurCatalog {
             skeletonAssetName: "plateosaurus-skeleton",
             rangeMapAssetName: "region-europe",
             rangeLabel: "Western Europe",
-            rarity: .uncommon
+            rarity: .common
         ),
         Dinosaur(
             id: "dilophosaurus",
@@ -410,7 +410,7 @@ enum DinosaurCatalog {
             imageAssetName: "quetzalcoatlus-skin",
             rangeMapAssetName: "region-north-america",
             rangeLabel: "Western North America",
-            rarity: .rare
+            rarity: .uncommon
         ),
 
         // Secret dinosaurs: not shown in the Collection grid while locked
