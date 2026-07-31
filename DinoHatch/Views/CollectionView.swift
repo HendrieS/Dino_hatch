@@ -69,7 +69,7 @@ struct CollectionView: View {
         case .name:
             list.sort { $0.localizedName.localizedCaseInsensitiveCompare($1.localizedName) == .orderedAscending }
         case .rarity:
-            list.sort { $0.rarity.starCount > $1.rarity.starCount }
+            list.sort { $0.rarity.starCount < $1.rarity.starCount }
         }
         return list
     }
