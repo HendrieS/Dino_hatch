@@ -18,7 +18,7 @@ struct HelpCenterView: View {
             }
 
             Section("Where it's stored") {
-                Text("Everything lives only on this device. There's no account, no cloud sync, no analytics, and no ads — the app doesn't need an internet connection to work, and nothing is ever sent anywhere.")
+                Text("Everything is stored on this device, and syncs privately through your iCloud account to your family's other devices — so the same collection, timer, and alarm show up whether your child uses an iPhone or an iPad. There's no separate account, no analytics, and no ads. This uses your own iCloud storage, not ours — nothing is ever sent to us. You can turn this off for Dino Hatch at any time in your device's Settings app under your name → iCloud → Saved to iCloud.")
             }
 
             Section("How the timer works") {
