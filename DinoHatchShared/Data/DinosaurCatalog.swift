@@ -157,6 +157,7 @@ enum DinosaurCatalog {
             symbolName: "arrow.left.and.right",
             emoji: "🦕",
             imageAssetName: "diplodocus-skin",
+            skeletonAssetName: "diplodocus-skeleton",
             rangeMapAssetName: "region-north-america",
             rangeLabel: "Western North America",
             rarity: .rare
