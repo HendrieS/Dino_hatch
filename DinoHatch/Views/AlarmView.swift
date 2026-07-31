@@ -37,8 +37,8 @@ struct AlarmView: View {
     }
 
     /// True right after the alarm is armed too late to catch today's window
-    /// — shows an encouraging "get ready for tomorrow" message instead of
-    /// the sad "missed it" one.
+    /// — shows an encouraging "get ready for next time" message (see
+    /// `nextAlarmIsTomorrow`) instead of the sad "missed it" one.
     private var isPendingFirstChance: Bool {
         guard let settings = alarms.first, settings.isEnabled else { return false }
         return AlarmClaimer.isPendingFirstChance(
@@ -48,6 +48,21 @@ struct AlarmView: View {
             lastHatchDate: settings.lastHatchDate,
             enabledAt: settings.enabledAt
         )
+    }
+
+    /// The next concrete time the alarm will actually fire, respecting
+    /// which weekdays are selected — used only to decide whether the
+    /// header message below can say "tomorrow" truthfully (e.g. today's
+    /// window closing on a Friday with only weekdays selected means the
+    /// next occurrence is Monday, not tomorrow).
+    private var nextAlarmFireDate: Date? {
+        guard let settings = alarms.first, settings.isEnabled else { return nil }
+        return AlarmNextFireDate.next(hour: settings.hour, minute: settings.minute, weekdays: settings.repeatWeekdays)
+    }
+
+    private var nextAlarmIsTomorrow: Bool {
+        guard let nextAlarmFireDate else { return false }
+        return Calendar.current.isDateInTomorrow(nextAlarmFireDate)
     }
 
     /// Consecutive scheduled alarms claimed in a row, zeroed out the moment
@@ -79,17 +94,29 @@ struct AlarmView: View {
                         .padding(.top, 12)
 
                     if headerImageName == "alarm-sad" {
-                        Text("Missed it today — try again tomorrow!")
-                            .font(.subheadline.bold())
-                            .foregroundStyle(.secondary)
-                            .multilineTextAlignment(.center)
-                            .fixedSize(horizontal: false, vertical: true)
+                        Group {
+                            if nextAlarmIsTomorrow {
+                                Text("Missed it today — try again tomorrow!")
+                            } else {
+                                Text("Missed it today — try again next time!")
+                            }
+                        }
+                        .font(.subheadline.bold())
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
                     } else if isPendingFirstChance {
-                        Text("Get ready to wake up on time tomorrow!")
-                            .font(.subheadline.bold())
-                            .foregroundStyle(Color.dinoGreen)
-                            .multilineTextAlignment(.center)
-                            .fixedSize(horizontal: false, vertical: true)
+                        Group {
+                            if nextAlarmIsTomorrow {
+                                Text("Get ready to wake up on time tomorrow!")
+                            } else {
+                                Text("Get ready to wake up on time for your next alarm!")
+                            }
+                        }
+                        .font(.subheadline.bold())
+                        .foregroundStyle(Color.dinoGreen)
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
                     } else if displayedStreak > 0 {
                         HStack(spacing: 4) {
                             Text("🔥")

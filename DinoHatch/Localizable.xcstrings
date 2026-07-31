@@ -2866,6 +2866,47 @@
         }
       }
     },
+    "Get ready to wake up on time for your next alarm!": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mach dich bereit, zu deinem nächsten Wecker pünktlich aufzuwachen!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Get ready to wake up on time for your next alarm!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Prepárate para despertarte a tiempo en tu próxima alarma!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prépare-toi à te réveiller à l'heure pour ta prochaine alarme !"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maak je klaar om op tijd wakker te worden voor je volgende wekker!"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Готовься проснуться вовремя к следующему будильнику!"
+          }
+        }
+      }
+    },
     "Get ready to wake up on time tomorrow!": {
       "extractionState": "manual",
       "localizations": {
@@ -4172,6 +4213,47 @@
           "stringUnit": {
             "state": "translated",
             "value": "Средний мел"
+          }
+        }
+      }
+    },
+    "Missed it today — try again next time!": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heute verpasst — versuch's beim nächsten Mal wieder!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Missed it today — try again next time!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoy se te pasó — ¡inténtalo de nuevo la próxima vez!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Raté aujourd'hui — réessayez la prochaine fois !"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vandaag gemist — volgende keer weer proberen!"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сегодня не успели — попробуйте в следующий раз!"
           }
         }
       }
