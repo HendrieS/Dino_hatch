@@ -398,6 +398,21 @@ enum DinosaurCatalog {
             rarity: .rare
         ),
         Dinosaur(
+            id: "carnotaurus",
+            name: "Carnotaurus",
+            era: "Late Cretaceous",
+            diet: .carnivore,
+            length: "8 m (26 ft)",
+            weight: "1,500 kg (3,300 lb)",
+            funFact: "Carnotaurus means 'meat-eating bull' and had two short horns above its eyes and tiny, stubby arms!",
+            symbolName: "bolt.trianglebadge.exclamationmark.fill",
+            emoji: "🐂",
+            imageAssetName: "carnotaurus-skin",
+            rangeMapAssetName: "region-south-america",
+            rangeLabel: "South America",
+            rarity: .rare
+        ),
+        Dinosaur(
             id: "quetzalcoatlus",
             name: "Quetzalcoatlus",
             era: "Late Cretaceous",
@@ -417,11 +432,12 @@ enum DinosaurCatalog {
         // (no silhouette, no hint they exist), and excluded from
         // HatchSelector's pool until every dinosaur above has been
         // unlocked. See Dinosaur.isSecret / HatchSelector.pickNext.
-        // Deliberately varied rather than four near-identical giant
+        // Deliberately varied rather than a bunch of near-identical giant
         // sauropods: one record-breaking herbivore, one apex predator,
-        // one giant-clawed oddity, and one horned sprinter, so the
-        // "you found them all" reward doesn't feel like four copies of
-        // the same dinosaur.
+        // and one giant-clawed oddity so far — a fourth (Amargasaurus,
+        // distinctive double-sailed spine) arrives with the catalog's
+        // next expansion wave, replacing Carnotaurus, which moved back
+        // to the regular Rare tier above.
         Dinosaur(
             id: "patagotitan",
             name: "Patagotitan",
@@ -467,22 +483,6 @@ enum DinosaurCatalog {
             imageAssetName: "therizinosaurus-skin",
             rangeMapAssetName: "region-mongolia-china",
             rangeLabel: "Mongolia & China",
-            rarity: .secretRare,
-            isSecret: true
-        ),
-        Dinosaur(
-            id: "carnotaurus",
-            name: "Carnotaurus",
-            era: "Late Cretaceous",
-            diet: .carnivore,
-            length: "8 m (26 ft)",
-            weight: "1,500 kg (3,300 lb)",
-            funFact: "Carnotaurus means 'meat-eating bull' and had two short horns above its eyes and tiny, stubby arms!",
-            symbolName: "bolt.trianglebadge.exclamationmark.fill",
-            emoji: "🐂",
-            imageAssetName: "carnotaurus-skin",
-            rangeMapAssetName: "region-south-america",
-            rangeLabel: "South America",
             rarity: .secretRare,
             isSecret: true
         )
