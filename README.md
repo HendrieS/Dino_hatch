@@ -128,7 +128,9 @@ Then in Xcode:
 - **Age onboarding & settings**: the first time the app is opened,
   `Views/AgeOnboardingView.swift` asks for the child's general age and
   gates the rest of the app (`Views/RootTabView.swift` shows it instead of
-  the `TabView` whenever `AppSettings.childAge` is `nil`). A gear icon on
+  the `TabView` whenever `AppSettings.childAge` is `nil`). Its header image
+  is `alarm-egg` (the same hatching-egg-with-baby-dino illustration
+  `AlarmView`'s default state uses) rather than a plain emoji. A gear icon on
   the Collection tab opens `Views/ParentalGateView.swift` first — a quick
   random single-digit multiplication question (not real security, just
   enough friction to keep a small child out) that only then reveals
