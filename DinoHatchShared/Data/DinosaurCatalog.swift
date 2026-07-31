@@ -220,6 +220,7 @@ enum DinosaurCatalog {
             symbolName: "hare.fill",
             emoji: "🐔",
             imageAssetName: "compsognathus-skin",
+            skeletonAssetName: "compsognathus-skeleton",
             rangeMapAssetName: "region-europe",
             rangeLabel: "Western Europe",
             rarity: .common
@@ -235,6 +236,7 @@ enum DinosaurCatalog {
             symbolName: "figure.run",
             emoji: "🦎",
             imageAssetName: "coelophysis-skin",
+            skeletonAssetName: "coelophysis-skeleton",
             rangeMapAssetName: "region-north-america",
             rangeLabel: "Western North America",
             rarity: .common
@@ -250,6 +252,7 @@ enum DinosaurCatalog {
             symbolName: "mountain.2.fill",
             emoji: "🦕",
             imageAssetName: "plateosaurus-skin",
+            skeletonAssetName: "plateosaurus-skeleton",
             rangeMapAssetName: "region-europe",
             rangeLabel: "Western Europe",
             rarity: .uncommon
@@ -265,6 +268,7 @@ enum DinosaurCatalog {
             symbolName: "crown.fill",
             emoji: "🦖",
             imageAssetName: "dilophosaurus-skin",
+            skeletonAssetName: "dilophosaurus-skeleton",
             rangeMapAssetName: "region-north-america",
             rangeLabel: "Western North America",
             rarity: .uncommon
@@ -280,6 +284,7 @@ enum DinosaurCatalog {
             symbolName: "arrow.up.and.down.circle.fill",
             emoji: "🦕",
             imageAssetName: "apatosaurus-skin",
+            skeletonAssetName: "apatosaurus-skeleton",
             rangeMapAssetName: "region-north-america",
             rangeLabel: "Western North America",
             rarity: .common
@@ -295,6 +300,7 @@ enum DinosaurCatalog {
             symbolName: "fish.fill",
             emoji: "🐟",
             imageAssetName: "baryonyx-skin",
+            skeletonAssetName: "baryonyx-skeleton",
             rangeMapAssetName: "region-europe",
             rangeLabel: "Western Europe",
             rarity: .uncommon
@@ -310,6 +316,7 @@ enum DinosaurCatalog {
             symbolName: "bolt.horizontal.fill",
             emoji: "🏃",
             imageAssetName: "gallimimus-skin",
+            skeletonAssetName: "gallimimus-skeleton",
             rangeMapAssetName: "region-mongolia-china",
             rangeLabel: "Mongolia & China",
             rarity: .common
