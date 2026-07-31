@@ -29,6 +29,10 @@ struct CollectionView: View {
         Set(unlocked.map(\.dinosaurID))
     }
 
+    private var unlockedAtByID: [String: Date] {
+        Dictionary(uniqueKeysWithValues: unlocked.map { ($0.dinosaurID, $0.unlockedAt) })
+    }
+
     /// The denominator only ever reflects the regular (non-secret) set, so
     /// it stays "26" forever. The numerator counts everything unlocked —
     /// regular and secret alike — so once a secret dinosaur is found it can
@@ -65,7 +69,21 @@ struct CollectionView: View {
         }
         switch sortOption {
         case .collectionOrder:
-            break
+            // Hatched dinosaurs in the order you actually unlocked them
+            // (oldest first); still-locked ones have no unlock date, so
+            // they fall in behind every unlocked one — `.distantFuture`
+            // as their sort key, tie-broken by catalog position so their
+            // relative order among themselves stays stable and predictable
+            // rather than depending on `sort`'s unspecified tie behavior.
+            let unlockedAtByID = unlockedAtByID
+            list = list.enumerated()
+                .sorted { lhs, rhs in
+                    let lhsDate = unlockedAtByID[lhs.element.id] ?? .distantFuture
+                    let rhsDate = unlockedAtByID[rhs.element.id] ?? .distantFuture
+                    if lhsDate != rhsDate { return lhsDate < rhsDate }
+                    return lhs.offset < rhs.offset
+                }
+                .map(\.element)
         case .name:
             list.sort { $0.localizedName.localizedCaseInsensitiveCompare($1.localizedName) == .orderedAscending }
         case .rarity:
