@@ -20,8 +20,13 @@ struct CountdownView: View {
 
             TimelineView(.periodic(from: .now, by: 0.1)) { context in
                 EggView(remainingFraction: engine.remainingFraction(at: context.date), date: context.date)
-                    .onChange(of: context.date) { _, newDate in
-                        guard !hasCompleted, engine.isComplete(at: newDate) else { return }
+                    // Watches the completion Bool rather than `context.date`
+                    // itself — a raw `Date` changes on every 0.1s tick, and
+                    // SwiftUI logs "action tried to update multiple times
+                    // per frame" for `onChange(of:)` on a value that churns
+                    // that fast. The Bool only flips once (false → true).
+                    .onChange(of: engine.isComplete(at: context.date)) { _, isComplete in
+                        guard !hasCompleted, isComplete else { return }
                         hasCompleted = true
                         onComplete()
                     }
