@@ -25,6 +25,7 @@ final class WidgetSnapshotBuilderTests: XCTestCase {
 
         XCTAssertEqual(snapshot.unlockedCount, 2)
         XCTAssertEqual(snapshot.lastDinosaurEmoji, trex.emoji)
+        XCTAssertEqual(snapshot.lastDinosaurImageAssetName, trex.imageAssetName)
         XCTAssertEqual(snapshot.lastDinosaurName, trex.localizedName)
     }
 
@@ -33,6 +34,7 @@ final class WidgetSnapshotBuilderTests: XCTestCase {
         let snapshot = WidgetSnapshotBuilder.build(unlocked: [record])
         XCTAssertEqual(snapshot.unlockedCount, 1)
         XCTAssertNil(snapshot.lastDinosaurEmoji)
+        XCTAssertNil(snapshot.lastDinosaurImageAssetName)
         XCTAssertNil(snapshot.lastDinosaurName)
     }
 
@@ -64,6 +66,7 @@ final class WidgetSnapshotBuilderTests: XCTestCase {
         let snapshot = WidgetSnapshotBuilder.build(unlocked: [])
         XCTAssertNil(snapshot.activeTimerEndDate)
         XCTAssertNil(snapshot.activeTimerDinosaurEmoji)
+        XCTAssertNil(snapshot.activeTimerDinosaurImageAssetName)
     }
 
     func testActiveTimerCarriesEndDateAndDinosaurEmoji() {
@@ -75,6 +78,7 @@ final class WidgetSnapshotBuilderTests: XCTestCase {
 
         XCTAssertEqual(snapshot.activeTimerEndDate, endDate)
         XCTAssertEqual(snapshot.activeTimerDinosaurEmoji, triceratops.emoji)
+        XCTAssertEqual(snapshot.activeTimerDinosaurImageAssetName, triceratops.imageAssetName)
     }
 
     func testActiveTimerWithUnknownDinosaurIDStillCarriesEndDate() {
@@ -85,5 +89,6 @@ final class WidgetSnapshotBuilderTests: XCTestCase {
 
         XCTAssertEqual(snapshot.activeTimerEndDate, endDate)
         XCTAssertNil(snapshot.activeTimerDinosaurEmoji)
+        XCTAssertNil(snapshot.activeTimerDinosaurImageAssetName)
     }
 }

@@ -6,12 +6,17 @@ import Foundation
 /// store directly, so this is written to an App Group-shared UserDefaults
 /// suite instead. The app resolves `lastDinosaurName` (already localized)
 /// and `lastDinosaurEmoji` before writing, so the widget target doesn't need
-/// `DinosaurCatalog`, the localization catalog, or any dinosaur art at all —
-/// it just displays whatever's in here.
+/// `DinosaurCatalog` or the localization catalog. It *does* share
+/// `Assets.xcassets` (see `project.yml`) so it can render the real skin
+/// illustration via `lastDinosaurImageAssetName`/
+/// `activeTimerDinosaurImageAssetName` — the emoji fields stay as a
+/// fallback for any dinosaur that doesn't have art yet (`DinoWidgetImage`
+/// handles the fallback, mirroring `DinoImageView` in the main app).
 struct WidgetSnapshot: Codable, Equatable {
     var unlockedCount: Int
     var totalCount: Int
     var lastDinosaurEmoji: String? = nil
+    var lastDinosaurImageAssetName: String? = nil
     var lastDinosaurName: String? = nil
     /// Whether an alarm is currently enabled — kept separate from
     /// `nextAlarmFireDate` being non-nil so the alarm widget can tell "off"
@@ -26,9 +31,11 @@ struct WidgetSnapshot: Codable, Equatable {
     /// running (whether or not it's already past, see
     /// `DinoHatchQuickTimerWidgetView`), nil once cancelled or hatched.
     var activeTimerEndDate: Date? = nil
-    /// The emoji of the dinosaur the running timer is hatching, resolved in
-    /// the app the same way `lastDinosaurEmoji` is.
+    /// The emoji/asset name of the dinosaur the running timer is hatching,
+    /// resolved in the app the same way `lastDinosaurEmoji`/
+    /// `lastDinosaurImageAssetName` are.
     var activeTimerDinosaurEmoji: String? = nil
+    var activeTimerDinosaurImageAssetName: String? = nil
 
     static let empty = WidgetSnapshot(unlockedCount: 0, totalCount: 0, lastDinosaurEmoji: nil, lastDinosaurName: nil)
 }

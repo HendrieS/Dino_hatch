@@ -45,8 +45,8 @@ final class TimerEngine {
         pendingDinosaurID = dinosaurID
 
         TimerNotificationScheduler.scheduleHatchNotification(at: end)
-        let dinosaurEmoji = DinosaurCatalog.all.first { $0.id == dinosaurID }?.emoji
-        DinoTimerActivityController.start(endDate: end, dinosaurEmoji: dinosaurEmoji)
+        let dinosaur = DinosaurCatalog.all.first { $0.id == dinosaurID }
+        DinoTimerActivityController.start(endDate: end, dinosaurEmoji: dinosaur?.emoji, dinosaurImageAssetName: dinosaur?.imageAssetName)
     }
 
     func cancel() {

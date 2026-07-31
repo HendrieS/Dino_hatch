@@ -13,7 +13,10 @@ struct CollectionProvider: TimelineProvider {
     func placeholder(in context: Context) -> CollectionEntry {
         CollectionEntry(
             date: .now,
-            snapshot: WidgetSnapshot(unlockedCount: 4, totalCount: 26, lastDinosaurEmoji: "🦖", lastDinosaurName: "Tyrannosaurus Rex")
+            snapshot: WidgetSnapshot(
+                unlockedCount: 4, totalCount: 26,
+                lastDinosaurEmoji: "🦖", lastDinosaurImageAssetName: "trex-skin", lastDinosaurName: "Tyrannosaurus Rex"
+            )
         )
     }
 
@@ -52,8 +55,10 @@ struct DinoHatchCollectionWidgetView: View {
 
     private var smallView: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text(verbatim: "🥚")
-                .font(.system(size: 28))
+            Image("egg-hatch-1")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 32, height: 32)
             Spacer(minLength: 4)
             progressLine(numberSize: 30, secondarySize: 16)
             Text("discovered")
@@ -65,8 +70,7 @@ struct DinoHatchCollectionWidgetView: View {
 
     private var mediumView: some View {
         HStack(spacing: 16) {
-            Text(verbatim: snapshot.lastDinosaurEmoji ?? "🥚")
-                .font(.system(size: 54))
+            DinoWidgetImage(assetName: snapshot.lastDinosaurImageAssetName, emoji: snapshot.lastDinosaurEmoji, size: 60)
 
             VStack(alignment: .leading, spacing: 4) {
                 if let name = snapshot.lastDinosaurName {
@@ -123,7 +127,10 @@ struct DinoHatchCollectionWidget: Widget {
 } timeline: {
     CollectionEntry(
         date: .now,
-        snapshot: WidgetSnapshot(unlockedCount: 7, totalCount: 26, lastDinosaurEmoji: "🦕", lastDinosaurName: "Brachiosaurus")
+        snapshot: WidgetSnapshot(
+            unlockedCount: 7, totalCount: 26,
+            lastDinosaurEmoji: "🦕", lastDinosaurImageAssetName: "brachiosaurus-skin", lastDinosaurName: "Brachiosaurus"
+        )
     )
 }
 
@@ -132,6 +139,9 @@ struct DinoHatchCollectionWidget: Widget {
 } timeline: {
     CollectionEntry(
         date: .now,
-        snapshot: WidgetSnapshot(unlockedCount: 7, totalCount: 26, lastDinosaurEmoji: "🦕", lastDinosaurName: "Brachiosaurus")
+        snapshot: WidgetSnapshot(
+            unlockedCount: 7, totalCount: 26,
+            lastDinosaurEmoji: "🦕", lastDinosaurImageAssetName: "brachiosaurus-skin", lastDinosaurName: "Brachiosaurus"
+        )
     )
 }

@@ -52,11 +52,12 @@ struct StartTimerIntent: AppIntent {
         try context.save()
 
         TimerNotificationScheduler.scheduleHatchNotification(at: end)
-        DinoTimerActivityController.start(endDate: end, dinosaurEmoji: dinosaur.emoji)
+        DinoTimerActivityController.start(endDate: end, dinosaurEmoji: dinosaur.emoji, dinosaurImageAssetName: dinosaur.imageAssetName)
 
         var snapshot = WidgetSnapshotStore.load() ?? .empty
         snapshot.activeTimerEndDate = end
         snapshot.activeTimerDinosaurEmoji = dinosaur.emoji
+        snapshot.activeTimerDinosaurImageAssetName = dinosaur.imageAssetName
         WidgetSnapshotStore.save(snapshot)
 
         WidgetCenter.shared.reloadTimelines(ofKind: WidgetSnapshotStore.quickTimerWidgetKind)

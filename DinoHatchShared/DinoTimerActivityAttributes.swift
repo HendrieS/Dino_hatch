@@ -9,5 +9,6 @@ struct DinoTimerActivityAttributes: ActivityAttributes {
     struct ContentState: Codable, Hashable {
         var endDate: Date
         var dinosaurEmoji: String?
+        var dinosaurImageAssetName: String?
     }
 }

@@ -34,8 +34,10 @@ struct DinoHatchAlarmWidgetView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             HStack(spacing: 6) {
-                Text(verbatim: "⏰")
-                    .font(.system(size: 18))
+                Image("alarm-egg")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 22, height: 22)
                 Text("Dino Alarm")
                     .font(.system(size: 13, weight: .bold, design: .rounded))
                     .foregroundStyle(.secondary)

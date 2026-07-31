@@ -59,6 +59,7 @@ targets:
       - path: DinoHatchWidget
       - path: DinoHatchShared
       - path: DinoHatch/Localizable.xcstrings
+      - path: DinoHatch/Assets.xcassets
     info:
       path: DinoHatchWidget/Info.plist
       properties:

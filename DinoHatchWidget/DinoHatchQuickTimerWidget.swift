@@ -65,8 +65,10 @@ struct DinoHatchQuickTimerWidgetView: View {
 
     private var header: some View {
         HStack(spacing: 6) {
-            Text(verbatim: "🥚")
-                .font(.system(size: 18))
+            Image("egg-hatch-1")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 20, height: 20)
             Text("Quick Timer")
                 .font(.system(size: 13, weight: .bold, design: .rounded))
                 .foregroundStyle(.secondary)
@@ -75,8 +77,7 @@ struct DinoHatchQuickTimerWidgetView: View {
 
     private func countdownView(endDate: Date) -> some View {
         HStack(spacing: 14) {
-            Text(verbatim: snapshot.activeTimerDinosaurEmoji ?? "🥚")
-                .font(.system(size: 36))
+            DinoWidgetImage(assetName: snapshot.activeTimerDinosaurImageAssetName, emoji: snapshot.activeTimerDinosaurEmoji, size: 44)
             Text(endDate, style: .timer)
                 .font(.system(size: 32, weight: .bold, design: .rounded))
                 .monospacedDigit()
@@ -87,8 +88,7 @@ struct DinoHatchQuickTimerWidgetView: View {
 
     private var readyView: some View {
         HStack(spacing: 10) {
-            Text(verbatim: snapshot.activeTimerDinosaurEmoji ?? "🥚")
-                .font(.system(size: 32))
+            DinoWidgetImage(assetName: snapshot.activeTimerDinosaurImageAssetName, emoji: snapshot.activeTimerDinosaurEmoji, size: 36)
             Text("An egg is ready to hatch!")
                 .font(.system(size: 15, weight: .bold, design: .rounded))
         }
@@ -149,7 +149,7 @@ struct DinoHatchQuickTimerWidget: Widget {
         snapshot: WidgetSnapshot(
             unlockedCount: 4, totalCount: 26,
             activeTimerEndDate: .now.addingTimeInterval(600),
-            activeTimerDinosaurEmoji: "🦕"
+            activeTimerDinosaurEmoji: "🦕", activeTimerDinosaurImageAssetName: "brachiosaurus-skin"
         )
     )
 }
@@ -162,7 +162,7 @@ struct DinoHatchQuickTimerWidget: Widget {
         snapshot: WidgetSnapshot(
             unlockedCount: 4, totalCount: 26,
             activeTimerEndDate: .now.addingTimeInterval(-30),
-            activeTimerDinosaurEmoji: "🦕"
+            activeTimerDinosaurEmoji: "🦕", activeTimerDinosaurImageAssetName: "brachiosaurus-skin"
         )
     )
 }

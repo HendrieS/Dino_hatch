@@ -8,6 +8,13 @@ import SwiftUI
 /// wherever a timer starts, this shows up, and tapping it anywhere opens the
 /// app (the default behavior for a Live Activity with no `Link`s of its
 /// own, same reasoning as the Quick Timer widget's countdown/ready states).
+///
+/// Real dinosaur art (via `DinoWidgetImage`) is used at the two sizes big
+/// enough for it to actually read (the Lock Screen banner, the Dynamic
+/// Island's expanded leading region) — the compact/minimal Island regions
+/// stay plain emoji on purpose: they render in the status bar at ~16-20pt,
+/// where a scaled-down illustration would blur while the system's own
+/// emoji glyph rendering stays crisp at any size.
 struct DinoTimerLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: DinoTimerActivityAttributes.self) { context in
@@ -17,8 +24,7 @@ struct DinoTimerLiveActivity: Widget {
         } dynamicIsland: { context in
             DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
-                    Text(verbatim: context.state.dinosaurEmoji ?? "🥚")
-                        .font(.system(size: 28))
+                    DinoWidgetImage(assetName: context.state.dinosaurImageAssetName, emoji: context.state.dinosaurEmoji, size: 28)
                 }
                 DynamicIslandExpandedRegion(.trailing) {
                     Text(context.state.endDate, style: .timer)
@@ -45,8 +51,7 @@ struct DinoTimerLiveActivity: Widget {
 
     private func lockScreenView(context: ActivityViewContext<DinoTimerActivityAttributes>) -> some View {
         HStack(spacing: 14) {
-            Text(verbatim: context.state.dinosaurEmoji ?? "🥚")
-                .font(.system(size: 40))
+            DinoWidgetImage(assetName: context.state.dinosaurImageAssetName, emoji: context.state.dinosaurEmoji, size: 48)
             VStack(alignment: .leading, spacing: 2) {
                 Text(verbatim: "Dino Hatch")
                     .font(.system(size: 13, weight: .semibold, design: .rounded))

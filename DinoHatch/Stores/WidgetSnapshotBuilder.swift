@@ -46,11 +46,13 @@ enum WidgetSnapshotBuilder {
             unlockedCount: unlocked.count,
             totalCount: totalCount,
             lastDinosaurEmoji: dinosaur?.emoji,
+            lastDinosaurImageAssetName: dinosaur?.imageAssetName,
             lastDinosaurName: dinosaur?.localizedName,
             alarmEnabled: alarmEnabled,
             nextAlarmFireDate: nextAlarmFireDate,
             activeTimerEndDate: activeTimer?.endDate,
-            activeTimerDinosaurEmoji: activeTimerDinosaur?.emoji
+            activeTimerDinosaurEmoji: activeTimerDinosaur?.emoji,
+            activeTimerDinosaurImageAssetName: activeTimerDinosaur?.imageAssetName
         )
     }
 }

@@ -257,9 +257,11 @@ SwiftData store directly. Instead:
   using the `group.com.dinohatch.app` App Group.
 - `Stores/WidgetSnapshotBuilder.swift` (main app only, unit-tested) turns the
   unlocked collection into a `WidgetSnapshot` — resolving the most recent
-  dinosaur's localized name and emoji *in the app*, so the widget target
-  doesn't need `DinosaurCatalog`, dinosaur art, or (beyond its own couple of
-  UI strings) the localization catalog at all.
+  dinosaur's localized name, emoji, and `imageAssetName` *in the app*, so
+  the widget target doesn't need `DinosaurCatalog` or (beyond its own
+  couple of UI strings) the localization catalog. It does share the real
+  artwork itself — see [Custom art in the widgets](#custom-art-in-the-widgets)
+  below.
 - `RootTabView` calls `WidgetSnapshotBuilder`/`WidgetSnapshotStore.save` and
   `WidgetCenter.shared.reloadTimelines` on every launch/foreground and
   whenever the unlocked count changes, covering both the timer's and the
@@ -367,6 +369,39 @@ Once the countdown reaches zero the Live Activity keeps showing (ticking
 past zero, same accepted limitation as the Quick Timer widget's countdown)
 until the app is actually opened and the hatch plays through —
 `TimerEngine.cancel()`/`completeHatch()` is what ends it.
+
+### Custom art in the widgets
+
+The Collection widget, Quick Timer widget, Alarm widget, and Live Activity
+all originally used plain emoji (🥚, 🦖, ⏰) as placeholders. They now use
+the app's real illustrated art instead:
+
+- `DinoHatch/Assets.xcassets` is shared into the `DinoHatchWidget` target
+  via `project.yml` (the same pattern already used for
+  `Localizable.xcstrings`), so the widget/Live Activity can render the same
+  skin illustrations the app itself uses — every dinosaur already has one,
+  so no new art was needed for this. Sharing the whole catalog (rather than
+  a curated subset) also means any art added to it later is automatically
+  available in the widgets too, with no extra wiring.
+- `WidgetSnapshot` carries `lastDinosaurImageAssetName`/
+  `activeTimerDinosaurImageAssetName` alongside the existing emoji fields,
+  and `DinoTimerActivityAttributes.ContentState` carries
+  `dinosaurImageAssetName` for the Live Activity. The emoji fields stay as
+  a fallback, not dead weight — `DinoWidgetImage.swift` (widget target
+  only) renders the real image when the asset name resolves to a bundled
+  one and falls back to the emoji otherwise, the same graceful-degradation
+  shape as `DinoImageView` in the main app.
+- The generic (non-dinosaur-specific) icons use existing art rather than
+  new uploads: the Collection and Quick Timer widgets' header icon is
+  `egg-hatch-1` (the plain speckled egg, stage 1 of the hatch animation);
+  the Alarm widget's header icon is `alarm-egg` (the same illustration
+  `AlarmView`'s default state already uses).
+- The Live Activity uses real art only where it's large enough to actually
+  read — the Lock Screen banner and the Dynamic Island's *expanded*
+  leading region. The compact/minimal Dynamic Island regions (rendered in
+  the status bar at ~16-20pt) stay plain emoji on purpose, since a
+  scaled-down illustration would blur there while the system's own emoji
+  rendering stays crisp at any size.
 
 ## Localization
 
