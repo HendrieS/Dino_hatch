@@ -10,6 +10,9 @@ struct DinoSilhouetteView: View {
 
             Text("???")
                 .font(.subheadline.bold())
+                // Matches DinoCardView's reserved 2-line name height, so
+                // locked and unlocked cards stay the same size in the grid.
+                .lineLimit(2, reservesSpace: true)
                 .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity)
