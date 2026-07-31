@@ -43,7 +43,7 @@ struct WidgetSnapshot: Codable, Equatable {
 /// Shared App Group read/write for `WidgetSnapshot`. Both targets link this
 /// file; only the main app ever calls `save`, both call `load`.
 enum WidgetSnapshotStore {
-    static let appGroupID = "group.com.dinohatch.app"
+    static let appGroupID = "group.com.dinohatch7567gl.app"
     static let widgetKind = "DinoHatchCollectionWidget"
     static let alarmWidgetKind = "DinoHatchAlarmWidget"
     static let quickTimerWidgetKind = "DinoHatchQuickTimerWidget"

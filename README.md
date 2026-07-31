@@ -35,11 +35,11 @@ Then in Xcode:
    (paid) Team, then repeat for the `DinoHatchWidget` target. Xcode will
    offer to fix the bundle identifiers / provisioning automatically — you
    can also change `PRODUCT_BUNDLE_IDENTIFIER` in `project.yml` (search for
-   `com.dinohatch.app`), then re-run `xcodegen generate`. Both targets share
-   the `group.com.dinohatch.app` App Group (see
+   `com.dinohatch7567gl.app`), then re-run `xcodegen generate`. Both targets share
+   the `group.com.dinohatch7567gl.app` App Group (see
    [Home Screen widget](#home-screen-widget) below) — it backs the app's
    actual SwiftData store, not just widget data, so the app won't launch at
-   all without it — and the `iCloud.com.dinohatch.app` container (see
+   all without it — and the `iCloud.com.dinohatch7567gl.app` container (see
    [iCloud sync](#icloud-sync) below). With automatic signing both should
    provision themselves; if Xcode complains, add the **App Groups** and
    **iCloud** (with **CloudKit** checked) capabilities manually on each
@@ -259,7 +259,7 @@ SwiftData store directly. Instead:
 
 - `DinoHatchShared/WidgetSnapshot.swift` (compiled into both targets) defines
   a small `Codable` struct plus a `UserDefaults(suiteName:)` read/write pair,
-  using the `group.com.dinohatch.app` App Group.
+  using the `group.com.dinohatch7567gl.app` App Group.
 - `Stores/WidgetSnapshotBuilder.swift` (main app only, unit-tested) turns the
   unlocked collection into a `WidgetSnapshot` — resolving the most recent
   dinosaur's localized name, emoji, and `imageAssetName` *in the app*, so
@@ -301,7 +301,7 @@ launches the app. That's only possible if the widget extension can open the
 *exact same* SwiftData store the app uses, which took a bigger change than
 the button itself:
 
-- The app's `ModelContainer` now lives inside the `group.com.dinohatch.app`
+- The app's `ModelContainer` now lives inside the `group.com.dinohatch7567gl.app`
   App Group container (`DinoHatchShared/SharedModelContainer.swift`) instead
   of its own default location, so both processes can open the same file.
   **This resets any local data from before this change** — the store moved,

@@ -2,7 +2,7 @@ import Foundation
 import SwiftData
 
 /// Builds the one `ModelContainer` both targets use, backed by a file inside
-/// the `group.com.dinohatch.app` App Group container rather than the app's
+/// the `group.com.dinohatch7567gl.app` App Group container rather than the app's
 /// own default location — the Quick Timer widget's `StartTimerIntent` runs
 /// in the widget extension's process and needs to write `AppSettings`
 /// directly (so a timer started from the widget is indistinguishable, once
@@ -13,7 +13,7 @@ import SwiftData
 /// rejects the store as incompatible.
 ///
 /// `cloudKitDatabase: .automatic` syncs the collection/timer/alarm state
-/// across a kid's devices via the `iCloud.com.dinohatch.app` container
+/// across a kid's devices via the `iCloud.com.dinohatch7567gl.app` container
 /// (entitled identically on both targets, same reasoning as the App Group
 /// above). This needs a paid Apple Developer Program membership — personal/
 /// free teams can't provision the iCloud capability at all. It degrades
