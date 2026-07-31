@@ -125,6 +125,7 @@ enum DinosaurCatalog {
             symbolName: "bird.fill",
             emoji: "🦅",
             imageAssetName: "pteranodon-skin",
+            skeletonAssetName: "pteranodon-skeleton",
             rangeMapAssetName: "region-north-america",
             rangeLabel: "Western North America",
             rarity: .uncommon
@@ -140,6 +141,7 @@ enum DinosaurCatalog {
             symbolName: "speaker.wave.3.fill",
             emoji: "📯",
             imageAssetName: "parasaurolophus-skin",
+            skeletonAssetName: "parasaurolophus-skeleton",
             rangeMapAssetName: "region-north-america",
             rangeLabel: "Western North America",
             rarity: .common
@@ -170,6 +172,7 @@ enum DinosaurCatalog {
             symbolName: "bolt.fill",
             emoji: "🦖",
             imageAssetName: "allosaurus-skin",
+            skeletonAssetName: "allosaurus-skeleton",
             rangeMapAssetName: "region-north-america",
             rangeLabel: "Western North America",
             rarity: .uncommon
@@ -185,6 +188,7 @@ enum DinosaurCatalog {
             symbolName: "circle.fill",
             emoji: "🪨",
             imageAssetName: "pachycephalosaurus-skin",
+            skeletonAssetName: "pachycephalosaurus-skeleton",
             rangeMapAssetName: "region-north-america",
             rangeLabel: "Western North America",
             rarity: .uncommon
@@ -200,6 +204,7 @@ enum DinosaurCatalog {
             symbolName: "hand.point.up.fill",
             emoji: "👍",
             imageAssetName: "iguanodon-skin",
+            skeletonAssetName: "iguanodon-skeleton",
             rangeMapAssetName: "region-europe",
             rangeLabel: "Western Europe",
             rarity: .common
