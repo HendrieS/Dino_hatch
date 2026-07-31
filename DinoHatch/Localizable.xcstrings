@@ -2006,6 +2006,47 @@
         }
       }
     },
+    "Dinosaur rarity": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dinosaurier-Seltenheit"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dinosaur rarity"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rareza de los dinosaurios"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rareté des dinosaures"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zeldzaamheid van dinosaurussen"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Редкость динозавров"
+          }
+        }
+      }
+    },
     "Diplodocus": {
       "extractionState": "stale",
       "localizations": {
@@ -2452,6 +2493,47 @@
           "stringUnit": {
             "state": "translated",
             "value": "Удаляет коллекцию динозавров, настройки таймера и будильника и снова запрашивает возраст ребёнка."
+          }
+        }
+      }
+    },
+    "Every dinosaur has a rarity — Common, Uncommon, Rare, or Secret Rare — shown as a colored border and star count on its card, like a trading card. This is just for fun and doesn't change the odds: every not-yet-hatched dinosaur has an equal chance of being the next one, regardless of rarity. Secret Rare is reserved for the collection's four hidden dinosaurs, which only become hatchable after every other dinosaur has been found.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jeder Dinosaurier hat eine Seltenheit — Gewöhnlich, Ungewöhnlich, Selten oder Geheim Selten — zu erkennen an einem farbigen Rahmen und der Sternanzahl auf seiner Karte, wie bei einer Sammelkarte. Das ist nur zum Spaß und ändert nichts an den Chancen: Jeder noch nicht geschlüpfte Dinosaurier hat unabhängig von seiner Seltenheit die gleiche Chance, als Nächstes zu schlüpfen. Geheim Selten ist den vier versteckten Dinosauriern der Sammlung vorbehalten, die erst schlüpfbar werden, nachdem jeder andere Dinosaurier gefunden wurde."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every dinosaur has a rarity — Common, Uncommon, Rare, or Secret Rare — shown as a colored border and star count on its card, like a trading card. This is just for fun and doesn't change the odds: every not-yet-hatched dinosaur has an equal chance of being the next one, regardless of rarity. Secret Rare is reserved for the collection's four hidden dinosaurs, which only become hatchable after every other dinosaur has been found."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cada dinosaurio tiene una rareza — Común, Poco común, Raro o Secreto raro — que se muestra como un borde de color y una cantidad de estrellas en su tarjeta, como en una carta coleccionable. Esto es solo por diversión y no cambia las probabilidades: cada dinosaurio aún no eclosionado tiene la misma probabilidad de ser el siguiente, sin importar su rareza. Secreto raro está reservado para los cuatro dinosaurios ocultos de la colección, que solo se pueden eclosionar después de haber encontrado todos los demás dinosaurios."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chaque dinosaure a une rareté — Commun, Peu commun, Rare ou Secret rare — indiquée par une bordure colorée et un nombre d'étoiles sur sa carte, comme une carte à collectionner. C'est purement pour le plaisir et cela ne change rien aux chances : chaque dinosaure pas encore éclos a une chance égale d'être le prochain, quelle que soit sa rareté. Secret rare est réservé aux quatre dinosaures cachés de la collection, qui ne deviennent éclosables qu'une fois tous les autres dinosaures trouvés."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elke dinosaurus heeft een zeldzaamheid — Gewoon, Ongewoon, Zeldzaam of Geheim zeldzaam — te zien aan een gekleurde rand en het aantal sterren op zijn kaart, net als bij een verzamelkaart. Dit is puur voor de leuk en verandert niets aan de kansen: elke nog niet uitgebroede dinosaurus heeft evenveel kans om de volgende te zijn, ongeacht de zeldzaamheid. Geheim zeldzaam is gereserveerd voor de vier verborgen dinosaurussen van de collectie, die pas uitbroedbaar worden nadat alle andere dinosaurussen zijn gevonden."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У каждого динозавра есть редкость — обычный, необычный, редкий или секретный редкий — она отображается в виде цветной рамки и количества звёзд на карточке, как в коллекционных карточках. Это сделано просто ради удовольствия и никак не влияет на шансы: у каждого ещё не вылупившегося динозавра одинаковая вероятность стать следующим, независимо от редкости. Категория «секретный редкий» зарезервирована для четырёх скрытых динозавров коллекции, которые становятся доступны для вылупления только после того, как найдены все остальные динозавры."
           }
         }
       }
