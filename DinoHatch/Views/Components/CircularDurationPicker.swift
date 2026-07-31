@@ -1,23 +1,25 @@
 import SwiftUI
 
 /// Clock-face style duration picker: drag anywhere on the dial to set any
-/// duration from 0:01 up to 59:59, or tap one of the 5-minute numbers to
-/// jump straight to it (without starting the timer). One full lap of the
-/// circle covers the entire range (0:00 at the top, sweeping clockwise up
-/// to just under 60:00), same as how an analog clock hand has no "stop" at
-/// 12 — dragging past the top wraps around, which is the expected feel for
-/// a dial like this rather than a bug to guard against.
+/// duration from 0:05 up to a full 60:00, or tap one of the 5-minute
+/// numbers to jump straight to it (without starting the timer). The top of
+/// the dial represents 60:00 rather than 0:00 — a 0-second timer makes no
+/// sense to start, so that position (and the sliver of drag positions
+/// nearest it) resolves to the max instead of the otherwise-meaningless
+/// zero, same as how an analog clock's 12 reads as "the top of the hour"
+/// rather than "zero." Dragging past the top still wraps around, which is
+/// the expected feel for a dial like this rather than a bug to guard
+/// against.
 struct CircularDurationPicker: View {
     @Binding var totalSeconds: Int
     var diameter: CGFloat = 260
 
-    static let maxSeconds = 3599
+    static let maxSeconds = 3600
     static let snapSeconds = 5
     /// One full lap of the dial = 60 minutes exactly, so a round value like
-    /// 5:00 lands precisely on the "5" tick. `maxSeconds` (59:59) is a
-    /// separate clamp just short of that, not the angle denominator — using
-    /// 3599 for both would leave every tick a hair off from where the
-    /// pointer actually sits.
+    /// 5:00 lands precisely on the "5" tick — `maxSeconds` and the lap
+    /// length are the same 3600 now that the top of the dial represents
+    /// 60:00 rather than a separate just-short-of-max clamp.
     private static let secondsPerLap = 3600
     private let ringWidth: CGFloat = 18
     private let labelRadiusOffset: CGFloat = 20
@@ -78,11 +80,14 @@ struct CircularDurationPicker: View {
             // Purely visual now — tapping is handled by `updateFromDrag`
             // via `interactiveDiameter`/`nearestMinuteMark`, not a gesture
             // on the label itself. Sized up from the original
-            // caption-sized label since a tiny number is hard to read.
+            // caption-sized label since a tiny number is hard to read. The
+            // mark at the top reads "60" (see `seconds(forMinuteMark:)`)
+            // rather than "0", since the top position now represents the
+            // max duration, not a meaningless zero.
             ForEach(Array(stride(from: 0, to: 60, by: 5)), id: \.self) { minuteMark in
-                Text(minuteMark, format: .number)
+                Text(minuteMark == 0 ? 60 : minuteMark, format: .number)
                     .font(.system(size: 15, weight: .bold, design: .rounded))
-                    .foregroundStyle(minuteMark * 60 == totalSeconds ? Color.dinoGreen : .secondary)
+                    .foregroundStyle(Self.seconds(forMinuteMark: minuteMark) == totalSeconds ? Color.dinoGreen : .secondary)
                     .offset(offset(forProgress: Double(minuteMark) / 60, radius: labelRadius))
             }
 
@@ -116,7 +121,7 @@ struct CircularDurationPicker: View {
             case .increment:
                 totalSeconds = min(totalSeconds + 30, Self.maxSeconds)
             case .decrement:
-                totalSeconds = max(totalSeconds - 30, 0)
+                totalSeconds = max(totalSeconds - 30, Self.snapSeconds)
             default:
                 break
             }
@@ -147,11 +152,18 @@ struct CircularDurationPicker: View {
         return nil
     }
 
+    /// Maps a tick's minute mark to the duration it actually represents —
+    /// the mark at the top (0) means 60:00, the full lap, not a
+    /// meaningless 0:00 (see the type's doc comment).
+    private static func seconds(forMinuteMark minuteMark: Int) -> Int {
+        minuteMark == 0 ? secondsPerLap : minuteMark * 60
+    }
+
     private func updateFromDrag(_ location: CGPoint) {
         let center = CGPoint(x: interactiveDiameter / 2, y: interactiveDiameter / 2)
 
         if let minuteMark = nearestMinuteMark(to: location, center: center) {
-            totalSeconds = min(minuteMark * 60, Self.maxSeconds)
+            totalSeconds = min(Self.seconds(forMinuteMark: minuteMark), Self.maxSeconds)
             lastTappedMinuteMark = minuteMark
             return
         }
@@ -165,7 +177,11 @@ struct CircularDurationPicker: View {
         // here (unlike `Self.maxSeconds` above) and that failed to compile
         // — always qualify static member references from instance scope.
         let snapped = (rawSeconds / Self.snapSeconds) * Self.snapSeconds
-        totalSeconds = min(max(snapped, 0), Self.maxSeconds)
+        // The sliver of drag positions right at/after the top snaps to 0 —
+        // resolve that to the full lap (60:00) instead, same reasoning as
+        // the top tick mark reading "60" rather than "0".
+        let resolved = snapped == 0 ? Self.secondsPerLap : snapped
+        totalSeconds = min(resolved, Self.maxSeconds)
     }
 }
 
