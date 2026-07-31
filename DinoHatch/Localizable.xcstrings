@@ -3684,6 +3684,47 @@
         }
       }
     },
+    "Icons unlock as you hatch dinosaurs — some for a specific species, others once you've hatched enough in total.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Symbole werden freigeschaltet, während du Dinosaurier schlüpfst — manche für eine bestimmte Art, andere sobald du insgesamt genug geschlüpft hast."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Icons unlock as you hatch dinosaurs — some for a specific species, others once you've hatched enough in total."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los iconos se desbloquean a medida que eclosionan dinosaurios: algunos por una especie concreta, otros al eclosionar suficientes en total."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les icônes se débloquent au fil des éclosions : certaines pour une espèce précise, d'autres une fois que suffisamment de dinosaures ont éclos au total."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Iconen worden ontgrendeld naarmate je dinosaurussen uitbroedt — sommige voor een specifieke soort, andere zodra je er in totaal genoeg hebt uitgebroed."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Значки открываются по мере вылупления динозавров — одни за конкретный вид, другие после того, как вылупится достаточно динозавров в общей сложности."
+          }
+        }
+      }
+    },
     "Iguanodon": {
       "extractionState": "stale",
       "localizations": {
@@ -7281,47 +7322,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Спасибо!"
-          }
-        }
-      }
-    },
-    "The brown and green dino icons were illustrated by Alexis.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Die braunen und grünen Dino-Symbole wurden von Alexis gestaltet."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The brown and green dino icons were illustrated by Alexis."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Los iconos de dinosaurio marrón y verde fueron ilustrados por Alexis."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les icônes de dinosaure marron et vert ont été illustrées par Alexis."
-          }
-        },
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "De bruine en groene dino-iconen zijn getekend door Alexis."
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Коричневый и зелёный значки динозавров нарисовала Alexis."
           }
         }
       }

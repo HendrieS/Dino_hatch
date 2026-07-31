@@ -30,6 +30,8 @@ struct SettingsView: View {
                     AppIconPicker(unlockedIDs: Set(unlocked.map(\.dinosaurID)))
                 } header: {
                     Text("App Icon")
+                } footer: {
+                    Text("Icons unlock as you hatch dinosaurs — some for a specific species, others once you've hatched enough in total.")
                 }
 
                 Section {
