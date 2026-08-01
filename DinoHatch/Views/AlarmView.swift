@@ -120,30 +120,42 @@ struct AlarmView: View {
                         .frame(width: 130, height: 130)
                         .padding(.top, 12)
 
-                    if headerImageName == "alarm-sad" {
-                        Group {
-                            if nextAlarmIsTomorrow {
-                                Text("Missed it today — try again tomorrow!")
-                            } else {
-                                Text("Missed it today — try again next time!")
+                    // The invisible placeholder reserves one line's worth of
+                    // height at all times, so toggling a weekday (which can
+                    // flip any of the branches below on or off) doesn't
+                    // collapse this area to zero height and shift the time
+                    // picker and everything under it up or down.
+                    ZStack {
+                        Text(verbatim: "placeholder")
+                            .font(.subheadline.bold())
+                            .opacity(0)
+                            .accessibilityHidden(true)
+
+                        if headerImageName == "alarm-sad" {
+                            Group {
+                                if nextAlarmIsTomorrow {
+                                    Text("Missed it today — try again tomorrow!")
+                                } else {
+                                    Text("Missed it today — try again next time!")
+                                }
                             }
+                            .font(.subheadline.bold())
+                            .foregroundStyle(.secondary)
+                            .multilineTextAlignment(.center)
+                            .fixedSize(horizontal: false, vertical: true)
+                        } else if isPendingFirstChance {
+                            getReadyMessage
+                        } else if displayedStreak > 0 {
+                            HStack(spacing: 4) {
+                                Text("🔥")
+                                Text(displayedStreak, format: .number)
+                                Text("day streak")
+                            }
+                            .font(.subheadline.bold())
+                            .foregroundStyle(Color.dinoGreen)
+                        } else if isTodayUnscheduled {
+                            getReadyMessage
                         }
-                        .font(.subheadline.bold())
-                        .foregroundStyle(.secondary)
-                        .multilineTextAlignment(.center)
-                        .fixedSize(horizontal: false, vertical: true)
-                    } else if isPendingFirstChance {
-                        getReadyMessage
-                    } else if displayedStreak > 0 {
-                        HStack(spacing: 4) {
-                            Text("🔥")
-                            Text(displayedStreak, format: .number)
-                            Text("day streak")
-                        }
-                        .font(.subheadline.bold())
-                        .foregroundStyle(Color.dinoGreen)
-                    } else if isTodayUnscheduled {
-                        getReadyMessage
                     }
 
                     Text("Set a wake-up time and hatch\na dinosaur when you open the app!")
