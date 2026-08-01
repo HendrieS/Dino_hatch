@@ -30,7 +30,7 @@ struct CollectionView: View {
     }
 
     private var unlockedAtByID: [String: Date] {
-        Dictionary(uniqueKeysWithValues: unlocked.map { ($0.dinosaurID, $0.unlockedAt) })
+        UnlockedDinosaurOrdering.earliestUnlockDateByID(unlocked.map { (id: $0.dinosaurID, date: $0.unlockedAt) })
     }
 
     /// The denominator only ever reflects the regular (non-secret) set, so
