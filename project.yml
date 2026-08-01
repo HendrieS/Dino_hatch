@@ -24,6 +24,7 @@ targets:
         UILaunchScreen: {}
         UIUserInterfaceStyle: Light
         NSSupportsLiveActivities: true
+        ITSAppUsesNonExemptEncryption: false
         UIBackgroundModes:
           - remote-notification
         UISupportedInterfaceOrientations:
