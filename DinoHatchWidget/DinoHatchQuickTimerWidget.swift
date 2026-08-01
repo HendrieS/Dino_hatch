@@ -35,6 +35,10 @@ struct QuickTimerProvider: TimelineProvider {
 /// passed — finished, but not yet opened in the app to play the hatch
 /// animation — shows a "ready" state instead of an odd-looking countdown
 /// ticking past zero, also tappable to open the app.
+///
+/// Both the countdown and ready states show a plain egg, never the actual
+/// dinosaur that's hatching — same reasoning as `DinoTimerLiveActivity`,
+/// this Home Screen widget shouldn't spoil the in-app reveal either.
 struct DinoHatchQuickTimerWidgetView: View {
     var entry: QuickTimerProvider.Entry
 
@@ -81,7 +85,7 @@ struct DinoHatchQuickTimerWidgetView: View {
 
     private func countdownView(endDate: Date) -> some View {
         HStack(spacing: 14) {
-            DinoWidgetImage(assetName: snapshot.activeTimerDinosaurImageAssetName, emoji: snapshot.activeTimerDinosaurEmoji, size: 44)
+            DinoWidgetImage(assetName: "egg-hatch-1", emoji: "🥚", size: 44)
             Text(endDate, style: .timer)
                 .font(.system(size: 32, weight: .bold, design: .rounded))
                 .monospacedDigit()
@@ -92,7 +96,7 @@ struct DinoHatchQuickTimerWidgetView: View {
 
     private var readyView: some View {
         HStack(spacing: 10) {
-            DinoWidgetImage(assetName: snapshot.activeTimerDinosaurImageAssetName, emoji: snapshot.activeTimerDinosaurEmoji, size: 36)
+            DinoWidgetImage(assetName: "egg-hatch-1", emoji: "🥚", size: 36)
             Text("An egg is ready to hatch!")
                 .font(.system(size: 15, weight: .bold, design: .rounded))
         }
@@ -152,8 +156,7 @@ struct DinoHatchQuickTimerWidget: Widget {
         date: .now,
         snapshot: WidgetSnapshot(
             unlockedCount: 4, totalCount: 26,
-            activeTimerEndDate: .now.addingTimeInterval(600),
-            activeTimerDinosaurEmoji: "🦕", activeTimerDinosaurImageAssetName: "brachiosaurus-skin"
+            activeTimerEndDate: .now.addingTimeInterval(600)
         )
     )
 }
@@ -165,8 +168,7 @@ struct DinoHatchQuickTimerWidget: Widget {
         date: .now,
         snapshot: WidgetSnapshot(
             unlockedCount: 4, totalCount: 26,
-            activeTimerEndDate: .now.addingTimeInterval(-30),
-            activeTimerDinosaurEmoji: "🦕", activeTimerDinosaurImageAssetName: "brachiosaurus-skin"
+            activeTimerEndDate: .now.addingTimeInterval(-30)
         )
     )
 }

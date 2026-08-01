@@ -45,11 +45,8 @@ final class TimerEngine {
         pendingDinosaurID = dinosaurID
 
         TimerNotificationScheduler.scheduleHatchNotification(at: end)
-        let dinosaur = DinosaurCatalog.all.first { $0.id == dinosaurID }
         DinoTimerActivityController.start(
             endDate: end,
-            dinosaurEmoji: dinosaur?.emoji,
-            dinosaurImageAssetName: dinosaur?.imageAssetName,
             supporterTierRawValue: settings.supporterTierRawValue
         )
     }

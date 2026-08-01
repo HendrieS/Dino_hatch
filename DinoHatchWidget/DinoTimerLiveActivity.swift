@@ -9,12 +9,16 @@ import SwiftUI
 /// app (the default behavior for a Live Activity with no `Link`s of its
 /// own, same reasoning as the Quick Timer widget's countdown/ready states).
 ///
-/// Real dinosaur art (via `DinoWidgetImage`) is used at the two sizes big
-/// enough for it to actually read (the Lock Screen banner, the Dynamic
-/// Island's expanded leading region) — the compact/minimal Island regions
-/// stay plain emoji on purpose: they render in the status bar at ~16-20pt,
-/// where a scaled-down illustration would blur while the system's own
-/// emoji glyph rendering stays crisp at any size.
+/// Always shows a plain egg (`egg-hatch-1` art at the two sizes big enough
+/// to read it, plain 🥚 in the compact/minimal Dynamic Island regions),
+/// never the actual dinosaur that's hatching — the whole point of the
+/// in-app hatch animation is the reveal, and a Live Activity sits on the
+/// Lock Screen where anyone glancing at it mid-countdown would see the
+/// species well before that reveal plays. There's also no reliable way to
+/// swap in the real art the instant the countdown hits zero while the app
+/// is backgrounded (no push/server infra here), so rather than have it
+/// sometimes reveal early depending on timing, it just never reveals at
+/// all — the actual reward moment stays exclusively in-app.
 struct DinoTimerLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: DinoTimerActivityAttributes.self) { context in
@@ -24,7 +28,7 @@ struct DinoTimerLiveActivity: Widget {
         } dynamicIsland: { context in
             DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
-                    DinoWidgetImage(assetName: context.state.dinosaurImageAssetName, emoji: context.state.dinosaurEmoji, size: 28)
+                    DinoWidgetImage(assetName: "egg-hatch-1", emoji: "🥚", size: 28)
                 }
                 DynamicIslandExpandedRegion(.trailing) {
                     Text(context.state.endDate, style: .timer)
@@ -37,21 +41,21 @@ struct DinoTimerLiveActivity: Widget {
                         .foregroundStyle(.secondary)
                 }
             } compactLeading: {
-                Text(verbatim: context.state.dinosaurEmoji ?? "🥚")
+                Text(verbatim: "🥚")
             } compactTrailing: {
                 Text(context.state.endDate, style: .timer)
                     .font(.system(size: 13, weight: .bold, design: .rounded))
                     .monospacedDigit()
                     .frame(width: 42)
             } minimal: {
-                Text(verbatim: context.state.dinosaurEmoji ?? "🥚")
+                Text(verbatim: "🥚")
             }
         }
     }
 
     private func lockScreenView(context: ActivityViewContext<DinoTimerActivityAttributes>) -> some View {
         HStack(spacing: 14) {
-            DinoWidgetImage(assetName: context.state.dinosaurImageAssetName, emoji: context.state.dinosaurEmoji, size: 48)
+            DinoWidgetImage(assetName: "egg-hatch-1", emoji: "🥚", size: 48)
             VStack(alignment: .leading, spacing: 2) {
                 Text(verbatim: "Dino Hatch")
                     .font(.system(size: 13, weight: .semibold, design: .rounded))

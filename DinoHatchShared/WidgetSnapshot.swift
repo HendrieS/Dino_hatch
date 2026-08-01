@@ -8,10 +8,14 @@ import Foundation
 /// and `lastDinosaurEmoji` before writing, so the widget target doesn't need
 /// `DinosaurCatalog` or the localization catalog. It *does* share
 /// `Assets.xcassets` (see `project.yml`) so it can render the real skin
-/// illustration via `lastDinosaurImageAssetName`/
-/// `activeTimerDinosaurImageAssetName` — the emoji fields stay as a
-/// fallback for any dinosaur that doesn't have art yet (`DinoWidgetImage`
+/// illustration via `lastDinosaurImageAssetName` — the emoji field stays as
+/// a fallback for any dinosaur that doesn't have art yet (`DinoWidgetImage`
 /// handles the fallback, mirroring `DinoImageView` in the main app).
+///
+/// Deliberately has no equivalent "active timer's dinosaur" fields — see
+/// `DinoTimerLiveActivity`'s doc comment for why a running timer never
+/// reveals which dinosaur it's hatching in any widget surface, only once
+/// it's actually unlocked and becomes `lastDinosaur*`.
 struct WidgetSnapshot: Codable, Equatable {
     var unlockedCount: Int
     var totalCount: Int
@@ -31,11 +35,6 @@ struct WidgetSnapshot: Codable, Equatable {
     /// running (whether or not it's already past, see
     /// `DinoHatchQuickTimerWidgetView`), nil once cancelled or hatched.
     var activeTimerEndDate: Date? = nil
-    /// The emoji/asset name of the dinosaur the running timer is hatching,
-    /// resolved in the app the same way `lastDinosaurEmoji`/
-    /// `lastDinosaurImageAssetName` are.
-    var activeTimerDinosaurEmoji: String? = nil
-    var activeTimerDinosaurImageAssetName: String? = nil
     /// Raw `SupporterTier` of the highest-owned support purchase (see
     /// `AppSettings.supporterTier`), nil if none — drives the small corner
     /// badge on the Home Screen widgets (`WidgetSupporterBadge`).

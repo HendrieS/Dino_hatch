@@ -218,13 +218,9 @@ struct RootTabView: View {
         let alarmInfo = alarms.first.map {
             WidgetSnapshotBuilder.AlarmInfo(hour: $0.hour, minute: $0.minute, weekdays: $0.repeatWeekdays, isEnabled: $0.isEnabled)
         }
-        let activeTimerInfo = appSettings.first.flatMap { settings in
-            settings.activeTimerEndDate.map {
-                WidgetSnapshotBuilder.ActiveTimerInfo(endDate: $0, dinosaurID: settings.pendingDinosaurID)
-            }
-        }
+        let activeTimerEndDate = appSettings.first?.activeTimerEndDate
         let supporterTier = appSettings.first?.supporterTier
-        WidgetSnapshotStore.save(WidgetSnapshotBuilder.build(unlocked: records, alarm: alarmInfo, activeTimer: activeTimerInfo, supporterTier: supporterTier))
+        WidgetSnapshotStore.save(WidgetSnapshotBuilder.build(unlocked: records, alarm: alarmInfo, activeTimerEndDate: activeTimerEndDate, supporterTier: supporterTier))
         WidgetCenter.shared.reloadTimelines(ofKind: WidgetSnapshotStore.widgetKind)
         WidgetCenter.shared.reloadTimelines(ofKind: WidgetSnapshotStore.alarmWidgetKind)
         WidgetCenter.shared.reloadTimelines(ofKind: WidgetSnapshotStore.quickTimerWidgetKind)

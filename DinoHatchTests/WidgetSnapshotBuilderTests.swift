@@ -62,34 +62,15 @@ final class WidgetSnapshotBuilderTests: XCTestCase {
         )
     }
 
-    func testNoActiveTimerLeavesTimerFieldsNil() {
+    func testNoActiveTimerLeavesTimerFieldNil() {
         let snapshot = WidgetSnapshotBuilder.build(unlocked: [])
         XCTAssertNil(snapshot.activeTimerEndDate)
-        XCTAssertNil(snapshot.activeTimerDinosaurEmoji)
-        XCTAssertNil(snapshot.activeTimerDinosaurImageAssetName)
     }
 
-    func testActiveTimerCarriesEndDateAndDinosaurEmoji() {
+    func testActiveTimerCarriesEndDate() {
         let endDate = Date(timeIntervalSince1970: 2_000_000_000)
-        let triceratops = DinosaurCatalog.all.first { $0.id == "triceratops" }!
-        let activeTimer = WidgetSnapshotBuilder.ActiveTimerInfo(endDate: endDate, dinosaurID: "triceratops")
-
-        let snapshot = WidgetSnapshotBuilder.build(unlocked: [], activeTimer: activeTimer)
-
+        let snapshot = WidgetSnapshotBuilder.build(unlocked: [], activeTimerEndDate: endDate)
         XCTAssertEqual(snapshot.activeTimerEndDate, endDate)
-        XCTAssertEqual(snapshot.activeTimerDinosaurEmoji, triceratops.emoji)
-        XCTAssertEqual(snapshot.activeTimerDinosaurImageAssetName, triceratops.imageAssetName)
-    }
-
-    func testActiveTimerWithUnknownDinosaurIDStillCarriesEndDate() {
-        let endDate = Date(timeIntervalSince1970: 2_000_000_000)
-        let activeTimer = WidgetSnapshotBuilder.ActiveTimerInfo(endDate: endDate, dinosaurID: "not-a-real-id")
-
-        let snapshot = WidgetSnapshotBuilder.build(unlocked: [], activeTimer: activeTimer)
-
-        XCTAssertEqual(snapshot.activeTimerEndDate, endDate)
-        XCTAssertNil(snapshot.activeTimerDinosaurEmoji)
-        XCTAssertNil(snapshot.activeTimerDinosaurImageAssetName)
     }
 
     func testNoSupporterTierLeavesSupporterFieldNil() {

@@ -19,15 +19,10 @@ enum WidgetSnapshotBuilder {
         let isEnabled: Bool
     }
 
-    struct ActiveTimerInfo {
-        let endDate: Date
-        let dinosaurID: String?
-    }
-
     static func build(
         unlocked: [UnlockRecord],
         alarm: AlarmInfo? = nil,
-        activeTimer: ActiveTimerInfo? = nil,
+        activeTimerEndDate: Date? = nil,
         supporterTier: SupporterTier? = nil,
         catalog: [Dinosaur] = DinosaurCatalog.all,
         now: Date = .now
@@ -41,8 +36,6 @@ enum WidgetSnapshotBuilder {
             alarm.isEnabled ? AlarmNextFireDate.next(hour: alarm.hour, minute: alarm.minute, weekdays: alarm.weekdays, now: now) : nil
         }
 
-        let activeTimerDinosaur = activeTimer?.dinosaurID.flatMap { id in catalog.first { $0.id == id } }
-
         return WidgetSnapshot(
             unlockedCount: unlocked.count,
             totalCount: totalCount,
@@ -51,9 +44,7 @@ enum WidgetSnapshotBuilder {
             lastDinosaurName: dinosaur?.localizedName,
             alarmEnabled: alarmEnabled,
             nextAlarmFireDate: nextAlarmFireDate,
-            activeTimerEndDate: activeTimer?.endDate,
-            activeTimerDinosaurEmoji: activeTimerDinosaur?.emoji,
-            activeTimerDinosaurImageAssetName: activeTimerDinosaur?.imageAssetName,
+            activeTimerEndDate: activeTimerEndDate,
             supporterTierRawValue: supporterTier?.rawValue
         )
     }

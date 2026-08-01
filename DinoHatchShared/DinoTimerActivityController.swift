@@ -12,8 +12,6 @@ import Foundation
 enum DinoTimerActivityController {
     static func start(
         endDate: Date,
-        dinosaurEmoji: String?,
-        dinosaurImageAssetName: String? = nil,
         supporterTierRawValue: String? = nil
     ) {
         guard ActivityAuthorizationInfo().areActivitiesEnabled else { return }
@@ -22,8 +20,6 @@ enum DinoTimerActivityController {
         end()
         let state = DinoTimerActivityAttributes.ContentState(
             endDate: endDate,
-            dinosaurEmoji: dinosaurEmoji,
-            dinosaurImageAssetName: dinosaurImageAssetName,
             supporterTierRawValue: supporterTierRawValue
         )
         let content = ActivityContent(state: state, staleDate: endDate)

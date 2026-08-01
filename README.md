@@ -407,14 +407,12 @@ the app's real illustrated art instead:
   so no new art was needed for this. Sharing the whole catalog (rather than
   a curated subset) also means any art added to it later is automatically
   available in the widgets too, with no extra wiring.
-- `WidgetSnapshot` carries `lastDinosaurImageAssetName`/
-  `activeTimerDinosaurImageAssetName` alongside the existing emoji fields,
-  and `DinoTimerActivityAttributes.ContentState` carries
-  `dinosaurImageAssetName` for the Live Activity. The emoji fields stay as
-  a fallback, not dead weight — `DinoWidgetImage.swift` (widget target
-  only) renders the real image when the asset name resolves to a bundled
-  one and falls back to the emoji otherwise, the same graceful-degradation
-  shape as `DinoImageView` in the main app.
+- `WidgetSnapshot` carries `lastDinosaurImageAssetName` alongside the
+  existing `lastDinosaurEmoji` — the emoji field stays as a fallback, not
+  dead weight — `DinoWidgetImage.swift` (widget target only) renders the
+  real image when the asset name resolves to a bundled one and falls back
+  to the emoji otherwise, the same graceful-degradation shape as
+  `DinoImageView` in the main app.
 - The generic (non-dinosaur-specific) icons use existing art rather than
   new uploads: the Collection and Quick Timer widgets' header icon is
   `egg-hatch-1` (the plain speckled egg, stage 1 of the hatch animation);
@@ -426,6 +424,20 @@ the app's real illustrated art instead:
   the status bar at ~16-20pt) stay plain emoji on purpose, since a
   scaled-down illustration would blur there while the system's own emoji
   rendering stays crisp at any size.
+- **Neither the Live Activity nor the Quick Timer widget ever show the
+  hatching dinosaur's identity while a timer is running or ready** — both
+  always render the generic `egg-hatch-1`/🥚 regardless of which dinosaur
+  `HatchSelector` already picked when the timer started. `WidgetSnapshot`
+  and `DinoTimerActivityAttributes.ContentState` deliberately have no
+  "active timer's dinosaur" fields at all, only `lastDinosaur*` (which
+  reflects a dinosaur that's already been unlocked and revealed in-app).
+  This was a real spoiler bug early on: the species was baked into the
+  Live Activity/widget the moment the timer started, visible on the Lock
+  Screen or Home Screen for the entire countdown, well before the in-app
+  hatch animation played. There's also no reliable way to reveal it
+  exactly when the countdown hits zero while the app is backgrounded (no
+  push/server infra here), so rather than sometimes reveal early depending
+  on timing, it just never reveals outside the app at all.
 
 ## Supporting the app
 

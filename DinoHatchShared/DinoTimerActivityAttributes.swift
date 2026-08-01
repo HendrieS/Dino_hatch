@@ -8,11 +8,9 @@ import Foundation
 struct DinoTimerActivityAttributes: ActivityAttributes {
     struct ContentState: Codable, Hashable {
         var endDate: Date
-        var dinosaurEmoji: String?
-        var dinosaurImageAssetName: String?
-        /// Raw `SupporterTier`, captured once at Live Activity start —
-        /// same reasoning as `dinosaurEmoji`/`dinosaurImageAssetName` not
-        /// updating mid-countdown, see `DinoTimerActivityController`.
+        /// Raw `SupporterTier`, captured once at Live Activity start rather
+        /// than updated mid-countdown if a purchase happens while a timer's
+        /// already running — see `DinoTimerActivityController`.
         var supporterTierRawValue: String?
     }
 }
