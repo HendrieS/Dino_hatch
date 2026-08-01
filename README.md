@@ -635,12 +635,19 @@ verify on your Mac:
 Steps that only make sense once, right before shipping to the App Store —
 not needed for day-to-day development:
 
-- [ ] Sign Apple's Paid Applications Agreement in App Store Connect
-      (required for any In-App Purchase, even though Dino Hatch itself
-      stays free) — see [Supporting the app](#supporting-the-app)
-- [ ] Create the four supporter IAP products in App Store Connect with real
-      pricing and localized display names, matching
-      `com.dinohatchtimer.app.support.{gray,green,gold,purple}` exactly
-- [ ] Test a real (sandbox) purchase and Restore Purchases on a physical
-      device via TestFlight, not just the local `Products.storekit`
-      Simulator config
+- [ ] For TestFlight phase 1, `Stores/FeatureFlags.swift` has
+      `supporterDonationsEnabled = false` — the purchase flow's entry points
+      (Settings → Support Dino Hatch, the Help Center section) are hidden so
+      phase 1 doesn't need the Paid Applications Agreement or the IAP
+      products set up first. `SupportUsView`/`SupporterStore` and the badge
+      display are untouched, so re-enabling for phase 2 is flipping that one
+      flag back to `true`. Once it's back on:
+  - [ ] Sign Apple's Paid Applications Agreement in App Store Connect
+        (required for any In-App Purchase, even though Dino Hatch itself
+        stays free) — see [Supporting the app](#supporting-the-app)
+  - [ ] Create the four supporter IAP products in App Store Connect with real
+        pricing and localized display names, matching
+        `com.dinohatchtimer.app.support.{gray,green,gold,purple}` exactly
+  - [ ] Test a real (sandbox) purchase and Restore Purchases on a physical
+        device via TestFlight, not just the local `Products.storekit`
+        Simulator config

@@ -40,12 +40,14 @@ struct SettingsView: View {
                     }
                 }
 
-                Section {
-                    Button("Support Dino Hatch") {
-                        showSupportUs = true
+                if FeatureFlags.supporterDonationsEnabled {
+                    Section {
+                        Button("Support Dino Hatch") {
+                            showSupportUs = true
+                        }
+                    } footer: {
+                        Text("Dino Hatch is free and always will be — this is completely optional.")
                     }
-                } footer: {
-                    Text("Dino Hatch is free and always will be — this is completely optional.")
                 }
 
                 Section {
