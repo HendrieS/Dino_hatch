@@ -10,7 +10,7 @@ import SwiftData
 /// be a path to StoreKit. Buying (or moving up a tier) only ever happens
 /// from Settings → Support Dino Hatch, behind `ParentalGateView`.
 struct SupporterBadgeView: View {
-    @Query private var settings: [AppSettings]
+    @Query(sort: \AppSettings.createdAt) private var settings: [AppSettings]
     @State private var showThankYou = false
 
     private var tier: SupporterTier? {

@@ -86,7 +86,7 @@ final class TimerEngine {
         guard let modelContext else {
             fatalError("TimerEngine.configure(context:) must be called before use")
         }
-        let descriptor = FetchDescriptor<AppSettings>()
+        let descriptor = FetchDescriptor<AppSettings>(sortBy: [SortDescriptor(\.createdAt)])
         if let existing = try? modelContext.fetch(descriptor).first {
             return existing
         }

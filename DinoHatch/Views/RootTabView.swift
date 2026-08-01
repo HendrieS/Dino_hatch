@@ -12,7 +12,7 @@ struct RootTabView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Query private var alarms: [AlarmSettings]
     @Query private var unlocked: [UnlockedDinosaur]
-    @Query private var appSettings: [AppSettings]
+    @Query(sort: \AppSettings.createdAt) private var appSettings: [AppSettings]
 
     @State private var pendingAlarmDinosaur: Dinosaur?
     @State private var whatsNewNotes: [ReleaseNote] = []

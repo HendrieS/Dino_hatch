@@ -10,7 +10,7 @@ import SwiftData
 struct SupportUsView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
-    @Query private var settings: [AppSettings]
+    @Query(sort: \AppSettings.createdAt) private var settings: [AppSettings]
 
     @State private var store = SupporterStore()
     @State private var showThankYou = false

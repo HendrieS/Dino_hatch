@@ -7,7 +7,7 @@ import SwiftData
 /// `RootTabView`.
 struct AgeOnboardingView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var settings: [AppSettings]
+    @Query(sort: \AppSettings.createdAt) private var settings: [AppSettings]
 
     @State private var age = 5
 

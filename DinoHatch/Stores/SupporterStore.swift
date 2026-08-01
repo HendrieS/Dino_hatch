@@ -94,7 +94,7 @@ final class SupporterStore {
 
     private func persist(_ tier: SupporterTier?) {
         guard let modelContext else { return }
-        let descriptor = FetchDescriptor<AppSettings>()
+        let descriptor = FetchDescriptor<AppSettings>(sortBy: [SortDescriptor(\.createdAt)])
         let settings = (try? modelContext.fetch(descriptor).first) ?? {
             let created = AppSettings()
             modelContext.insert(created)

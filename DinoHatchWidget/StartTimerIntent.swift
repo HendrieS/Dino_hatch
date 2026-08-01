@@ -67,7 +67,13 @@ struct StartTimerIntent: AppIntent {
     }
 
     private static func existingOrNewAppSettings(in context: ModelContext) throws -> AppSettings {
-        if let existing = try context.fetch(FetchDescriptor<AppSettings>()).first {
+        // Sorted the same way every other AppSettings fetch in the app is
+        // (see AppSettings.createdAt's doc comment) — this runs in the
+        // widget extension's own separate process, so it's the one most
+        // likely to disagree with the main app about which row is "the"
+        // settings row if more than one ever exists.
+        let descriptor = FetchDescriptor<AppSettings>(sortBy: [SortDescriptor(\.createdAt)])
+        if let existing = try context.fetch(descriptor).first {
             return existing
         }
         let created = AppSettings()

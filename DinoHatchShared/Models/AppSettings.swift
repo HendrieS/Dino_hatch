@@ -5,8 +5,20 @@ import SwiftData
 /// wall-clock date, not an elapsed duration) lets an in-flight timer survive
 /// not just backgrounding but a full app kill/relaunch: on relaunch we just
 /// compare `Date.now` to this date instead of tracking elapsed ticks.
+///
+/// "Single-row" is intent, not a guarantee: CloudKit-backed SwiftData can't
+/// enforce a unique constraint (same reasoning as `UnlockedDinosaur`), and
+/// `StartTimerIntent` (widget extension process) does its own independent
+/// "find the row, or create one" — if that fetch ever comes up empty when
+/// the real row genuinely exists, it creates a second row and writes the
+/// running timer there instead, which every other `AppSettings` query
+/// (unsorted `.first`) could then disagree about seeing. `createdAt` exists
+/// so every call site can sort consistently and agree on the same row —
+/// see the `sort:`/`sortBy:` argument at each `@Query`/`FetchDescriptor`
+/// site rather than relying on undefined fetch order.
 @Model
 final class AppSettings {
+    var createdAt: Date = Date.now
     var lastUsedDurationSeconds: Int = 300
     var activeTimerEndDate: Date?
     var activeTimerTotalSeconds: Int = 0

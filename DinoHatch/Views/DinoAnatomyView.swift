@@ -22,7 +22,7 @@ struct DinoAnatomyView: View {
     var size: CGFloat = 300
 
     @Query private var unlocked: [UnlockedDinosaur]
-    @Query private var appSettings: [AppSettings]
+    @Query(sort: \AppSettings.createdAt) private var appSettings: [AppSettings]
 
     @State private var isHeld = false
     @State private var scanPhase: CGFloat = 0

@@ -4,7 +4,7 @@ import SwiftData
 struct SettingsView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
-    @Query private var settings: [AppSettings]
+    @Query(sort: \AppSettings.createdAt) private var settings: [AppSettings]
     @Query private var unlocked: [UnlockedDinosaur]
     @Query private var alarms: [AlarmSettings]
 
