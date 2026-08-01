@@ -54,7 +54,7 @@ struct Dinosaur: Identifiable, Codable, Hashable {
         case uncommon
         case rare
         /// The tier for `isSecret` dinosaurs — a step above `rare` so the
-        /// four hidden ones stand apart from the regular rare pool once
+        /// hidden ones stand apart from the regular rare pool once
         /// they're unlocked, instead of blending in as more of the same.
         case secretRare
     }

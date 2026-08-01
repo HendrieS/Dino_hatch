@@ -65,6 +65,11 @@ struct AgeOnboardingView: View {
             return created
         }()
         row.childAge = age
+        // A brand-new (or freshly reset) install has nothing to catch up
+        // on, so stamp the current version silently rather than letting
+        // RootTabView's WhatsNewGate treat it as "just updated" and show a
+        // sheet for a version this install never actually ran before.
+        row.lastSeenAppVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
     }
 }
 

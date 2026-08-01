@@ -13,8 +13,8 @@ final class DinosaurCatalogTests: XCTestCase {
         XCTAssertLessThanOrEqual(regularCount, 30)
     }
 
-    func testHasFourSecretDinosaurs() {
-        XCTAssertEqual(DinosaurCatalog.all.filter(\.isSecret).count, 4)
+    func testHasThreeSecretDinosaurs() {
+        XCTAssertEqual(DinosaurCatalog.all.filter(\.isSecret).count, 3)
     }
 
     func testNoEmptyRequiredFields() {

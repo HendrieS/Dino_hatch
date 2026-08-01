@@ -168,7 +168,7 @@ Then in Xcode:
   the app, not just inside it. It also carries a star-rank badge in the
   corner (`Dinosaur.rarity` — common/uncommon/rare/secret rare, already
   stored in `Data/DinosaurCatalog.swift` but unused elsewhere in the UI
-  until now) for a trading-card feel. The four `isSecret` dinosaurs sit
+  until now) for a trading-card feel. The `isSecret` dinosaurs sit
   in their own `secretRare` tier (4 stars, purple) above the regular
   `rare` tier (3 stars, gold), so they stand apart once unlocked instead
   of blending into the rest of the rare pool.

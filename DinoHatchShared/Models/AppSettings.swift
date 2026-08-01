@@ -24,6 +24,14 @@ final class AppSettings {
     /// on launch) — this field is just a cache for instant display before
     /// that reconciliation finishes, see `AppSettings.supporterTier`.
     var supporterTierRawValue: String?
+    /// The `CFBundleShortVersionString` the "What's New" sheet was last
+    /// shown for (or silently stamped for, on first launch — see
+    /// `AgeOnboardingView.save()`). RootTabView compares this against the
+    /// running app's version to decide whether an update just happened; nil
+    /// means either a fresh install mid-onboarding, or an existing install
+    /// updating into the build that first introduced this field, both
+    /// handled in `WhatsNewGate`.
+    var lastSeenAppVersion: String?
 
     init() {}
 }

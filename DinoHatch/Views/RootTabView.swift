@@ -15,6 +15,8 @@ struct RootTabView: View {
     @Query private var appSettings: [AppSettings]
 
     @State private var pendingAlarmDinosaur: Dinosaur?
+    @State private var whatsNewNotes: [ReleaseNote] = []
+    @State private var showWhatsNew = false
     @State private var selectedTab: Tab = .timer
     /// Refreshed every minute (and on every foreground transition) purely
     /// to keep the Alarm tab's missed-window badge current — unlike the
@@ -57,6 +59,7 @@ struct RootTabView: View {
             }
             .onAppear(perform: checkAlarmHatch)
             .onAppear(perform: refreshWidgetSnapshot)
+            .onAppear(perform: checkWhatsNew)
             .onChange(of: scenePhase) { _, newPhase in
                 if newPhase == .active {
                     now = .now
@@ -88,6 +91,9 @@ struct RootTabView: View {
                 } onDone: {
                     pendingAlarmDinosaur = nil
                 }
+            }
+            .sheet(isPresented: $showWhatsNew) {
+                WhatsNewView(notes: whatsNewNotes)
             }
 
             if selectedTab != .timer {
@@ -176,6 +182,21 @@ struct RootTabView: View {
         settings.lastHatchDate = .now
         let unlockedIDs = Set(unlocked.map(\.dinosaurID))
         pendingAlarmDinosaur = HatchSelector.pickNext(unlockedIDs: unlockedIDs)
+    }
+
+    /// Checked once per `mainTabView` appearance (i.e. once per real app
+    /// launch, not on every foreground — see `RootTabView`'s `onAppear`
+    /// vs. `onChange(of: scenePhase)` split above), rather than gating on
+    /// `scenePhase` too — a returning-from-background app shouldn't pop this
+    /// up again mid-session just because a minute passed.
+    private func checkWhatsNew() {
+        guard let settings = appSettings.first else { return }
+        let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
+        let notes = WhatsNewGate.notesToShow(currentVersion: currentVersion, lastSeenVersion: settings.lastSeenAppVersion)
+        settings.lastSeenAppVersion = currentVersion
+        guard !notes.isEmpty else { return }
+        whatsNewNotes = notes
+        showWhatsNew = true
     }
 
     private func unlock(_ dinosaur: Dinosaur) {

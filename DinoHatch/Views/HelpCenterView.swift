@@ -38,7 +38,7 @@ struct HelpCenterView: View {
             }
 
             Section("Dinosaur rarity") {
-                Text("Every dinosaur has a rarity — Common, Uncommon, Rare, or Secret Rare — shown as a colored border and star count on its card, like a trading card. This is just for fun and doesn't change the odds: every not-yet-hatched dinosaur has an equal chance of being the next one, regardless of rarity. Secret Rare is reserved for the collection's four hidden dinosaurs, which only become hatchable after every other dinosaur has been found.")
+                Text("Every dinosaur has a rarity — Common, Uncommon, Rare, or Secret Rare — shown as a colored border and star count on its card, like a trading card. This is just for fun and doesn't change the odds: every not-yet-hatched dinosaur has an equal chance of being the next one, regardless of rarity. Secret Rare is reserved for the collection's three hidden dinosaurs, which only become hatchable after every other dinosaur has been found.")
             }
 
             Section("App icons") {
