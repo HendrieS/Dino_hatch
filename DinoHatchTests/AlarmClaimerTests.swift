@@ -212,4 +212,41 @@ final class AlarmClaimerTests: XCTestCase {
         )
         XCTAssertFalse(pending)
     }
+
+    func testTodayUnscheduledWhenTodaysWeekdayNotSelected() {
+        let now = date(day: 8, hour: 19, minute: 23) // Wednesday (4)
+        let unscheduled = AlarmClaimer.isTodayUnscheduled(
+            weekdays: [5, 1], // Thursday, Sunday — not today
+            lastHatchDate: nil, now: now, calendar: calendar
+        )
+        XCTAssertTrue(unscheduled)
+    }
+
+    func testNotTodayUnscheduledWhenTodaysWeekdayIsSelected() {
+        let now = date(day: 8, hour: 19, minute: 23)
+        let unscheduled = AlarmClaimer.isTodayUnscheduled(
+            weekdays: [4, 5], // includes today (Wednesday)
+            lastHatchDate: nil, now: now, calendar: calendar
+        )
+        XCTAssertFalse(unscheduled)
+    }
+
+    func testNotTodayUnscheduledWithNoWeekdaysSelected() {
+        let now = date(day: 8, hour: 19, minute: 23)
+        let unscheduled = AlarmClaimer.isTodayUnscheduled(
+            weekdays: [],
+            lastHatchDate: nil, now: now, calendar: calendar
+        )
+        XCTAssertFalse(unscheduled)
+    }
+
+    func testNotTodayUnscheduledOnceAlreadyClaimedToday() {
+        let now = date(day: 8, hour: 19, minute: 23)
+        let claimedEarlierToday = date(day: 8, hour: 7, minute: 5)
+        let unscheduled = AlarmClaimer.isTodayUnscheduled(
+            weekdays: [5, 1],
+            lastHatchDate: claimedEarlierToday, now: now, calendar: calendar
+        )
+        XCTAssertFalse(unscheduled)
+    }
 }

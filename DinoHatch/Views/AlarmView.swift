@@ -65,6 +65,15 @@ struct AlarmView: View {
         return Calendar.current.isDateInTomorrow(nextAlarmFireDate)
     }
 
+    /// True when today simply isn't a scheduled weekday — the complement to
+    /// `isPendingFirstChance` (see `AlarmClaimer.isTodayUnscheduled`).
+    /// Checked after `displayedStreak` below so an active streak still shows
+    /// on a non-alarm day instead of being replaced by this nudge.
+    private var isTodayUnscheduled: Bool {
+        guard let settings = alarms.first, settings.isEnabled else { return false }
+        return AlarmClaimer.isTodayUnscheduled(weekdays: settings.repeatWeekdays, lastHatchDate: settings.lastHatchDate)
+    }
+
     /// Consecutive scheduled alarms claimed in a row, zeroed out the moment
     /// today's window closes unclaimed rather than waiting for the next
     /// claim to overwrite the persisted count — matches how `headerImageName`
@@ -81,6 +90,24 @@ struct AlarmView: View {
             return 0
         }
         return settings.streakCount
+    }
+
+    /// Shared by `isPendingFirstChance` and `isTodayUnscheduled` — same
+    /// wording either way, since from the parent's perspective both just
+    /// mean "nothing to claim today, here's when the next one is."
+    @ViewBuilder
+    private var getReadyMessage: some View {
+        Group {
+            if nextAlarmIsTomorrow {
+                Text("Get ready to wake up on time tomorrow!")
+            } else {
+                Text("Get ready to wake up on time for your next alarm!")
+            }
+        }
+        .font(.subheadline.bold())
+        .foregroundStyle(Color.dinoGreen)
+        .multilineTextAlignment(.center)
+        .fixedSize(horizontal: false, vertical: true)
     }
 
     var body: some View {
@@ -106,17 +133,7 @@ struct AlarmView: View {
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
                     } else if isPendingFirstChance {
-                        Group {
-                            if nextAlarmIsTomorrow {
-                                Text("Get ready to wake up on time tomorrow!")
-                            } else {
-                                Text("Get ready to wake up on time for your next alarm!")
-                            }
-                        }
-                        .font(.subheadline.bold())
-                        .foregroundStyle(Color.dinoGreen)
-                        .multilineTextAlignment(.center)
-                        .fixedSize(horizontal: false, vertical: true)
+                        getReadyMessage
                     } else if displayedStreak > 0 {
                         HStack(spacing: 4) {
                             Text("🔥")
@@ -125,6 +142,8 @@ struct AlarmView: View {
                         }
                         .font(.subheadline.bold())
                         .foregroundStyle(Color.dinoGreen)
+                    } else if isTodayUnscheduled {
+                        getReadyMessage
                     }
 
                     Text("Set a wake-up time and hatch\na dinosaur when you open the app!")

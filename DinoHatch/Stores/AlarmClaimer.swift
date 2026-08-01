@@ -92,4 +92,26 @@ enum AlarmClaimer {
         }
         return true
     }
+
+    /// True when today isn't one of the alarm's scheduled weekdays at all,
+    /// so there was never a window to catch or miss today — the case
+    /// `wasMissedToday`/`isPendingFirstChance` don't cover, since both are
+    /// specifically about *today's* window and return `false` outright when
+    /// today isn't selected. Drives the same "get ready" messaging as
+    /// `isPendingFirstChance`, just for the opposite reason (nothing
+    /// scheduled today vs. armed too late for today), so which weekday
+    /// happens to include "today" doesn't make the message flicker in and
+    /// out as someone edits the weekday picker.
+    static func isTodayUnscheduled(
+        weekdays: [Int],
+        lastHatchDate: Date?,
+        now: Date = .now,
+        calendar: Calendar = .current
+    ) -> Bool {
+        guard !weekdays.isEmpty else { return false }
+        if let lastHatchDate, calendar.isDate(lastHatchDate, inSameDayAs: now) {
+            return false
+        }
+        return !weekdays.contains(calendar.component(.weekday, from: now))
+    }
 }
