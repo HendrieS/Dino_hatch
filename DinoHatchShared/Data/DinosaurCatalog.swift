@@ -413,31 +413,33 @@ enum DinosaurCatalog {
             rarity: .rare
         ),
         Dinosaur(
-            id: "quetzalcoatlus",
-            name: "Quetzalcoatlus",
+            id: "therizinosaurus",
+            name: "Therizinosaurus",
             era: "Late Cretaceous",
-            diet: .carnivore,
-            length: "11 m (36 ft) wingspan",
-            weight: "200 kg (440 lb)",
-            funFact: "Quetzalcoatlus was a flying reptile as big as a small airplane, the largest flier ever known!",
-            symbolName: "airplane",
-            emoji: "🛩️",
-            imageAssetName: "quetzalcoatlus-skin",
-            rangeMapAssetName: "region-north-america",
-            rangeLabel: "Western North America",
-            rarity: .uncommon
+            diet: .herbivore,
+            length: "10 m (33 ft)",
+            weight: "5,000 kg (11,000 lb)",
+            funFact: "Therizinosaurus was a plant-eating dinosaur with enormous claws as long as swords!",
+            symbolName: "scissors",
+            emoji: "🦥",
+            imageAssetName: "therizinosaurus-skin",
+            rangeMapAssetName: "region-mongolia-china",
+            rangeLabel: "Mongolia & China",
+            rarity: .rare
         ),
 
         // Secret dinosaurs: not shown in the Collection grid while locked
         // (no silhouette, no hint they exist), and excluded from
         // HatchSelector's pool until every dinosaur above has been
         // unlocked. See Dinosaur.isSecret / HatchSelector.pickNext.
-        // Deliberately varied rather than a bunch of near-identical giant
-        // sauropods: one record-breaking herbivore, one apex predator,
-        // and one giant-clawed oddity so far — a fourth (Amargasaurus,
-        // distinctive double-sailed spine) arrives with the catalog's
-        // next expansion wave, replacing Carnotaurus, which moved back
-        // to the regular Rare tier above.
+        // Themed as "kings/queens" — each one holds a genuine record as
+        // the biggest/most extreme example of its kind, rather than just
+        // being an arbitrarily rare pick: Patagotitan (king of the
+        // giants, the biggest land animal ever found), Giganotosaurus
+        // (king of predators, rivals T-Rex as the largest carnivorous
+        // dinosaur), Quetzalcoatlus (king of the skies, the largest
+        // flying reptile ever known). Two more join with the catalog's
+        // next expansion waves, one per wave.
         Dinosaur(
             id: "patagotitan",
             name: "Patagotitan",
@@ -471,18 +473,18 @@ enum DinosaurCatalog {
             isSecret: true
         ),
         Dinosaur(
-            id: "therizinosaurus",
-            name: "Therizinosaurus",
+            id: "quetzalcoatlus",
+            name: "Quetzalcoatlus",
             era: "Late Cretaceous",
-            diet: .herbivore,
-            length: "10 m (33 ft)",
-            weight: "5,000 kg (11,000 lb)",
-            funFact: "Therizinosaurus was a plant-eating dinosaur with enormous claws as long as swords!",
-            symbolName: "scissors",
-            emoji: "🦥",
-            imageAssetName: "therizinosaurus-skin",
-            rangeMapAssetName: "region-mongolia-china",
-            rangeLabel: "Mongolia & China",
+            diet: .carnivore,
+            length: "11 m (36 ft) wingspan",
+            weight: "200 kg (440 lb)",
+            funFact: "Quetzalcoatlus was a flying reptile as big as a small airplane, the largest flier ever known!",
+            symbolName: "airplane",
+            emoji: "🛩️",
+            imageAssetName: "quetzalcoatlus-skin",
+            rangeMapAssetName: "region-north-america",
+            rangeLabel: "Western North America",
             rarity: .secretRare,
             isSecret: true
         )
