@@ -33,10 +33,19 @@ struct CountdownView: View {
             }
             .frame(height: 220)
 
-            Button("Cancel Timer", role: .destructive) {
+            Button(role: .destructive) {
                 engine.cancel()
                 onCancel()
+            } label: {
+                Text("Cancel Timer")
+                    .font(.title3.bold())
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.dinoRed)
+                    .foregroundStyle(.white)
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
             }
+            .padding(.horizontal, 32)
 
             Spacer()
             Spacer()
