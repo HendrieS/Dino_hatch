@@ -54,7 +54,7 @@ struct CircularDurationPicker: View {
     var body: some View {
         ZStack {
             Circle()
-                .stroke(Color.dinoCardBackground, lineWidth: ringWidth)
+                .stroke(Color.dinoDialTrack, lineWidth: ringWidth)
                 .frame(width: diameter, height: diameter)
 
             Circle()

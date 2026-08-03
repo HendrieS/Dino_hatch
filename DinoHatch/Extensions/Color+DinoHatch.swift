@@ -15,6 +15,11 @@ extension Color {
     /// extended to Alarm/Collection for consistency across the app.
     static let dinoWarmBackgroundTop = Color(red: 0.984, green: 0.969, blue: 0.918)
     static let dinoWarmBackgroundBottom = Color(red: 0.945, green: 0.906, blue: 0.800)
+    /// `CircularDurationPicker`'s ring track — `dinoCardBackground` (a
+    /// near-white system tone) read as plain white against the warm cream
+    /// background, so the track needs its own warmer, visibly darker tan to
+    /// stay readable as a ring rather than blending into the background.
+    static let dinoDialTrack = Color(red: 0.843, green: 0.776, blue: 0.612)
 }
 
 extension View {
