@@ -164,6 +164,7 @@ struct AlarmView: View {
                         .fixedSize(horizontal: false, vertical: true)
 
                     Toggle("Alarm On", isOn: $isEnabled)
+                        .toggleStyle(DinoToggleStyle())
                         .padding(.horizontal, 40)
 
                     DatePicker("Wake-up time", selection: $time, displayedComponents: .hourAndMinute)
@@ -195,7 +196,7 @@ struct AlarmView: View {
                             .fixedSize(horizontal: false, vertical: true)
                             .padding(.horizontal, 12)
                             .padding(.vertical, 8)
-                            .background(Color.dinoCardBackground, in: RoundedRectangle(cornerRadius: 12))
+                            .background(Color.dinoDialTrack, in: RoundedRectangle(cornerRadius: 12))
                             .padding(.horizontal, 32)
                     }
 
@@ -207,7 +208,7 @@ struct AlarmView: View {
                             .fixedSize(horizontal: false, vertical: true)
                             .padding(.horizontal, 12)
                             .padding(.vertical, 8)
-                            .background(Color.dinoCardBackground, in: RoundedRectangle(cornerRadius: 12))
+                            .background(Color.dinoDialTrack, in: RoundedRectangle(cornerRadius: 12))
                             .padding(.horizontal, 32)
                     }
                 }
