@@ -26,11 +26,11 @@ struct TimerSetupView: View {
                     Button {
                         startTimer()
                     } label: {
-                        HStack(spacing: 10) {
+                        HStack(spacing: 8) {
                             Image("button-footprint-play")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 28, height: 28)
+                                .frame(width: 22, height: 22)
                             Text("Start Timer")
                         }
                         .font(.title3.bold())

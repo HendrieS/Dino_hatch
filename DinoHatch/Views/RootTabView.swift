@@ -44,6 +44,9 @@ struct RootTabView: View {
                             Text("Timer")
                         } icon: {
                             Image("timer-icon")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 25, height: 25)
                         }
                     }
                     .tag(Tab.timer)
@@ -54,6 +57,9 @@ struct RootTabView: View {
                             Text("Alarm")
                         } icon: {
                             Image("alarm-icon")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 25, height: 25)
                         }
                     }
                     .tag(Tab.alarm)
@@ -65,6 +71,9 @@ struct RootTabView: View {
                             Text("Collection")
                         } icon: {
                             Image("collection-icon")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 25, height: 25)
                         }
                     }
                     .tag(Tab.collection)
