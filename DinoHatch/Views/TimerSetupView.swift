@@ -44,6 +44,7 @@ struct TimerSetupView: View {
             }
             .navigationTitle("Dino Hatch")
             .navigationBarTitleDisplayMode(.inline)
+            .dinoWarmBackground()
             .onAppear {
                 // Round to the dial's snap grid in case a duration was
                 // saved under a different grid (e.g. a prior build's

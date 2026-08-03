@@ -51,6 +51,7 @@ struct CountdownView: View {
             Spacer()
         }
         .padding()
+        .dinoWarmBackground()
         // Keep the screen awake for the duration of the countdown so it
         // doesn't lock mid-timer; restored as soon as this view goes away
         // (cancelled, hatched, or navigated off).
