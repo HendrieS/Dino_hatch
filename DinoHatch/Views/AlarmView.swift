@@ -193,6 +193,9 @@ struct AlarmView: View {
                             .foregroundStyle(.secondary)
                             .multilineTextAlignment(.center)
                             .fixedSize(horizontal: false, vertical: true)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 8)
+                            .background(Color.dinoCardBackground, in: RoundedRectangle(cornerRadius: 12))
                             .padding(.horizontal, 32)
                     }
 
@@ -202,6 +205,9 @@ struct AlarmView: View {
                             .foregroundStyle(.secondary)
                             .multilineTextAlignment(.center)
                             .fixedSize(horizontal: false, vertical: true)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 8)
+                            .background(Color.dinoCardBackground, in: RoundedRectangle(cornerRadius: 12))
                             .padding(.horizontal, 32)
                     }
                 }
