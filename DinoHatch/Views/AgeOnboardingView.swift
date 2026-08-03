@@ -56,6 +56,7 @@ struct AgeOnboardingView: View {
         .padding()
         .frame(maxWidth: 500)
         .frame(maxWidth: .infinity)
+        .dinoWarmBackground()
     }
 
     private func save() {
