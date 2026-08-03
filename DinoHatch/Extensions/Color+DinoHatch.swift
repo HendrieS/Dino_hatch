@@ -19,14 +19,26 @@ extension Color {
 
 extension View {
     /// The warm cream gradient background used behind every main tab
-    /// (Timer, Alarm, Collection) in place of the plain system white.
+    /// (Timer, Alarm, Collection) in place of the plain system white, with
+    /// a decorative fern/leaf cluster bleeding off the bottom-left corner —
+    /// the first of the two corner clusters from the approved mockup (only
+    /// the left one has art yet; the right one joins once that asset
+    /// exists). `allowsHitTesting(false)` since it's purely decorative and
+    /// shouldn't intercept taps near the corner.
     func dinoWarmBackground() -> some View {
         background(
-            LinearGradient(
-                colors: [Color.dinoWarmBackgroundTop, Color.dinoWarmBackgroundBottom],
-                startPoint: .top,
-                endPoint: .bottom
-            )
+            ZStack(alignment: .bottomLeading) {
+                LinearGradient(
+                    colors: [Color.dinoWarmBackgroundTop, Color.dinoWarmBackgroundBottom],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                Image("leaf-corner-left")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 200, height: 200)
+                    .allowsHitTesting(false)
+            }
             .ignoresSafeArea()
         )
     }
