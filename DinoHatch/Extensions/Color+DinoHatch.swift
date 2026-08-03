@@ -45,6 +45,11 @@ extension View {
                     .scaledToFit()
                     .frame(width: 200, height: 200)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+                    // Nudged further into the corner than plain alignment
+                    // allows (alignment alone only gets it flush with the
+                    // edge) — bleeds it slightly past the screen bounds to
+                    // match the left cluster's tucked-in-the-corner feel.
+                    .offset(x: 24, y: 24)
                     .allowsHitTesting(false)
             }
             .ignoresSafeArea()
