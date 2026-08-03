@@ -26,13 +26,19 @@ struct TimerSetupView: View {
                     Button {
                         startTimer()
                     } label: {
-                        Text("Start Timer")
-                            .font(.title3.bold())
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(totalSeconds > 0 ? Color.dinoGreen : Color.gray)
-                            .foregroundStyle(.white)
-                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                        HStack(spacing: 10) {
+                            Image("button-footprint-play")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 28, height: 28)
+                            Text("Start Timer")
+                        }
+                        .font(.title3.bold())
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(totalSeconds > 0 ? Color.dinoGreen : Color.gray)
+                        .foregroundStyle(.white)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
                     }
                     .disabled(totalSeconds == 0)
                     .padding(.horizontal, 32)

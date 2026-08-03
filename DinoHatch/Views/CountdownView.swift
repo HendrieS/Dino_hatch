@@ -37,13 +37,19 @@ struct CountdownView: View {
                 engine.cancel()
                 onCancel()
             } label: {
-                Text("Cancel Timer")
-                    .font(.title3.bold())
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.dinoRed)
-                    .foregroundStyle(.white)
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                HStack(spacing: 10) {
+                    Image("button-footprint-stop")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 28, height: 28)
+                    Text("Cancel Timer")
+                }
+                .font(.title3.bold())
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(Color.dinoRed)
+                .foregroundStyle(.white)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
             }
             .padding(.horizontal, 32)
 

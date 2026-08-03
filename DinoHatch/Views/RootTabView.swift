@@ -40,20 +40,32 @@ struct RootTabView: View {
             TabView(selection: $selectedTab) {
                 TimerHomeView(isActive: selectedTab == .timer)
                     .tabItem {
-                        Label("Timer", systemImage: "hourglass")
+                        Label {
+                            Text("Timer")
+                        } icon: {
+                            Image("timer-icon")
+                        }
                     }
                     .tag(Tab.timer)
 
                 AlarmView()
                     .tabItem {
-                        Label("Alarm", systemImage: "alarm.fill")
+                        Label {
+                            Text("Alarm")
+                        } icon: {
+                            Image("alarm-icon")
+                        }
                     }
                     .tag(Tab.alarm)
                     .badge(alarmWasMissedToday(at: now) ? Text(verbatim: "!") : nil)
 
                 CollectionView()
                     .tabItem {
-                        Label("Collection", systemImage: "book.closed.fill")
+                        Label {
+                            Text("Collection")
+                        } icon: {
+                            Image("collection-icon")
+                        }
                     }
                     .tag(Tab.collection)
             }
