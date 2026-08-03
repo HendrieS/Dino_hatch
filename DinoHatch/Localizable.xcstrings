@@ -1965,6 +1965,46 @@
         }
       }
     },
+    "Dino Hatch is built to be private, safe, and a little bit educational. Here's exactly what that means.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dino Hatch ist privat, sicher und ein bisschen lehrreich gestaltet. Hier erfährst du genau, was das bedeutet."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dino Hatch is built to be private, safe, and a little bit educational. Here's exactly what that means."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dino Hatch está diseñado para ser privado, seguro y un poco educativo. Aquí te explicamos exactamente qué significa eso."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dino Hatch a été conçu pour être privé, sûr et un peu éducatif. Voici exactement ce que cela signifie."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dino Hatch is gemaakt om privé, veilig en een beetje leerzaam te zijn. Hier lees je precies wat dat betekent."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dino Hatch создано так, чтобы быть приватным, безопасным и немного познавательным. Вот что это значит."
+          }
+        }
+      }
+    },
     "Dino Hatch is free and always will be — this is completely optional.": {
       "extractionState": "manual",
       "localizations": {
@@ -3970,6 +4010,46 @@
         }
       }
     },
+    "Keeping it kid-safe": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kindersicher"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keeping it kid-safe"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seguridad infantil"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sécurité pour les enfants"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Veilig voor kinderen"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Безопасность для детей"
+          }
+        }
+      }
+    },
     "Late Cretaceous": {
       "extractionState": "stale",
       "localizations": {
@@ -4171,47 +4251,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Заблокировано"
-          }
-        }
-      }
-    },
-    "Managing this data": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Diese Daten verwalten"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Managing this data"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gestionar estos datos"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gérer ces données"
-          }
-        },
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deze gegevens beheren"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Управление этими данными"
           }
         }
       }
@@ -5234,6 +5273,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "Платеозавр был одним из первых гигантских травоядных динозавров и мог вставать на задние лапы, чтобы дотянуться до высоких листьев!"
+          }
+        }
+      }
+    },
+    "Privacy": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Privatsphäre"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Privacy"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Privacidad"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Confidentialité"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Privacy"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Конфиденциальность"
           }
         }
       }
@@ -7325,43 +7404,42 @@
         }
       }
     },
-    "Tap any hatched dinosaur to read kid-friendly facts about it. Press and hold to see an X-ray view — this unlocks after the first hatch for children 5 and under, or after two hatches for children 6 and up.": {
-      "extractionState": "manual",
+    "Tap any hatched dinosaur for kid-friendly facts — when it lived, what it ate, how big it really was, and where in the world it was found. Press and hold to see an X-ray view of its skeleton, which unlocks after the first hatch for children 5 and under, or after two hatches for children 6 and up.": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tippe auf einen geschlüpften Dinosaurier, um kindgerechte Fakten über ihn zu lesen. Halte ihn gedrückt, um eine Röntgenansicht zu sehen — diese wird für Kinder bis 5 Jahre nach dem ersten Schlüpfen freigeschaltet, für Kinder ab 6 Jahren nach zwei geschlüpften Dinosauriern."
+            "value": "Tippe auf einen geschlüpften Dinosaurier für kindgerechte Fakten — wann er lebte, was er fraß, wie groß er wirklich war und wo auf der Welt er gefunden wurde. Drücke und halte für eine Röntgenansicht seines Skeletts, die nach dem ersten Schlüpfen für Kinder bis 5 Jahre freigeschaltet wird, oder nach zwei Schlüpfvorgängen für Kinder ab 6 Jahren."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tap any hatched dinosaur to read kid-friendly facts about it. Press and hold to see an X-ray view — this unlocks after the first hatch for children 5 and under, or after two hatches for children 6 and up."
+            "value": "Tap any hatched dinosaur for kid-friendly facts — when it lived, what it ate, how big it really was, and where in the world it was found. Press and hold to see an X-ray view of its skeleton, which unlocks after the first hatch for children 5 and under, or after two hatches for children 6 and up."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Toca cualquier dinosaurio nacido para leer datos aptos para niños sobre él. Mantén pulsado para ver una vista de rayos X: se desbloquea tras el primer nacimiento para niños de 5 años o menos, o tras dos nacimientos para niños de 6 años o más."
+            "value": "Toca cualquier dinosaurio eclosionado para ver datos aptos para niños — cuándo vivió, qué comía, lo grande que era en realidad y en qué parte del mundo se encontró. Mantén pulsado para ver una vista de rayos X de su esqueleto, que se desbloquea tras la primera eclosión para niños de 5 años o menos, o tras dos eclosiones para niños de 6 años o más."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Touchez un dinosaure éclos pour lire des informations adaptées aux enfants à son sujet. Appuyez de manière prolongée pour voir une vue aux rayons X — elle se débloque après la première éclosion pour les enfants de 5 ans et moins, ou après deux éclosions pour les enfants de 6 ans et plus."
+            "value": "Touchez un dinosaure éclos pour des informations adaptées aux enfants — quand il a vécu, ce qu'il mangeait, sa taille réelle et où dans le monde il a été trouvé. Appuyez de manière prolongée pour voir une vue aux rayons X de son squelette, qui se débloque après la première éclosion pour les enfants de 5 ans ou moins, ou après deux éclosions pour les enfants de 6 ans ou plus."
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tik op een uitgekomen dino om kindvriendelijke feitjes te lezen. Houd ingedrukt voor een röntgenweergave — deze wordt ontgrendeld na het eerste uitkomen voor kinderen van 5 jaar en jonger, of na twee keer uitkomen voor kinderen van 6 jaar en ouder."
+            "value": "Tik op een uitgekomen dinosaurus voor kindvriendelijke feiten — wanneer hij leefde, wat hij at, hoe groot hij echt was en waar ter wereld hij is gevonden. Druk en houd vast voor een röntgenweergave van zijn skelet, die wordt ontgrendeld na de eerste keer uitkomen voor kinderen van 5 jaar en jonger, of na twee keer uitkomen voor kinderen van 6 jaar en ouder."
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "Нажмите на любого вылупившегося динозавра, чтобы прочитать интересные факты о нём, понятные детям. Нажмите и удерживайте, чтобы увидеть рентген — он открывается после первого вылупления для детей 5 лет и младше, или после двух вылуплений для детей от 6 лет."
+            "value": "Нажмите на любого вылупившегося динозавра, чтобы увидеть понятные детям факты — когда он жил, что ел, каким был на самом деле большим и в какой части света его нашли. Нажмите и удерживайте, чтобы увидеть рентгеновский снимок его скелета — он открывается после первого вылупления для детей 5 лет и младше, или после двух вылуплений для детей от 6 лет."
           }
         }
       }
@@ -7485,6 +7563,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "Коллекция"
+          }
+        }
+      }
+    },
+    "The heart-shaped badge kids might tap on the main screens only ever shows a thank-you message. Buying support only happens from Settings, behind that same math check.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das herzförmige Abzeichen, das Kinder auf den Hauptbildschirmen antippen könnten, zeigt immer nur eine Dankeschön-Nachricht. Eine Unterstützung kaufen kannst du nur in den Einstellungen, hinter derselben Rechenaufgabe."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The heart-shaped badge kids might tap on the main screens only ever shows a thank-you message. Buying support only happens from Settings, behind that same math check."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La insignia con forma de corazón que los niños podrían tocar en las pantallas principales solo muestra un mensaje de agradecimiento. Comprar apoyo solo es posible desde Ajustes, tras esa misma pregunta matemática."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le badge en forme de cœur que les enfants pourraient toucher sur les écrans principaux n'affiche jamais qu'un message de remerciement. L'achat d'un soutien ne se fait que depuis les Réglages, derrière cette même question de calcul."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Het hartvormige insigne dat kinderen op de hoofdschermen kunnen aantikken, toont altijd alleen een bedankje. Steun kopen kan alleen via Instellingen, achter diezelfde rekenvraag."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Значок в форме сердца, который дети могут нажать на главных экранах, всегда показывает только сообщение с благодарностью. Купить поддержку можно только в Настройках, за тем же математическим вопросом."
           }
         }
       }
@@ -8432,47 +8550,6 @@
         }
       }
     },
-    "What we store about your child": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Was wir über dein Kind speichern"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "What we store about your child"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Qué guardamos sobre tu hijo o hija"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ce que nous conservons sur votre enfant"
-          }
-        },
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wat we over je kind bewaren"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Что мы храним о вашем ребёнке"
-          }
-        }
-      }
-    },
     "What's New": {
       "localizations": {
         "de": {
@@ -8509,47 +8586,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Что нового"
-          }
-        }
-      }
-    },
-    "Where it's stored": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wo es gespeichert wird"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Where it's stored"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dónde se guarda"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Où c'est conservé"
-          }
-        },
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Waar het wordt bewaard"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Где это хранится"
           }
         }
       }

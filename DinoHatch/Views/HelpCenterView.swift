@@ -3,26 +3,35 @@ import SwiftUI
 /// A parent-facing overview of what the app stores and how it works,
 /// reachable from `SettingsView` (behind the same parental gate). Written
 /// for an adult, not the child — plain and specific, since data privacy is
-/// the most likely reason someone would open it.
+/// the most likely reason someone would open it. Ordered around the app's
+/// three core principles (privacy-first, kid-safe, a little educational),
+/// most-likely-reason-to-open first, rather than an arbitrary feature list.
 struct HelpCenterView: View {
     var body: some View {
         Form {
             Section {
-                Label("Just their age", systemImage: "number")
-                Label("Which dinosaurs they've hatched, and when", systemImage: "clock")
-                Label("Timer and alarm settings", systemImage: "gearshape")
-            } header: {
-                Text("What we store about your child")
-            } footer: {
-                Text("No name, birthday, email, photos, or location are ever asked for or stored.")
+                Text("Dino Hatch is built to be private, safe, and a little bit educational. Here's exactly what that means.")
             }
 
             Section {
+                Label("Just their age", systemImage: "number")
+                Label("Which dinosaurs they've hatched, and when", systemImage: "clock")
+                Label("Timer and alarm settings", systemImage: "gearshape")
                 Text("Everything is stored on this device, and syncs privately through your iCloud account to your family's other devices — so the same collection, timer, and alarm show up whether your child uses an iPhone or an iPad. There's no separate account, no analytics, and no ads. This uses your own iCloud storage, not ours — nothing is ever sent to us.")
             } header: {
-                Text("Where it's stored")
+                Text("Privacy")
             } footer: {
-                Text("To turn this off: open the Settings app on your device → tap your name at the top → iCloud → Saved to iCloud (tap See All if Dino Hatch isn't shown right away) → turn off Dino Hatch.")
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("No name, birthday, email, photos, or location are ever asked for or stored.")
+                    Text("To turn this off: open the Settings app on your device → tap your name at the top → iCloud → Saved to iCloud (tap See All if Dino Hatch isn't shown right away) → turn off Dino Hatch.")
+                }
+            }
+
+            Section("Keeping it kid-safe") {
+                Text("You can change the age or erase everything (collection, timer, and alarm settings) from Settings at any time. A quick math question keeps small children from getting into Settings by accident.")
+                if FeatureFlags.supporterDonationsEnabled {
+                    Text("The heart-shaped badge kids might tap on the main screens only ever shows a thank-you message. Buying support only happens from Settings, behind that same math check.")
+                }
             }
 
             Section("How the timer works") {
@@ -34,7 +43,7 @@ struct HelpCenterView: View {
             }
 
             Section("The collection") {
-                Text("Tap any hatched dinosaur to read kid-friendly facts about it. Press and hold to see an X-ray view — this unlocks after the first hatch for children 5 and under, or after two hatches for children 6 and up.")
+                Text("Tap any hatched dinosaur for kid-friendly facts — when it lived, what it ate, how big it really was, and where in the world it was found. Press and hold to see an X-ray view of its skeleton, which unlocks after the first hatch for children 5 and under, or after two hatches for children 6 and up.")
             }
 
             Section("Dinosaur rarity") {
@@ -45,18 +54,14 @@ struct HelpCenterView: View {
                 Text("Settings → App Icon lets you change the Home Screen icon. The default is always available. Four of the dinosaur icons unlock once you've hatched that specific dinosaur — Tyrannosaurus Rex, Triceratops, and Pteranodon are regular hatches, while the fourth, Patagotitan, is one of the collection's secret dinosaurs, so it only unlocks after every other dinosaur has been hatched first. The other two work differently: the brown dino icon unlocks once you've hatched 5 dinosaurs in total, and the green dino icon once you've hatched 10.")
             }
 
-            Section("Managing this data") {
-                Text("You can change the age or erase everything (collection, timer, and alarm settings) from Settings at any time. A quick math question keeps small children from getting into Settings by accident.")
+            Section("Why no dark mode?") {
+                Text("Dino Hatch always uses its light look, even if your device is set to dark mode. It's a daytime app for kids — bright colors are easier for young eyes to read, and a dark, glowing screen isn't something we want to encourage at bedtime.")
             }
 
             if FeatureFlags.supporterDonationsEnabled {
                 Section("Supporting Dino Hatch") {
                     Text("Settings → Support Dino Hatch offers an optional one-time purchase, in four tiers, for families who'd like to support development. It never unlocks anything in the game — it only adds a small heart-shaped badge (colored gray, green, gold, or purple depending on the tier) shown in the corner of the main screens and Home Screen widgets. Dino Hatch stays completely free either way.")
                 }
-            }
-
-            Section("Why no dark mode?") {
-                Text("Dino Hatch always uses its light look, even if your device is set to dark mode. It's a daytime app for kids — bright colors are easier for young eyes to read, and a dark, glowing screen isn't something we want to encourage at bedtime.")
             }
 
             // The address itself isn't linguistic content, so it's shown
