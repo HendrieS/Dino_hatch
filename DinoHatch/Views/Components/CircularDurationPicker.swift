@@ -94,7 +94,7 @@ struct CircularDurationPicker: View {
             Circle()
                 .fill(Color.dinoGreen)
                 .frame(width: 28, height: 28)
-                .overlay(Circle().stroke(.white, lineWidth: 3))
+                .overlay(Circle().stroke(Color.dinoDialTrack, lineWidth: 3))
                 .shadow(radius: 1)
                 .offset(offset(forProgress: progress, radius: diameter / 2))
 
