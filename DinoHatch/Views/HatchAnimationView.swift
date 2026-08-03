@@ -22,6 +22,8 @@ struct HatchAnimationView: View {
                 VectorHatchSequence(dinosaur: dinosaur, onComplete: onComplete)
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .dinoWarmBackground()
     }
 }
 

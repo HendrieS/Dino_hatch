@@ -85,6 +85,7 @@ struct DinosaurDetailView: View {
         }
         .navigationTitle(Text(localizedContent: dinosaur.name))
         .navigationBarTitleDisplayMode(.inline)
+        .dinoWarmBackground()
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 if let shareURL, let shareImage {

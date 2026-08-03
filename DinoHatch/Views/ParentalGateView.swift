@@ -86,6 +86,7 @@ struct ParentalGateView: View {
                 .padding()
                 .frame(maxWidth: 500)
                 .frame(maxWidth: .infinity)
+                .dinoWarmBackground()
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
                         Button("Cancel") { dismiss() }

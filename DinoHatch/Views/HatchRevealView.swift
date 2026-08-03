@@ -40,6 +40,7 @@ struct HatchRevealView: View {
         }
         .frame(maxWidth: 500)
         .frame(maxWidth: .infinity)
+        .dinoWarmBackground()
     }
 }
 

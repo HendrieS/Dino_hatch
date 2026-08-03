@@ -85,6 +85,8 @@ struct HelpCenterView: View {
         }
         .navigationTitle("Help Center")
         .navigationBarTitleDisplayMode(.inline)
+        .scrollContentBackground(.hidden)
+        .dinoWarmBackground()
     }
 }
 

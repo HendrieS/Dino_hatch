@@ -56,6 +56,8 @@ struct SupportUsView: View {
             }
             .navigationTitle("Support Us")
             .navigationBarTitleDisplayMode(.inline)
+            .scrollContentBackground(.hidden)
+            .dinoWarmBackground()
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") { dismiss() }
