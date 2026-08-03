@@ -20,14 +20,15 @@ extension Color {
 extension View {
     /// The warm cream gradient background used behind every main tab
     /// (Timer, Alarm, Collection) in place of the plain system white, with
-    /// a decorative fern/leaf cluster bleeding off the bottom-left corner —
-    /// the first of the two corner clusters from the approved mockup (only
-    /// the left one has art yet; the right one joins once that asset
-    /// exists). `allowsHitTesting(false)` since it's purely decorative and
-    /// shouldn't intercept taps near the corner.
+    /// decorative fern/leaf clusters bleeding off both bottom corners, as
+    /// in the approved mockup. Each image gets its own full-size frame
+    /// with a corner alignment (rather than relying on the ZStack's own
+    /// single alignment) so the two clusters can pin to opposite corners
+    /// independently. `allowsHitTesting(false)` since they're purely
+    /// decorative and shouldn't intercept taps near either corner.
     func dinoWarmBackground() -> some View {
         background(
-            ZStack(alignment: .bottomLeading) {
+            ZStack {
                 LinearGradient(
                     colors: [Color.dinoWarmBackgroundTop, Color.dinoWarmBackgroundBottom],
                     startPoint: .top,
@@ -37,6 +38,13 @@ extension View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 200, height: 200)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+                    .allowsHitTesting(false)
+                Image("leaf-corner-right")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 200, height: 200)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
                     .allowsHitTesting(false)
             }
             .ignoresSafeArea()
