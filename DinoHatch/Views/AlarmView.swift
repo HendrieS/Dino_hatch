@@ -196,7 +196,7 @@ struct AlarmView: View {
                             .fixedSize(horizontal: false, vertical: true)
                             .padding(.horizontal, 12)
                             .padding(.vertical, 8)
-                            .background(Color.dinoDialTrack, in: RoundedRectangle(cornerRadius: 12))
+                            .background(Color.dinoDialTrack.opacity(0.6), in: RoundedRectangle(cornerRadius: 12))
                             .padding(.horizontal, 32)
                     }
 
