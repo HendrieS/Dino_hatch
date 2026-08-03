@@ -9,6 +9,19 @@ struct CountdownView: View {
     @State private var hasCompleted = false
 
     var body: some View {
+        NavigationStack {
+            countdownContent
+                .navigationTitle("Dino Hatch")
+                .navigationBarTitleDisplayMode(.inline)
+        }
+    }
+
+    /// Matches `TimerSetupView`'s own `NavigationStack` + inline "Dino
+    /// Hatch" title exactly, rather than leaving this screen title-less —
+    /// without it, switching from setup to counting dropped the whole nav
+    /// bar, so everything below (including the Cancel Timer button) jumped
+    /// up by that bar's height the instant the timer started.
+    private var countdownContent: some View {
         VStack(spacing: 40) {
             Spacer()
 
