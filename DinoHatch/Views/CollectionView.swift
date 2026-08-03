@@ -164,6 +164,7 @@ struct CollectionView: View {
             }
             .navigationTitle("Dino-pedia")
             .navigationBarTitleDisplayMode(.inline)
+            .dinoWarmBackground()
             .searchable(text: $searchText, prompt: Text("Search dinosaurs"))
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {

@@ -212,6 +212,7 @@ struct AlarmView: View {
             }
             .navigationTitle("Dino Alarm")
             .navigationBarTitleDisplayMode(.inline)
+            .dinoWarmBackground()
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     SupporterBadgeView()

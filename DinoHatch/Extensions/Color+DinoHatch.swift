@@ -9,19 +9,17 @@ extension Color {
     static let dinoRed = Color(red: 0.85, green: 0.34, blue: 0.32)
     static let dinoCardBackground = Color(uiColor: .secondarySystemBackground)
     /// Gradient stops for `View.dinoWarmBackground()` — a warm cream tone
-    /// replacing the plain system white behind the Timer screens, in the
-    /// same tone family as the egg-hatch art's nest. Approved from a
-    /// background-only mockup before touching any view code.
+    /// replacing the plain system white app-wide, in the same tone family
+    /// as the egg-hatch art's nest. Approved from a background-only mockup
+    /// before touching any view code, first on the Timer screens, then
+    /// extended to Alarm/Collection for consistency across the app.
     static let dinoWarmBackgroundTop = Color(red: 0.984, green: 0.969, blue: 0.918)
     static let dinoWarmBackgroundBottom = Color(red: 0.945, green: 0.906, blue: 0.800)
 }
 
 extension View {
-    /// The warm cream gradient background approved to replace the plain
-    /// white default on the Timer setup/countdown screens. Deliberately
-    /// not applied everywhere yet — scoped to exactly what was shown in
-    /// the mockup, pending a decision on whether it extends to the
-    /// Alarm/Collection tabs too.
+    /// The warm cream gradient background used behind every main tab
+    /// (Timer, Alarm, Collection) in place of the plain system white.
     func dinoWarmBackground() -> some View {
         background(
             LinearGradient(
