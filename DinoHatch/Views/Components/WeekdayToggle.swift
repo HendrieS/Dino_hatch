@@ -26,7 +26,7 @@ struct WeekdayToggle: View {
             Text(verbatim: label)
                 .font(.subheadline.bold())
                 .frame(width: 36, height: 36)
-                .background(isOn ? Color.dinoGreen : Color.dinoCardBackground)
+                .background(isOn ? Color.dinoGreen : Color.dinoWarmBackgroundBottom)
                 .foregroundStyle(isOn ? .white : .primary)
                 .clipShape(Circle())
         }
