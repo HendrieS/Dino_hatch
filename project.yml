@@ -21,6 +21,7 @@ targets:
     info:
       path: DinoHatch/Info.plist
       properties:
+        CFBundleDisplayName: Dino Hatch
         UILaunchScreen: {}
         UIUserInterfaceStyle: Light
         NSSupportsLiveActivities: true
