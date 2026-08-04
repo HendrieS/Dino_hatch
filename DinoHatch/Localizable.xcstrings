@@ -1432,6 +1432,47 @@
         }
       }
     },
+    "Collection Complete!": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sammlung komplett!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Collection Complete!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Colección completa!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Collection complète !"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Collectie compleet!"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Коллекция собрана!"
+          }
+        }
+      }
+    },
     "Collection Order": {
       "extractionState": "manual",
       "localizations": {
@@ -4415,6 +4456,47 @@
           "stringUnit": {
             "state": "translated",
             "value": "Монголия и Китай"
+          }
+        }
+      }
+    },
+    "More dinosaurs are on their way...": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weitere Dinosaurier sind unterwegs..."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "More dinosaurs are on their way..."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Más dinosaurios están en camino..."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "D'autres dinosaures arrivent bientôt..."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Er komen meer dinosaurussen aan..."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скоро появятся новые динозавры..."
           }
         }
       }
@@ -8750,6 +8832,47 @@
           "stringUnit": {
             "state": "translated",
             "value": "Пожалуйста"
+          }
+        }
+      }
+    },
+    "You've hatched every dinosaur in the collection. Amazing work, paleontologist!": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Du hast jeden Dinosaurier der Sammlung ausgebrütet. Tolle Arbeit!"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You've hatched every dinosaur in the collection. Amazing work, paleontologist!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Has incubado todos los dinosaurios de la colección. ¡Buen trabajo!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu as fait éclore tous les dinosaures de la collection. Bravo, jeune paléontologue !"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Je hebt elke dinosaurus in de collectie uitgebroed. Knap werk, jonge paleontoloog!"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вся коллекция динозавров вылупилась! Отличная работа!"
           }
         }
       }

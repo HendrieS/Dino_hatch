@@ -17,6 +17,8 @@ struct RootTabView: View {
     @State private var pendingAlarmDinosaur: Dinosaur?
     @State private var whatsNewNotes: [ReleaseNote] = []
     @State private var showWhatsNew = false
+    @State private var collectionCompleteMascots: [Dinosaur] = []
+    @State private var showCollectionComplete = false
     @State private var selectedTab: Tab = .timer
     /// Refreshed every minute (and on every foreground transition) purely
     /// to keep the Alarm tab's missed-window badge current — unlike the
@@ -98,6 +100,18 @@ struct RootTabView: View {
             }
             .onChange(of: unlocked.count) { _, _ in
                 refreshWidgetSnapshot()
+                checkCollectionComplete()
+            }
+            .onChange(of: pendingAlarmDinosaur) { _, newValue in
+                // The alarm-hatch cover below can itself be what completes
+                // the collection (unlock(_:) runs while it's still on
+                // screen) — checkCollectionComplete() deliberately no-ops
+                // while that cover is up rather than trying to stack a
+                // second fullScreenCover on top of it, so re-check the
+                // instant it closes to catch that case.
+                if newValue == nil {
+                    checkCollectionComplete()
+                }
             }
             .onChange(of: alarmFingerprint) { _, _ in
                 refreshWidgetSnapshot()
@@ -120,6 +134,11 @@ struct RootTabView: View {
             }
             .sheet(isPresented: $showWhatsNew) {
                 WhatsNewView(notes: whatsNewNotes)
+            }
+            .fullScreenCover(isPresented: $showCollectionComplete) {
+                CollectionCompleteView(mascots: collectionCompleteMascots) {
+                    showCollectionComplete = false
+                }
             }
 
             if selectedTab != .timer {
@@ -228,6 +247,35 @@ struct RootTabView: View {
     private func unlock(_ dinosaur: Dinosaur) {
         guard !unlocked.contains(where: { $0.dinosaurID == dinosaur.id }) else { return }
         modelContext.insert(UnlockedDinosaur(dinosaurID: dinosaur.id))
+    }
+
+    /// Fires the first time the *entire* catalog (regular + Secret Rare) is
+    /// hatched, whether that happened via the timer or the alarm — both
+    /// paths insert into the same `UnlockedDinosaur` table this view already
+    /// queries, so watching `unlocked.count` catches either one without
+    /// needing separate logic per path. Compares against
+    /// `lastCollectionCompleteCatalogSize` (not a plain Bool) so this
+    /// naturally fires again if a future catalog expansion gets fully
+    /// hatched too. Deliberately skipped while `pendingAlarmDinosaur` is
+    /// still showing its own fullScreenCover — see the `onChange` above.
+    private func checkCollectionComplete() {
+        guard pendingAlarmDinosaur == nil, let settings = appSettings.first else { return }
+        let totalCatalogCount = DinosaurCatalog.all.count
+        guard unlocked.count == totalCatalogCount,
+              settings.lastCollectionCompleteCatalogSize != totalCatalogCount else { return }
+        settings.lastCollectionCompleteCatalogSize = totalCatalogCount
+        collectionCompleteMascots = mostRecentlyHatched(count: 2)
+        showCollectionComplete = true
+    }
+
+    /// The dinosaurs `CollectionCompleteView` shows as its mascot pair —
+    /// whichever were hatched most recently, so it naturally includes the
+    /// one that just completed the set rather than a hardcoded species pair.
+    private func mostRecentlyHatched(count: Int) -> [Dinosaur] {
+        unlocked
+            .sorted { $0.unlockedAt > $1.unlockedAt }
+            .prefix(count)
+            .compactMap { record in DinosaurCatalog.all.first(where: { $0.id == record.dinosaurID }) }
     }
 
     /// Keeps the Home Screen widgets' App Group snapshot in sync — called on

@@ -44,6 +44,13 @@ final class AppSettings {
     /// updating into the build that first introduced this field, both
     /// handled in `WhatsNewGate`.
     var lastSeenAppVersion: String?
+    /// The catalog size (`DinosaurCatalog.all.count`) at which
+    /// `CollectionCompleteView` was last shown, nil if never shown. Compared
+    /// against the *current* catalog size rather than a plain Bool so the
+    /// celebration naturally fires again if a future catalog expansion (see
+    /// the Wave 1/2 backlog item) gets fully hatched too, instead of only
+    /// ever celebrating once per install.
+    var lastCollectionCompleteCatalogSize: Int?
 
     init() {}
 }
