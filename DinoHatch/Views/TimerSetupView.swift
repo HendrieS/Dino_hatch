@@ -17,7 +17,7 @@ struct TimerSetupView: View {
                         // the screen per user request, to see how it looks
                         // higher up (closer to/overlapping the vine canopy)
                         // instead of sitting in the normal content flow.
-                        .offset(y: -40)
+                        .offset(y: -80)
 
                     Text("Set a timer and watch\nan egg hatch!")
                         .font(.title2.bold())

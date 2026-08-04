@@ -119,7 +119,7 @@ struct CollectionView: View {
             ScrollView {
                 SignTitleView(text: "Dino-pedia")
                     // Experimental — see TimerSetupView's matching offset.
-                    .offset(y: -40)
+                    .offset(y: -80)
                     .padding(.top, 8)
 
                 // Composed from separate Text views (rather than one
