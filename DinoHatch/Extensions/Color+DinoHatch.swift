@@ -46,29 +46,30 @@ extension View {
                     startPoint: .top,
                     endPoint: .bottom
                 )
-                // .scaledToFit() with both maxWidth AND maxHeight bounded in
-                // the same frame call — capping only maxWidth let the image
-                // balloon to a much taller render than its aspect ratio
-                // alone would predict, presumably because this whole ZStack
-                // is a `.background()` under `.ignoresSafeArea()`, which
-                // proposes far more height than the visible screen to its
-                // children. Bounding both dimensions together guarantees
-                // this can never render taller than maxHeight regardless of
-                // what height gets proposed. A fixed-height .fill()+
-                // .clipped() was tried before that and hard-cropped the
-                // vine's own dangling leaf strands mid-shape — .scaledToFit()
-                // never crops, so the full artwork's natural taper always
-                // shows, just smaller than the width alone would allow.
+                // .scaledToFit(), width-capped at 500 (matching the app's
+                // max-content-width convention, e.g. TimerSetupView) so it
+                // spans the full device width on iPhone but doesn't grow
+                // oversized on iPad, with height following the art's own
+                // aspect ratio — no separate height cap, so it reads as a
+                // full-width arch rather than a small centered patch. (An
+                // earlier attempt capped height too, which looked right in
+                // isolation but turned out to be overcorrecting for what
+                // was actually a *positioning* bug — see below.) A
+                // fixed-height .fill()+.clipped() was tried even earlier
+                // and hard-cropped the vine's own dangling leaf strands
+                // mid-shape — .scaledToFit() never crops, so the full
+                // artwork's natural taper always shows.
                 Image("vine-top-canopy")
                     .resizable()
                     .scaledToFit()
-                    .frame(maxWidth: 500, maxHeight: 110)
+                    .frame(maxWidth: 500)
                     // maxHeight: .infinity here (matching the leaf corners
-                    // below) is what actually makes `alignment: .top` do
-                    // anything — without it this frame's height is just the
-                    // image's own ~110pt, leaving no extra space for "top"
-                    // to mean anything, so it fell back to the ZStack's own
-                    // default center alignment and rendered mid-screen.
+                    // below) is what makes `alignment: .top` do anything —
+                    // without it this frame's height is just the image's
+                    // own content height, leaving no extra space for "top"
+                    // to mean anything, so it previously fell back to the
+                    // ZStack's own default center alignment and rendered
+                    // mid-screen instead of at the top.
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                     .allowsHitTesting(false)
                 Image("leaf-corner-left")
