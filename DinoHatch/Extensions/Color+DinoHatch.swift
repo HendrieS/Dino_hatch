@@ -63,7 +63,13 @@ extension View {
                     .resizable()
                     .scaledToFit()
                     .frame(maxWidth: 500, maxHeight: 110)
-                    .frame(maxWidth: .infinity, alignment: .top)
+                    // maxHeight: .infinity here (matching the leaf corners
+                    // below) is what actually makes `alignment: .top` do
+                    // anything — without it this frame's height is just the
+                    // image's own ~110pt, leaving no extra space for "top"
+                    // to mean anything, so it fell back to the ZStack's own
+                    // default center alignment and rendered mid-screen.
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                     .allowsHitTesting(false)
                 Image("leaf-corner-left")
                     .resizable()
