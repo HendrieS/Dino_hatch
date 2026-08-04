@@ -213,6 +213,62 @@ final class AlarmClaimerTests: XCTestCase {
         XCTAssertFalse(pending)
     }
 
+    func testCatchUpReadyOnceResponseWindowHasClosed() {
+        let now = date(day: 8, hour: 7, minute: 16) // one minute past the window
+        let ready = AlarmClaimer.isCatchUpReady(
+            hour: 7, minute: 0, weekdays: [4],
+            lastHatchDate: nil, now: now, calendar: calendar
+        )
+        XCTAssertTrue(ready)
+    }
+
+    func testCatchUpReadyLateInTheSameDay() {
+        let now = date(day: 8, hour: 23, minute: 45) // late evening, still the same day
+        let ready = AlarmClaimer.isCatchUpReady(
+            hour: 7, minute: 0, weekdays: [4],
+            lastHatchDate: nil, now: now, calendar: calendar
+        )
+        XCTAssertTrue(ready)
+    }
+
+    func testNotCatchUpReadyWithinTheNormalResponseWindow() {
+        let now = date(day: 8, hour: 7, minute: 5) // still within the 15-minute window
+        let ready = AlarmClaimer.isCatchUpReady(
+            hour: 7, minute: 0, weekdays: [4],
+            lastHatchDate: nil, now: now, calendar: calendar
+        )
+        XCTAssertFalse(ready)
+    }
+
+    func testNotCatchUpReadyOnceAlreadyClaimedToday() {
+        let now = date(day: 8, hour: 12, minute: 0)
+        let claimedEarlierToday = date(day: 8, hour: 7, minute: 5)
+        let ready = AlarmClaimer.isCatchUpReady(
+            hour: 7, minute: 0, weekdays: [4],
+            lastHatchDate: claimedEarlierToday, now: now, calendar: calendar
+        )
+        XCTAssertFalse(ready)
+    }
+
+    func testNotCatchUpReadyOnANewDay() {
+        let now = date(day: 9, hour: 7, minute: 30) // Thursday, a fresh day
+        let ready = AlarmClaimer.isCatchUpReady(
+            hour: 7, minute: 0, weekdays: [4, 5],
+            lastHatchDate: nil, now: now, calendar: calendar
+        )
+        XCTAssertFalse(ready)
+    }
+
+    func testNotCatchUpReadyWhenEnabledAfterTodaysWindowClosed() {
+        let now = date(day: 8, hour: 9, minute: 0)
+        let enabledAt = date(day: 8, hour: 8, minute: 30) // armed after the window closed — nothing to catch up on
+        let ready = AlarmClaimer.isCatchUpReady(
+            hour: 7, minute: 0, weekdays: [4],
+            lastHatchDate: nil, enabledAt: enabledAt, now: now, calendar: calendar
+        )
+        XCTAssertFalse(ready)
+    }
+
     func testTodayUnscheduledWhenTodaysWeekdayNotSelected() {
         let now = date(day: 8, hour: 19, minute: 23) // Wednesday (4)
         let unscheduled = AlarmClaimer.isTodayUnscheduled(

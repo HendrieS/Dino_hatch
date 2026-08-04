@@ -124,6 +124,7 @@ struct RootTabView: View {
             }
             .onReceive(minuteTimer) { date in
                 now = date
+                checkAlarmHatch()
             }
             .fullScreenCover(item: $pendingAlarmDinosaur) { dinosaur in
                 AlarmHatchView(dinosaur: dinosaur) {
@@ -205,28 +206,47 @@ struct RootTabView: View {
         )
     }
 
-    /// Checked on every foreground transition rather than tied to the
-    /// notification itself firing — the app can't run custom code exactly
-    /// when a background notification delivers, so this works whether or
-    /// not the kid taps the notification, and even if permission was
-    /// denied. See `AlarmClaimer`.
+    /// Checked on every foreground transition (and every minute tick — see
+    /// `onReceive(minuteTimer)` — so a continuously-foregrounded app still
+    /// catches the window closing without needing a fresh background/
+    /// foreground cycle) rather than tied to the notification itself firing
+    /// — the app can't run custom code exactly when a background
+    /// notification delivers, so this works whether or not the kid taps the
+    /// notification, and even if permission was denied. See `AlarmClaimer`.
+    ///
+    /// Claims either on time (`isReady`, continues the streak) or, failing
+    /// that, via the catch-up window (`isCatchUpReady`) — same reward
+    /// either way, but a catch-up resets the streak to 1 instead of
+    /// continuing it, since the streak specifically rewards responding
+    /// within the window rather than just hatching something that day.
     private func checkAlarmHatch() {
         guard pendingAlarmDinosaur == nil, let settings = alarms.first, settings.isEnabled else { return }
-        guard AlarmClaimer.isReady(
+        let unlockedIDs = Set(unlocked.map(\.dinosaurID))
+
+        if AlarmClaimer.isReady(
             hour: settings.hour,
             minute: settings.minute,
             weekdays: settings.repeatWeekdays,
             lastHatchDate: settings.lastHatchDate
-        ) else { return }
-
-        settings.streakCount = AlarmStreak.nextStreak(
-            currentStreak: settings.streakCount,
+        ) {
+            settings.streakCount = AlarmStreak.nextStreak(
+                currentStreak: settings.streakCount,
+                lastHatchDate: settings.lastHatchDate,
+                weekdays: settings.repeatWeekdays
+            )
+            settings.lastHatchDate = .now
+            pendingAlarmDinosaur = HatchSelector.pickNext(unlockedIDs: unlockedIDs)
+        } else if AlarmClaimer.isCatchUpReady(
+            hour: settings.hour,
+            minute: settings.minute,
+            weekdays: settings.repeatWeekdays,
             lastHatchDate: settings.lastHatchDate,
-            weekdays: settings.repeatWeekdays
-        )
-        settings.lastHatchDate = .now
-        let unlockedIDs = Set(unlocked.map(\.dinosaurID))
-        pendingAlarmDinosaur = HatchSelector.pickNext(unlockedIDs: unlockedIDs)
+            enabledAt: settings.enabledAt
+        ) {
+            settings.streakCount = 1
+            settings.lastHatchDate = .now
+            pendingAlarmDinosaur = HatchSelector.pickNext(unlockedIDs: unlockedIDs)
+        }
     }
 
     /// Checked once per `mainTabView` appearance (i.e. once per real app

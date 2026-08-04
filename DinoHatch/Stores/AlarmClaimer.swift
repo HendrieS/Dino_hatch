@@ -93,6 +93,35 @@ enum AlarmClaimer {
         return true
     }
 
+    /// True during the catch-up window for a genuinely missed alarm — same
+    /// day, response window closed, not yet claimed. Identical conditions to
+    /// `wasMissedToday` (including its `enabledAt` guard, so an alarm armed
+    /// too late for today never offers a catch-up for a chance it never
+    /// really had), kept as its own name so call sites that gate an actual
+    /// claim read as "catch-up eligible" rather than reusing a boolean named
+    /// for sad-dino status art. A catch-up claim still hatches the normal
+    /// reward but resets the streak rather than continuing it — see
+    /// `RootTabView.checkAlarmHatch()`.
+    static func isCatchUpReady(
+        hour: Int,
+        minute: Int,
+        weekdays: [Int],
+        lastHatchDate: Date?,
+        enabledAt: Date? = nil,
+        now: Date = .now,
+        calendar: Calendar = .current
+    ) -> Bool {
+        wasMissedToday(
+            hour: hour,
+            minute: minute,
+            weekdays: weekdays,
+            lastHatchDate: lastHatchDate,
+            enabledAt: enabledAt,
+            now: now,
+            calendar: calendar
+        )
+    }
+
     /// True when today isn't one of the alarm's scheduled weekdays at all,
     /// so there was never a window to catch or miss today — the case
     /// `wasMissedToday`/`isPendingFirstChance` don't cover, since both are
