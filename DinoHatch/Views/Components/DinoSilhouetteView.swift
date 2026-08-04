@@ -17,7 +17,7 @@ struct DinoSilhouetteView: View {
         }
         .frame(maxWidth: .infinity)
         .padding()
-        .background(Color.black.opacity(0.06))
+        .background(Color.dinoCollectionCardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 16))
     }
 }

@@ -20,6 +20,13 @@ extension Color {
     /// background, so the track needs its own warmer, visibly darker tan to
     /// stay readable as a ring rather than blending into the background.
     static let dinoDialTrack = Color(red: 0.843, green: 0.776, blue: 0.612)
+    /// `CollectionView`'s dinosaur cards (`DinoCardView`/`DinoSilhouetteView`)
+    /// — `dinoCardBackground` (an opaque near-white system tone) read as too
+    /// bright next to the locked "???" cards, which use this same
+    /// semi-transparent black tint and so naturally pick up the warm cream
+    /// background showing through underneath. Reused here so unlocked and
+    /// locked cards share the exact same tone.
+    static let dinoCollectionCardBackground = Color.black.opacity(0.06)
 }
 
 extension View {

@@ -17,7 +17,7 @@ struct DinoCardView: View {
         }
         .frame(maxWidth: .infinity)
         .padding()
-        .background(Color.dinoCardBackground)
+        .background(Color.dinoCollectionCardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .overlay(
             RoundedRectangle(cornerRadius: 16)
