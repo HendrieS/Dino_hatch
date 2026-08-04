@@ -22,6 +22,8 @@ struct CountdownView: View {
     private var countdownContent: some View {
         VStack(spacing: 40) {
             SignTitleView(text: "Dino Hatch")
+                // Experimental — see TimerSetupView's matching offset.
+                .offset(y: -40)
 
             Spacer()
 

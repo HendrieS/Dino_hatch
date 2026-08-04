@@ -115,6 +115,8 @@ struct AlarmView: View {
             ScrollView {
                 VStack(spacing: 24) {
                     SignTitleView(text: "Dino Alarm")
+                        // Experimental — see TimerSetupView's matching offset.
+                        .offset(y: -40)
 
                     Image(headerImageName)
                         .resizable()

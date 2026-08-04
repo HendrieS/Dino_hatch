@@ -118,6 +118,8 @@ struct CollectionView: View {
         NavigationStack {
             ScrollView {
                 SignTitleView(text: "Dino-pedia")
+                    // Experimental — see TimerSetupView's matching offset.
+                    .offset(y: -40)
                     .padding(.top, 8)
 
                 // Composed from separate Text views (rather than one
