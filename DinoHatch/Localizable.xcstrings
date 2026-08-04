@@ -6300,43 +6300,43 @@
         }
       }
     },
-    "Set a repeating wake-up time. Opening the app within 15 minutes of it hatches a bonus dinosaur — a small incentive to actually get up, rather than a reward for opening the app whenever.": {
+    "Set a repeating wake-up time. Opening the app within 15 minutes of it hatches a bonus dinosaur and keeps your streak going — a small incentive to actually get up, rather than a reward for opening the app whenever. Miss that window and the day isn't lost: opening the app anytime later that same day still hatches a dinosaur, it just resets the streak back to one.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Stelle eine wiederkehrende Weckzeit ein. Wenn du die App innerhalb von 15 Minuten danach öffnest, schlüpft ein Bonus-Dinosaurier — ein kleiner Anreiz, tatsächlich aufzustehen, statt einfach nur die App irgendwann zu öffnen."
+            "value": "Stelle eine wiederkehrende Weckzeit ein. Wenn du die App innerhalb von 15 Minuten danach öffnest, schlüpft ein Bonus-Dinosaurier und deine Serie geht weiter — ein kleiner Anreiz, tatsächlich aufzustehen, statt einfach nur die App irgendwann zu öffnen. Verpasst du dieses Zeitfenster, ist der Tag nicht verloren: Öffnest du die App später am selben Tag, schlüpft trotzdem ein Dinosaurier, nur die Serie beginnt wieder bei eins."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Set a repeating wake-up time. Opening the app within 15 minutes of it hatches a bonus dinosaur — a small incentive to actually get up, rather than a reward for opening the app whenever."
+            "value": "Set a repeating wake-up time. Opening the app within 15 minutes of it hatches a bonus dinosaur and keeps your streak going — a small incentive to actually get up, rather than a reward for opening the app whenever. Miss that window and the day isn't lost: opening the app anytime later that same day still hatches a dinosaur, it just resets the streak back to one."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Configura una hora de despertar repetitiva. Abrir la app en los 15 minutos siguientes hace nacer un dinosaurio extra: un pequeño incentivo para levantarse de verdad, no solo por abrir la app en cualquier momento."
+            "value": "Configura una hora de despertar repetitiva. Abrir la app en los 15 minutos siguientes hace nacer un dinosaurio extra y mantiene tu racha — un pequeño incentivo para levantarse de verdad, no solo por abrir la app en cualquier momento. Si te pierdes esa ventana, el día no se pierde: abrir la app más tarde ese mismo día igualmente hace nacer un dinosaurio, solo que la racha vuelve a empezar en uno."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Réglez une heure de réveil répétitive. Ouvrir l'application dans les 15 minutes qui suivent fait éclore un dinosaure bonus — une petite incitation à vraiment se lever, plutôt qu'une récompense pour ouvrir l'application n'importe quand."
+            "value": "Réglez une heure de réveil répétitive. Ouvrir l'application dans les 15 minutes qui suivent fait éclore un dinosaure bonus et prolonge votre série — une petite incitation à vraiment se lever, plutôt qu'une récompense pour ouvrir l'application n'importe quand. Si vous manquez ce créneau, la journée n'est pas perdue : ouvrir l'application plus tard le même jour fait quand même éclore un dinosaure, mais la série repart à un."
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Stel een terugkerende wektijd in. Als je de app binnen 15 minuten daarna opent, komt er een bonusdino uit — een kleine stimulans om echt op te staan, in plaats van een beloning voor het op elk moment openen van de app."
+            "value": "Stel een terugkerende wektijd in. Als je de app binnen 15 minuten daarna opent, komt er een bonusdino uit en loopt je reeks door — een kleine stimulans om echt op te staan, in plaats van een beloning voor het op elk moment openen van de app. Mis je dat tijdvenster, dan is de dag niet verloren: de app later diezelfde dag openen laat alsnog een dino uitkomen, alleen begint de reeks weer bij één."
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "Настройте повторяющееся время пробуждения. Если открыть приложение в течение 15 минут после будильника, вылупится дополнительный динозавр — небольшой стимул действительно встать, а не просто открыть приложение когда угодно."
+            "value": "Настройте повторяющееся время пробуждения. Если открыть приложение в течение 15 минут после будильника, вылупится дополнительный динозавр, а серия продолжится — небольшой стимул действительно встать, а не просто открыть приложение когда угодно. Если это окно упущено, день не потерян: если открыть приложение позже в тот же день, динозавр всё равно вылупится, но серия начнётся заново с одного."
           }
         }
       }

@@ -39,7 +39,7 @@ struct HelpCenterView: View {
             }
 
             Section("How the dino alarm works") {
-                Text("Set a repeating wake-up time. Opening the app within 15 minutes of it hatches a bonus dinosaur — a small incentive to actually get up, rather than a reward for opening the app whenever.")
+                Text("Set a repeating wake-up time. Opening the app within 15 minutes of it hatches a bonus dinosaur and keeps your streak going — a small incentive to actually get up, rather than a reward for opening the app whenever. Miss that window and the day isn't lost: opening the app anytime later that same day still hatches a dinosaur, it just resets the streak back to one.")
             }
 
             Section("The collection") {
