@@ -46,20 +46,23 @@ extension View {
                     startPoint: .top,
                     endPoint: .bottom
                 )
-                // .scaledToFit() with no forced height — a fixed-height
-                // .fill()+.clipped() was tried first, but hard-cropping the
-                // image's own dangling leaf strands mid-shape reads as a
-                // literal cut-off edge instead of their natural taper.
-                // Capped at a max width (matching the app's existing
-                // max-content-width convention, e.g. TimerSetupView) rather
-                // than the full device width, so the vine doesn't grow
-                // oversized on iPad — the source art is one continuous
-                // edge-to-edge banner, not a fixed-size corner cluster like
-                // the leaf clusters below.
+                // .scaledToFit() with both maxWidth AND maxHeight bounded in
+                // the same frame call — capping only maxWidth let the image
+                // balloon to a much taller render than its aspect ratio
+                // alone would predict, presumably because this whole ZStack
+                // is a `.background()` under `.ignoresSafeArea()`, which
+                // proposes far more height than the visible screen to its
+                // children. Bounding both dimensions together guarantees
+                // this can never render taller than maxHeight regardless of
+                // what height gets proposed. A fixed-height .fill()+
+                // .clipped() was tried before that and hard-cropped the
+                // vine's own dangling leaf strands mid-shape — .scaledToFit()
+                // never crops, so the full artwork's natural taper always
+                // shows, just smaller than the width alone would allow.
                 Image("vine-top-canopy")
                     .resizable()
                     .scaledToFit()
-                    .frame(maxWidth: 500)
+                    .frame(maxWidth: 500, maxHeight: 110)
                     .frame(maxWidth: .infinity, alignment: .top)
                     .allowsHitTesting(false)
                 Image("leaf-corner-left")
