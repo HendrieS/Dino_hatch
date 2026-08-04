@@ -71,6 +71,12 @@ extension View {
                     // ZStack's own default center alignment and rendered
                     // mid-screen instead of at the top.
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                    // Nudged further up than plain top alignment allows
+                    // (alignment alone only gets it flush with the top
+                    // edge) — bleeds it slightly past the screen bounds per
+                    // user feedback, same technique as the right leaf
+                    // corner's offset below.
+                    .offset(y: -5)
                     .allowsHitTesting(false)
                 Image("leaf-corner-left")
                     .resizable()
