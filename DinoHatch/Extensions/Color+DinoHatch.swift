@@ -46,6 +46,21 @@ extension View {
                     startPoint: .top,
                     endPoint: .bottom
                 )
+                // Fixed height + .fill/.clipped (rather than .fit at full
+                // device width, like the corner clusters below use) so the
+                // vine's on-screen size stays predictable across device
+                // widths — an iPad-width .fit render would scale the drop
+                // height up proportionally with it, since the source art is
+                // one continuous edge-to-edge banner rather than a
+                // fixed-size corner cluster.
+                Image("vine-top-canopy")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 140)
+                    .clipped()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                    .allowsHitTesting(false)
                 Image("leaf-corner-left")
                     .resizable()
                     .scaledToFit()
