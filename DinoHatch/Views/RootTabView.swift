@@ -78,6 +78,11 @@ struct RootTabView: View {
                     }
                     .tag(Tab.collection)
             }
+            // Without this, the selected tab's label used the system's
+            // default blue accent while the tab icons render full-color
+            // green (template-rendering-intent: original) — a mismatch
+            // between icon and label color on the very same tab item.
+            .tint(Color.dinoGreen)
             .onAppear(perform: checkAlarmHatch)
             .onAppear(perform: refreshWidgetSnapshot)
             .onAppear(perform: checkWhatsNew)
