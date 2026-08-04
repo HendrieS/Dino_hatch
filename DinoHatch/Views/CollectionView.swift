@@ -117,6 +117,9 @@ struct CollectionView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
+                SignTitleView(text: "Dino-pedia")
+                    .padding(.top, 8)
+
                 // Composed from separate Text views (rather than one
                 // interpolated string) so the numeral formatting doesn't
                 // depend on guessing the exact %-format Xcode would have
@@ -162,8 +165,6 @@ struct CollectionView: View {
                     .padding()
                 }
             }
-            .navigationTitle("Dino-pedia")
-            .navigationBarTitleDisplayMode(.inline)
             .dinoWarmBackground()
             .searchable(text: $searchText, prompt: Text("Search dinosaurs"))
             .toolbar {

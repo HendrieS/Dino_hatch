@@ -114,6 +114,8 @@ struct AlarmView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 24) {
+                    SignTitleView(text: "Dino Alarm")
+
                     Image(headerImageName)
                         .resizable()
                         .scaledToFit()
@@ -217,8 +219,6 @@ struct AlarmView: View {
                 .frame(maxWidth: 500)
                 .frame(maxWidth: .infinity)
             }
-            .navigationTitle("Dino Alarm")
-            .navigationBarTitleDisplayMode(.inline)
             .dinoWarmBackground()
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {

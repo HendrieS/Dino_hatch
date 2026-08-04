@@ -12,6 +12,8 @@ struct TimerSetupView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 32) {
+                    SignTitleView(text: "Dino Hatch")
+
                     Text("Set a timer and watch\nan egg hatch!")
                         .font(.title2.bold())
                         .multilineTextAlignment(.center)
@@ -48,8 +50,6 @@ struct TimerSetupView: View {
                 .frame(maxWidth: 500)
                 .frame(maxWidth: .infinity)
             }
-            .navigationTitle("Dino Hatch")
-            .navigationBarTitleDisplayMode(.inline)
             .dinoWarmBackground()
             .onAppear {
                 // Round to the dial's snap grid in case a duration was

@@ -11,18 +11,18 @@ struct CountdownView: View {
     var body: some View {
         NavigationStack {
             countdownContent
-                .navigationTitle("Dino Hatch")
-                .navigationBarTitleDisplayMode(.inline)
         }
     }
 
-    /// Matches `TimerSetupView`'s own `NavigationStack` + inline "Dino
-    /// Hatch" title exactly, rather than leaving this screen title-less —
-    /// without it, switching from setup to counting dropped the whole nav
-    /// bar, so everything below (including the Cancel Timer button) jumped
-    /// up by that bar's height the instant the timer started.
+    /// Matches `TimerSetupView`'s own `NavigationStack` + `SignTitleView`
+    /// exactly, rather than leaving this screen title-less — without a
+    /// matching title element, switching from setup to counting dropped
+    /// whatever occupied that space, so everything below (including the
+    /// Cancel Timer button) jumped up the instant the timer started.
     private var countdownContent: some View {
         VStack(spacing: 40) {
+            SignTitleView(text: "Dino Hatch")
+
             Spacer()
 
             if let endDate = engine.endDate {
@@ -70,6 +70,13 @@ struct CountdownView: View {
             Spacer()
         }
         .padding()
+        // Matches TimerSetupView's own extra top padding so SignTitleView
+        // lands at the same vertical position in both screens — now that
+        // the sign is a real VStack element (not native nav bar chrome
+        // with OS-guaranteed matching height), any padding mismatch here
+        // would reintroduce the very jump this screen's title element was
+        // added to prevent.
+        .padding(.top, 24)
         .dinoWarmBackground()
         // Keep the screen awake for the duration of the countdown so it
         // doesn't lock mid-timer; restored as soon as this view goes away
