@@ -27,14 +27,21 @@ struct CountdownView: View {
 
             Spacer()
 
-            if let endDate = engine.endDate {
-                Text(endDate, style: .timer)
-                    .font(.system(size: 56, weight: .bold, design: .rounded))
-                    .monospacedDigit()
-            }
-
+            // Same ring + egg composition as CircularDurationPicker's setup
+            // state (260pt diameter, matching), so starting the timer feels
+            // like a continuation rather than a completely different
+            // screen — the ring's progress arc now shrinks as the egg's
+            // own remainingFraction does, rather than being a separate
+            // static duration display. The live countdown text moves below
+            // the ring instead of above the egg, same layout as setup.
             TimelineView(.periodic(from: .now, by: 0.1)) { context in
-                EggView(remainingFraction: engine.remainingFraction(at: context.date), date: context.date)
+                VStack(spacing: 12) {
+                    ZStack {
+                        DialRingView(progress: engine.remainingFraction(at: context.date))
+                            .frame(width: 260, height: 260)
+                        EggView(remainingFraction: engine.remainingFraction(at: context.date), date: context.date)
+                    }
+                    .frame(width: 260, height: 260)
                     // Watches the completion Bool rather than `context.date`
                     // itself — a raw `Date` changes on every 0.1s tick, and
                     // SwiftUI logs "action tried to update multiple times
@@ -45,8 +52,14 @@ struct CountdownView: View {
                         hasCompleted = true
                         onComplete()
                     }
+
+                    if let endDate = engine.endDate {
+                        Text(endDate, style: .timer)
+                            .font(.system(size: 40, weight: .bold, design: .rounded))
+                            .monospacedDigit()
+                    }
+                }
             }
-            .frame(height: 220)
 
             Button(role: .destructive) {
                 engine.cancel()

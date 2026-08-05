@@ -52,16 +52,30 @@ struct CircularDurationPicker: View {
     }
 
     var body: some View {
+        VStack(spacing: 12) {
+            ring
+
+            // The ring's own accessibilityValue below already announces
+            // this same duration, so VoiceOver doesn't need to read it a
+            // second time here.
+            Text(String(format: "%d:%02d", totalSeconds / 60, totalSeconds % 60))
+                .font(.system(size: 40, weight: .bold, design: .rounded))
+                .monospacedDigit()
+                .accessibilityHidden(true)
+        }
+    }
+
+    private var ring: some View {
         ZStack {
-            Circle()
-                .stroke(Color.dinoDialTrack, lineWidth: ringWidth)
+            DialRingView(progress: progress, ringWidth: ringWidth)
                 .frame(width: diameter, height: diameter)
 
-            Circle()
-                .trim(from: 0, to: progress)
-                .stroke(Color.dinoGreen, style: StrokeStyle(lineWidth: ringWidth, lineCap: .round))
-                .rotationEffect(.degrees(-90))
-                .frame(width: diameter, height: diameter)
+            // Always shown, full and still (remainingFraction: 1 keeps
+            // EggView's near-completion shake off) — the egg used to only
+            // appear once counting down; showing it here too, right where
+            // it'll sit during the countdown, makes the picker itself feel
+            // like part of the same hatch rather than a separate setup step.
+            EggView(remainingFraction: 1, date: .now)
 
             ForEach(0..<60, id: \.self) { minute in
                 if minute % 5 != 0 {
@@ -97,10 +111,6 @@ struct CircularDurationPicker: View {
                 .overlay(Circle().stroke(Color.dinoDialTrack, lineWidth: 3))
                 .shadow(radius: 1)
                 .offset(offset(forProgress: progress, radius: diameter / 2))
-
-            Text(String(format: "%d:%02d", totalSeconds / 60, totalSeconds % 60))
-                .font(.system(size: 40, weight: .bold, design: .rounded))
-                .monospacedDigit()
         }
         .frame(width: interactiveDiameter, height: interactiveDiameter)
         .contentShape(Circle())
