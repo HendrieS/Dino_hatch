@@ -46,32 +46,18 @@ extension View {
                     startPoint: .top,
                     endPoint: .bottom
                 )
-                // Three-part canopy (left corner cluster, a tiling middle
-                // strip, right corner cluster) rather than one single
-                // fixed-aspect-ratio image — a single image stretched to
-                // fill iPad's much wider screen either left huge gaps (when
-                // width-capped) or grew far too tall (when left uncapped).
-                // An HStack naturally solves this: the two corner images
-                // keep their own fixed width, and the tiling middle image
-                // (`.resizable(resizingMode: .tile)`, which repeats the
-                // asset at its native pixel size rather than stretching it)
-                // fills exactly whatever width remains between them,
-                // however wide that turns out to be.
+                // Top canopy corners only for now — a tiling middle strip
+                // (to fill the gap between them on wide screens like iPad)
+                // was tried and pulled per user feedback; see task #29's
+                // history for both middle-art attempts. Leaves an open gap
+                // on very wide screens until that's revisited, same
+                // trade-off the single-image version had.
                 HStack(alignment: .top, spacing: 0) {
                     Image("vine-canopy-left")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 190)
-                    Image("vine-canopy-middle")
-                        .resizable(resizingMode: .tile)
-                        .frame(maxWidth: .infinity)
-                        // Bumped from 58pt to 160pt to match the new,
-                        // deeper-hanging middle art (and read closer to the
-                        // corner clusters' own ~185-190pt depth) — the
-                        // first middle asset's tendrils were noticeably
-                        // shorter than the corners', which read as three
-                        // mismatched pieces instead of one canopy line.
-                        .frame(height: 160)
+                    Spacer(minLength: 0)
                     Image("vine-canopy-right")
                         .resizable()
                         .scaledToFit()
