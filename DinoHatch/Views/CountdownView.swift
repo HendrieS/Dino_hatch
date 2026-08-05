@@ -25,7 +25,10 @@ struct CountdownView: View {
                 // Experimental — see TimerSetupView's matching offset.
                 .offset(y: -40)
 
-            Spacer()
+            // No Spacer here (unlike before) — the two Spacers below already
+            // out-weigh the empty space above in this VStack's layout, which
+            // pushes the ring/button block toward the top; an extra Spacer
+            // here just fought that and pulled the ring back down.
 
             // Same ring + egg composition as CircularDurationPicker's setup
             // state (260pt diameter, matching), so starting the timer feels
