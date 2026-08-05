@@ -65,7 +65,13 @@ extension View {
                     Image("vine-canopy-middle")
                         .resizable(resizingMode: .tile)
                         .frame(maxWidth: .infinity)
-                        .frame(height: 58)
+                        // Bumped from 58pt to 160pt to match the new,
+                        // deeper-hanging middle art (and read closer to the
+                        // corner clusters' own ~185-190pt depth) — the
+                        // first middle asset's tendrils were noticeably
+                        // shorter than the corners', which read as three
+                        // mismatched pieces instead of one canopy line.
+                        .frame(height: 160)
                     Image("vine-canopy-right")
                         .resizable()
                         .scaledToFit()
