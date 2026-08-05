@@ -6341,46 +6341,6 @@
         }
       }
     },
-    "Set a timer and watch\nan egg hatch!": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stelle einen Timer ein und sieh zu,\nwie ein Ei ausschlüpft!"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Set a timer and watch\nan egg hatch!"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "¡Configura un temporizador y mira\ncómo se abre un huevo!"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Réglez une minuterie et regardez\nun œuf éclore !"
-          }
-        },
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stel een timer in en kijk hoe\neen ei uitkomt!"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Установи таймер и посмотри,\nкак вылупится яйцо!"
-          }
-        }
-      }
-    },
     "Set a wake-up time and hatch\na dinosaur when you open the app!": {
       "localizations": {
         "de": {
