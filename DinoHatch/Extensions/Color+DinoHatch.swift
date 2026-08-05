@@ -46,38 +46,33 @@ extension View {
                     startPoint: .top,
                     endPoint: .bottom
                 )
-                // .scaledToFit(), width-capped at 500 (matching the app's
-                // max-content-width convention, e.g. TimerSetupView) so it
-                // spans the full device width on iPhone but doesn't grow
-                // oversized on iPad, with height following the art's own
-                // aspect ratio — no separate height cap, so it reads as a
-                // full-width arch rather than a small centered patch. (An
-                // earlier attempt capped height too, which looked right in
-                // isolation but turned out to be overcorrecting for what
-                // was actually a *positioning* bug — see below.) A
-                // fixed-height .fill()+.clipped() was tried even earlier
-                // and hard-cropped the vine's own dangling leaf strands
-                // mid-shape — .scaledToFit() never crops, so the full
-                // artwork's natural taper always shows.
-                Image("vine-top-canopy")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(maxWidth: 500)
-                    // maxHeight: .infinity here (matching the leaf corners
-                    // below) is what makes `alignment: .top` do anything —
-                    // without it this frame's height is just the image's
-                    // own content height, leaving no extra space for "top"
-                    // to mean anything, so it previously fell back to the
-                    // ZStack's own default center alignment and rendered
-                    // mid-screen instead of at the top.
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                    // Nudged further up than plain top alignment allows
-                    // (alignment alone only gets it flush with the top
-                    // edge) — bleeds it slightly past the screen bounds per
-                    // user feedback, same technique as the right leaf
-                    // corner's offset below.
-                    .offset(y: -5)
-                    .allowsHitTesting(false)
+                // Three-part canopy (left corner cluster, a tiling middle
+                // strip, right corner cluster) rather than one single
+                // fixed-aspect-ratio image — a single image stretched to
+                // fill iPad's much wider screen either left huge gaps (when
+                // width-capped) or grew far too tall (when left uncapped).
+                // An HStack naturally solves this: the two corner images
+                // keep their own fixed width, and the tiling middle image
+                // (`.resizable(resizingMode: .tile)`, which repeats the
+                // asset at its native pixel size rather than stretching it)
+                // fills exactly whatever width remains between them,
+                // however wide that turns out to be.
+                HStack(alignment: .top, spacing: 0) {
+                    Image("vine-canopy-left")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 190)
+                    Image("vine-canopy-middle")
+                        .resizable(resizingMode: .tile)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 58)
+                    Image("vine-canopy-right")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 170)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                .allowsHitTesting(false)
                 Image("leaf-corner-left")
                     .resizable()
                     .scaledToFit()
