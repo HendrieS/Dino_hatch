@@ -20,7 +20,7 @@ struct SignTitleView: View {
 
     var body: some View {
         Text(text)
-            .font(.system(size: 17, weight: .bold, design: .rounded))
+            .font(.system(size: 18.5, weight: .bold, design: .rounded))
             .foregroundStyle(Color(red: 0.24, green: 0.16, blue: 0.07))
             // A crude "carved into wood" look — a light shadow below and a
             // dark shadow above, both with zero blur radius so they read as
@@ -29,7 +29,7 @@ struct SignTitleView: View {
             .shadow(color: .black.opacity(0.35), radius: 0, x: 0, y: -1)
             .multilineTextAlignment(.center)
             .padding(.horizontal, 26)
-            .frame(width: 168, height: 168 * Self.aspectRatio)
+            .frame(width: 185, height: 185 * Self.aspectRatio)
             .background(
                 Image("sign-wooden-plank")
                     .resizable()
