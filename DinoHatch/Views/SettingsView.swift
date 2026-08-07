@@ -79,7 +79,11 @@ struct SettingsView: View {
             } message: {
                 Text("This can't be undone.")
             }
-            .sheet(isPresented: $showSupportUs) {
+            // Full screen rather than a sheet — see CollectionView's
+            // matching change for Settings itself; same reasoning applies
+            // here since SupportUsView also uses the bleeding fauna
+            // background.
+            .fullScreenCover(isPresented: $showSupportUs) {
                 SupportUsView()
             }
         }

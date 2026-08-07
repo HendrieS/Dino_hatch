@@ -133,7 +133,10 @@ struct RootTabView: View {
                     pendingAlarmDinosaur = nil
                 }
             }
-            .sheet(isPresented: $showWhatsNew) {
+            // Full screen rather than a sheet — see CollectionView's
+            // matching change for Settings; WhatsNewView also uses the
+            // bleeding fauna background.
+            .fullScreenCover(isPresented: $showWhatsNew) {
                 WhatsNewView(notes: whatsNewNotes)
             }
             .fullScreenCover(isPresented: $showCollectionComplete) {

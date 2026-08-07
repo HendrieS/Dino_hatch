@@ -29,7 +29,10 @@ struct SupporterBadgeView: View {
                     .background(tier.tint, in: Circle())
             }
             .accessibilityLabel(tier.localizedLabel)
-            .sheet(isPresented: $showThankYou) {
+            // Full screen rather than a sheet — see CollectionView's
+            // matching change for Settings; SupporterThankYouView also uses
+            // the bleeding fauna background.
+            .fullScreenCover(isPresented: $showThankYou) {
                 SupporterThankYouView(tier: tier)
             }
         }
