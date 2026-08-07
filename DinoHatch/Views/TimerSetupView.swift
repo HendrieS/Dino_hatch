@@ -7,6 +7,7 @@ struct TimerSetupView: View {
 
     @Query private var unlockedDinosaurs: [UnlockedDinosaur]
     @State private var totalSeconds: Int = 300
+    @State private var showSettings = false
 
     var body: some View {
         NavigationStack {
@@ -57,6 +58,21 @@ struct TimerSetupView: View {
                 .frame(maxWidth: .infinity)
             }
             .dinoWarmBackground()
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        showSettings = true
+                    } label: {
+                        Image(systemName: "gearshape.fill")
+                    }
+                }
+            }
+            // Full screen rather than a sheet — see CollectionView's
+            // matching change for Settings; same bleeding fauna background
+            // reasoning applies here.
+            .fullScreenCover(isPresented: $showSettings) {
+                ParentalGateView()
+            }
             .onAppear {
                 // Round to the dial's snap grid in case a duration was
                 // saved under a different grid (e.g. a prior build's

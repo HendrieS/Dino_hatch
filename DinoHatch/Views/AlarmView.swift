@@ -9,6 +9,7 @@ struct AlarmView: View {
     @State private var time = Calendar.current.date(bySettingHour: 7, minute: 0, second: 0, of: .now) ?? .now
     @State private var weekdays: Set<Int> = []
     @State private var notificationsDenied = false
+    @State private var showSettings = false
 
     private let orderedWeekdays = [2, 3, 4, 5, 6, 7, 1] // Monday...Sunday
 
@@ -232,6 +233,19 @@ struct AlarmView: View {
                 ToolbarItem(placement: .topBarLeading) {
                     SupporterBadgeView()
                 }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        showSettings = true
+                    } label: {
+                        Image(systemName: "gearshape.fill")
+                    }
+                }
+            }
+            // Full screen rather than a sheet — see CollectionView's
+            // matching change for Settings; same bleeding fauna background
+            // reasoning applies here.
+            .fullScreenCover(isPresented: $showSettings) {
+                ParentalGateView()
             }
             .onAppear(perform: load)
             .onChange(of: isEnabled) { _, newValue in
