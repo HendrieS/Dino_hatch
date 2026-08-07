@@ -14,19 +14,22 @@ struct TimerSetupView: View {
             ScrollView {
                 VStack(spacing: 32) {
                     SignTitleView(text: "Dino Hatch")
-                        // Experimental — pulled up toward the top of the
-                        // screen per user request, to see how it looks
-                        // closer to the vine canopy instead of sitting in
-                        // the normal content flow.
-                        .offset(y: -40)
+                        // -40 is the original experimental "pulled up toward
+                        // the top" offset; the extra -44 compensates for the
+                        // nav bar that appeared once this screen got its own
+                        // Settings gear (it previously had no toolbar at
+                        // all, so nothing reserved that space) — without it,
+                        // the sign renders a full nav-bar-height lower than
+                        // this offset implies.
+                        .offset(y: -84)
 
                     CircularDurationPicker(totalSeconds: $totalSeconds)
                         // Pulls the ring back up to close the gap the sign's
-                        // own -40 offset above leaves behind (that offset
+                        // own -84 offset above leaves behind (that offset
                         // moves the sign visually without freeing up any
                         // layout space, so without this the ring would sit
-                        // 40pt lower than the sign's new position implies).
-                        .padding(.top, -40)
+                        // 84pt lower than the sign's new position implies).
+                        .padding(.top, -84)
                     // CircularDurationPicker's own frame already reserves
                     // the full space its labels need (see
                     // `interactiveDiameter`), so no extra padding is
