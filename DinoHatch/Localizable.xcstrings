@@ -122,6 +122,46 @@
         }
       }
     },
+    "A few ideas for what to use it for:\n• Getting ready in the morning\n• Meal time\n• Quiet time\n• Brushing teeth\n• Waiting your turn\n• Taking turns with a sibling or friend\n• Focus time, like homework or quiet play\n• Moving between activities": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein paar Ideen, wofür ihr ihn nutzen könnt:\n• Morgens fertig machen\n• Essenszeiten\n• Ruhezeiten\n• Zähneputzen\n• Warten, bis man an der Reihe ist\n• Abwechseln mit einem Geschwisterkind oder Freund\n• Konzentrationszeit, z. B. für Hausaufgaben oder ruhiges Spielen\n• Übergänge zwischen Aktivitäten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A few ideas for what to use it for:\n• Getting ready in the morning\n• Meal time\n• Quiet time\n• Brushing teeth\n• Waiting your turn\n• Taking turns with a sibling or friend\n• Focus time, like homework or quiet play\n• Moving between activities"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Algunas ideas para usarlo:\n• Prepararse por la mañana\n• La hora de comer\n• Momentos de calma\n• Lavarse los dientes\n• Esperar su turno\n• Turnarse con un hermano o amigo\n• Tiempo de concentración, como deberes o juego tranquilo\n• Pasar de una actividad a otra"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelques idées d'utilisation :\n• Se préparer le matin\n• L'heure du repas\n• Les moments calmes\n• Se brosser les dents\n• Attendre son tour\n• Alterner avec un frère, une sœur ou un ami\n• Le temps de concentration, comme les devoirs ou un jeu calme\n• Passer d'une activité à une autre"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Een paar ideeën waarvoor je hem kunt gebruiken:\n• 's Ochtends klaarmaken\n• Etenstijd\n• Rustmomenten\n• Tanden poetsen\n• Wachten tot je aan de beurt bent\n• Om de beurt met een broer, zus of vriendje\n• Concentratietijd, zoals huiswerk of rustig spelen\n• Overgangen tussen activiteiten"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Несколько идей, для чего его использовать:\n• Сборы по утрам\n• Время еды\n• Спокойное время\n• Чистка зубов\n• Ожидание своей очереди\n• Очерёдность с братом, сестрой или другом\n• Время для концентрации — например, уроки или спокойная игра\n• Переход между занятиями"
+          }
+        }
+      }
+    },
     "Age": {
       "extractionState": "manual",
       "localizations": {

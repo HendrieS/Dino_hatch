@@ -36,6 +36,7 @@ struct HelpCenterView: View {
 
             Section("How the timer works") {
                 Text("Set a countdown. When it reaches zero, an egg on screen hatches and adds a new dinosaur to the collection.")
+                Text("A few ideas for what to use it for:\n• Getting ready in the morning\n• Meal time\n• Quiet time\n• Brushing teeth\n• Waiting your turn\n• Taking turns with a sibling or friend\n• Focus time, like homework or quiet play\n• Moving between activities")
             }
 
             Section("How the dino alarm works") {
