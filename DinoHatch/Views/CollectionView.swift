@@ -237,7 +237,12 @@ struct CollectionView: View {
                 }
                 #endif
             }
-            .sheet(isPresented: $showSettings) {
+            // Full screen rather than a sheet — the warm background's
+            // decorative fauna (vine canopy, leaf corners) is drawn edge to
+            // edge via .ignoresSafeArea(), which reads as a mistake inside a
+            // card-style sheet's rounded, inset corners instead of bleeding
+            // off the screen the way it's meant to.
+            .fullScreenCover(isPresented: $showSettings) {
                 ParentalGateView()
             }
         }
