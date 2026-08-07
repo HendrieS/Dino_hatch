@@ -142,6 +142,10 @@ struct CollectionView: View {
                 // the original 8pt breathing room.
                 .padding(.top, -32)
 
+                searchAndFilterBar
+                    .padding(.top, 10)
+                    .padding(.horizontal, 14)
+
                 if visibleDinosaurs.isEmpty {
                     ContentUnavailableView {
                         Label("No Dinosaurs Found", systemImage: "questionmark.square.dashed")
@@ -173,53 +177,11 @@ struct CollectionView: View {
                 }
             }
             .dinoWarmBackground()
-            .searchable(text: $searchText, prompt: Text("Search dinosaurs"))
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     SupporterBadgeView()
                 }
 
-                ToolbarItem(placement: .topBarTrailing) {
-                    Menu {
-                        Picker(selection: $sortOption) {
-                            ForEach(SortOption.allCases) { option in
-                                option.label.tag(option)
-                            }
-                        } label: {
-                            Text("Sort By")
-                        }
-
-                        Picker(selection: $dietFilter) {
-                            Text("All").tag(Dinosaur.Diet?.none)
-                            ForEach(Dinosaur.Diet.allCases, id: \.self) { diet in
-                                diet.localizedLabel.tag(Dinosaur.Diet?.some(diet))
-                            }
-                        } label: {
-                            Text("Diet")
-                        }
-
-                        Picker(selection: $rarityFilter) {
-                            Text("All").tag(Dinosaur.Rarity?.none)
-                            ForEach(Dinosaur.Rarity.allCases, id: \.self) { rarity in
-                                rarity.localizedLabel.tag(Dinosaur.Rarity?.some(rarity))
-                            }
-                        } label: {
-                            Text("Rarity")
-                        }
-
-                        if isFiltering {
-                            Button(role: .destructive) {
-                                dietFilter = nil
-                                rarityFilter = nil
-                            } label: {
-                                Text("Clear Filters")
-                            }
-                        }
-                    } label: {
-                        Image(systemName: isFiltering ? "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease.circle")
-                    }
-                    .accessibilityLabel(Text("Sort and Filter"))
-                }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         showSettings = true
@@ -251,6 +213,82 @@ struct CollectionView: View {
                 ParentalGateView()
             }
         }
+    }
+
+    /// A single search field with the sort/filter menu folded into its
+    /// trailing edge (behind a thin divider), replacing what used to be a
+    /// separate `.searchable` row plus its own standalone toolbar icon —
+    /// two rows and an extra icon's worth of clutter for what's really one
+    /// "narrow down what I'm looking at" control. Approved via a preview
+    /// mockup before implementation.
+    private var searchAndFilterBar: some View {
+        HStack(spacing: 0) {
+            HStack(spacing: 6) {
+                Image(systemName: "magnifyingglass")
+                    .foregroundStyle(.secondary)
+                TextField("Search dinosaurs", text: $searchText)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                if !searchText.isEmpty {
+                    Button {
+                        searchText = ""
+                    } label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundStyle(.secondary)
+                    }
+                    .accessibilityLabel(Text("Clear search"))
+                }
+            }
+            .padding(.horizontal, 10)
+            .frame(maxWidth: .infinity, alignment: .leading)
+
+            Divider()
+                .frame(height: 20)
+
+            Menu {
+                Picker(selection: $sortOption) {
+                    ForEach(SortOption.allCases) { option in
+                        option.label.tag(option)
+                    }
+                } label: {
+                    Text("Sort By")
+                }
+
+                Picker(selection: $dietFilter) {
+                    Text("All").tag(Dinosaur.Diet?.none)
+                    ForEach(Dinosaur.Diet.allCases, id: \.self) { diet in
+                        diet.localizedLabel.tag(Dinosaur.Diet?.some(diet))
+                    }
+                } label: {
+                    Text("Diet")
+                }
+
+                Picker(selection: $rarityFilter) {
+                    Text("All").tag(Dinosaur.Rarity?.none)
+                    ForEach(Dinosaur.Rarity.allCases, id: \.self) { rarity in
+                        rarity.localizedLabel.tag(Dinosaur.Rarity?.some(rarity))
+                    }
+                } label: {
+                    Text("Rarity")
+                }
+
+                if isFiltering {
+                    Button(role: .destructive) {
+                        dietFilter = nil
+                        rarityFilter = nil
+                    } label: {
+                        Text("Clear Filters")
+                    }
+                }
+            } label: {
+                Image(systemName: isFiltering ? "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease.circle")
+                    .foregroundStyle(Color.dinoGreen)
+                    .frame(width: 42)
+            }
+            .accessibilityLabel(Text("Sort and Filter"))
+        }
+        .frame(height: 38)
+        .background(Color.dinoCardBackground, in: RoundedRectangle(cornerRadius: 12))
     }
 
     #if DEBUG
