@@ -21,14 +21,12 @@ struct TimerSetupView: View {
                         .offset(y: -40)
 
                     CircularDurationPicker(totalSeconds: $totalSeconds)
-                        // -40 closes the gap the sign's own -40 offset above
-                        // leaves behind (that offset moves the sign visually
-                        // without freeing up any layout space); the extra
-                        // -30 on top of that pulls the ring (and the Start
-                        // Timer button below it) further up still, freeing
-                        // up room at the bottom of the screen for the
-                        // planned button redesign (task #26).
-                        .padding(.top, -70)
+                        // Pulls the ring back up to close the gap the sign's
+                        // own -40 offset above leaves behind (that offset
+                        // moves the sign visually without freeing up any
+                        // layout space, so without this the ring would sit
+                        // 40pt lower than the sign's new position implies).
+                        .padding(.top, -40)
                     // CircularDurationPicker's own frame already reserves
                     // the full space its labels need (see
                     // `interactiveDiameter`), so no extra padding is

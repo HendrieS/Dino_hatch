@@ -62,12 +62,6 @@ struct CountdownView: View {
                             .monospacedDigit()
                     }
                 }
-                // Pulls the ring (and the Cancel Timer button below it) up
-                // by another 30pt, freeing up room at the bottom of the
-                // screen for the planned button redesign (task #26) — same
-                // reasoning as TimerSetupView's matching padding on
-                // CircularDurationPicker.
-                .padding(.top, -30)
             }
 
             Button(role: .destructive) {
