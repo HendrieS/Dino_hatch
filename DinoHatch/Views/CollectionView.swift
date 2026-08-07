@@ -119,7 +119,7 @@ struct CollectionView: View {
             ScrollView {
                 SignTitleView(text: "Dino-pedia")
                     // Experimental — see TimerSetupView's matching offset.
-                    .offset(y: -80)
+                    .offset(y: -40)
                     .padding(.top, 8)
 
                 // Composed from separate Text views (rather than one
@@ -135,7 +135,12 @@ struct CollectionView: View {
                 }
                 .font(.headline)
                 .foregroundStyle(.secondary)
-                .padding(.top, 8)
+                // Was a plain +8 gap below the sign; net -32 (8 - 40)
+                // closes the extra gap the sign's own -40 offset above
+                // leaves behind, same reasoning as TimerSetupView's
+                // matching padding on CircularDurationPicker, while keeping
+                // the original 8pt breathing room.
+                .padding(.top, -32)
 
                 if visibleDinosaurs.isEmpty {
                     ContentUnavailableView {

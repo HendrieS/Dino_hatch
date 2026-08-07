@@ -116,13 +116,19 @@ struct AlarmView: View {
                 VStack(spacing: 24) {
                     SignTitleView(text: "Dino Alarm")
                         // Experimental — see TimerSetupView's matching offset.
-                        .offset(y: -80)
+                        .offset(y: -40)
 
                     Image(headerImageName)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 130, height: 130)
-                        .padding(.top, 12)
+                        // Was a plain +12 gap below the sign; net -28 (12 -
+                        // 40) closes the extra gap the sign's own -40
+                        // offset above leaves behind, same reasoning as
+                        // TimerSetupView's matching padding on
+                        // CircularDurationPicker, while keeping the
+                        // original 12pt breathing room.
+                        .padding(.top, -28)
 
                     // The invisible placeholder reserves one line's worth of
                     // height at all times, so toggling a weekday (which can
