@@ -4,7 +4,10 @@ import Combine
 import WidgetKit
 
 struct RootTabView: View {
-    private enum Tab: Hashable {
+    /// Not `private` — `FloatingNavMenu` (a separate file) binds to this
+    /// same type so it can drive `selectedTab` without RootTabView needing
+    /// to translate to/from some more generic representation.
+    enum Tab: Hashable {
         case timer, alarm, collection
     }
 
@@ -21,9 +24,10 @@ struct RootTabView: View {
     @State private var showCollectionComplete = false
     @State private var selectedTab: Tab = .timer
     /// Refreshed every minute (and on every foreground transition) purely
-    /// to keep the Alarm tab's missed-window badge current — unlike the
-    /// timer banner's TimelineView, this needs to tick even while the Timer
-    /// tab is showing, since the badge lives on the tab bar itself.
+    /// to keep the Alarm destination's missed-window badge current — unlike
+    /// the timer banner's TimelineView, this needs to tick even while the
+    /// Timer screen is showing, since the badge lives on `FloatingNavMenu`,
+    /// which stays on screen across every tab.
     @State private var now: Date = .now
     private let minuteTimer = Timer.publish(every: 60, on: .main, in: .common).autoconnect()
 
@@ -41,49 +45,25 @@ struct RootTabView: View {
         ZStack(alignment: .top) {
             TabView(selection: $selectedTab) {
                 TimerHomeView(isActive: selectedTab == .timer)
-                    .tabItem {
-                        Label {
-                            Text("Timer")
-                        } icon: {
-                            Image("timer-icon")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 25, height: 25)
-                        }
-                    }
                     .tag(Tab.timer)
 
                 AlarmView()
-                    .tabItem {
-                        Label {
-                            Text("Alarm")
-                        } icon: {
-                            Image("alarm-icon")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 25, height: 25)
-                        }
-                    }
                     .tag(Tab.alarm)
-                    .badge(alarmWasMissedToday(at: now) ? Text(verbatim: "!") : nil)
 
                 CollectionView()
-                    .tabItem {
-                        Label {
-                            Text("Collection")
-                        } icon: {
-                            Image("collection-icon")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 25, height: 25)
-                        }
-                    }
                     .tag(Tab.collection)
             }
-            // Without this, the selected tab's label used the system's
-            // default blue accent while the tab icons render full-color
-            // green (template-rendering-intent: original) — a mismatch
-            // between icon and label color on the very same tab item.
+            // The system tab bar is replaced by FloatingNavMenu below —
+            // TabView itself stays (rather than switching to a plain
+            // Group/switch) so each screen keeps its own state exactly as
+            // before (e.g. TimerHomeView's countdown) rather than being
+            // torn down whenever another tab is selected.
+            .toolbar(.hidden, for: .tabBar)
+            // Tints every native control in the app (pickers, toggles,
+            // date pickers, ...) green instead of system blue — no longer
+            // needed to match a tab bar label's color specifically (that
+            // bar is gone), but still the only thing giving those controls
+            // their green accent, so it stays.
             .tint(Color.dinoGreen)
             .onAppear(perform: checkAlarmHatch)
             .onAppear(perform: refreshWidgetSnapshot)
@@ -159,6 +139,8 @@ struct RootTabView: View {
                     .animation(.spring(response: 0.4, dampingFraction: 0.8), value: isTimerReady(at: context.date))
                 }
             }
+
+            FloatingNavMenu(selectedTab: $selectedTab, showAlarmBadge: alarmWasMissedToday(at: now))
         }
     }
 
