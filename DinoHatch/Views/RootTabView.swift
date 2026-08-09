@@ -58,7 +58,13 @@ struct RootTabView: View {
             // Group/switch) so each screen keeps its own state exactly as
             // before (e.g. TimerHomeView's countdown) rather than being
             // torn down whenever another tab is selected.
+            //
+            // .toolbar(.hidden, for: .tabBar) alone still left an empty
+            // translucent bar-shaped background visible with no icons in
+            // it — hiding the background explicitly on top of that clears
+            // it fully.
             .toolbar(.hidden, for: .tabBar)
+            .toolbarBackground(.hidden, for: .tabBar)
             // Tints every native control in the app (pickers, toggles,
             // date pickers, ...) green instead of system blue — no longer
             // needed to match a tab bar label's color specifically (that
