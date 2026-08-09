@@ -15,7 +15,7 @@ struct FloatingNavMenu: View {
 
     @State private var isOpen = false
 
-    private let triggerDiameter: CGFloat = 72
+    private let triggerDiameter: CGFloat = 90
     private let itemDiameter: CGFloat = 44
 
     var body: some View {
@@ -34,7 +34,7 @@ struct FloatingNavMenu: View {
             isOpen.toggle()
         } label: {
             Image(systemName: "pawprint.fill")
-                .font(.system(size: 26))
+                .font(.system(size: 32))
                 .foregroundStyle(Color.dinoGreen)
                 .frame(width: triggerDiameter, height: triggerDiameter)
                 .background(isOpen ? Color.dinoGreen.opacity(0.18) : Color.clear, in: Circle())
