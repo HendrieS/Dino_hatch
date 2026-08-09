@@ -61,8 +61,8 @@ struct FloatingNavMenu: View {
         // Clears the 200pt-tall fern corners rather than sitting over them
         // — see the trigger's own 30pt for comparison, matching the
         // approved mockup's "separate row above, not on top of" layout.
-        // Lowered from 190 per feedback that it sat a bit high.
-        .padding(.bottom, 160)
+        // Lowered from 190 -> 160 -> 130 per feedback that it sat too high.
+        .padding(.bottom, 130)
     }
 
     private func item(_ tab: RootTabView.Tab, image: String, label: Text, showBadge: Bool = false) -> some View {
