@@ -43,91 +43,28 @@ struct RootTabView: View {
 
     private var mainTabView: some View {
         ZStack(alignment: .top) {
-            TabView(selection: $selectedTab) {
-                TimerHomeView(isActive: selectedTab == .timer)
-                    .tag(Tab.timer)
-
-                AlarmView()
-                    .tag(Tab.alarm)
-
-                CollectionView()
-                    .tag(Tab.collection)
-            }
-            // The system tab bar is replaced by FloatingNavMenu below —
-            // TabView itself stays (rather than switching to a plain
-            // Group/switch) so each screen keeps its own state exactly as
-            // before (e.g. TimerHomeView's countdown) rather than being
-            // torn down whenever another tab is selected.
+            // A plain switch rather than TabView — .toolbar(.hidden, for:
+            // .tabBar) plus .toolbarBackground(.hidden, for: .tabBar) still
+            // left an empty translucent bar-shaped background on screen,
+            // confirmed on device, so this sidesteps that instead of
+            // continuing to fight it.
             //
-            // .toolbar(.hidden, for: .tabBar) alone still left an empty
-            // translucent bar-shaped background visible with no icons in
-            // it — hiding the background explicitly on top of that clears
-            // it fully.
-            .toolbar(.hidden, for: .tabBar)
-            .toolbarBackground(.hidden, for: .tabBar)
-            // Tints every native control in the app (pickers, toggles,
-            // date pickers, ...) green instead of system blue — no longer
-            // needed to match a tab bar label's color specifically (that
-            // bar is gone), but still the only thing giving those controls
-            // their green accent, so it stays.
-            .tint(Color.dinoGreen)
-            .onAppear(perform: checkAlarmHatch)
-            .onAppear(perform: refreshWidgetSnapshot)
-            .onAppear(perform: checkWhatsNew)
-            .onChange(of: scenePhase) { _, newPhase in
-                if newPhase == .active {
-                    now = .now
-                    checkAlarmHatch()
-                    // Also covers the alarm's next-fire date having simply
-                    // passed since the last save, with no settings change
-                    // to key off of.
-                    refreshWidgetSnapshot()
-                }
-            }
-            .onChange(of: unlocked.count) { _, _ in
-                refreshWidgetSnapshot()
-                checkCollectionComplete()
-            }
-            .onChange(of: pendingAlarmDinosaur) { _, newValue in
-                // The alarm-hatch cover below can itself be what completes
-                // the collection (unlock(_:) runs while it's still on
-                // screen) — checkCollectionComplete() deliberately no-ops
-                // while that cover is up rather than trying to stack a
-                // second fullScreenCover on top of it, so re-check the
-                // instant it closes to catch that case.
-                if newValue == nil {
-                    checkCollectionComplete()
-                }
-            }
-            .onChange(of: alarmFingerprint) { _, _ in
-                refreshWidgetSnapshot()
-            }
-            .onChange(of: timerFingerprint) { _, _ in
-                refreshWidgetSnapshot()
-            }
-            .onChange(of: appSettings.first?.supporterTierRawValue) { _, _ in
-                refreshWidgetSnapshot()
-            }
-            .onReceive(minuteTimer) { date in
-                now = date
-                checkAlarmHatch()
-            }
-            .fullScreenCover(item: $pendingAlarmDinosaur) { dinosaur in
-                AlarmHatchView(dinosaur: dinosaur) {
-                    unlock(dinosaur)
-                } onDone: {
-                    pendingAlarmDinosaur = nil
-                }
-            }
-            // Full screen rather than a sheet — see CollectionView's
-            // matching change for Settings; WhatsNewView also uses the
-            // bleeding fauna background.
-            .fullScreenCover(isPresented: $showWhatsNew) {
-                WhatsNewView(notes: whatsNewNotes)
-            }
-            .fullScreenCover(isPresented: $showCollectionComplete) {
-                CollectionCompleteView(mascots: collectionCompleteMascots) {
-                    showCollectionComplete = false
+            // Trade-off: each screen is torn down and rebuilt when its tab
+            // isn't selected, rather than staying alive underneath like
+            // TabView's pages do — e.g. Collection loses its pushed detail
+            // view on switching away and back. Timer is fine either way:
+            // TimerHomeView already fully restores a running countdown from
+            // persisted state in its own .onAppear (see resumeIfNeeded()),
+            // for the widget/relaunch case, so a tab switch rebuilding it
+            // hits that same path.
+            Group {
+                switch selectedTab {
+                case .timer:
+                    TimerHomeView(isActive: selectedTab == .timer)
+                case .alarm:
+                    AlarmView()
+                case .collection:
+                    CollectionView()
                 }
             }
 
@@ -147,6 +84,76 @@ struct RootTabView: View {
             }
 
             FloatingNavMenu(selectedTab: $selectedTab, showAlarmBadge: alarmWasMissedToday(at: now))
+        }
+        // Tints every native control in the app (pickers, toggles, date
+        // pickers, ...) green instead of system blue — no longer needed to
+        // match a tab bar label's color specifically (that bar is gone),
+        // but still the only thing giving those controls their green
+        // accent, so it stays.
+        .tint(Color.dinoGreen)
+        // Attached to the outer ZStack rather than the switching Group
+        // above — that Group's content changes identity on every tab
+        // switch, which would make these fire repeatedly (.onAppear) or
+        // stop being observed (.onChange/.fullScreenCover) each time,
+        // instead of behaving as "once per real app launch/foreground."
+        .onAppear(perform: checkAlarmHatch)
+        .onAppear(perform: refreshWidgetSnapshot)
+        .onAppear(perform: checkWhatsNew)
+        .onChange(of: scenePhase) { _, newPhase in
+            if newPhase == .active {
+                now = .now
+                checkAlarmHatch()
+                // Also covers the alarm's next-fire date having simply
+                // passed since the last save, with no settings change to
+                // key off of.
+                refreshWidgetSnapshot()
+            }
+        }
+        .onChange(of: unlocked.count) { _, _ in
+            refreshWidgetSnapshot()
+            checkCollectionComplete()
+        }
+        .onChange(of: pendingAlarmDinosaur) { _, newValue in
+            // The alarm-hatch cover below can itself be what completes the
+            // collection (unlock(_:) runs while it's still on screen) —
+            // checkCollectionComplete() deliberately no-ops while that
+            // cover is up rather than trying to stack a second
+            // fullScreenCover on top of it, so re-check the instant it
+            // closes to catch that case.
+            if newValue == nil {
+                checkCollectionComplete()
+            }
+        }
+        .onChange(of: alarmFingerprint) { _, _ in
+            refreshWidgetSnapshot()
+        }
+        .onChange(of: timerFingerprint) { _, _ in
+            refreshWidgetSnapshot()
+        }
+        .onChange(of: appSettings.first?.supporterTierRawValue) { _, _ in
+            refreshWidgetSnapshot()
+        }
+        .onReceive(minuteTimer) { date in
+            now = date
+            checkAlarmHatch()
+        }
+        .fullScreenCover(item: $pendingAlarmDinosaur) { dinosaur in
+            AlarmHatchView(dinosaur: dinosaur) {
+                unlock(dinosaur)
+            } onDone: {
+                pendingAlarmDinosaur = nil
+            }
+        }
+        // Full screen rather than a sheet — see CollectionView's matching
+        // change for Settings; WhatsNewView also uses the bleeding fauna
+        // background.
+        .fullScreenCover(isPresented: $showWhatsNew) {
+            WhatsNewView(notes: whatsNewNotes)
+        }
+        .fullScreenCover(isPresented: $showCollectionComplete) {
+            CollectionCompleteView(mascots: collectionCompleteMascots) {
+                showCollectionComplete = false
+            }
         }
     }
 
