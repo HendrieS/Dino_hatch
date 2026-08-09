@@ -15,7 +15,7 @@ struct FloatingNavMenu: View {
 
     @State private var isOpen = false
 
-    private let triggerDiameter: CGFloat = 60
+    private let triggerDiameter: CGFloat = 72
     private let itemDiameter: CGFloat = 44
 
     var body: some View {
@@ -34,7 +34,7 @@ struct FloatingNavMenu: View {
             isOpen.toggle()
         } label: {
             Image(systemName: "pawprint.fill")
-                .font(.system(size: 22))
+                .font(.system(size: 26))
                 .foregroundStyle(Color.dinoGreen)
                 .frame(width: triggerDiameter, height: triggerDiameter)
                 .background(isOpen ? Color.dinoGreen.opacity(0.18) : Color.clear, in: Circle())
@@ -54,14 +54,15 @@ struct FloatingNavMenu: View {
             item(.collection, image: "menu-icon-collection", label: Text("Collection"))
         }
         .padding(.horizontal, 14)
-        .frame(height: triggerDiameter)
-        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: triggerDiameter / 2))
+        .frame(height: 60)
+        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 30))
         .shadow(color: .black.opacity(0.18), radius: 10, y: 4)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
         // Clears the 200pt-tall fern corners rather than sitting over them
         // — see the trigger's own 30pt for comparison, matching the
         // approved mockup's "separate row above, not on top of" layout.
-        .padding(.bottom, 190)
+        // Lowered from 190 per feedback that it sat a bit high.
+        .padding(.bottom, 160)
     }
 
     private func item(_ tab: RootTabView.Tab, image: String, label: Text, showBadge: Bool = false) -> some View {
