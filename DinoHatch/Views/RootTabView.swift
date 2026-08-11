@@ -26,6 +26,10 @@ struct RootTabView: View {
     /// True while `TimerHomeView` is showing its hatch animation or reveal
     /// — see `FloatingNavMenu`'s conditional rendering below.
     @State private var isTimerCelebrating = false
+    /// True while `CollectionView` has a dinosaur's detail view pushed —
+    /// same reasoning and same conditional rendering as
+    /// `isTimerCelebrating`.
+    @State private var isCollectionShowingDetail = false
     /// Refreshed every minute (and on every foreground transition) purely
     /// to keep the Alarm destination's missed-window badge current — unlike
     /// the timer banner's TimelineView, this needs to tick even while the
@@ -67,7 +71,7 @@ struct RootTabView: View {
                 case .alarm:
                     AlarmView()
                 case .collection:
-                    CollectionView()
+                    CollectionView(isShowingDetail: $isCollectionShowingDetail)
                 }
             }
 
@@ -86,11 +90,15 @@ struct RootTabView: View {
                 }
             }
 
-            // Hidden during Timer's own hatching/reveal phases — those are
-            // full-screen celebratory moments, not "the Timer screen"
-            // itself, matching how the menu is already absent during the
-            // similarly celebratory AlarmHatchView full-screen cover.
-            if !(selectedTab == .timer && isTimerCelebrating) {
+            // Hidden during Timer's own hatching/reveal phases (full-screen
+            // celebratory moments, not "the Timer screen" itself — matching
+            // how the menu is already absent during the similarly
+            // celebratory AlarmHatchView full-screen cover) and while a
+            // dinosaur's detail view is pushed on Collection, for the same
+            // "screen the kid has drilled into" reasoning.
+            let hideForTimer = selectedTab == .timer && isTimerCelebrating
+            let hideForCollection = selectedTab == .collection && isCollectionShowingDetail
+            if !hideForTimer && !hideForCollection {
                 FloatingNavMenu(selectedTab: $selectedTab, showAlarmBadge: alarmWasMissedToday(at: now))
             }
         }

@@ -16,9 +16,16 @@ struct CollectionView: View {
         }
     }
 
+    /// Mirrors whether a dinosaur's detail view is pushed — `RootTabView`
+    /// hides `FloatingNavMenu` while this is true, same reasoning as
+    /// `TimerHomeView.isCelebrating`: a screen the kid has drilled into,
+    /// not "the Collection screen" itself.
+    @Binding var isShowingDetail: Bool
+
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \UnlockedDinosaur.unlockedAt) private var unlocked: [UnlockedDinosaur]
 
+    @State private var path = NavigationPath()
     @State private var showSettings = false
     @State private var searchText = ""
     @State private var dietFilter: Dinosaur.Diet?
@@ -115,7 +122,7 @@ struct CollectionView: View {
     private let columns = [GridItem(.adaptive(minimum: 140), spacing: 16)]
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             ScrollView {
                 SignTitleView(text: "Dino-pedia")
                     // -52 rather than TimerSetupView's -84 or AlarmView's
@@ -218,6 +225,9 @@ struct CollectionView: View {
                 ParentalGateView()
             }
         }
+        .onChange(of: path) { _, newPath in
+            isShowingDetail = !newPath.isEmpty
+        }
     }
 
     /// A single search field with the sort/filter menu folded into its
@@ -312,6 +322,6 @@ struct CollectionView: View {
 }
 
 #Preview {
-    CollectionView()
+    CollectionView(isShowingDetail: .constant(false))
         .modelContainer(for: [UnlockedDinosaur.self, AppSettings.self], inMemory: true)
 }
