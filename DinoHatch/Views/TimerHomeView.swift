@@ -9,6 +9,13 @@ struct TimerHomeView: View {
     /// still shows the full reveal instead of a dinosaur that's already sat
     /// there waiting.
     var isActive: Bool
+    /// Mirrors whether `phase` is `.hatching`/`.reveal` — `RootTabView`
+    /// hides `FloatingNavMenu` while this is true, since those two phases
+    /// are full-screen celebratory moments (matching how the menu is
+    /// already absent during the similarly celebratory `AlarmHatchView`
+    /// full-screen cover) rather than "the Timer screen" a kid would
+    /// expect to navigate away from mid-animation.
+    @Binding var isCelebrating: Bool
 
     @Environment(\.modelContext) private var modelContext
     @Environment(\.scenePhase) private var scenePhase
@@ -84,6 +91,9 @@ struct TimerHomeView: View {
             engine.restoreFromSettings()
             resumeIfNeeded()
         }
+        .onChange(of: phase) { _, newPhase in
+            isCelebrating = newPhase == .hatching || newPhase == .reveal
+        }
     }
 
     /// The countdown finished. Plays the hatch animation immediately if the
@@ -115,6 +125,6 @@ struct TimerHomeView: View {
 }
 
 #Preview {
-    TimerHomeView(isActive: true)
+    TimerHomeView(isActive: true, isCelebrating: .constant(false))
         .modelContainer(for: [UnlockedDinosaur.self, AppSettings.self], inMemory: true)
 }

@@ -23,6 +23,9 @@ struct RootTabView: View {
     @State private var collectionCompleteMascots: [Dinosaur] = []
     @State private var showCollectionComplete = false
     @State private var selectedTab: Tab = .timer
+    /// True while `TimerHomeView` is showing its hatch animation or reveal
+    /// — see `FloatingNavMenu`'s conditional rendering below.
+    @State private var isTimerCelebrating = false
     /// Refreshed every minute (and on every foreground transition) purely
     /// to keep the Alarm destination's missed-window badge current — unlike
     /// the timer banner's TimelineView, this needs to tick even while the
@@ -60,7 +63,7 @@ struct RootTabView: View {
             Group {
                 switch selectedTab {
                 case .timer:
-                    TimerHomeView(isActive: selectedTab == .timer)
+                    TimerHomeView(isActive: selectedTab == .timer, isCelebrating: $isTimerCelebrating)
                 case .alarm:
                     AlarmView()
                 case .collection:
@@ -83,7 +86,13 @@ struct RootTabView: View {
                 }
             }
 
-            FloatingNavMenu(selectedTab: $selectedTab, showAlarmBadge: alarmWasMissedToday(at: now))
+            // Hidden during Timer's own hatching/reveal phases — those are
+            // full-screen celebratory moments, not "the Timer screen"
+            // itself, matching how the menu is already absent during the
+            // similarly celebratory AlarmHatchView full-screen cover.
+            if !(selectedTab == .timer && isTimerCelebrating) {
+                FloatingNavMenu(selectedTab: $selectedTab, showAlarmBadge: alarmWasMissedToday(at: now))
+            }
         }
         // Tints every native control in the app (pickers, toggles, date
         // pickers, ...) green instead of system blue — no longer needed to
