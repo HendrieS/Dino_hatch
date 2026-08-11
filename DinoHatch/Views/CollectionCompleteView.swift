@@ -69,8 +69,9 @@ struct CollectionCompleteView: View {
                 .buttonStyle(.dinoChunkyGreen)
                 // Wider than 32pt — this sits right at the bottom over the
                 // fern corners, so it needs extra clearance to land between
-                // them instead of over them.
-                .padding(.horizontal, 56)
+                // them instead of over them. 56 wasn't enough to clear
+                // them, confirmed on device.
+                .padding(.horizontal, 80)
                 .padding(.bottom, 12)
         }
         .frame(maxWidth: 500)
