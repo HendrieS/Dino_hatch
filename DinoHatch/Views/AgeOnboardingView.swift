@@ -39,11 +39,16 @@ struct AgeOnboardingView: View {
             .frame(height: 140)
             .padding(.horizontal, 60)
 
-            Button("Continue", action: save)
-                .buttonStyle(.dinoChunkyGreen)
-                // Matches every other text button's confirmed-correct width
-                // across the app.
-                .padding(.horizontal, 140)
+            Button(action: save) {
+                Text("Continue")
+                    .font(.title3.bold())
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.dinoGreen)
+                    .foregroundStyle(.white)
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
+            }
+            .padding(.horizontal, 32)
 
             Spacer()
             Spacer()

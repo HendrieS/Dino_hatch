@@ -68,12 +68,17 @@ struct ParentalGateView: View {
                         .foregroundStyle(.red)
                         .opacity(showWrongAnswer ? 1 : 0)
 
-                    Button("Check", action: check)
-                        .buttonStyle(.dinoChunkyGreen)
-                        // Matches every other text button's confirmed-
-                        // correct width across the app.
-                        .padding(.horizontal, 140)
-                        .disabled(answer.isEmpty)
+                    Button(action: check) {
+                        Text("Check")
+                            .font(.title3.bold())
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.dinoGreen)
+                            .foregroundStyle(.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                    }
+                    .padding(.horizontal, 32)
+                    .disabled(answer.isEmpty)
 
                     Spacer()
                     Spacer()

@@ -43,12 +43,17 @@ struct WhatsNewView: View {
                     .background(Color.dinoCardBackground)
                     .clipShape(RoundedRectangle(cornerRadius: 16))
 
-                    Button("Got it!") { dismiss() }
-                        .buttonStyle(.dinoChunkyGreen)
-                        // Matches every other text button's confirmed-
-                        // correct width across the app.
-                        .padding(.horizontal, 140)
-                        .padding(.bottom, 12)
+                    Button(action: { dismiss() }) {
+                        Text("Got it!")
+                            .font(.title3.bold())
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.dinoGreen)
+                            .foregroundStyle(.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                    }
+                    .padding(.horizontal, 32)
+                    .padding(.bottom, 12)
                 }
                 .padding()
                 .frame(maxWidth: 500)
