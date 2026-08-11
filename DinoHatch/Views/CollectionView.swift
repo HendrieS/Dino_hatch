@@ -118,8 +118,13 @@ struct CollectionView: View {
         NavigationStack {
             ScrollView {
                 SignTitleView(text: "Dino-pedia")
-                    // Experimental — see TimerSetupView's matching offset.
-                    .offset(y: -40)
+                    // -52 rather than TimerSetupView's -84 or AlarmView's
+                    // -60 because this sign sits directly in the ScrollView
+                    // with only its own +8 padding above it (no VStack
+                    // padding at all) — the different offsets land the sign
+                    // at the same actual screen position, matched by eye
+                    // against Timer's, which was confirmed correct.
+                    .offset(y: -52)
                     .padding(.top, 8)
 
                 // Composed from separate Text views (rather than one
@@ -135,12 +140,12 @@ struct CollectionView: View {
                 }
                 .font(.headline)
                 .foregroundStyle(.secondary)
-                // Was a plain +8 gap below the sign; net -32 (8 - 40)
-                // closes the extra gap the sign's own -40 offset above
+                // Was a plain +8 gap below the sign; net -44 (8 - 52)
+                // closes the extra gap the sign's own -52 offset above
                 // leaves behind, same reasoning as TimerSetupView's
                 // matching padding on CircularDurationPicker, while keeping
                 // the original 8pt breathing room.
-                .padding(.top, -32)
+                .padding(.top, -44)
 
                 searchAndFilterBar
                     .padding(.top, 10)
