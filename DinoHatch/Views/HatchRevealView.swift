@@ -31,9 +31,9 @@ struct HatchRevealView: View {
                 // Wider than the fun-fact text's own 32pt inset — this sits
                 // right at the bottom over the fern corners, so it needs
                 // extra clearance to land between them instead of over them.
-                // 32 -> 56 -> 80 all still overlapped them, confirmed on
+                // 32 -> 56 -> 80 -> 100 all still overlapped them, confirmed on
                 // device each time.
-                .padding(.horizontal, 100)
+                .padding(.horizontal, 140)
                 .padding(.bottom, 24)
         }
         .frame(maxWidth: 500)
