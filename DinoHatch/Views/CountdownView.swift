@@ -77,7 +77,9 @@ struct CountdownView: View {
                 }
             }
             .buttonStyle(.dinoChunkyRed)
-            .padding(.horizontal, 32)
+            // Matches the "Awesome!" buttons' own confirmed-correct width
+            // for consistency across every text button.
+            .padding(.horizontal, 140)
 
             Spacer()
             Spacer()

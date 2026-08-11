@@ -55,7 +55,9 @@ struct TimerSetupView: View {
                         )
                     )
                     .disabled(totalSeconds == 0)
-                    .padding(.horizontal, 32)
+                    // Matches the "Awesome!" buttons' own confirmed-correct
+                    // width for consistency across every text button.
+                    .padding(.horizontal, 140)
                 }
                 .padding()
                 .padding(.top, 24)
