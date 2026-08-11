@@ -55,7 +55,15 @@ struct SettingsView: View {
                         showResetConfirmation = true
                     }
                 } footer: {
+                    // This is the last row in the Form, so scrolling to the
+                    // bottom can put it directly over the fern corners —
+                    // a plain footer Text there was unreadable against
+                    // that busy art, so it gets its own opaque card like
+                    // other floating text elsewhere in the app (e.g.
+                    // AlarmView's "Notifications are off" banner).
                     Text("Erases the dinosaur collection, timer, and alarm settings, and asks for the child's age again.")
+                        .padding(10)
+                        .background(Color.dinoCardBackground, in: RoundedRectangle(cornerRadius: 10))
                 }
             }
             .navigationTitle("Settings")
