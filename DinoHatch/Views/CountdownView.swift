@@ -75,13 +75,8 @@ struct CountdownView: View {
                         .frame(width: 22, height: 22)
                     Text("Cancel Timer")
                 }
-                .font(.title3.bold())
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(Color.dinoRed)
-                .foregroundStyle(.white)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
             }
+            .buttonStyle(.dinoChunkyRed)
             .padding(.horizontal, 32)
 
             Spacer()

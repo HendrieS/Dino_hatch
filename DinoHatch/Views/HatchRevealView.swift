@@ -26,17 +26,10 @@ struct HatchRevealView: View {
 
             Spacer()
 
-            Button(action: onDismiss) {
-                Text("Awesome!")
-                    .font(.title3.bold())
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.dinoGreen)
-                    .foregroundStyle(.white)
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
-            }
-            .padding(.horizontal, 32)
-            .padding(.bottom, 24)
+            Button("Awesome!", action: onDismiss)
+                .buttonStyle(.dinoChunkyGreen)
+                .padding(.horizontal, 32)
+                .padding(.bottom, 24)
         }
         .frame(maxWidth: 500)
         .frame(maxWidth: .infinity)

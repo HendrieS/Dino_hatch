@@ -47,13 +47,13 @@ struct TimerSetupView: View {
                                 .frame(width: 22, height: 22)
                             Text("Start Timer")
                         }
-                        .font(.title3.bold())
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(totalSeconds > 0 ? Color.dinoGreen : Color.gray)
-                        .foregroundStyle(.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 20))
                     }
+                    .buttonStyle(
+                        ChunkyButtonStyle(
+                            color: totalSeconds > 0 ? .dinoGreen : .gray,
+                            edgeColor: totalSeconds > 0 ? .dinoGreenShadow : .dinoGrayShadow
+                        )
+                    )
                     .disabled(totalSeconds == 0)
                     .padding(.horizontal, 32)
                 }

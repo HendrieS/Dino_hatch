@@ -34,17 +34,10 @@ struct SupporterThankYouView: View {
                 Spacer()
                 Spacer()
 
-                Button(action: { dismiss() }) {
-                    Text("Awesome!")
-                        .font(.title3.bold())
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.dinoGreen)
-                        .foregroundStyle(.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 20))
-                }
-                .padding(.horizontal, 32)
-                .padding(.bottom, 12)
+                Button("Awesome!") { dismiss() }
+                    .buttonStyle(.dinoChunkyGreen)
+                    .padding(.horizontal, 32)
+                    .padding(.bottom, 12)
             }
             .padding()
             .frame(maxWidth: 500)

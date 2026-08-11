@@ -7,6 +7,15 @@ extension Color {
     /// Cancel Timer) — a warm coral rather than the harsher system red, to
     /// match dinoGreen's softer illustrated-app tone.
     static let dinoRed = Color(red: 0.85, green: 0.34, blue: 0.32)
+    /// The "3D edge" `ChunkyButtonStyle` reveals as a rim below the face
+    /// when not pressed — a hand-picked darker shade of `dinoGreen` rather
+    /// than a programmatic darken, matching how every other color in this
+    /// file is tuned by eye instead of derived.
+    static let dinoGreenShadow = Color(red: 0.14, green: 0.43, blue: 0.29)
+    /// Same idea as `dinoGreenShadow`, for `dinoRed`.
+    static let dinoRedShadow = Color(red: 0.60, green: 0.24, blue: 0.22)
+    /// Same idea again, for the disabled (gray) Start Timer button.
+    static let dinoGrayShadow = Color(white: 0.35)
     static let dinoCardBackground = Color(uiColor: .secondarySystemBackground)
     /// Gradient stops for `View.dinoWarmBackground()` — a warm cream tone
     /// replacing the plain system white app-wide, in the same tone family
