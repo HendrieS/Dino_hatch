@@ -36,7 +36,10 @@ struct SupporterThankYouView: View {
 
                 Button("Awesome!") { dismiss() }
                     .buttonStyle(.dinoChunkyGreen)
-                    .padding(.horizontal, 32)
+                    // Wider than 32pt — this sits right at the bottom over
+                    // the fern corners, so it needs extra clearance to land
+                    // between them instead of over them.
+                    .padding(.horizontal, 56)
                     .padding(.bottom, 12)
             }
             .padding()
