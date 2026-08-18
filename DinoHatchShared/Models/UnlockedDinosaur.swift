@@ -5,6 +5,7 @@ import SwiftData
 final class UnlockedDinosaur {
     var dinosaurID: String = ""
     var unlockedAt: Date = Date.now
+    var isFavorite: Bool = false
 
     init(dinosaurID: String, unlockedAt: Date = .now) {
         self.dinosaurID = dinosaurID

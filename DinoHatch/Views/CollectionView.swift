@@ -169,13 +169,14 @@ struct CollectionView: View {
                     LazyVGrid(columns: columns, spacing: 16) {
                         ForEach(visibleDinosaurs) { dinosaur in
                             if unlockedIDs.contains(dinosaur.id) {
+                                let record = unlocked.first(where: { $0.dinosaurID == dinosaur.id })
                                 NavigationLink {
                                     DinosaurDetailView(
                                         dinosaur: dinosaur,
-                                        unlockedAt: unlocked.first(where: { $0.dinosaurID == dinosaur.id })?.unlockedAt
+                                        unlockedAt: record?.unlockedAt
                                     )
                                 } label: {
-                                    DinoCardView(dinosaur: dinosaur)
+                                    DinoCardView(dinosaur: dinosaur, isFavorite: record?.isFavorite ?? false)
                                 }
                                 .buttonStyle(.plain)
                             } else if !dinosaur.isSecret {

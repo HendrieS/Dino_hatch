@@ -2,6 +2,7 @@ import SwiftUI
 
 struct DinoCardView: View {
     let dinosaur: Dinosaur
+    var isFavorite: Bool = false
 
     var body: some View {
         VStack(spacing: 8) {
@@ -23,10 +24,21 @@ struct DinoCardView: View {
             RoundedRectangle(cornerRadius: 16)
                 .strokeBorder(dinosaur.rarity.tint, lineWidth: 2)
         )
+        .overlay(alignment: .topTrailing) {
+            if isFavorite {
+                Image(systemName: "heart.fill")
+                    .font(.caption)
+                    .foregroundStyle(Color.dinoRed)
+                    .padding(6)
+                    .background(.ultraThinMaterial, in: Circle())
+                    .padding(6)
+                    .accessibilityLabel(Text("Favorite"))
+            }
+        }
     }
 }
 
 #Preview {
-    DinoCardView(dinosaur: DinosaurCatalog.all[0])
+    DinoCardView(dinosaur: DinosaurCatalog.all[0], isFavorite: true)
         .padding()
 }

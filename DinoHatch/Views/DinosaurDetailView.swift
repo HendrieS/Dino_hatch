@@ -1,12 +1,21 @@
 import SwiftUI
+import SwiftData
 import UIKit
 
 struct DinosaurDetailView: View {
     let dinosaur: Dinosaur
     let unlockedAt: Date?
 
+    @Query private var unlockedRecords: [UnlockedDinosaur]
     @State private var shareURL: URL?
     @State private var shareImage: UIImage?
+
+    /// Looked up by `dinosaur.id` rather than passed in directly (like
+    /// `unlockedAt` is) so toggling favorite here updates live — a plain
+    /// `Date?` can't do that, but a `@Query`'d SwiftData reference type can.
+    private var unlockedRecord: UnlockedDinosaur? {
+        unlockedRecords.first(where: { $0.dinosaurID == dinosaur.id })
+    }
 
     var body: some View {
         ScrollView {
@@ -88,6 +97,17 @@ struct DinosaurDetailView: View {
         .dinoWarmBackground()
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
+                if let unlockedRecord {
+                    Button {
+                        unlockedRecord.isFavorite.toggle()
+                    } label: {
+                        Image(systemName: unlockedRecord.isFavorite ? "heart.fill" : "heart")
+                            .foregroundStyle(unlockedRecord.isFavorite ? Color.dinoRed : Color.primary)
+                    }
+                    .accessibilityLabel(unlockedRecord.isFavorite ? Text("Remove from Favorites") : Text("Add to Favorites"))
+                }
+            }
+            ToolbarItem(placement: .topBarTrailing) {
                 if let shareURL, let shareImage {
                     ShareLink(
                         item: shareURL,
@@ -144,4 +164,5 @@ private struct FactRow: View {
     NavigationStack {
         DinosaurDetailView(dinosaur: DinosaurCatalog.all[0], unlockedAt: .now)
     }
+    .modelContainer(for: [UnlockedDinosaur.self], inMemory: true)
 }
