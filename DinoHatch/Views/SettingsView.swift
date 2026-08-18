@@ -9,6 +9,7 @@ struct SettingsView: View {
     @Query private var alarms: [AlarmSettings]
 
     @State private var age = 5
+    @State private var isTimerLockEnabled = false
     @State private var showResetConfirmation = false
     @State private var showSupportUs = false
 
@@ -24,6 +25,15 @@ struct SettingsView: View {
                     .onChange(of: age) { _, newValue in
                         settingsRow().childAge = newValue
                     }
+                }
+
+                Section {
+                    Toggle("Timer Lock", isOn: $isTimerLockEnabled)
+                        .onChange(of: isTimerLockEnabled) { _, newValue in
+                            settingsRow().isTimerLockEnabled = newValue
+                        }
+                } footer: {
+                    Text("When on, cancelling a running timer needs this same math check — handy for quiet time, waiting turns, or anything else you don't want ended early. Picking or changing the duration before starting is never gated.")
                 }
 
                 Section {
@@ -76,6 +86,7 @@ struct SettingsView: View {
             }
             .onAppear {
                 age = settings.first?.childAge ?? 5
+                isTimerLockEnabled = settings.first?.isTimerLockEnabled ?? false
             }
             .confirmationDialog(
                 "Are you sure?",

@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 import UIKit
 
 struct CountdownView: View {
@@ -6,7 +7,14 @@ struct CountdownView: View {
     var onComplete: () -> Void
     var onCancel: () -> Void
 
+    @Query private var appSettings: [AppSettings]
     @State private var hasCompleted = false
+    @State private var showLockGate = false
+
+    /// Off by default — see `AppSettings.isTimerLockEnabled`.
+    private var isTimerLockEnabled: Bool {
+        appSettings.first?.isTimerLockEnabled ?? false
+    }
 
     var body: some View {
         NavigationStack {
@@ -65,8 +73,12 @@ struct CountdownView: View {
             }
 
             Button(role: .destructive) {
-                engine.cancel()
-                onCancel()
+                if isTimerLockEnabled {
+                    showLockGate = true
+                } else {
+                    engine.cancel()
+                    onCancel()
+                }
             } label: {
                 HStack(spacing: 8) {
                     Image("button-footprint-stop")
@@ -78,6 +90,15 @@ struct CountdownView: View {
             }
             .buttonStyle(.dinoChunkyRed)
             .padding(.horizontal, 32)
+            // Full screen rather than a sheet — see CollectionView's
+            // matching change for Settings; same bleeding fauna background
+            // reasoning applies here.
+            .fullScreenCover(isPresented: $showLockGate) {
+                ParentalGateView(onUnlock: {
+                    engine.cancel()
+                    onCancel()
+                }, prompt: "Solve this to cancel the timer.")
+            }
 
             Spacer()
             Spacer()

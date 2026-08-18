@@ -6666,6 +6666,46 @@
         }
       }
     },
+    "Solve this to cancel the timer.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Löse das, um den Timer abzubrechen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solve this to cancel the timer."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resuelve esto para cancelar el temporizador."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Résolvez ceci pour annuler le minuteur."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los dit op om de timer te annuleren."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Реши пример, чтобы отменить таймер."
+          }
+        }
+      }
+    },
     "Solve this to open settings.": {
       "extractionState": "manual",
       "localizations": {
@@ -7975,6 +8015,46 @@
         }
       }
     },
+    "Timer Lock": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Timer-Sperre"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Timer Lock"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bloqueo del temporizador"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verrouillage du minuteur"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Timervergrendeling"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Блокировка таймера"
+          }
+        }
+      }
+    },
     "Timer and alarm settings": {
       "extractionState": "manual",
       "localizations": {
@@ -8708,6 +8788,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "Что нового"
+          }
+        }
+      }
+    },
+    "When on, cancelling a running timer needs this same math check — handy for quiet time, waiting turns, or anything else you don't want ended early. Picking or changing the duration before starting is never gated.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wenn aktiviert, ist zum Abbrechen eines laufenden Timers derselbe Rechen-Check nötig — praktisch für Ruhezeiten, Warten auf die Reihe oder alles andere, das nicht vorzeitig beendet werden soll. Die Dauer vor dem Start festzulegen oder zu ändern ist nie gesperrt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When on, cancelling a running timer needs this same math check — handy for quiet time, waiting turns, or anything else you don't want ended early. Picking or changing the duration before starting is never gated."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuando está activado, cancelar un temporizador en marcha requiere esta misma prueba matemática — útil para momentos de calma, esperar el turno o cualquier otra cosa que no quieras que termine antes de tiempo. Elegir o cambiar la duración antes de empezar nunca está bloqueado."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activé, annuler un minuteur en cours demande ce même calcul — pratique pour les moments calmes, attendre son tour, ou tout ce que vous ne voulez pas voir arrêté trop tôt. Choisir ou modifier la durée avant de démarrer n'est jamais verrouillé."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Indien ingeschakeld, is voor het annuleren van een lopende timer dezelfde rekensom nodig — handig voor rustmomenten, wachten tot je aan de beurt bent, of iets anders dat je niet vroegtijdig wilt stoppen. De duur instellen of wijzigen vóór het starten is nooit vergrendeld."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Если включено, для отмены запущенного таймера нужно решить тот же пример — удобно для спокойного времени, ожидания своей очереди или всего остального, что не должно закончиться раньше времени. Выбор или изменение длительности перед запуском никогда не блокируется."
           }
         }
       }

@@ -51,6 +51,13 @@ final class AppSettings {
     /// the Wave 1/2 backlog item) gets fully hatched too, instead of only
     /// ever celebrating once per install.
     var lastCollectionCompleteCatalogSize: Int?
+    /// Opt-in parental control, off by default — while true, cancelling a
+    /// running timer requires solving `ParentalGateView`'s math check first
+    /// (same check as reaching Settings), so a timer set for quiet time,
+    /// waiting turns, etc. can't just be tapped away by a kid. Doesn't gate
+    /// picking or changing the duration before starting, only cancelling
+    /// once it's running — see SettingsView/CountdownView.
+    var isTimerLockEnabled: Bool = false
 
     init() {}
 }

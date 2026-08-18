@@ -6,6 +6,14 @@ import SwiftUI
 /// enough for single-digit multiplication. A wrong answer swaps in a fresh
 /// question rather than just letting you retry the same one.
 struct ParentalGateView: View {
+    /// When provided, a correct answer calls this and dismisses the gate
+    /// instead of swapping in `SettingsView` — for callers that just need a
+    /// one-off "prove you're a grown-up" moment (e.g. the Timer Lock
+    /// confirming a cancel) rather than the Settings flow itself. Leave nil
+    /// for the original "gate on the way to Settings" behavior.
+    var onUnlock: (() -> Void)?
+    var prompt: LocalizedStringKey = "Solve this to open settings."
+
     @Environment(\.dismiss) private var dismiss
 
     @State private var factorA = Int.random(in: 3...9)
@@ -16,7 +24,7 @@ struct ParentalGateView: View {
     @FocusState private var isFocused: Bool
 
     var body: some View {
-        if isUnlocked {
+        if isUnlocked, onUnlock == nil {
             SettingsView()
         } else {
             NavigationStack {
@@ -26,7 +34,7 @@ struct ParentalGateView: View {
                     Text("Grown-ups only")
                         .font(.title2.bold())
 
-                    Text("Solve this to open settings.")
+                    Text(prompt)
                         .font(.footnote)
                         .foregroundStyle(.secondary)
 
@@ -98,10 +106,15 @@ struct ParentalGateView: View {
     }
 
     private func check() {
-        if Int(answer) == factorA * factorB {
-            isUnlocked = true
-        } else {
+        guard Int(answer) == factorA * factorB else {
             newQuestion()
+            return
+        }
+        if let onUnlock {
+            onUnlock()
+            dismiss()
+        } else {
+            isUnlocked = true
         }
     }
 
