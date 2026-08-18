@@ -15,10 +15,7 @@ struct AgeOnboardingView: View {
         VStack(spacing: 28) {
             Spacer()
 
-            Image("alarm-egg")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 150, height: 150)
+            AgeRulerIcon()
 
             Text("How old is your child?")
                 .font(.title2.bold())
