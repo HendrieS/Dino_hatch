@@ -4376,6 +4376,46 @@
         }
       }
     },
+    "Locked. Requires solving a math check to cancel.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gesperrt. Zum Abbrechen ist eine Rechenaufgabe zu lösen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Locked. Requires solving a math check to cancel."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bloqueado. Es necesario resolver una prueba matemática para cancelar."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verrouillé. Il faut résoudre un calcul pour annuler."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vergrendeld. Los een rekensom op om te annuleren."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Заблокировано. Чтобы отменить, нужно решить пример."
+          }
+        }
+      }
+    },
     "Mid Cretaceous": {
       "extractionState": "stale",
       "localizations": {

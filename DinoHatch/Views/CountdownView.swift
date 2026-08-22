@@ -86,10 +86,19 @@ struct CountdownView: View {
                         .scaledToFit()
                         .frame(width: 22, height: 22)
                     Text("Cancel Timer")
+                    // A small, subdued hint that this is gated — sits right
+                    // after the label rather than replacing/crowding it, so
+                    // the button still reads as "Cancel Timer" at a glance.
+                    if isTimerLockEnabled {
+                        Image(systemName: "lock.fill")
+                            .font(.footnote)
+                            .opacity(0.7)
+                    }
                 }
             }
             .buttonStyle(.dinoChunkyRed)
             .padding(.horizontal, 32)
+            .accessibilityHint(isTimerLockEnabled ? Text("Locked. Requires solving a math check to cancel.") : Text(""))
             // Full screen rather than a sheet — see CollectionView's
             // matching change for Settings; same bleeding fauna background
             // reasoning applies here.
