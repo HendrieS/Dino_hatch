@@ -194,8 +194,20 @@ struct CollectionView: View {
                             }
                         }
                         .padding()
+                        // Clears the paw button before the fade below takes
+                        // over, so the last row never scrolls in flush
+                        // behind it.
+                        .padding(.bottom, 90)
                     }
                 }
+                // Reaches all the way to the true screen edge rather than
+                // stopping at the safe area — `dinoWarmBackground()`'s fern
+                // corners already ignore the safe area (they bleed off the
+                // physical screen edge), so without this the fade overlay
+                // below stopped short of them, leaving a second, misplaced
+                // hard edge right at the safe area boundary instead of
+                // fixing the original one.
+                .ignoresSafeArea(edges: .bottom)
                 // Softens where the grid meets the paw button/fern corners
                 // below — without this, scrolled-up cards get cut off by a
                 // hard edge right at the screen's bottom rather than easing
@@ -210,7 +222,7 @@ struct CollectionView: View {
                         startPoint: .top,
                         endPoint: .bottom
                     )
-                    .frame(height: 48)
+                    .frame(height: 110)
                     .allowsHitTesting(false)
                 }
             }
