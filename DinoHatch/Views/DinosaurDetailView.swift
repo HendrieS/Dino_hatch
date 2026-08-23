@@ -18,10 +18,17 @@ struct DinosaurDetailView: View {
     }
 
     var body: some View {
-        // FitScrollView (not a plain ScrollView) so this doesn't
-        // scroll/bounce on taller devices where everything already fits
-        // without it — matches Timer/Alarm/Collection.
-        FitScrollView {
+        // Plain ScrollView — FitScrollView was tried here first (matching
+        // Timer/Alarm/Collection) but its "disable scroll once content
+        // fits" measurement didn't reliably enable scrolling on this
+        // screen specifically, confirmed on device (the "Found in" card
+        // stayed behind the ferns, unreachable). This is also the only one
+        // of these screens that's a *pushed* NavigationStack destination
+        // rather than the root of its own stack, which may be why its
+        // GeometryReader-based measurement behaved differently. Always
+        // scrollable is simple and guaranteed correct, at the minor cost
+        // of allowing scroll/bounce even when content already fits.
+        ScrollView {
             VStack(spacing: 20) {
                 // Was: DinoImageView(dinosaur: dinosaur, size: 160)
                 // Now the interactive press & hold x-ray viewer. It falls
