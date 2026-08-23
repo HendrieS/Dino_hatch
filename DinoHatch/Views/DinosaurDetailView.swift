@@ -96,33 +96,14 @@ struct DinosaurDetailView: View {
             // can't end up behind the fern corners, which now render in
             // front of content rather than behind it — same fix as
             // Collection's grid, Settings' spacer row, and Alarm's
-            // footnote.
+            // footnote. No fade here (unlike CollectionView's ScrollView)
+            // — per feedback, this screen should behave like Settings:
+            // plain scrolling, content just never reaches the fern zone
+            // at all, rather than easing into it.
             .padding(.bottom, 90)
             .frame(maxWidth: 500)
             .frame(maxWidth: .infinity)
         }
-        // Fades the top/bottom ~36pt of whatever's currently scrolled into
-        // view — same technique as CollectionView's ScrollView, defined as
-        // a fraction of this view's own measured height so it can't end up
-        // mispositioned the way a guessed offset could. Applied to the
-        // FitScrollView itself, before `.dinoWarmBackground()` below adds
-        // the fern overlay — masking the ferns too would undo them always
-        // rendering on top.
-        .mask(
-            GeometryReader { proxy in
-                let fade = 36 / max(proxy.size.height, 1)
-                LinearGradient(
-                    stops: [
-                        .init(color: .clear, location: 0),
-                        .init(color: .black, location: fade),
-                        .init(color: .black, location: 1 - fade),
-                        .init(color: .clear, location: 1)
-                    ],
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-            }
-        )
         .navigationTitle(Text(localizedContent: dinosaur.name))
         .navigationBarTitleDisplayMode(.inline)
         .dinoWarmBackground()
