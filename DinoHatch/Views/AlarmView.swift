@@ -147,14 +147,6 @@ struct AlarmView: View {
                     // scrolling once content doesn't fit above the ferns,
                     // rather than leaving the footnote unreachable).
                     VStack(spacing: 12) {
-                    Image(headerImageName)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 130, height: 130)
-                        // 36 -> 12: same "too spread out" feedback, for the
-                        // gap below the sign specifically.
-                        .padding(.top, 12)
-
                     // The invisible placeholder reserves one line's worth of
                     // height at all times, so toggling a weekday (which can
                     // flip any of the branches below on or off) doesn't
@@ -192,6 +184,12 @@ struct AlarmView: View {
                             getReadyMessage
                         }
                     }
+                    // 36 -> 12: gap below the sign, now that the header
+                    // image (egg/reward/sad dino) that used to sit above
+                    // this has been removed to shorten the screen — see
+                    // `headerImageName`, which stays around purely to
+                    // drive the "Missed it today" branch above.
+                    .padding(.top, 12)
 
                     Text("Set a wake-up time and hatch\na dinosaur when you open the app!")
                         .font(.title3.bold())
