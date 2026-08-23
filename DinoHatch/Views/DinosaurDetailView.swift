@@ -18,7 +18,10 @@ struct DinosaurDetailView: View {
     }
 
     var body: some View {
-        ScrollView {
+        // FitScrollView (not a plain ScrollView) so this doesn't
+        // scroll/bounce on taller devices where everything already fits
+        // without it — matches Timer/Alarm/Collection.
+        FitScrollView {
             VStack(spacing: 20) {
                 // Was: DinoImageView(dinosaur: dinosaur, size: 160)
                 // Now the interactive press & hold x-ray viewer. It falls
@@ -89,9 +92,37 @@ struct DinosaurDetailView: View {
                 }
             }
             .padding()
+            // Extra clearance so "Hatched on" and the "Found in" map card
+            // can't end up behind the fern corners, which now render in
+            // front of content rather than behind it — same fix as
+            // Collection's grid, Settings' spacer row, and Alarm's
+            // footnote.
+            .padding(.bottom, 90)
             .frame(maxWidth: 500)
             .frame(maxWidth: .infinity)
         }
+        // Fades the top/bottom ~36pt of whatever's currently scrolled into
+        // view — same technique as CollectionView's ScrollView, defined as
+        // a fraction of this view's own measured height so it can't end up
+        // mispositioned the way a guessed offset could. Applied to the
+        // FitScrollView itself, before `.dinoWarmBackground()` below adds
+        // the fern overlay — masking the ferns too would undo them always
+        // rendering on top.
+        .mask(
+            GeometryReader { proxy in
+                let fade = 36 / max(proxy.size.height, 1)
+                LinearGradient(
+                    stops: [
+                        .init(color: .clear, location: 0),
+                        .init(color: .black, location: fade),
+                        .init(color: .black, location: 1 - fade),
+                        .init(color: .clear, location: 1)
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+            }
+        )
         .navigationTitle(Text(localizedContent: dinosaur.name))
         .navigationBarTitleDisplayMode(.inline)
         .dinoWarmBackground()
