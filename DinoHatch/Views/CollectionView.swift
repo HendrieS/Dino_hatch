@@ -18,6 +18,18 @@ private struct ViewportHeightKey: PreferenceKey {
     }
 }
 
+/// Reports the pinned sign's own bottom edge, in `.global` (window)
+/// coordinates — `RootTabView` uses this to position its top fade exactly
+/// where the sign actually ends, rather than guessing a fixed offset that
+/// could vary by device (status bar/Dynamic Island height) and risk the
+/// fade painting over the sign instead of below it.
+private struct SignBottomYKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = nextValue()
+    }
+}
+
 struct CollectionView: View {
     private enum SortOption: String, CaseIterable, Identifiable {
         case collectionOrder, name, rarity
@@ -44,6 +56,9 @@ struct CollectionView: View {
     /// this is false, since there'd be nothing scrolling behind them to
     /// fade; see `body`'s `.scrollDisabled` for where this gets computed.
     @Binding var isScrollable: Bool
+
+    /// The pinned sign's measured bottom edge — see `SignBottomYKey`.
+    @Binding var signBottomY: CGFloat
 
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \UnlockedDinosaur.unlockedAt) private var unlocked: [UnlockedDinosaur]
@@ -166,6 +181,12 @@ struct CollectionView: View {
                     // TimerSetupView's matching comment for why all three
                     // screens land on the same -44.
                     .padding(.top, -44)
+                    .background(
+                        GeometryReader { proxy in
+                            Color.clear.preference(key: SignBottomYKey.self, value: proxy.frame(in: .global).maxY)
+                        }
+                    )
+                    .onPreferenceChange(SignBottomYKey.self) { signBottomY = $0 }
 
                 ScrollView {
                     // Wrapped in an explicit VStack (default spacing, same
@@ -394,6 +415,6 @@ struct CollectionView: View {
 }
 
 #Preview {
-    CollectionView(isShowingDetail: .constant(false), isScrollable: .constant(true))
+    CollectionView(isShowingDetail: .constant(false), isScrollable: .constant(true), signBottomY: .constant(149))
         .modelContainer(for: [UnlockedDinosaur.self, AppSettings.self], inMemory: true)
 }

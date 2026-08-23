@@ -34,6 +34,13 @@ struct RootTabView: View {
     /// `true` so the fades below don't flash on for a frame before
     /// `CollectionView` reports its real measurement.
     @State private var isCollectionScrollable = true
+    /// `CollectionView`'s pinned sign's actual measured bottom edge, in
+    /// window coordinates — the top fade below is positioned from this
+    /// (never a guessed constant), so it can never paint over the sign
+    /// regardless of how tall the nav bar/status bar/Dynamic Island ends up
+    /// being on a given device. 149 is only a starting guess, used for the
+    /// first frame or two before `CollectionView` reports the real value.
+    @State private var collectionSignBottomY: CGFloat = 149
     /// Refreshed every minute (and on every foreground transition) purely
     /// to keep the Alarm destination's missed-window badge current — unlike
     /// the timer banner's TimelineView, this needs to tick even while the
@@ -75,7 +82,11 @@ struct RootTabView: View {
                 case .alarm:
                     AlarmView()
                 case .collection:
-                    CollectionView(isShowingDetail: $isCollectionShowingDetail, isScrollable: $isCollectionScrollable)
+                    CollectionView(
+                        isShowingDetail: $isCollectionShowingDetail,
+                        isScrollable: $isCollectionScrollable,
+                        signBottomY: $collectionSignBottomY
+                    )
                 }
             }
 
@@ -98,11 +109,12 @@ struct RootTabView: View {
             // dinosaurs match, e.g. after filtering) — fading content that
             // never moves would just look like a permanently dimmed edge.
             if selectedTab == .collection && isCollectionScrollable {
-                // Top: sits right below the pinned sign (nav bar ≈44pt +
-                // the sign's own ≈105pt rendered height, see
-                // CollectionView's matching comment on its own -44 padding)
-                // — not tied to the true screen top, so it isn't thrown off
-                // by status bar/Dynamic Island height varying by device.
+                // Top: sits right below the pinned sign, using its actual
+                // measured bottom edge (`collectionSignBottomY`) rather than
+                // a guessed offset — a guess would vary by device (status
+                // bar/Dynamic Island height) and risked painting over the
+                // sign instead of below it, which is exactly what forcing
+                // the sign to always render on top is meant to prevent.
                 // Fades to `dinoWarmBackgroundTop`, matching the background
                 // gradient's own color this near the top of the screen.
                 LinearGradient(
@@ -112,7 +124,7 @@ struct RootTabView: View {
                 )
                 .frame(height: 40)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                .padding(.top, 149)
+                .padding(.top, collectionSignBottomY)
                 .allowsHitTesting(false)
 
                 // Bottom: stops short of the true screen edge rather than

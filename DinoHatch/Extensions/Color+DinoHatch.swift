@@ -42,19 +42,29 @@ extension View {
     /// The warm cream gradient background used behind every main tab
     /// (Timer, Alarm, Collection) in place of the plain system white, with
     /// decorative fern/leaf clusters bleeding off both bottom corners, as
-    /// in the approved mockup. Each image gets its own full-size frame
-    /// with a corner alignment (rather than relying on the ZStack's own
-    /// single alignment) so the two clusters can pin to opposite corners
-    /// independently. `allowsHitTesting(false)` since they're purely
-    /// decorative and shouldn't intercept taps near either corner.
+    /// in the approved mockup. The gradient stays a genuine `.background`
+    /// (behind everything, as a fill should be), but the fern/vine art
+    /// itself is an `.overlay` — always painted in front of this view's own
+    /// content, rather than behind it where scrolled content could cover
+    /// it. Each image gets its own full-size frame with a corner alignment
+    /// (rather than relying on the ZStack's own single alignment) so the
+    /// two clusters can pin to opposite corners independently.
+    /// `allowsHitTesting(false)` since they're purely decorative and
+    /// shouldn't intercept taps near either corner. A `.fullScreenCover`
+    /// (e.g. Settings) still presents above all of this regardless — that's
+    /// a separate presentation layer in SwiftUI, not affected by any
+    /// overlay/z-ordering within the presenting view.
     func dinoWarmBackground() -> some View {
         background(
+            LinearGradient(
+                colors: [Color.dinoWarmBackgroundTop, Color.dinoWarmBackgroundBottom],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
+        )
+        .overlay(
             ZStack {
-                LinearGradient(
-                    colors: [Color.dinoWarmBackgroundTop, Color.dinoWarmBackgroundBottom],
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
                 // Top canopy corners only for now — a tiling middle strip
                 // (to fill the gap between them on wide screens like iPad)
                 // was tried and pulled per user feedback; see task #29's
