@@ -251,17 +251,21 @@ struct RootTabView: View {
             )
             settings.lastHatchDate = .now
             pendingAlarmDinosaur = HatchSelector.pickNext(unlockedIDs: unlockedIDs)
-        } else if AlarmClaimer.isCatchUpReady(
-            hour: settings.hour,
-            minute: settings.minute,
-            weekdays: settings.repeatWeekdays,
-            lastHatchDate: settings.lastHatchDate,
-            enabledAt: settings.enabledAt
-        ) {
-            settings.streakCount = 1
-            settings.lastHatchDate = .now
-            pendingAlarmDinosaur = HatchSelector.pickNext(unlockedIDs: unlockedIDs)
         }
+        // Catch-up claiming temporarily disabled for testing — re-enable by
+        // restoring this branch (logic untouched in `AlarmClaimer`):
+        //
+        // else if AlarmClaimer.isCatchUpReady(
+        //     hour: settings.hour,
+        //     minute: settings.minute,
+        //     weekdays: settings.repeatWeekdays,
+        //     lastHatchDate: settings.lastHatchDate,
+        //     enabledAt: settings.enabledAt
+        // ) {
+        //     settings.streakCount = 1
+        //     settings.lastHatchDate = .now
+        //     pendingAlarmDinosaur = HatchSelector.pickNext(unlockedIDs: unlockedIDs)
+        // }
     }
 
     /// Checked once per `mainTabView` appearance (i.e. once per real app
