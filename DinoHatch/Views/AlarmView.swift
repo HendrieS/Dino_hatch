@@ -135,11 +135,18 @@ struct AlarmView: View {
                 // scroll/bounce on taller devices where everything already
                 // fits without it.
                 FitScrollView {
-                    // 24 -> 16: tightens the gap between the header image,
-                    // the "Get ready"/streak message, and the "Set a
+                    // 24 -> 16 -> 12: tightens the gap between the header
+                    // image, the "Get ready"/streak message, and the "Set a
                     // wake-up time" heading, per direct feedback that this
-                    // stretch of the screen felt too spread out.
-                    VStack(spacing: 16) {
+                    // stretch of the screen felt too spread out — the
+                    // second round specifically to keep the footnote at the
+                    // bottom from ending up behind the fern corners (see
+                    // this VStack's own closing `.padding(.bottom, 90)` for
+                    // the other half of that fix: reserving enough
+                    // clearance there for FitScrollView to actually enable
+                    // scrolling once content doesn't fit above the ferns,
+                    // rather than leaving the footnote unreachable).
+                    VStack(spacing: 12) {
                     Image(headerImageName)
                         .resizable()
                         .scaledToFit()
@@ -241,7 +248,12 @@ struct AlarmView: View {
                     }
                     }
                     .padding(.bottom)
-                    .padding(.bottom, 24)
+                    // 24 -> 90: the ferns now render in front of content
+                    // (not behind it — see RootTabView's matching change),
+                    // so this needs real clearance to keep the footnote
+                    // text from ending up behind them, same reasoning as
+                    // Collection's grid and Settings' spacer row.
+                    .padding(.bottom, 90)
                 }
             }
             .padding(.horizontal)
