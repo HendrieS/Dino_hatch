@@ -1,6 +1,23 @@
 import SwiftUI
 import SwiftData
 
+/// Measures the ScrollView content's own total height, and the height of
+/// the viewport it's scrolling in — `CollectionView` compares the two to
+/// decide whether scrolling is actually needed (see `isScrollable`).
+private struct ContentHeightKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = nextValue()
+    }
+}
+
+private struct ViewportHeightKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = nextValue()
+    }
+}
+
 struct CollectionView: View {
     private enum SortOption: String, CaseIterable, Identifiable {
         case collectionOrder, name, rarity
@@ -22,6 +39,12 @@ struct CollectionView: View {
     /// not "the Collection screen" itself.
     @Binding var isShowingDetail: Bool
 
+    /// True once the grid actually needs to scroll (content taller than the
+    /// visible area) — `RootTabView` also hides its top/bottom fades while
+    /// this is false, since there'd be nothing scrolling behind them to
+    /// fade; see `body`'s `.scrollDisabled` for where this gets computed.
+    @Binding var isScrollable: Bool
+
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \UnlockedDinosaur.unlockedAt) private var unlocked: [UnlockedDinosaur]
 
@@ -31,6 +54,8 @@ struct CollectionView: View {
     @State private var dietFilter: Dinosaur.Diet?
     @State private var rarityFilter: Dinosaur.Rarity?
     @State private var sortOption: SortOption = .collectionOrder
+    @State private var contentHeight: CGFloat = 0
+    @State private var viewportHeight: CGFloat = 0
 
     private var unlockedIDs: Set<String> {
         Set(unlocked.map(\.dinosaurID))
@@ -143,6 +168,13 @@ struct CollectionView: View {
                     .padding(.top, -44)
 
                 ScrollView {
+                    // Wrapped in an explicit VStack (default spacing, same
+                    // as the implicit one the ScrollView's builder already
+                    // applied to these siblings — so this shouldn't change
+                    // anything visually) purely so there's a single view
+                    // whose total height can be measured below, to compare
+                    // against the ScrollView's own viewport height.
+                    VStack {
                     // Composed from separate Text views (rather than one
                     // interpolated string) so the numeral formatting doesn't
                     // depend on guessing the exact %-format Xcode would have
@@ -200,7 +232,26 @@ struct CollectionView: View {
                         // (see its own comment for why).
                         .padding(.bottom, 90)
                     }
+                    }
+                    .background(
+                        GeometryReader { proxy in
+                            Color.clear.preference(key: ContentHeightKey.self, value: proxy.size.height)
+                        }
+                    )
                 }
+                .background(
+                    GeometryReader { proxy in
+                        Color.clear.preference(key: ViewportHeightKey.self, value: proxy.size.height)
+                    }
+                )
+                .onPreferenceChange(ContentHeightKey.self) { contentHeight = $0 }
+                .onPreferenceChange(ViewportHeightKey.self) { viewportHeight = $0 }
+                .onChange(of: contentHeight) { _, _ in updateScrollable() }
+                .onChange(of: viewportHeight) { _, _ in updateScrollable() }
+                // No point letting the grid scroll (or bounce) when
+                // everything already fits in the visible area — see
+                // `updateScrollable()`.
+                .scrollDisabled(!isScrollable)
             }
             .dinoWarmBackground()
             .toolbar {
@@ -242,6 +293,13 @@ struct CollectionView: View {
         .onChange(of: path) { _, newPath in
             isShowingDetail = !newPath.isEmpty
         }
+    }
+
+    /// A small tolerance (rather than a strict `>`) so a fraction-of-a-point
+    /// rounding difference between the two measurements doesn't flip
+    /// scrolling on for content that's actually an exact fit.
+    private func updateScrollable() {
+        isScrollable = contentHeight > viewportHeight + 1
     }
 
     /// A single search field with the sort/filter menu folded into its
@@ -336,6 +394,6 @@ struct CollectionView: View {
 }
 
 #Preview {
-    CollectionView(isShowingDetail: .constant(false))
+    CollectionView(isShowingDetail: .constant(false), isScrollable: .constant(true))
         .modelContainer(for: [UnlockedDinosaur.self, AppSettings.self], inMemory: true)
 }

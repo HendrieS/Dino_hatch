@@ -30,6 +30,10 @@ struct RootTabView: View {
     /// same reasoning and same conditional rendering as
     /// `isTimerCelebrating`.
     @State private var isCollectionShowingDetail = false
+    /// True once `CollectionView`'s grid actually needs to scroll — starts
+    /// `true` so the fades below don't flash on for a frame before
+    /// `CollectionView` reports its real measurement.
+    @State private var isCollectionScrollable = true
     /// Refreshed every minute (and on every foreground transition) purely
     /// to keep the Alarm destination's missed-window badge current — unlike
     /// the timer banner's TimelineView, this needs to tick even while the
@@ -71,7 +75,7 @@ struct RootTabView: View {
                 case .alarm:
                     AlarmView()
                 case .collection:
-                    CollectionView(isShowingDetail: $isCollectionShowingDetail)
+                    CollectionView(isShowingDetail: $isCollectionShowingDetail, isScrollable: $isCollectionScrollable)
                 }
             }
 
@@ -89,8 +93,11 @@ struct RootTabView: View {
             // positioned independently of CollectionView's own layout, the
             // same way the paw button already renders reliably at a fixed
             // screen position. `allowsHitTesting(false)` on both so neither
-            // ever blocks scrolling or taps on the cards underneath.
-            if selectedTab == .collection {
+            // ever blocks scrolling or taps on the cards underneath. Hidden
+            // whenever the grid doesn't actually need to scroll (few enough
+            // dinosaurs match, e.g. after filtering) — fading content that
+            // never moves would just look like a permanently dimmed edge.
+            if selectedTab == .collection && isCollectionScrollable {
                 // Top: sits right below the pinned sign (nav bar ≈44pt +
                 // the sign's own ≈105pt rendered height, see
                 // CollectionView's matching comment on its own -44 padding)
