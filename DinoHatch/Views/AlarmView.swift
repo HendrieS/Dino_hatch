@@ -135,15 +135,18 @@ struct AlarmView: View {
                 // scroll/bounce on taller devices where everything already
                 // fits without it.
                 FitScrollView {
-                    VStack(spacing: 24) {
+                    // 24 -> 16: tightens the gap between the header image,
+                    // the "Get ready"/streak message, and the "Set a
+                    // wake-up time" heading, per direct feedback that this
+                    // stretch of the screen felt too spread out.
+                    VStack(spacing: 16) {
                     Image(headerImageName)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 130, height: 130)
-                        // 36pt gap below the sign — matches the
-                        // confirmed-correct spacing from before the fix
-                        // above (see TimerSetupView's matching comment).
-                        .padding(.top, 36)
+                        // 36 -> 12: same "too spread out" feedback, for the
+                        // gap below the sign specifically.
+                        .padding(.top, 12)
 
                     // The invisible placeholder reserves one line's worth of
                     // height at all times, so toggling a weekday (which can
