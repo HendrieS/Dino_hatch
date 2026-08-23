@@ -75,6 +75,17 @@ struct SettingsView: View {
                         .padding(10)
                         .background(Color.dinoCardBackground, in: RoundedRectangle(cornerRadius: 10))
                 }
+
+                // Invisible spacer row — without it, this Form's content
+                // ends right where the fern corners start, and since the
+                // ferns now render in front of content (not behind it),
+                // there was no way to scroll this section clear of them.
+                Section {
+                    Color.clear
+                        .frame(height: 90)
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
+                }
             }
             .navigationTitle("Settings")
             .scrollContentBackground(.hidden)
@@ -88,11 +99,13 @@ struct SettingsView: View {
                 age = settings.first?.childAge ?? 5
                 isTimerLockEnabled = settings.first?.isTimerLockEnabled ?? false
             }
-            .confirmationDialog(
-                "Are you sure?",
-                isPresented: $showResetConfirmation,
-                titleVisibility: .visible
-            ) {
+            // .alert rather than .confirmationDialog — the dialog was
+            // anchored to the triggering button, which sits at the very
+            // bottom of the Form, and ended up presenting in an unexpected
+            // spot near the top of the screen instead. An alert always
+            // presents centered, independent of where it was triggered
+            // from.
+            .alert("Are you sure?", isPresented: $showResetConfirmation) {
                 Button("Reset Everything", role: .destructive, action: resetAll)
                 Button("Cancel", role: .cancel) {}
             } message: {
