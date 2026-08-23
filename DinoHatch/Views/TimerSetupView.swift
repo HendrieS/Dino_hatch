@@ -11,57 +11,62 @@ struct TimerSetupView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: 32) {
-                    SignTitleView(text: "Dino Hatch")
-                        // -40 is the original experimental "pulled up toward
-                        // the top" offset; the extra -44 compensates for the
-                        // nav bar that appeared once this screen got its own
-                        // Settings gear (it previously had no toolbar at
-                        // all, so nothing reserved that space) — without it,
-                        // the sign renders a full nav-bar-height lower than
-                        // this offset implies.
-                        .offset(y: -84)
+            VStack(spacing: 0) {
+                SignTitleView(text: "Dino Hatch")
+                    // Pinned here, outside the ScrollView below, so it stays
+                    // fixed in place while the ring/button scroll underneath
+                    // rather than scrolling away with them. The offset
+                    // itself is unchanged from before this split — still
+                    // -84 against this VStack's own 40pt top inset (from
+                    // `.padding()` + `.padding(.top, 24)` below) — only
+                    // where the sign lives in the hierarchy changed, not
+                    // its rendered position.
+                    .offset(y: -84)
 
-                    CircularDurationPicker(totalSeconds: $totalSeconds)
-                        // -84 closes the gap the sign's own -84 offset above
-                        // leaves behind (see SignTitleView's comment); the
-                        // extra -30 on top of that tightens the sign-to-ring
-                        // gap further per direct feedback (marked with two
-                        // reference lines on a device screenshot showing the
-                        // target spacing) and frees a bit more room at the
-                        // bottom for the planned button redesign (task #26).
-                        .padding(.top, -114)
-                    // CircularDurationPicker's own frame already reserves
-                    // the full space its labels need (see
-                    // `interactiveDiameter`), so no extra padding is
-                    // required here to keep the Start Timer button clear.
+                ScrollView {
+                    VStack(spacing: 32) {
+                        CircularDurationPicker(totalSeconds: $totalSeconds)
+                            // -82 reproduces the exact gap the old -114 did
+                            // back when this sat right after the sign in
+                            // one shared VStack (32 declared spacing - 114
+                            // = -82 net): now that this is the ScrollView's
+                            // own first child, it gets no automatic spacing
+                            // before it, so that 32 has to be folded
+                            // directly into this padding instead.
+                            .padding(.top, -82)
+                        // CircularDurationPicker's own frame already reserves
+                        // the full space its labels need (see
+                        // `interactiveDiameter`), so no extra padding is
+                        // required here to keep the Start Timer button clear.
 
-                    Button {
-                        startTimer()
-                    } label: {
-                        HStack(spacing: 8) {
-                            Image("button-footprint-play")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 22, height: 22)
-                            Text("Start Timer")
+                        Button {
+                            startTimer()
+                        } label: {
+                            HStack(spacing: 8) {
+                                Image("button-footprint-play")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 22, height: 22)
+                                Text("Start Timer")
+                            }
                         }
-                    }
-                    .buttonStyle(
-                        ChunkyButtonStyle(
-                            color: totalSeconds > 0 ? .dinoGreen : .gray,
-                            edgeColor: totalSeconds > 0 ? .dinoGreenShadow : .dinoGrayShadow
+                        .buttonStyle(
+                            ChunkyButtonStyle(
+                                color: totalSeconds > 0 ? .dinoGreen : .gray,
+                                edgeColor: totalSeconds > 0 ? .dinoGreenShadow : .dinoGrayShadow
+                            )
                         )
-                    )
-                    .disabled(totalSeconds == 0)
-                    .padding(.horizontal, 32)
+                        .disabled(totalSeconds == 0)
+                        .padding(.horizontal, 32)
+                    }
+                    .padding(.bottom)
                 }
-                .padding()
-                .padding(.top, 24)
-                .frame(maxWidth: 500)
-                .frame(maxWidth: .infinity)
             }
+            .padding(.horizontal)
+            .padding(.top)
+            .padding(.top, 24)
+            .frame(maxWidth: 500)
+            .frame(maxWidth: .infinity)
             .dinoWarmBackground()
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {

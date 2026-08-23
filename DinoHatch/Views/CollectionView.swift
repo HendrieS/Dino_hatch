@@ -123,14 +123,16 @@ struct CollectionView: View {
 
     var body: some View {
         NavigationStack(path: $path) {
-            ScrollView {
+            VStack(spacing: 0) {
                 SignTitleView(text: "Dino-pedia")
-                    // -52 rather than TimerSetupView's -84 or AlarmView's
-                    // -60 because this sign sits directly in the ScrollView
-                    // with only its own +8 padding above it (no VStack
-                    // padding at all) — the different offsets land the sign
-                    // at the same actual screen position, matched by eye
-                    // against Timer's, which was confirmed correct.
+                    // Pinned here, outside the ScrollView below, so it stays
+                    // fixed in place while the grid scrolls underneath
+                    // rather than scrolling away with it. Offset and
+                    // padding unchanged from before this split — still -52
+                    // against this view's own +8 padding (rather than
+                    // TimerSetupView's -84 or AlarmView's -60, whose own
+                    // top insets are taller) — only where the sign lives in
+                    // the hierarchy changed, not its rendered position.
                     .offset(y: -52)
                     .padding(.top, 8)
 
@@ -138,6 +140,10 @@ struct CollectionView: View {
                 // interpolated string) so the numeral formatting doesn't
                 // depend on guessing the exact %-format Xcode would have
                 // extracted for a hand-authored String Catalog.
+                //
+                // Pinned alongside the sign above (not in the ScrollView
+                // below) for the same reason — this count is part of the
+                // fixed header, not scrolling content.
                 HStack(spacing: 4) {
                     Text(unlockedIDs.count, format: .number)
                         .foregroundStyle(hasFoundBonusDinosaurs ? .orange : .secondary)
@@ -149,44 +155,45 @@ struct CollectionView: View {
                 .foregroundStyle(.secondary)
                 // Was a plain +8 gap below the sign; net -44 (8 - 52)
                 // closes the extra gap the sign's own -52 offset above
-                // leaves behind, same reasoning as TimerSetupView's
-                // matching padding on CircularDurationPicker, while keeping
-                // the original 8pt breathing room.
+                // leaves behind — unchanged from before this split, see
+                // the sign's own comment above.
                 .padding(.top, -44)
 
-                searchAndFilterBar
-                    .padding(.top, 10)
-                    .padding(.horizontal, 14)
+                ScrollView {
+                    searchAndFilterBar
+                        .padding(.top, 10)
+                        .padding(.horizontal, 14)
 
-                if visibleDinosaurs.isEmpty {
-                    ContentUnavailableView {
-                        Label("No Dinosaurs Found", systemImage: "questionmark.square.dashed")
-                    } description: {
-                        Text("Try a different search or filter.")
-                    }
-                    .padding(.top, 40)
-                } else {
-                    LazyVGrid(columns: columns, spacing: 16) {
-                        ForEach(visibleDinosaurs) { dinosaur in
-                            if unlockedIDs.contains(dinosaur.id) {
-                                let record = unlocked.first(where: { $0.dinosaurID == dinosaur.id })
-                                NavigationLink {
-                                    DinosaurDetailView(
-                                        dinosaur: dinosaur,
-                                        unlockedAt: record?.unlockedAt
-                                    )
-                                } label: {
-                                    DinoCardView(dinosaur: dinosaur, isFavorite: record?.isFavorite ?? false)
-                                }
-                                .buttonStyle(.plain)
-                            } else if !dinosaur.isSecret {
-                                DinoSilhouetteView()
-                            }
-                            // Locked secret dinosaurs render nothing at all —
-                            // no silhouette, no placeholder, no hint they exist.
+                    if visibleDinosaurs.isEmpty {
+                        ContentUnavailableView {
+                            Label("No Dinosaurs Found", systemImage: "questionmark.square.dashed")
+                        } description: {
+                            Text("Try a different search or filter.")
                         }
+                        .padding(.top, 40)
+                    } else {
+                        LazyVGrid(columns: columns, spacing: 16) {
+                            ForEach(visibleDinosaurs) { dinosaur in
+                                if unlockedIDs.contains(dinosaur.id) {
+                                    let record = unlocked.first(where: { $0.dinosaurID == dinosaur.id })
+                                    NavigationLink {
+                                        DinosaurDetailView(
+                                            dinosaur: dinosaur,
+                                            unlockedAt: record?.unlockedAt
+                                        )
+                                    } label: {
+                                        DinoCardView(dinosaur: dinosaur, isFavorite: record?.isFavorite ?? false)
+                                    }
+                                    .buttonStyle(.plain)
+                                } else if !dinosaur.isSecret {
+                                    DinoSilhouetteView()
+                                }
+                                // Locked secret dinosaurs render nothing at all —
+                                // no silhouette, no placeholder, no hint they exist.
+                            }
+                        }
+                        .padding()
                     }
-                    .padding()
                 }
             }
             .dinoWarmBackground()

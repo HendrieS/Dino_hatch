@@ -113,28 +113,35 @@ struct AlarmView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: 24) {
-                    SignTitleView(text: "Dino Alarm")
-                        // -60 rather than TimerSetupView's -84 because this
-                        // screen's outer VStack only has the default 16pt
-                        // .padding() (Timer also has an extra .padding(.top,
-                        // 24)) — the two different offsets land the sign at
-                        // the same actual screen position, matched by eye
-                        // against Timer's, which was confirmed correct.
-                        .offset(y: -60)
+            VStack(spacing: 0) {
+                SignTitleView(text: "Dino Alarm")
+                    // Pinned here, outside the ScrollView below, so it stays
+                    // fixed in place while the rest of the screen scrolls
+                    // underneath rather than scrolling away with it. The
+                    // offset itself is unchanged from before this split —
+                    // still -60 against this VStack's own default 16pt
+                    // `.padding()` below (rather than TimerSetupView's -84,
+                    // whose own top inset is 24pt taller) — only where the
+                    // sign lives in the hierarchy changed, not its rendered
+                    // position.
+                    .offset(y: -60)
 
+                ScrollView {
+                    VStack(spacing: 24) {
                     Image(headerImageName)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 130, height: 130)
-                        // Was a plain +12 gap below the sign; net -48 (12 -
-                        // 60) closes the extra gap the sign's own -60
-                        // offset above leaves behind, same reasoning as
-                        // TimerSetupView's matching padding on
-                        // CircularDurationPicker, while keeping the
-                        // original 12pt breathing room.
-                        .padding(.top, -48)
+                        // -24 reproduces the exact +12pt gap the old -48
+                        // did back when this sat right after the sign in
+                        // one shared VStack (24 declared spacing - 48 = -24
+                        // net): now that this is the ScrollView's own first
+                        // child, it gets no automatic spacing before it, so
+                        // that 24 has to be folded directly into this
+                        // padding instead — see TimerSetupView's matching
+                        // CircularDurationPicker comment for the same
+                        // reasoning.
+                        .padding(.top, -24)
 
                     // The invisible placeholder reserves one line's worth of
                     // height at all times, so toggling a weekday (which can
@@ -227,12 +234,15 @@ struct AlarmView: View {
                             .background(Color.dinoDialTrack, in: RoundedRectangle(cornerRadius: 12))
                             .padding(.horizontal, 32)
                     }
+                    }
+                    .padding(.bottom)
+                    .padding(.bottom, 24)
                 }
-                .padding()
-                .padding(.bottom, 24)
-                .frame(maxWidth: 500)
-                .frame(maxWidth: .infinity)
             }
+            .padding(.horizontal)
+            .padding(.top)
+            .frame(maxWidth: 500)
+            .frame(maxWidth: .infinity)
             .dinoWarmBackground()
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
