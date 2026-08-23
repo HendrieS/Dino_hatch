@@ -30,17 +30,9 @@ struct RootTabView: View {
     /// same reasoning and same conditional rendering as
     /// `isTimerCelebrating`.
     @State private var isCollectionShowingDetail = false
-    /// True once `CollectionView`'s grid actually needs to scroll — starts
-    /// `true` so the fades below don't flash on for a frame before
-    /// `CollectionView` reports its real measurement.
+    /// True once `CollectionView`'s grid actually needs to scroll — drives
+    /// its own `.scrollDisabled`; see `CollectionView.isScrollable`.
     @State private var isCollectionScrollable = true
-    /// `CollectionView`'s pinned sign's actual measured bottom edge, in
-    /// window coordinates — the top fade below is positioned from this
-    /// (never a guessed constant), so it can never paint over the sign
-    /// regardless of how tall the nav bar/status bar/Dynamic Island ends up
-    /// being on a given device. 149 is only a starting guess, used for the
-    /// first frame or two before `CollectionView` reports the real value.
-    @State private var collectionSignBottomY: CGFloat = 149
     /// Refreshed every minute (and on every foreground transition) purely
     /// to keep the Alarm destination's missed-window badge current — unlike
     /// the timer banner's TimelineView, this needs to tick even while the
@@ -84,62 +76,9 @@ struct RootTabView: View {
                 case .collection:
                     CollectionView(
                         isShowingDetail: $isCollectionShowingDetail,
-                        isScrollable: $isCollectionScrollable,
-                        signBottomY: $collectionSignBottomY
+                        isScrollable: $isCollectionScrollable
                     )
                 }
-            }
-
-            // Softens where the Collection grid meets the fixed chrome above
-            // and below it — without these, scrolled cards get cut off by a
-            // hard edge right where they pass behind the pinned sign (top)
-            // or the paw button/fern corners (bottom), rather than easing
-            // out of view. Live here (rather than inside CollectionView's
-            // own ScrollView, which is where the bottom one was tried
-            // first) because that version never rendered visibly on device
-            // even after a clean rebuild — nested several levels inside
-            // CollectionView's own NavigationStack/VStack/ScrollView,
-            // something there was blocking it in a way that wasn't
-            // diagnosable without a device to test on. Placed here instead,
-            // positioned independently of CollectionView's own layout, the
-            // same way the paw button already renders reliably at a fixed
-            // screen position. `allowsHitTesting(false)` on both so neither
-            // ever blocks scrolling or taps on the cards underneath. Hidden
-            // whenever the grid doesn't actually need to scroll (few enough
-            // dinosaurs match, e.g. after filtering) — fading content that
-            // never moves would just look like a permanently dimmed edge.
-            if selectedTab == .collection && isCollectionScrollable {
-                // Top: sits right below the pinned sign, using its actual
-                // measured bottom edge (`collectionSignBottomY`) rather than
-                // a guessed offset — a guess would vary by device (status
-                // bar/Dynamic Island height) and risked painting over the
-                // sign instead of below it, which is exactly what forcing
-                // the sign to always render on top is meant to prevent.
-                // Fades to `dinoWarmBackgroundTop`, matching the background
-                // gradient's own color this near the top of the screen.
-                LinearGradient(
-                    colors: [Color.dinoWarmBackgroundTop, Color.dinoWarmBackgroundTop.opacity(0)],
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-                .frame(height: 40)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                .padding(.top, collectionSignBottomY)
-                .allowsHitTesting(false)
-
-                // Bottom: stops short of the true screen edge rather than
-                // bleeding into it, so it fades cards out before reaching
-                // the fern corners instead of washing out the ferns
-                // themselves with an opaque cream band on top of them.
-                LinearGradient(
-                    colors: [Color.dinoWarmBackgroundBottom.opacity(0), Color.dinoWarmBackgroundBottom],
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-                .frame(height: 80)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-                .padding(.bottom, 110)
-                .allowsHitTesting(false)
             }
 
             if selectedTab != .timer {
