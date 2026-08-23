@@ -138,7 +138,7 @@ struct FloatingNavMenu: View {
                     }
                 }
 
-                Text(label)
+                label
                     .font(.system(size: 10.5, weight: .bold))
                     .foregroundStyle(.white)
             }
