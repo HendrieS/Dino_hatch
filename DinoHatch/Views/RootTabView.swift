@@ -75,6 +75,36 @@ struct RootTabView: View {
                 }
             }
 
+            // Softens where the Collection grid meets the paw button/fern
+            // corners below — without this, scrolled-up cards get cut off
+            // by a hard edge right at the screen's bottom rather than
+            // easing into the background. Lives here (rather than inside
+            // CollectionView's own ScrollView, which is where this was
+            // tried first) because that version never rendered visibly on
+            // device even after a clean rebuild — nested several levels
+            // inside CollectionView's own NavigationStack/VStack/ScrollView,
+            // something there was blocking it in a way that wasn't
+            // diagnosable without a device to test on. Placed here instead,
+            // pinned to the bottom exactly like the paw button below it (a
+            // position already proven to render correctly at this exact
+            // spot in the view tree), it's independent of CollectionView's
+            // own layout entirely. Fades to the same tone
+            // `dinoWarmBackground()` uses at that edge, so the transition
+            // reads as "blends into the background" rather than a visible
+            // seam. `allowsHitTesting(false)` so it never blocks scrolling
+            // or taps on the cards underneath.
+            if selectedTab == .collection {
+                LinearGradient(
+                    colors: [Color.dinoWarmBackgroundBottom.opacity(0), Color.dinoWarmBackgroundBottom],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .frame(height: 110)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+                .ignoresSafeArea(edges: .bottom)
+                .allowsHitTesting(false)
+            }
+
             if selectedTab != .timer {
                 TimelineView(.periodic(from: .now, by: 1)) { context in
                     Group {

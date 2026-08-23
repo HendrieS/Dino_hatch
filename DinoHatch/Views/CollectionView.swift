@@ -194,36 +194,12 @@ struct CollectionView: View {
                             }
                         }
                         .padding()
-                        // Clears the paw button before the fade below takes
-                        // over, so the last row never scrolls in flush
-                        // behind it.
+                        // Clears the paw button/fern corners so the last row
+                        // never scrolls in flush behind them — the actual
+                        // fade for that zone lives in RootTabView, not here
+                        // (see its own comment for why).
                         .padding(.bottom, 90)
                     }
-                }
-                // Reaches all the way to the true screen edge rather than
-                // stopping at the safe area — `dinoWarmBackground()`'s fern
-                // corners already ignore the safe area (they bleed off the
-                // physical screen edge), so without this the fade overlay
-                // below stopped short of them, leaving a second, misplaced
-                // hard edge right at the safe area boundary instead of
-                // fixing the original one.
-                .ignoresSafeArea(edges: .bottom)
-                // Softens where the grid meets the paw button/fern corners
-                // below — without this, scrolled-up cards get cut off by a
-                // hard edge right at the screen's bottom rather than easing
-                // into the background. Fades to the same tone
-                // `dinoWarmBackground()` uses at that edge, so the
-                // transition reads as "blends into the background" rather
-                // than a visible seam. `allowsHitTesting(false)` so it
-                // never blocks scrolling or taps on the cards underneath.
-                .overlay(alignment: .bottom) {
-                    LinearGradient(
-                        colors: [Color.dinoWarmBackgroundBottom.opacity(0), Color.dinoWarmBackgroundBottom],
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
-                    .frame(height: 110)
-                    .allowsHitTesting(false)
                 }
             }
             .dinoWarmBackground()
