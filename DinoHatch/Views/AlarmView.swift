@@ -131,7 +131,10 @@ struct AlarmView: View {
                     // screens land on the same -44.
                     .padding(.top, -44)
 
-                ScrollView {
+                // FitScrollView (not a plain ScrollView) so this doesn't
+                // scroll/bounce on taller devices where everything already
+                // fits without it.
+                FitScrollView {
                     VStack(spacing: 24) {
                     Image(headerImageName)
                         .resizable()

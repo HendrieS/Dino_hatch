@@ -27,7 +27,10 @@ struct TimerSetupView: View {
                     // with its old -84 offset).
                     .padding(.top, -44)
 
-                ScrollView {
+                // FitScrollView (not a plain ScrollView) so this doesn't
+                // scroll/bounce on taller devices where the ring and button
+                // already fit without it.
+                FitScrollView {
                     VStack(spacing: 32) {
                         CircularDurationPicker(totalSeconds: $totalSeconds)
                             // Small, deliberately tight gap below the sign —
