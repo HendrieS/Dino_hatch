@@ -196,6 +196,23 @@ struct CollectionView: View {
                         .padding()
                     }
                 }
+                // Softens where the grid meets the paw button/fern corners
+                // below — without this, scrolled-up cards get cut off by a
+                // hard edge right at the screen's bottom rather than easing
+                // into the background. Fades to the same tone
+                // `dinoWarmBackground()` uses at that edge, so the
+                // transition reads as "blends into the background" rather
+                // than a visible seam. `allowsHitTesting(false)` so it
+                // never blocks scrolling or taps on the cards underneath.
+                .overlay(alignment: .bottom) {
+                    LinearGradient(
+                        colors: [Color.dinoWarmBackgroundBottom.opacity(0), Color.dinoWarmBackgroundBottom],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                    .frame(height: 48)
+                    .allowsHitTesting(false)
+                }
             }
             .dinoWarmBackground()
             .toolbar {
