@@ -126,40 +126,41 @@ struct CollectionView: View {
             VStack(spacing: 0) {
                 SignTitleView(text: "Dino-pedia")
                     // Pinned here, outside the ScrollView below, so it stays
-                    // fixed in place while the grid scrolls underneath
-                    // rather than scrolling away with it. Offset and
-                    // padding unchanged from before this split — still -52
-                    // against this view's own +8 padding (rather than
-                    // TimerSetupView's -84 or AlarmView's -60, whose own
-                    // top insets are taller) — only where the sign lives in
-                    // the hierarchy changed, not its rendered position.
-                    .offset(y: -52)
-                    .padding(.top, 8)
-
-                // Composed from separate Text views (rather than one
-                // interpolated string) so the numeral formatting doesn't
-                // depend on guessing the exact %-format Xcode would have
-                // extracted for a hand-authored String Catalog.
-                //
-                // Pinned alongside the sign above (not in the ScrollView
-                // below) for the same reason — this count is part of the
-                // fixed header, not scrolling content.
-                HStack(spacing: 4) {
-                    Text(unlockedIDs.count, format: .number)
-                        .foregroundStyle(hasFoundBonusDinosaurs ? .orange : .secondary)
-                    Text(verbatim: "/")
-                    Text(regularDinosaurs.count, format: .number)
-                    Text("discovered")
-                }
-                .font(.headline)
-                .foregroundStyle(.secondary)
-                // Was a plain +8 gap below the sign; net -44 (8 - 52)
-                // closes the extra gap the sign's own -52 offset above
-                // leaves behind — unchanged from before this split, see
-                // the sign's own comment above.
-                .padding(.top, -44)
+                    // fixed in place while everything else (including the
+                    // discovered count) scrolls underneath — only the sign
+                    // itself locks in place. Uses `.padding` rather than the
+                    // `.offset` this used before switching to a pinned
+                    // header — offset doesn't shrink the space a view
+                    // reserves for layout, so the ScrollView below still
+                    // started as if the sign were in its original,
+                    // un-shifted spot, leaving a large dead gap above the
+                    // discovered count. Padding actually pulls the sign up,
+                    // closing that gap. -44 renders at the exact same
+                    // position as before (this screen's old +8 padding
+                    // combined with its old -52 offset) — see
+                    // TimerSetupView's matching comment for why all three
+                    // screens land on the same -44.
+                    .padding(.top, -44)
 
                 ScrollView {
+                    // Composed from separate Text views (rather than one
+                    // interpolated string) so the numeral formatting doesn't
+                    // depend on guessing the exact %-format Xcode would have
+                    // extracted for a hand-authored String Catalog.
+                    HStack(spacing: 4) {
+                        Text(unlockedIDs.count, format: .number)
+                            .foregroundStyle(hasFoundBonusDinosaurs ? .orange : .secondary)
+                        Text(verbatim: "/")
+                        Text(regularDinosaurs.count, format: .number)
+                        Text("discovered")
+                    }
+                    .font(.headline)
+                    .foregroundStyle(.secondary)
+                    // 8pt gap below the sign — matches the confirmed-correct
+                    // spacing from before the fix above (see
+                    // TimerSetupView's matching comment).
+                    .padding(.top, 8)
+
                     searchAndFilterBar
                         .padding(.top, 10)
                         .padding(.horizontal, 14)

@@ -15,25 +15,25 @@ struct TimerSetupView: View {
                 SignTitleView(text: "Dino Hatch")
                     // Pinned here, outside the ScrollView below, so it stays
                     // fixed in place while the ring/button scroll underneath
-                    // rather than scrolling away with them. The offset
-                    // itself is unchanged from before this split — still
-                    // -84 against this VStack's own 40pt top inset (from
-                    // `.padding()` + `.padding(.top, 24)` below) — only
-                    // where the sign lives in the hierarchy changed, not
-                    // its rendered position.
-                    .offset(y: -84)
+                    // rather than scrolling away with them. Uses `.padding`
+                    // rather than the `.offset` this used before switching
+                    // to a pinned header — offset doesn't shrink the space
+                    // a view reserves for layout, so the ScrollView below
+                    // still started as if the sign were in its original,
+                    // un-shifted spot, leaving a large dead gap above the
+                    // ring. Padding actually pulls the sign up, closing
+                    // that gap. -44 renders at the exact same position as
+                    // before (this screen's old 40pt top inset combined
+                    // with its old -84 offset).
+                    .padding(.top, -44)
 
                 ScrollView {
                     VStack(spacing: 32) {
                         CircularDurationPicker(totalSeconds: $totalSeconds)
-                            // -82 reproduces the exact gap the old -114 did
-                            // back when this sat right after the sign in
-                            // one shared VStack (32 declared spacing - 114
-                            // = -82 net): now that this is the ScrollView's
-                            // own first child, it gets no automatic spacing
-                            // before it, so that 32 has to be folded
-                            // directly into this padding instead.
-                            .padding(.top, -82)
+                            // Small, deliberately tight gap below the sign —
+                            // matches the confirmed-correct spacing from
+                            // before the fix above.
+                            .padding(.top, 2)
                         // CircularDurationPicker's own frame already reserves
                         // the full space its labels need (see
                         // `interactiveDiameter`), so no extra padding is
@@ -63,8 +63,6 @@ struct TimerSetupView: View {
                 }
             }
             .padding(.horizontal)
-            .padding(.top)
-            .padding(.top, 24)
             .frame(maxWidth: 500)
             .frame(maxWidth: .infinity)
             .dinoWarmBackground()
