@@ -78,10 +78,18 @@ Then in Xcode:
 - **Hatch selection**: `Stores/HatchSelector.swift` randomly picks a
   not-yet-unlocked dinosaur; once the whole catalog is unlocked it replays a
   random existing one rather than dead-ending the reward loop.
-- **Animation**: `Views/HatchAnimationView.swift` and `Views/EggView.swift`
-  build the crack/wobble/burst/confetti sequence from plain SwiftUI shapes
-  and animations — no image assets or third-party animation library. The
-  hand-off into `Views/HatchRevealView.swift` is no longer an instant cut:
+- **Animation**: what actually plays today, for every catalog dinosaur, is
+  `HatchAnimationView`'s illustrated `IllustratedHatchSequence` — a 4-frame
+  cross-fade through the real hatch art (see "Dinosaur portrait art" and
+  "Species-specific hatch art" below) — and `EggView` showing the real
+  illustrated egg (`egg-hatch-1`) with a wobble/shake as it nears
+  completion. Both files also keep an original `VectorHatchSequence`/
+  `EggShape` fallback, built from plain SwiftUI shapes and animations with
+  no image assets or third-party animation library, for a hypothetical
+  future dinosaur that ships before its hatch art does (same reasoning as
+  `DinoImageView`'s emoji fallback) — not something you'll see hatching
+  anything currently in the catalog. The hand-off into
+  `Views/HatchRevealView.swift` is no longer an instant cut:
   `Views/TimerHomeView.swift` and `Views/AlarmHatchView.swift` both wrap
   their `.hatching` -> `.reveal` state change in `withAnimation` and give
   the two views a `.transition(.opacity)`, and `HatchRevealView` itself
@@ -319,7 +327,8 @@ widget, and a Dino Alarm widget (both further down this section).
 
 The Dino Collection widget (small/medium) shows collection progress
 ("X / Y discovered") and, at medium size, the most recently hatched
-dinosaur's emoji and name. It's read-only and static — no live countdown —
+dinosaur's illustration (emoji as a fallback — see "Custom art in the
+widgets" below) and name. It's read-only and static — no live countdown —
 so it uses a single-entry `TimelineProvider` with `policy: .never` rather
 than polling on a schedule.
 
@@ -406,16 +415,32 @@ same system-rendered date style `CountdownView` already uses for the running
 timer, so it ticks down on its own with no per-second app/widget work. With
 no alarm enabled it just shows "No alarm set".
 
-`Stores/AlarmNextFireDate.swift` (pure, unit-tested) is the mirror image of
-`AlarmStreak.previousScheduledDay` — given an hour/minute/weekdays and now,
-it walks forward up to 7 days to find the next matching occurrence.
-`WidgetSnapshotBuilder` calls it when building the snapshot, and
-`RootTabView` keeps that snapshot's `nextAlarmFireDate` fresh by reloading
-on: any alarm settings change (`alarmFingerprint`, a cheap string stand-in
-for `.onChange` since `AlarmSettings` is a SwiftData reference type and
-in-place property edits don't reliably trigger `.onChange(of:)` on the
-array itself), and every foreground (covers the fire date having simply
-passed, with no settings change to key off of).
+`DinoHatchShared/Stores/AlarmNextFireDate.swift` (pure, unit-tested) is the
+mirror image of `AlarmStreak.previousScheduledDay` — given an hour/minute/
+weekdays and now, it walks forward up to 7 days to find the next matching
+occurrence. It lives in the shared module (not `DinoHatch/Stores`, where the
+rest of the alarm logic stays app-only) specifically so `AlarmProvider` —
+the widget extension's own `TimelineProvider`, in `DinoHatchWidget/
+DinoHatchAlarmWidget.swift` — can call it too.
+
+Two things keep the widget's fire date correct:
+
+- `WidgetSnapshotBuilder` calls `AlarmNextFireDate.next` when building the
+  snapshot (so `nextAlarmFireDate` has an instant value for
+  `getSnapshot()`'s placeholder and the Widget Gallery preview), and
+  `RootTabView` writes a fresh snapshot on: any alarm settings change
+  (`alarmFingerprint`, a cheap string stand-in for `.onChange` since
+  `AlarmSettings` is a SwiftData reference type and in-place property edits
+  don't reliably trigger `.onChange(of:)` on the array itself), and every
+  foreground.
+- That alone isn't enough — a fire date computed once by the app goes stale
+  the instant it passes, and the whole point of a widget is checking status
+  *without* opening the app. So `WidgetSnapshot` also carries the raw
+  `alarmHour`/`alarmMinute`/`alarmWeekdays`, and `AlarmProvider.getTimeline()`
+  recomputes `AlarmNextFireDate.next(..., now: .now)` itself at reload time
+  rather than trusting the stored date, then requests its own next reload
+  right at that resolved date (`.after(fireDate)` instead of `.never`) — a
+  self-sustaining loop that stays correct even if the app is never reopened.
 
 ### Lock Screen / Dynamic Island Live Activity
 
@@ -439,10 +464,16 @@ behavior for a Live Activity with no `Link` of its own.
 - `NSSupportsLiveActivities` is set on the `DinoHatch` target in
   `project.yml` — required for Live Activities to work at all.
 
-Once the countdown reaches zero the Live Activity keeps showing (ticking
-past zero, same accepted limitation as the Quick Timer widget's countdown)
-until the app is actually opened and the hatch plays through —
-`TimerEngine.cancel()`/`completeHatch()` is what ends it.
+`DinoTimerActivityController.start()` sets `staleDate: endDate` on the
+activity content, and both the Dynamic Island's expanded-trailing/
+compact-trailing regions and the Lock Screen banner check
+`context.isStale` (standard ActivityKit pattern) to swap the ticking
+countdown for a "Ready!"/"An egg is ready to hatch!" state once it passes
+— same reasoning as the Quick Timer widget's countdown/ready split, just
+via `isStale` instead of a timeline reload policy, since Live Activities
+don't have one. The activity itself keeps showing either way (still
+tappable to open the app) until the app is actually opened and the hatch
+plays through — `TimerEngine.cancel()`/`completeHatch()` is what ends it.
 
 ### Custom art in the widgets
 
