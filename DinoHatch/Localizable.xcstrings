@@ -4457,84 +4457,43 @@
         }
       }
     },
-    "Missed it today — try again next time!": {
+    "Missed it today — but the day isn't lost!": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Heute verpasst — versuch's beim nächsten Mal wieder!"
+            "value": "Heute verpasst — aber der Tag ist nicht verloren!"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Missed it today — try again next time!"
+            "value": "Missed it today — but the day isn't lost!"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hoy se te pasó — ¡inténtalo de nuevo la próxima vez!"
+            "value": "Hoy se te pasó — ¡pero el día no se pierde!"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Raté aujourd'hui — réessayez la prochaine fois !"
+            "value": "Raté aujourd'hui — mais la journée n'est pas perdue !"
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vandaag gemist — volgende keer weer proberen!"
+            "value": "Vandaag gemist — maar de dag is niet verloren!"
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "Сегодня не успели — попробуйте в следующий раз!"
-          }
-        }
-      }
-    },
-    "Missed it today — try again tomorrow!": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Heute verpasst — versuch's morgen wieder!"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Missed it today — try again tomorrow!"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hoy se te pasó — ¡inténtalo de nuevo mañana!"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Raté aujourd'hui — réessayez demain !"
-          }
-        },
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vandaag gemist — morgen weer proberen!"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Сегодня не успели — попробуйте завтра снова!"
+            "value": "Сегодня не успели — но день не потерян!"
           }
         }
       }

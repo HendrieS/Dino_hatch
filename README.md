@@ -135,18 +135,29 @@ Then in Xcode:
   and whether or not notification permission was granted — the app can't
   run custom code at the exact moment a background notification fires
   anyway, so the design doesn't depend on it. Missing the 15-minute window
-  means no dinosaur until the alarm's next scheduled occurrence — it's a
-  deliberate "actually get up" incentive, not just a lenient catch-up
-  reward. The header illustration on the Alarm tab reflects today's status
-  (`AlarmView.headerImageName`): the plain `alarm-egg` art by default, the
-  celebrating `alarm-reward` hatchling once `AlarmSettings.lastHatchDate`
-  shows today's alarm was actually claimed in time, or the sad `alarm-sad`
-  dino once `AlarmClaimer.wasMissedToday` says the window closed without a
-  claim — alongside a short "Missed it today — try again tomorrow!" line.
-  A missed window also puts a small "!" badge on the Alarm tab itself
+  doesn't lock the reward away until the next scheduled alarm — `checkAlarmHatch()`
+  also checks `AlarmClaimer.isCatchUpReady` (identical conditions to
+  `wasMissedToday` below, confirmed by its own
+  `testCatchUpReadyLateInTheSameDay`), which stays true for the rest of the
+  same day, so opening the app any time before midnight still hatches a
+  dinosaur — just with the streak reset to 1 instead of continued, since
+  the streak specifically rewards responding within the window rather than
+  just hatching something that day. The header illustration on the Alarm
+  tab reflects today's status (`AlarmView.headerImageName`): the plain
+  `alarm-egg` art by default, the celebrating `alarm-reward` hatchling once
+  `AlarmSettings.lastHatchDate` shows today's alarm was actually claimed
+  (on time or via catch-up), or the sad `alarm-sad` dino — alongside a
+  short "Missed it today — but the day isn't lost!" line (matching the
+  phrasing `HelpCenterView`'s alarm explainer already uses for this same
+  catch-up behavior) — for the brief gap between the window closing and the very
+  next foreground/minute tick, at which point `checkAlarmHatch()`'s
+  catch-up branch fires and flips this back to `alarm-reward` on its own,
+  without the kid needing to do anything beyond having the app open. A
+  missed window also puts a small "!" badge on the Alarm tab itself
   (`RootTabView.alarmWasMissedToday`, refreshed every minute and on every
   foreground transition via a `Timer.publish`), so it's noticeable without
-  needing to open that tab. `AlarmSettings.enabledAt` is stamped whenever
+  needing to open that tab — same brief-then-auto-resolved lifetime as the
+  sad art. `AlarmSettings.enabledAt` is stamped whenever
   the alarm toggles from off to on, so turning it on after today's window
   has already closed doesn't show the sad "missed it" state — there was
   never a real chance to catch it. `AlarmClaimer.isPendingFirstChance`
@@ -665,7 +676,11 @@ verify on your Mac:
 - [ ] Confirm only one dinosaur is awarded per day even if you foreground
       the app multiple times within the window
 - [ ] Set an alarm, then wait more than 15 minutes before opening the app —
-      confirm no dinosaur is awarded (window missed)
+      the Alarm tab briefly shows the sad "missed it" art/badge, then a
+      dinosaur is still awarded (via catch-up) on that same open — confirm
+      `AlarmSettings.streakCount` reset to 1 rather than continuing
+- [ ] Confirm a *second* dinosaur isn't also awarded later the same day —
+      catch-up should still only claim once per day, same as an on-time claim
 - [ ] `Cmd+U` unit tests pass
 
 ## Before you release

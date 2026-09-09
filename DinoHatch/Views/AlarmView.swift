@@ -16,10 +16,14 @@ struct AlarmView: View {
     /// Today's status, at a glance: the plain egg by default, the
     /// celebrating hatchling once today's alarm has actually been claimed
     /// within its 15-minute window, or the sad dino once that window has
-    /// closed without a claim (see `AlarmClaimer`/`RootTabView`). Stays the
-    /// plain egg — not sad — if the alarm was only armed after today's
-    /// window already closed (`isPendingFirstChance`), since there was
-    /// nothing to actually miss.
+    /// closed without a claim (see `AlarmClaimer`/`RootTabView`). In
+    /// practice this sad state is brief rather than a real dead end —
+    /// `RootTabView.checkAlarmHatch()`'s catch-up branch uses the exact
+    /// same condition and fires on the very next foreground/minute tick,
+    /// silently awarding a (streak-reset) dinosaur, which flips this back
+    /// to `alarm-reward`. Stays the plain egg — not sad — if the alarm was
+    /// only armed after today's window already closed
+    /// (`isPendingFirstChance`), since there was nothing to actually miss.
     private var headerImageName: String {
         guard let settings = alarms.first, settings.isEnabled else { return "alarm-egg" }
         if let lastHatchDate = settings.lastHatchDate, Calendar.current.isDateInToday(lastHatchDate) {
@@ -159,17 +163,22 @@ struct AlarmView: View {
                             .accessibilityHidden(true)
 
                         if headerImageName == "alarm-sad" {
-                            Group {
-                                if nextAlarmIsTomorrow {
-                                    Text("Missed it today — try again tomorrow!")
-                                } else {
-                                    Text("Missed it today — try again next time!")
-                                }
-                            }
-                            .font(.subheadline.bold())
-                            .foregroundStyle(.secondary)
-                            .multilineTextAlignment(.center)
-                            .fixedSize(horizontal: false, vertical: true)
+                            // Not a dead end — `AlarmClaimer.isCatchUpReady`
+                            // (identical conditions to `wasMissedToday`,
+                            // confirmed by its own
+                            // testCatchUpReadyLateInTheSameDay) still
+                            // awards a dinosaur any time later today, just
+                            // with the streak reset instead of continued.
+                            // The copy used to promise "try again
+                            // tomorrow," which was never actually true —
+                            // "the day isn't lost" matches the phrasing
+                            // HelpCenterView already uses to explain this
+                            // same catch-up behavior.
+                            Text("Missed it today — but the day isn't lost!")
+                                .font(.subheadline.bold())
+                                .foregroundStyle(.secondary)
+                                .multilineTextAlignment(.center)
+                                .fixedSize(horizontal: false, vertical: true)
                         } else if isPendingFirstChance {
                             getReadyMessage
                         } else if displayedStreak > 0 {
