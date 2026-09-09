@@ -86,6 +86,18 @@ Then in Xcode:
   pops its contents in with a spring (`hasAppeared`) plus a `.success`
   `sensoryFeedback` haptic, so the reward actually lands with a beat
   instead of the whole card just appearing on the first frame.
+  `Views/CollectionCompleteView.swift` (the bigger, whole-catalog
+  celebration) got the same `hasAppeared` pop-plus-haptic treatment so it
+  doesn't land with less flourish than the per-dinosaur reveal. A few
+  smaller motion/haptic touches followed the same pass: the favorite heart
+  on `Views/DinosaurDetailView.swift` morphs and bounces
+  (`.contentTransition(.symbolEffect(.replace))` + `.symbolEffect(.bounce)`)
+  with a `.selection` haptic instead of just swapping SF Symbols;
+  `Views/AlarmView.swift`'s wake-time picker and weekday row now fade in/out
+  with the alarm toggle instead of snapping; and
+  `Views/ParentalGateView.swift` shakes the equation
+  (a small custom `ShakeEffect: GeometryEffect`) and plays an `.error`
+  haptic on a wrong answer.
 - **Species-specific hatch art**: the illustrated 4-frame hatch sequence
   shares generic art for stages 1-2 (the egg hasn't visibly differentiated
   yet), but `Stores/EggHatchArt.swift` swaps stages 3-4 to body-plan-family

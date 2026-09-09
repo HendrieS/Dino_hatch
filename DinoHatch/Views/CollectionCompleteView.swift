@@ -10,6 +10,12 @@ struct CollectionCompleteView: View {
     let mascots: [Dinosaur]
     var onDismiss: () -> Void
 
+    // Same entrance-pop-plus-haptic treatment as HatchRevealView.hasAppeared
+    // — this screen is the bigger of the two celebrations (the whole
+    // catalog, not just one dinosaur), so it shouldn't land with less
+    // flourish than the per-dinosaur reveal.
+    @State private var hasAppeared = false
+
     var body: some View {
         VStack(spacing: 24) {
             Spacer()
@@ -20,9 +26,12 @@ struct CollectionCompleteView: View {
                     .foregroundStyle(.white)
                     .padding(24)
                     .background(Color.dinoGreen, in: Circle())
+                    .scaleEffect(hasAppeared ? 1 : 0.3)
+                    .opacity(hasAppeared ? 1 : 0)
 
                 Text("Collection Complete!")
                     .font(.title2.bold())
+                    .opacity(hasAppeared ? 1 : 0)
 
                 Text("You've hatched every dinosaur in the collection. Amazing work, paleontologist!")
                     .font(.subheadline)
@@ -30,6 +39,7 @@ struct CollectionCompleteView: View {
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.horizontal, 8)
+                    .opacity(hasAppeared ? 1 : 0)
 
                 HStack(alignment: .bottom, spacing: 4) {
                     ForEach(mascots) { dinosaur in
@@ -37,6 +47,7 @@ struct CollectionCompleteView: View {
                     }
                 }
                 .padding(.top, 4)
+                .opacity(hasAppeared ? 1 : 0)
 
                 ZStack {
                     Text("More dinosaurs are on their way...")
@@ -56,6 +67,7 @@ struct CollectionCompleteView: View {
                         .frame(width: 30, height: 30)
                         .offset(y: -14)
                 }
+                .opacity(hasAppeared ? 1 : 0)
             }
             .padding(20)
             .background(.white.opacity(0.55), in: RoundedRectangle(cornerRadius: 20))
@@ -77,6 +89,12 @@ struct CollectionCompleteView: View {
         .frame(maxWidth: 500)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .dinoWarmBackground()
+        .onAppear {
+            withAnimation(.spring(response: 0.55, dampingFraction: 0.65)) {
+                hasAppeared = true
+            }
+        }
+        .sensoryFeedback(.success, trigger: hasAppeared) { _, newValue in newValue }
     }
 }
 

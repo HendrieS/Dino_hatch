@@ -21,6 +21,9 @@ struct ParentalGateView: View {
     @State private var answer = ""
     @State private var showWrongAnswer = false
     @State private var isUnlocked = false
+    // Bumped on every wrong answer, purely to drive the shake below — its
+    // actual value never matters, only that it changes.
+    @State private var wrongAnswerCount = 0
     @FocusState private var isFocused: Bool
 
     var body: some View {
@@ -46,6 +49,8 @@ struct ParentalGateView: View {
                     }
                     .font(.largeTitle.bold())
                     .fontDesign(.rounded)
+                    .modifier(ShakeEffect(animatableData: CGFloat(wrongAnswerCount)))
+                    .animation(.default, value: wrongAnswerCount)
 
                     TextField("Answer", text: $answer)
                         .keyboardType(.numberPad)
@@ -75,6 +80,7 @@ struct ParentalGateView: View {
                         .font(.footnote.bold())
                         .foregroundStyle(.red)
                         .opacity(showWrongAnswer ? 1 : 0)
+                        .animation(.easeInOut(duration: 0.2), value: showWrongAnswer)
 
                     Button(action: check) {
                         Text("Check")
@@ -101,6 +107,7 @@ struct ParentalGateView: View {
                     }
                 }
                 .onAppear { isFocused = true }
+                .sensoryFeedback(.error, trigger: wrongAnswerCount)
             }
         }
     }
@@ -120,9 +127,25 @@ struct ParentalGateView: View {
 
     private func newQuestion() {
         showWrongAnswer = true
+        wrongAnswerCount += 1
         answer = ""
         factorA = Int.random(in: 3...9)
         factorB = Int.random(in: 3...9)
+    }
+}
+
+/// A horizontal "no, try again" shake — `animatableData` is driven by a
+/// plain incrementing counter rather than a Bool, so the effect can replay
+/// identically on every wrong answer in a row, not just the first.
+private struct ShakeEffect: GeometryEffect {
+    var amount: CGFloat = 8
+    var shakesPerUnit: CGFloat = 3
+    var animatableData: CGFloat
+
+    func effectValue(size: CGSize) -> ProjectionTransform {
+        let progress = animatableData.truncatingRemainder(dividingBy: 1)
+        let offset = amount * sin(progress * .pi * shakesPerUnit) * (1 - progress)
+        return ProjectionTransform(CGAffineTransform(translationX: offset, y: 0))
     }
 }
 

@@ -205,6 +205,7 @@ struct AlarmView: View {
                         .labelsHidden()
                         .disabled(!isEnabled)
                         .opacity(isEnabled ? 1 : 0.4)
+                        .animation(.easeInOut(duration: 0.25), value: isEnabled)
 
                     VStack(spacing: 8) {
                         Text("Repeats on")
@@ -220,6 +221,7 @@ struct AlarmView: View {
                     }
                     .disabled(!isEnabled)
                     .opacity(isEnabled ? 1 : 0.4)
+                    .animation(.easeInOut(duration: 0.25), value: isEnabled)
 
                     if isEnabled {
                         Text("Open the app within 15 minutes of your alarm to hatch a dinosaur!")

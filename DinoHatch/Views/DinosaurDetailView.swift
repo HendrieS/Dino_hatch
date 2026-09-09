@@ -122,7 +122,13 @@ struct DinosaurDetailView: View {
                     } label: {
                         Image(systemName: unlockedRecord.isFavorite ? "heart.fill" : "heart")
                             .foregroundStyle(unlockedRecord.isFavorite ? Color.dinoRed : Color.primary)
+                            // Morphs the outline into the filled heart and
+                            // bounces it on every toggle, rather than the
+                            // icon just snapping between the two SF Symbols.
+                            .contentTransition(.symbolEffect(.replace))
+                            .symbolEffect(.bounce, value: unlockedRecord.isFavorite)
                     }
+                    .sensoryFeedback(.selection, trigger: unlockedRecord.isFavorite)
                     .accessibilityLabel(unlockedRecord.isFavorite ? Text("Remove from Favorites") : Text("Add to Favorites"))
                 }
             }
