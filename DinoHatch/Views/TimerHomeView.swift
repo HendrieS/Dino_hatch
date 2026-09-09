@@ -94,8 +94,11 @@ struct TimerHomeView: View {
                 HatchAnimationView(dinosaur: hatchedDinosaur) {
                     unlock(hatchedDinosaur)
                     engine.completeHatch()
-                    phase = .reveal
+                    withAnimation(.easeInOut(duration: 0.4)) {
+                        phase = .reveal
+                    }
                 }
+                .transition(.opacity)
             }
         case .reveal:
             if let hatchedDinosaur {
@@ -103,6 +106,7 @@ struct TimerHomeView: View {
                     self.hatchedDinosaur = nil
                     phase = .setup
                 }
+                .transition(.opacity)
             }
         }
     }

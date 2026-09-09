@@ -78,7 +78,14 @@ Then in Xcode:
   random existing one rather than dead-ending the reward loop.
 - **Animation**: `Views/HatchAnimationView.swift` and `Views/EggView.swift`
   build the crack/wobble/burst/confetti sequence from plain SwiftUI shapes
-  and animations — no image assets or third-party animation library.
+  and animations — no image assets or third-party animation library. The
+  hand-off into `Views/HatchRevealView.swift` is no longer an instant cut:
+  `Views/TimerHomeView.swift` and `Views/AlarmHatchView.swift` both wrap
+  their `.hatching` -> `.reveal` state change in `withAnimation` and give
+  the two views a `.transition(.opacity)`, and `HatchRevealView` itself
+  pops its contents in with a spring (`hasAppeared`) plus a `.success`
+  `sensoryFeedback` haptic, so the reward actually lands with a beat
+  instead of the whole card just appearing on the first frame.
 - **Species-specific hatch art**: the illustrated 4-frame hatch sequence
   shares generic art for stages 1-2 (the egg hasn't visibly differentiated
   yet), but `Stores/EggHatchArt.swift` swaps stages 3-4 to body-plan-family

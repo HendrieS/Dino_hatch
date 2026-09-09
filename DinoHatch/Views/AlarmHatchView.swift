@@ -14,11 +14,15 @@ struct AlarmHatchView: View {
         Group {
             if revealed {
                 HatchRevealView(dinosaur: dinosaur, onDismiss: onDone)
+                    .transition(.opacity)
             } else {
                 HatchAnimationView(dinosaur: dinosaur) {
                     onUnlock()
-                    revealed = true
+                    withAnimation(.easeInOut(duration: 0.4)) {
+                        revealed = true
+                    }
                 }
+                .transition(.opacity)
             }
         }
     }
