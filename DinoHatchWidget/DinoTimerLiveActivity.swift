@@ -31,9 +31,21 @@ struct DinoTimerLiveActivity: Widget {
                     DinoWidgetImage(assetName: "egg-hatch-1", emoji: "🥚", size: 28)
                 }
                 DynamicIslandExpandedRegion(.trailing) {
-                    Text(context.state.endDate, style: .timer)
-                        .font(.system(size: 20, weight: .bold, design: .rounded))
-                        .monospacedDigit()
+                    // `staleDate: endDate` (see DinoTimerActivityController)
+                    // makes `context.isStale` true once the countdown ends —
+                    // without checking it, this would keep ticking the timer
+                    // text past zero indefinitely for a timer started via
+                    // the widget and never opened in-app to actually finish
+                    // it (same class of bug as
+                    // DinoHatchQuickTimerWidgetView's countdown/ready split).
+                    if context.isStale {
+                        Text("Ready!")
+                            .font(.system(size: 16, weight: .bold, design: .rounded))
+                    } else {
+                        Text(context.state.endDate, style: .timer)
+                            .font(.system(size: 20, weight: .bold, design: .rounded))
+                            .monospacedDigit()
+                    }
                 }
                 DynamicIslandExpandedRegion(.bottom) {
                     Text(verbatim: "Dino Hatch")
@@ -43,10 +55,16 @@ struct DinoTimerLiveActivity: Widget {
             } compactLeading: {
                 Text(verbatim: "🥚")
             } compactTrailing: {
-                Text(context.state.endDate, style: .timer)
-                    .font(.system(size: 13, weight: .bold, design: .rounded))
-                    .monospacedDigit()
-                    .frame(width: 42)
+                if context.isStale {
+                    Image(systemName: "checkmark.circle.fill")
+                        .font(.system(size: 15, weight: .bold))
+                        .frame(width: 42)
+                } else {
+                    Text(context.state.endDate, style: .timer)
+                        .font(.system(size: 13, weight: .bold, design: .rounded))
+                        .monospacedDigit()
+                        .frame(width: 42)
+                }
             } minimal: {
                 Text(verbatim: "🥚")
             }
@@ -60,9 +78,20 @@ struct DinoTimerLiveActivity: Widget {
                 Text(verbatim: "Dino Hatch")
                     .font(.system(size: 13, weight: .semibold, design: .rounded))
                     .foregroundStyle(.secondary)
-                Text(context.state.endDate, style: .timer)
-                    .font(.system(size: 28, weight: .bold, design: .rounded))
-                    .monospacedDigit()
+                // Same `context.isStale` reasoning as the Dynamic Island
+                // regions above — reuses the exact string
+                // TimerReadyBanner/DinoHatchQuickTimerWidgetView already
+                // use for this same "egg's done" moment, rather than
+                // introducing a new one that would need its own
+                // translations.
+                if context.isStale {
+                    Text("An egg is ready to hatch!")
+                        .font(.system(size: 18, weight: .bold, design: .rounded))
+                } else {
+                    Text(context.state.endDate, style: .timer)
+                        .font(.system(size: 28, weight: .bold, design: .rounded))
+                        .monospacedDigit()
+                }
             }
             Spacer()
             WidgetSupporterBadge(tier: context.state.supporterTierRawValue.flatMap(SupporterTier.init(rawValue:)))

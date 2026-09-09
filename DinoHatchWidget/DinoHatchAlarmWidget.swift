@@ -6,11 +6,16 @@ struct AlarmEntry: TimelineEntry {
     let snapshot: WidgetSnapshot
 }
 
-/// Single-entry timeline, same reasoning as `CollectionProvider` — the
-/// countdown itself is rendered live by `Text(_:style: .timer)`, driven by
-/// the system rather than by repeated timeline reloads. `RootTabView`
-/// reloads this widget's timeline whenever the alarm's settings change or
-/// its next fire date has simply passed.
+/// The countdown itself is rendered live by `Text(_:style: .timer)`, driven
+/// by the system with no reload needed *while* the fire date is still in
+/// the future. But `RootTabView`'s pre-computed `nextAlarmFireDate` goes
+/// stale the moment it passes — relying on the main app to notice and
+/// reload (next foreground, or a settings change) leaves the widget stuck
+/// showing that stale date, ticking oddly past zero, for however long the
+/// app stays unopened, which defeats the point of a glanceable widget.
+/// `getTimeline` instead recomputes the fire date itself from the raw
+/// schedule and self-schedules its own reload right at that moment
+/// (`.after`), so it stays correct even if the app is never reopened.
 struct AlarmProvider: TimelineProvider {
     func placeholder(in context: Context) -> AlarmEntry {
         AlarmEntry(date: .now, snapshot: WidgetSnapshot(unlockedCount: 0, totalCount: 26, alarmEnabled: true, nextAlarmFireDate: .now.addingTimeInterval(3600)))
@@ -21,8 +26,25 @@ struct AlarmProvider: TimelineProvider {
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<AlarmEntry>) -> Void) {
-        let entry = AlarmEntry(date: .now, snapshot: WidgetSnapshotStore.load() ?? .empty)
-        completion(Timeline(entries: [entry], policy: .never))
+        var snapshot = WidgetSnapshotStore.load() ?? .empty
+        let resolvedFireDate = Self.resolvedFireDate(for: snapshot)
+        snapshot.nextAlarmFireDate = resolvedFireDate
+        let entry = AlarmEntry(date: .now, snapshot: snapshot)
+        let policy: TimelineReloadPolicy = resolvedFireDate.map { .after($0) } ?? .never
+        completion(Timeline(entries: [entry], policy: policy))
+    }
+
+    /// Recomputes the next fire date fresh from `alarmHour`/`alarmMinute`/
+    /// `alarmWeekdays` using this call's own `.now`, rather than trusting
+    /// `snapshot.nextAlarmFireDate` — see the type's doc comment above.
+    /// Falls back to that stored value only if the raw fields are missing
+    /// (a snapshot written before this field existed).
+    private static func resolvedFireDate(for snapshot: WidgetSnapshot) -> Date? {
+        guard snapshot.alarmEnabled else { return nil }
+        guard let hour = snapshot.alarmHour, let minute = snapshot.alarmMinute, let weekdays = snapshot.alarmWeekdays else {
+            return snapshot.nextAlarmFireDate
+        }
+        return AlarmNextFireDate.next(hour: hour, minute: minute, weekdays: weekdays)
     }
 }
 

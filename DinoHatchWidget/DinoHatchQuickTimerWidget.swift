@@ -20,8 +20,20 @@ struct QuickTimerProvider: TimelineProvider {
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<QuickTimerEntry>) -> Void) {
-        let entry = QuickTimerEntry(date: .now, snapshot: WidgetSnapshotStore.load() ?? .empty)
-        completion(Timeline(entries: [entry], policy: .never))
+        let snapshot = WidgetSnapshotStore.load() ?? .empty
+        let entry = QuickTimerEntry(date: .now, snapshot: snapshot)
+        // `.never` would leave this stuck showing `countdownView` forever
+        // once `activeTimerEndDate` passes — nothing else reloads this
+        // widget's timeline while the app stays unopened (the whole point
+        // of starting a timer from here), so `endDate > entry.date` never
+        // gets re-evaluated to flip to `readyView` on its own. Requesting a
+        // reload right at `endDate` fixes that: the next `getTimeline` call
+        // re-reads this same snapshot with a fresh `.now`, correctly
+        // resolving to `readyView` from then on (policy `.never` again,
+        // since nothing further needs to happen until the app clears
+        // `activeTimerEndDate` on hatch and reloads explicitly).
+        let policy: TimelineReloadPolicy = snapshot.activeTimerEndDate.map { .after($0) } ?? .never
+        completion(Timeline(entries: [entry], policy: policy))
     }
 }
 

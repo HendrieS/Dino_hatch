@@ -44,6 +44,9 @@ enum WidgetSnapshotBuilder {
             lastDinosaurName: dinosaur?.localizedName,
             alarmEnabled: alarmEnabled,
             nextAlarmFireDate: nextAlarmFireDate,
+            alarmHour: alarm?.hour,
+            alarmMinute: alarm?.minute,
+            alarmWeekdays: alarm?.weekdays,
             activeTimerEndDate: activeTimerEndDate,
             supporterTierRawValue: supporterTier?.rawValue
         )

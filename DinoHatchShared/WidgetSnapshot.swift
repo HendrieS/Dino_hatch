@@ -27,10 +27,25 @@ struct WidgetSnapshot: Codable, Equatable {
     /// apart from "on, but the fire date happens to be stale/unresolved".
     var alarmEnabled: Bool = false
     /// The next concrete alarm firing, computed by `AlarmNextFireDate` at
-    /// write time — the widget just hands this straight to
-    /// `Text(_:style: .timer)`, which ticks down live with no further
-    /// timeline reloads needed.
+    /// write time. `Text(_:style: .timer)` ticks this down live with no
+    /// reload needed *while* it's still in the future, but once it passes
+    /// this stored value goes stale — `AlarmProvider.getTimeline()` doesn't
+    /// trust it directly, it recomputes fresh from `alarmHour`/
+    /// `alarmMinute`/`alarmWeekdays` below at reload time (falling back to
+    /// this field only if those are unexpectedly nil, e.g. a snapshot
+    /// written before this field existed). Kept around mainly so
+    /// `getSnapshot()`'s instant placeholder and the Widget Gallery preview
+    /// have something to show without needing the raw fields.
     var nextAlarmFireDate: Date? = nil
+    /// Raw alarm schedule, mirroring `AlarmSettings` — lets
+    /// `AlarmProvider.getTimeline()` recompute `AlarmNextFireDate.next(...)`
+    /// itself at reload time (using its own fresh `.now`) rather than
+    /// trusting a fire date computed once back when the main app last
+    /// called `refreshWidgetSnapshot()`, which goes stale the moment that
+    /// date passes. nil/nil/nil when there's no alarm row yet.
+    var alarmHour: Int? = nil
+    var alarmMinute: Int? = nil
+    var alarmWeekdays: [Int]? = nil
     /// Mirrors `AppSettings.activeTimerEndDate` — non-nil while a timer is
     /// running (whether or not it's already past, see
     /// `DinoHatchQuickTimerWidgetView`), nil once cancelled or hatched.

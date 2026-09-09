@@ -42,6 +42,9 @@ final class WidgetSnapshotBuilderTests: XCTestCase {
         let snapshot = WidgetSnapshotBuilder.build(unlocked: [])
         XCTAssertFalse(snapshot.alarmEnabled)
         XCTAssertNil(snapshot.nextAlarmFireDate)
+        XCTAssertNil(snapshot.alarmHour)
+        XCTAssertNil(snapshot.alarmMinute)
+        XCTAssertNil(snapshot.alarmWeekdays)
     }
 
     func testDisabledAlarmHasNoNextFireDate() {
@@ -60,6 +63,20 @@ final class WidgetSnapshotBuilderTests: XCTestCase {
             snapshot.nextAlarmFireDate,
             AlarmNextFireDate.next(hour: 7, minute: 0, weekdays: Array(1...7), now: now)
         )
+    }
+
+    /// `AlarmProvider` (in the widget extension) recomputes the fire date
+    /// itself from these raw fields rather than trusting
+    /// `nextAlarmFireDate`, which goes stale the moment it passes — see its
+    /// doc comment. Populated whenever alarm info is passed at all, even if
+    /// currently disabled, since `alarmEnabled` is the field that actually
+    /// gates whether `AlarmProvider` uses them.
+    func testEnabledAlarmCarriesRawScheduleFieldsForWidgetToRecompute() {
+        let alarm = WidgetSnapshotBuilder.AlarmInfo(hour: 6, minute: 45, weekdays: [2, 3, 4, 5, 6], isEnabled: true)
+        let snapshot = WidgetSnapshotBuilder.build(unlocked: [], alarm: alarm)
+        XCTAssertEqual(snapshot.alarmHour, 6)
+        XCTAssertEqual(snapshot.alarmMinute, 45)
+        XCTAssertEqual(snapshot.alarmWeekdays, [2, 3, 4, 5, 6])
     }
 
     func testNoActiveTimerLeavesTimerFieldNil() {
