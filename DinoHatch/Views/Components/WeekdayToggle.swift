@@ -21,16 +21,27 @@ struct WeekdayToggle: View {
         Calendar.current.standaloneWeekdaySymbols[weekday - 1]
     }
 
+    // Bumped only inside the button's own action below — tying the haptic
+    // directly to `isOn` would also fire it the instant AlarmView loads
+    // already-saved weekdays on appear, buzzing once per enabled day just
+    // from opening the tab instead of only on an actual tap.
+    @State private var tapFeedback = 0
+
     var body: some View {
-        Button(action: action) {
+        Button {
+            action()
+            tapFeedback += 1
+        } label: {
             Text(verbatim: label)
                 .font(.subheadline.bold())
                 .frame(width: 36, height: 36)
                 .background(isOn ? Color.dinoGreen : Color.dinoWarmBackgroundBottom)
                 .foregroundStyle(isOn ? .white : .primary)
                 .clipShape(Circle())
+                .animation(.easeInOut(duration: 0.15), value: isOn)
         }
         .buttonStyle(.plain)
+        .sensoryFeedback(.selection, trigger: tapFeedback)
         .accessibilityLabel(Text(verbatim: accessibilityDayName))
         .accessibilityAddTraits(isOn ? .isSelected : [])
     }

@@ -18,6 +18,10 @@ struct AppIconPicker: View {
     let unlockedIDs: Set<String>
 
     @State private var selected: AppIconOption?
+    // Bumped only from `select(_:)` — a plain `trigger: selected` would also
+    // fire the haptic from `onAppear`'s initial sync below, buzzing on
+    // every visit to this screen instead of only on an actual tap.
+    @State private var selectionFeedback = 0
 
     private let thumbnailSize: CGFloat = 52
 
@@ -29,6 +33,7 @@ struct AppIconPicker: View {
             }
         }
         .onAppear { selected = AppIconOption.current }
+        .sensoryFeedback(.selection, trigger: selectionFeedback)
     }
 
     private var defaultRow: some View {
@@ -113,6 +118,7 @@ struct AppIconPicker: View {
         Image(systemName: "checkmark")
             .font(.body.bold())
             .foregroundStyle(Color.dinoGreen)
+            .transition(.scale.combined(with: .opacity))
     }
 
     private func accessibilityLabel(for option: AppIconOption, isUnlocked: Bool) -> Text {
@@ -122,7 +128,11 @@ struct AppIconPicker: View {
     }
 
     private func select(_ option: AppIconOption?) {
-        selected = option
+        guard selected != option else { return }
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
+            selected = option
+        }
+        selectionFeedback += 1
         AppIconOption.apply(option)
     }
 }

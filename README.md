@@ -97,7 +97,14 @@ Then in Xcode:
   with the alarm toggle instead of snapping; and
   `Views/ParentalGateView.swift` shakes the equation
   (a small custom `ShakeEffect: GeometryEffect`) and plays an `.error`
-  haptic on a wrong answer.
+  haptic on a wrong answer. `Views/Components/AppIconPicker.swift`'s
+  checkmark now transitions/springs between rows instead of jumping, and
+  `Views/Components/WeekdayToggle.swift` animates its own color swap. Both
+  of those, plus the weekday row, route their `.selection` haptic through a
+  private tap counter rather than tying it directly to the selected/on
+  value — tying it directly to the value would also fire the haptic the
+  instant the screen loads already-saved state (icon choice, enabled
+  weekdays) rather than only on an actual tap.
 - **Species-specific hatch art**: the illustrated 4-frame hatch sequence
   shares generic art for stages 1-2 (the egg hasn't visibly differentiated
   yet), but `Stores/EggHatchArt.swift` swaps stages 3-4 to body-plan-family
