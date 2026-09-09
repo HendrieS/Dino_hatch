@@ -721,6 +721,17 @@ verify on your Mac:
       `AlarmSettings.streakCount` reset to 1 rather than continuing
 - [ ] Confirm a *second* dinosaur isn't also awarded later the same day —
       catch-up should still only claim once per day, same as an on-time claim
+- [ ] Add the Quick Timer widget to the Home Screen, start a short timer
+      from it (no app launch), then leave the app closed until it finishes —
+      confirm the widget flips from the countdown to "An egg is ready to
+      hatch!" on its own, without ever opening the app
+- [ ] Add the Alarm widget, set an alarm, then leave the app closed past
+      the fire date — confirm the widget shows the *next* occurrence's
+      countdown rather than a stale/negative one once you next glance at it
+- [ ] Start a timer so its Live Activity shows on the Lock Screen (and
+      Dynamic Island, if supported), leave the app closed past the end
+      date — confirm it switches to "Ready!"/"An egg is ready to hatch!"
+      instead of ticking past zero
 - [ ] `Cmd+U` unit tests pass
 
 ## Before you release
