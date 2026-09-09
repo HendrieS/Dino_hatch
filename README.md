@@ -182,9 +182,11 @@ Then in Xcode:
   re-triggers onboarding on next launch. Settings also links to
   `Views/HelpCenterView.swift`, a plain-language explainer for the adult —
   what's stored (just the age, unlock progress, and timer/alarm settings —
-  no name, account, or contact info), that it's all local-only with no
-  cloud sync/analytics/ads, and a short walkthrough of how the timer, dino
-  alarm, and collection features work. It ends with a "Found a bug?"
+  no name, account, or contact info), that it syncs privately across a
+  family's devices via their own iCloud account with no separate account,
+  analytics, or ads (see [iCloud sync](#icloud-sync) below), and a short
+  walkthrough of how the timer, dino alarm, and collection features work.
+  It ends with a "Found a bug?"
   section — a `Link` to `mailto:Dinohatch@spijker.pro` (with a prefilled
   subject) that opens the device's Mail app.
 - **X-ray age gating**: the press-and-hold x-ray view
