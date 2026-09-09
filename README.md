@@ -280,12 +280,23 @@ Then in Xcode:
   fact row on the detail screen and, like `length`, displayed verbatim in
   every language rather than localized. All 30 catalog entries have one.
 - **Light mode only**: the app is aimed at kids and isn't designed with a
-  dark palette in mind, so dark mode is disabled at both levels —
+  dark palette in mind, so dark mode is disabled at three levels —
   `UIUserInterfaceStyle: Light` in `project.yml` forces system chrome
-  (status bar, system alerts) light, and `.preferredColorScheme(.light)`
-  on the root view in `DinoHatchApp.swift` forces the SwiftUI hierarchy.
-  `Views/HelpCenterView.swift` has a "Why no dark mode?" section explaining
-  the reasoning to the adult (bright colors for young eyes, not
+  (status bar, system alerts) light, `.preferredColorScheme(.light)` on
+  the root view in `DinoHatchApp.swift` forces the main app's SwiftUI
+  hierarchy, and each Home Screen widget view plus the Live Activity's
+  Lock Screen banner (not its Dynamic Island content — see below) sets
+  `.environment(\.colorScheme, .light)` of its own. That third one is
+  easy to miss: `DinoHatchApp`'s modifier only reaches the app's own
+  `WindowGroup`, not the widget extension's separate view hierarchy, so
+  without it, system Dark Mode would flip `.secondary`/default text to
+  its light/white variant while every widget's fixed light pastel
+  background stayed unchanged — unreadable, not actually dark. The Dynamic
+  Island's own content is deliberately left alone, since it renders on the
+  system's always-dark Island chrome, where the default color scheme
+  already suits that background; forcing light there would break it the
+  other way. `Views/HelpCenterView.swift` has a "Why no dark mode?" section
+  explaining the reasoning to the adult (bright colors for young eyes, not
   encouraging bedtime screen use).
 - **Notification permission**: `Stores/NotificationAuthorization.swift` is
   a small shared helper for requesting local-notification permission,
@@ -732,6 +743,12 @@ verify on your Mac:
       Dynamic Island, if supported), leave the app closed past the end
       date — confirm it switches to "Ready!"/"An egg is ready to hatch!"
       instead of ticking past zero
+- [ ] With the device in system Dark Mode, check all three Home Screen
+      widgets and the Live Activity's Lock Screen banner — text should
+      stay readable (dark text on the light pastel background) rather
+      than flipping to unreadable light/white text. The Dynamic Island's
+      own content isn't covered by this and should keep using its usual
+      light-on-dark-chrome appearance regardless of system setting.
 - [ ] `Cmd+U` unit tests pass
 
 ## Before you release

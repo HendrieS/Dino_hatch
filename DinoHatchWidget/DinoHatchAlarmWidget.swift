@@ -93,6 +93,11 @@ struct DinoHatchAlarmWidgetView: View {
                 startPoint: .top, endPoint: .bottom
             )
         }
+        // See DinoHatchCollectionWidgetView's matching modifier — forces
+        // this widget to stay light regardless of system Dark Mode, same
+        // as the main app, since .preferredColorScheme there doesn't reach
+        // this separate view hierarchy.
+        .environment(\.colorScheme, .light)
     }
 }
 

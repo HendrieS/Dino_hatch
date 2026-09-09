@@ -25,6 +25,17 @@ struct DinoTimerLiveActivity: Widget {
             lockScreenView(context: context)
                 .activityBackgroundTint(Color(red: 0.93, green: 0.96, blue: 1.00))
                 .activitySystemActionForegroundColor(.black)
+                // Same "always light" reasoning as the Home Screen widgets
+                // (see DinoHatchCollectionWidgetView) — this banner's own
+                // background is a fixed light pastel tint, so .primary/
+                // .secondary text needs to stay in their light-mode colors
+                // too, regardless of system Dark Mode. Deliberately NOT
+                // applied to the `dynamicIsland` closure below — that
+                // content renders on the system's own always-dark Island
+                // chrome, where the default (dark) color scheme is already
+                // correct; forcing light there would make its text
+                // disappear against that dark background instead.
+                .environment(\.colorScheme, .light)
         } dynamicIsland: { context in
             DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {

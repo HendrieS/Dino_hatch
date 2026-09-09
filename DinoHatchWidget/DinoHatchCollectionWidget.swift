@@ -55,6 +55,14 @@ struct DinoHatchCollectionWidgetView: View {
                 startPoint: .top, endPoint: .bottom
             )
         }
+        // Same "always light" reasoning as DinoHatchApp's own
+        // .preferredColorScheme(.light) — but that modifier only applies
+        // inside the app's own WindowGroup, not this widget's separate view
+        // hierarchy. Without this, system Dark Mode would flip .secondary/
+        // default text to its light/white variant while this fixed pastel
+        // background stayed unchanged, making the text unreadable rather
+        // than actually presenting a dark appearance.
+        .environment(\.colorScheme, .light)
     }
 
     private var smallView: some View {
