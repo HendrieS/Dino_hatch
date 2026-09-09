@@ -4,9 +4,11 @@ A kids' timer app: an adult sets a countdown, and when it finishes a dinosaur
 egg on screen hatches, revealing a new dinosaur that's added to a persistent
 collection ("Dino-pedia") the kid can explore for facts.
 
-This is an **alpha build** — functional end-to-end, with placeholder emoji
-art and a hand-rolled (no external library) hatch animation. See
-[Known alpha limitations](#known-alpha-limitations) below.
+This is an **alpha build** — functional end-to-end, with a full set of
+illustrated dinosaur art (skin, X-ray skeleton, and range map for all 30
+catalog dinosaurs) and a hand-rolled (no external library) hatch animation.
+See [Known alpha limitations](#known-alpha-limitations) below for what's
+still rough.
 
 ## Requirements
 
@@ -105,6 +107,15 @@ Then in Xcode:
   value — tying it directly to the value would also fire the haptic the
   instant the screen loads already-saved state (icon choice, enabled
   weekdays) rather than only on an actual tap.
+- **Dinosaur portrait art**: every one of the 30 catalog dinosaurs has a
+  real illustrated skin portrait (`Dinosaur.imageAssetName`), an X-ray
+  skeleton (`skeletonAssetName`, see `DinoAnatomyView`), and a range map
+  (`rangeMapAssetName`) in `Assets.xcassets` — not emoji. `DinoImageView`
+  still checks `imageAssetName`/`UIImage(named:)` before falling back to
+  `Dinosaur.emoji`, so that fallback is exercised today only if a future
+  catalog addition ships without art yet, not for anything currently in
+  the catalog. `DinosaurCatalogTests.testEveryDinosaurHasARangeMap`/
+  `testEveryDinosaurHasAWeight` catch a new entry silently missing either.
 - **Species-specific hatch art**: the illustrated 4-frame hatch sequence
   shares generic art for stages 1-2 (the egg hasn't visibly differentiated
   yet), but `Stores/EggHatchArt.swift` swaps stages 3-4 to body-plan-family
@@ -625,10 +636,6 @@ membership, revert to local-only:
 
 ## Known alpha limitations
 
-- **Placeholder art**: dinosaurs are represented with emoji (🦖🦕 etc.), not
-  illustrations. `Dinosaur.imageAssetName` exists specifically so real
-  artwork can be dropped into `Assets.xcassets` later without touching any
-  view code — `DinoImageView` already prefers it when present.
 - **Timer has no background modes**, but does schedule a one-shot local
   notification for when the egg finishes (`Stores/TimerNotificationScheduler.swift`,
   best-effort like the dino alarm's — permission denied just means no

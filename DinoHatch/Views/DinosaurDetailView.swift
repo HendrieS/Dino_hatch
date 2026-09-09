@@ -31,9 +31,12 @@ struct DinosaurDetailView: View {
         ScrollView {
             VStack(spacing: 20) {
                 // Was: DinoImageView(dinosaur: dinosaur, size: 160)
-                // Now the interactive press & hold x-ray viewer. It falls
-                // back to the emoji placeholder automatically for dinosaurs
-                // that don't have skin + skeleton art yet.
+                // Now the interactive press & hold x-ray viewer. Falls back
+                // to the plain (still illustrated, not emoji, for every
+                // current catalog dinosaur) DinoImageView automatically
+                // once x-ray isn't unlocked yet (see XRayEligibility) or,
+                // hypothetically, for a dinosaur without skin + skeleton
+                // art.
                 DinoAnatomyView(dinosaur: dinosaur, size: 300)
 
                 Text(localizedContent: dinosaur.name)

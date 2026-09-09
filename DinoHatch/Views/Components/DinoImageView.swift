@@ -1,9 +1,10 @@
 import SwiftUI
 import UIKit
 
-/// Renders a dinosaur's visual. Checks `imageAssetName` first so real
-/// artwork can be dropped into the asset catalog later without touching
-/// any call site; falls back to the placeholder emoji today.
+/// Renders a dinosaur's visual. Checks `imageAssetName` first — every
+/// catalog dinosaur has real illustrated art today, so this is what
+/// actually renders in practice — falling back to the emoji only for a
+/// hypothetical future catalog entry that ships before its art does.
 struct DinoImageView: View {
     let dinosaur: Dinosaur
     var size: CGFloat = 80

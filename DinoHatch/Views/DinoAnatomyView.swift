@@ -8,11 +8,14 @@ import UIKit
 /// artwork fades in over it with a cool x-ray tint and a sweeping scan line.
 /// Releasing returns to the skin.
 ///
-/// Degrades gracefully — falling back to the standard `DinoImageView` (emoji
-/// placeholder) with the x-ray interaction disabled — in two cases: the
-/// dinosaur is missing its skin/skeleton art, or `XRayEligibility` says the
-/// feature isn't unlocked yet. Neither case shows any hint that x-ray
-/// exists; it just quietly starts working once both are satisfied.
+/// Degrades gracefully — falling back to the standard `DinoImageView` (still
+/// the real skin illustration for every current catalog dinosaur, just
+/// without the interactive x-ray toggle) — in two cases: the dinosaur is
+/// missing its skin/skeleton art, or `XRayEligibility` says the feature
+/// isn't unlocked yet — the latter being the common case early on, since
+/// x-ray needs 1-2 hatches first (see `XRayEligibility`). Neither case
+/// shows any hint that x-ray exists; it just quietly starts working once
+/// both are satisfied.
 ///
 /// Requires iOS 17+ for `onChange(of:_:)` (two-parameter form) and
 /// `sensoryFeedback`. If you target iOS 16, see the notes in README.md for
