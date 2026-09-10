@@ -82,7 +82,7 @@ struct SettingsView: View {
                 // there was no way to scroll this section clear of them.
                 Section {
                     Color.clear
-                        .frame(height: 90)
+                        .frame(height: 50)
                         .listRowBackground(Color.clear)
                         .listRowSeparator(.hidden)
                 }
