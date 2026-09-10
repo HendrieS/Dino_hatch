@@ -227,14 +227,13 @@ struct CollectionView: View {
                         .padding()
                         // Just enough room for the last row to scroll clear
                         // of the paw button — the much larger bottom fade
-                        // above (170pt) is what actually keeps cards from
-                        // looking like they're hiding behind the fern
-                        // corners as they scroll past, so this no longer
-                        // needs to be a large clearance on its own (180 —
-                        // and 90 before that — left too much empty space
-                        // once the fade was doing its job, confirmed on
-                        // device).
-                        .padding(.bottom, 60)
+                        // above is what actually keeps cards from looking
+                        // like they're hiding behind the fern corners as
+                        // they scroll past, so this no longer needs to be a
+                        // large clearance on its own (180, then 60, both
+                        // confirmed on device — 180 left too much empty
+                        // space, 90 lands right in between).
+                        .padding(.bottom, 90)
                     }
                     }
                     .background(
@@ -276,6 +275,16 @@ struct CollectionView: View {
                 // bottom fade needs to start well above where the ferns
                 // actually begin, not just cover the sliver right at the
                 // edge.
+                //
+                // The bottom fade also isn't a single clear-at-the-edge
+                // stop like the top one — it reaches *full* transparency
+                // (`bottomFadeEnd`, 90pt from the bottom) well before the
+                // true edge, then stays fully clear the rest of the way.
+                // A plain two-stop fade only reaches full transparency
+                // exactly at the edge, so a card scrolled into the fern
+                // zone was still faintly visible there (confirmed on
+                // device) rather than fully hidden by the time it'd
+                // actually touch the fern art.
                 .mask(
                     GeometryReader { proxy in
                         // Each clamped to 0.5, not just guarded against
@@ -284,24 +293,28 @@ struct CollectionView: View {
                         // height), `proxy.size.height` can transiently be
                         // anywhere from 0 up to a real but still-small
                         // value. Below 2x a given fade's pixel size, that
-                        // fade's fraction would exceed 0.5, putting the
-                        // `location: fade` stop after `location: 1 - fade`
+                        // fade's fraction would exceed 0.5, putting a
+                        // `location:` stop after one that should follow it
                         // — SwiftUI logs "Gradient stop locations must be
                         // ordered" and (seen on device) can fail to
                         // rasterize the mask at all for that frame. Capping
-                        // at 0.5 keeps the stops valid at any height; real
-                        // layout heights are always well above either
-                        // fade's 2x point, so this only ever kicks in
+                        // each at 0.5 keeps every stop validly ordered at
+                        // any height (bottomFadeStart ≥ bottomFadeEnd is
+                        // preserved through the clamp since 170 ≥ 90); real
+                        // layout heights are always well above these
+                        // fades' 2x points, so this only ever kicks in
                         // during that transient pass, correcting itself the
                         // instant real geometry resolves.
                         let height = max(proxy.size.height, 1)
                         let topFade = min(36 / height, 0.5)
-                        let bottomFade = min(170 / height, 0.5)
+                        let bottomFadeStart = min(170 / height, 0.5)
+                        let bottomFadeEnd = min(90 / height, 0.5)
                         LinearGradient(
                             stops: [
                                 .init(color: .clear, location: 0),
                                 .init(color: .black, location: topFade),
-                                .init(color: .black, location: 1 - bottomFade),
+                                .init(color: .black, location: 1 - bottomFadeStart),
+                                .init(color: .clear, location: 1 - bottomFadeEnd),
                                 .init(color: .clear, location: 1)
                             ],
                             startPoint: .top,
