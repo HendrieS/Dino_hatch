@@ -225,14 +225,16 @@ struct CollectionView: View {
                             }
                         }
                         .padding()
-                        // Clears the paw button/fern corners so the last row
-                        // never scrolls in flush behind them. 90 (matching
-                        // Alarm/Settings' own fern clearance) wasn't enough
-                        // here specifically — confirmed on device: a card in
-                        // the last row still ended up partly hidden behind
-                        // the fern art. Grid cards are bulkier than those
-                        // screens' plain text rows, so this needs more room.
-                        .padding(.bottom, 180)
+                        // Just enough room for the last row to scroll clear
+                        // of the paw button — the much larger bottom fade
+                        // above (170pt) is what actually keeps cards from
+                        // looking like they're hiding behind the fern
+                        // corners as they scroll past, so this no longer
+                        // needs to be a large clearance on its own (180 —
+                        // and 90 before that — left too much empty space
+                        // once the fade was doing its job, confirmed on
+                        // device).
+                        .padding(.bottom, 60)
                     }
                     }
                     .background(
@@ -254,8 +256,8 @@ struct CollectionView: View {
                 // everything already fits in the visible area — see
                 // `updateScrollable()`.
                 .scrollDisabled(!isScrollable)
-                // Fades the top/bottom ~36pt of whatever's currently
-                // scrolled into view, so cards ease out of sight passing
+                // Fades whatever's currently scrolled into view near the
+                // top/bottom edges, so cards ease out of sight passing
                 // behind the sign (top) or down toward the paw button/fern
                 // corners (bottom) instead of clipping there. Sized as a
                 // fraction of this ScrollView's own measured height (via
@@ -265,30 +267,41 @@ struct CollectionView: View {
                 // once — this version can't get the position wrong, since
                 // it's defined directly in terms of the ScrollView's own
                 // frame instead of a separate, guessed coordinate.
+                //
+                // Deliberately asymmetric: the fern corner art reaches much
+                // further up from the bottom edge than the sign does from
+                // the top, so a symmetric ~36pt fade left cards fully
+                // opaque while still visually passing behind the ferns for
+                // a good stretch of the scroll (confirmed on device) — the
+                // bottom fade needs to start well above where the ferns
+                // actually begin, not just cover the sliver right at the
+                // edge.
                 .mask(
                     GeometryReader { proxy in
-                        // Clamped to 0.5, not just guarded against
+                        // Each clamped to 0.5, not just guarded against
                         // division by zero — during the first layout pass
                         // (before the ScrollView settles to its real
                         // height), `proxy.size.height` can transiently be
                         // anywhere from 0 up to a real but still-small
-                        // value. Below 72pt (2x this 36pt fade), an
-                        // unclamped `fade` exceeds 0.5, putting the
+                        // value. Below 2x a given fade's pixel size, that
+                        // fade's fraction would exceed 0.5, putting the
                         // `location: fade` stop after `location: 1 - fade`
                         // — SwiftUI logs "Gradient stop locations must be
                         // ordered" and (seen on device) can fail to
                         // rasterize the mask at all for that frame. Capping
                         // at 0.5 keeps the stops valid at any height; real
-                        // layout heights are always well above 72pt, so
-                        // this only ever kicks in during that transient
-                        // pass, correcting itself the instant real
-                        // geometry resolves.
-                        let fade = min(36 / max(proxy.size.height, 1), 0.5)
+                        // layout heights are always well above either
+                        // fade's 2x point, so this only ever kicks in
+                        // during that transient pass, correcting itself the
+                        // instant real geometry resolves.
+                        let height = max(proxy.size.height, 1)
+                        let topFade = min(36 / height, 0.5)
+                        let bottomFade = min(170 / height, 0.5)
                         LinearGradient(
                             stops: [
                                 .init(color: .clear, location: 0),
-                                .init(color: .black, location: fade),
-                                .init(color: .black, location: 1 - fade),
+                                .init(color: .black, location: topFade),
+                                .init(color: .black, location: 1 - bottomFade),
                                 .init(color: .clear, location: 1)
                             ],
                             startPoint: .top,
