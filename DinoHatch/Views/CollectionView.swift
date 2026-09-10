@@ -226,8 +226,13 @@ struct CollectionView: View {
                         }
                         .padding()
                         // Clears the paw button/fern corners so the last row
-                        // never scrolls in flush behind them.
-                        .padding(.bottom, 90)
+                        // never scrolls in flush behind them. 90 (matching
+                        // Alarm/Settings' own fern clearance) wasn't enough
+                        // here specifically — confirmed on device: a card in
+                        // the last row still ended up partly hidden behind
+                        // the fern art. Grid cards are bulkier than those
+                        // screens' plain text rows, so this needs more room.
+                        .padding(.bottom, 180)
                     }
                     }
                     .background(
