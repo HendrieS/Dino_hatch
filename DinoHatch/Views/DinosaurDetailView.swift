@@ -102,22 +102,66 @@ struct DinosaurDetailView: View {
                 }
             }
             .padding()
-            // Extra clearance so "Hatched on" and the "Found in" map card
-            // can't end up behind the fern corners, which now render in
-            // front of content rather than behind it. No fade here (unlike
-            // CollectionView's ScrollView) — per feedback, this screen
-            // should behave like Settings: plain scrolling, content just
-            // never reaches the fern zone at all, rather than easing into
-            // it. 90 (Settings/Alarm's own clearance) wasn't enough here —
-            // confirmed on device, the "Found in" map card was noticeably
-            // cut off behind the ferns/paw button. That card is much
-            // taller than those screens' plain text rows, and this screen
-            // has no fade to lean on the way Collection's grid does, so it
-            // needs more room on padding alone.
-            .padding(.bottom, 220)
+            // Clearance so the top of the anatomy image and the bottom
+            // "Found in" card have somewhere to scroll clear to. The real
+            // fix for the vine canopy/fern corners actually covering
+            // content is the fade mask below — plain padding alone (tried
+            // first, up to 220pt at the bottom) either wasn't enough or
+            // left the content just sitting fully opaque right up until it
+            // was abruptly covered, same problem CollectionView's grid had
+            // before it got a fade too.
+            .padding(.top, 60)
+            .padding(.bottom, 90)
             .frame(maxWidth: 500)
             .frame(maxWidth: .infinity)
         }
+        // Same reasoning and asymmetric shape as CollectionView's mask:
+        // the vine canopy (top) and fern corners (bottom) render in front
+        // of this screen's content (via .dinoWarmBackground() below), so
+        // content needs to fade to full transparency before it'd actually
+        // be covered by that art rather than staying opaque right up
+        // until it's abruptly clipped. The bottom needs more room than
+        // the top since the fern art (plus, on Collection, the paw
+        // button — not shown on this pushed screen, but the fern art
+        // itself is the same size) reaches further up than the vine
+        // canopy does down.
+        //
+        // Applied here, directly to the ScrollView, and *before*
+        // `.dinoWarmBackground()` below — same ordering as CollectionView
+        // (mask on the ScrollView, background/fern-overlay on the view
+        // that wraps it). A mask affects only what's already composed
+        // into the view it's attached to, not content layered on
+        // afterward, so getting this order backwards would fade the fern
+        // art itself out along with the content instead of leaving it
+        // fully opaque on top.
+        .mask(
+            GeometryReader { proxy in
+                // See CollectionView's matching mask for why every fade
+                // fraction here is clamped to 0.5 — same transient-height
+                // reasoning, and the same ordering guarantee holds since
+                // each pair (topFadeEnd < topFadeStart,
+                // bottomFadeEnd < bottomFadeStart) keeps that order through
+                // the clamp, and topFadeStart + bottomFadeStart never
+                // exceeds 1 even when both clamp to 0.5.
+                let height = max(proxy.size.height, 1)
+                let topFadeStart = min(130 / height, 0.5)
+                let topFadeEnd = min(70 / height, 0.5)
+                let bottomFadeStart = min(170 / height, 0.5)
+                let bottomFadeEnd = min(90 / height, 0.5)
+                LinearGradient(
+                    stops: [
+                        .init(color: .clear, location: 0),
+                        .init(color: .clear, location: topFadeEnd),
+                        .init(color: .black, location: topFadeStart),
+                        .init(color: .black, location: 1 - bottomFadeStart),
+                        .init(color: .clear, location: 1 - bottomFadeEnd),
+                        .init(color: .clear, location: 1)
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+            }
+        )
         .navigationTitle(Text(localizedContent: dinosaur.name))
         .navigationBarTitleDisplayMode(.inline)
         .dinoWarmBackground()
