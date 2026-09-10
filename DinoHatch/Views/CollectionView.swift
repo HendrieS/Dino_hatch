@@ -262,7 +262,23 @@ struct CollectionView: View {
                 // frame instead of a separate, guessed coordinate.
                 .mask(
                     GeometryReader { proxy in
-                        let fade = 36 / max(proxy.size.height, 1)
+                        // Clamped to 0.5, not just guarded against
+                        // division by zero — during the first layout pass
+                        // (before the ScrollView settles to its real
+                        // height), `proxy.size.height` can transiently be
+                        // anywhere from 0 up to a real but still-small
+                        // value. Below 72pt (2x this 36pt fade), an
+                        // unclamped `fade` exceeds 0.5, putting the
+                        // `location: fade` stop after `location: 1 - fade`
+                        // — SwiftUI logs "Gradient stop locations must be
+                        // ordered" and (seen on device) can fail to
+                        // rasterize the mask at all for that frame. Capping
+                        // at 0.5 keeps the stops valid at any height; real
+                        // layout heights are always well above 72pt, so
+                        // this only ever kicks in during that transient
+                        // pass, correcting itself the instant real
+                        // geometry resolves.
+                        let fade = min(36 / max(proxy.size.height, 1), 0.5)
                         LinearGradient(
                             stops: [
                                 .init(color: .clear, location: 0),
