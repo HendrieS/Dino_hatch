@@ -336,22 +336,20 @@ struct CollectionView: View {
                         Image(systemName: "gearshape.fill")
                     }
                 }
-                // Temporarily hidden for website screenshots — restore by
-                // uncommenting (see git history for the exact block).
-                // #if DEBUG
-                // ToolbarItem(placement: .topBarTrailing) {
-                //     Menu {
-                //         Button("Unlock All (Testing)", systemImage: "lock.open.fill") {
-                //             unlockAll()
-                //         }
-                //         Button("Reset Collection (Testing)", systemImage: "trash", role: .destructive) {
-                //             resetCollection()
-                //         }
-                //     } label: {
-                //         Image(systemName: "ladybug.fill")
-                //     }
-                // }
-                // #endif
+                #if DEBUG
+                ToolbarItem(placement: .topBarTrailing) {
+                    Menu {
+                        Button("Unlock All (Testing)", systemImage: "lock.open.fill") {
+                            unlockAll()
+                        }
+                        Button("Reset Collection (Testing)", systemImage: "trash", role: .destructive) {
+                            resetCollection()
+                        }
+                    } label: {
+                        Image(systemName: "ladybug.fill")
+                    }
+                }
+                #endif
             }
             // Full screen rather than a sheet — the warm background's
             // decorative fauna (vine canopy, leaf corners) is drawn edge to

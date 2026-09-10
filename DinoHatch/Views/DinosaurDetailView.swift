@@ -104,13 +104,17 @@ struct DinosaurDetailView: View {
             .padding()
             // Extra clearance so "Hatched on" and the "Found in" map card
             // can't end up behind the fern corners, which now render in
-            // front of content rather than behind it — same fix as
-            // Collection's grid, Settings' spacer row, and Alarm's
-            // footnote. No fade here (unlike CollectionView's ScrollView)
-            // — per feedback, this screen should behave like Settings:
-            // plain scrolling, content just never reaches the fern zone
-            // at all, rather than easing into it.
-            .padding(.bottom, 90)
+            // front of content rather than behind it. No fade here (unlike
+            // CollectionView's ScrollView) — per feedback, this screen
+            // should behave like Settings: plain scrolling, content just
+            // never reaches the fern zone at all, rather than easing into
+            // it. 90 (Settings/Alarm's own clearance) wasn't enough here —
+            // confirmed on device, the "Found in" map card was noticeably
+            // cut off behind the ferns/paw button. That card is much
+            // taller than those screens' plain text rows, and this screen
+            // has no fade to lean on the way Collection's grid does, so it
+            // needs more room on padding alone.
+            .padding(.bottom, 220)
             .frame(maxWidth: 500)
             .frame(maxWidth: .infinity)
         }
