@@ -7,8 +7,13 @@ collection ("Dino-pedia") the kid can explore for facts.
 This is an **alpha build** — functional end-to-end, with a full set of
 illustrated dinosaur art (skin, X-ray skeleton, and range map for all 30
 catalog dinosaurs) and a hand-rolled (no external library) hatch animation.
-See [Known alpha limitations](#known-alpha-limitations) below for what's
-still rough.
+It's been through several rounds of real device/Simulator testing and
+polish since — dark mode, layout against the decorative fern/vine art,
+animation timing, widget behavior — see the
+[Manual verification checklist](#manual-verification-checklist) for exactly
+what's confirmed so far versus still open, and
+[Known alpha limitations](#known-alpha-limitations) for what's rough by
+design rather than lack of testing.
 
 ## Requirements
 
@@ -698,19 +703,36 @@ membership, revert to local-only:
   the app happens to already be open and stays open through the exact
   alarm moment without ever backgrounding — a rare case, not handled for
   this alpha.
-- **Animation is basic**: functional and self-contained, but tuned for
-  "works, is charming enough for an alpha" rather than fully polished timing
-  — expect to want to tweak spring/duration values once you see it running.
+- **Animation timing is mostly tuned, not exhaustively**: the hatch/reveal
+  sequence, both celebration screens, and several interactive controls
+  (favorite heart, app icon picker, weekday toggle, parental gate) now have
+  entrance springs, transitions, and haptics — tuned through a few rounds
+  of on-device feedback, not just guessed once and left. Still worth a
+  fresh look before shipping; some corner of it likely still wants a nudge.
 
 ## Manual verification checklist
 
-This project was authored without access to Xcode/Simulator, so please
-verify on your Mac:
+This project started without access to Xcode/Simulator, but has since been
+through several rounds of real device/Simulator testing — checked items
+below have actually been confirmed that way; unchecked ones haven't been
+exercised yet and shouldn't be assumed to work. Please verify the rest on
+your Mac:
 
-- [ ] `xcodegen generate` succeeds and the project opens without errors
-- [ ] Builds and runs on iPhone + iPad simulators
-- [ ] Full loop: start a short timer (e.g. 1 min) → egg hatches → dinosaur
+- [x] `xcodegen generate` succeeds and the project opens without errors
+- [ ] Builds and runs on iPhone + iPad simulators — confirmed on iPhone 17
+      Pro Max Simulator; iPad not yet tested
+- [x] Full loop: start a short timer (e.g. 1 min) → egg hatches → dinosaur
       appears in the Collection tab → tap it to see facts
+- [x] Scroll the Collection grid all the way down — cards should fade out
+      before they'd touch the fern corners, not get cut off behind them,
+      and the last row should land with a reasonable (not huge) gap above
+      the ferns once settled
+- [x] Scroll a dinosaur's detail screen (tap any unlocked card) all the way
+      in both directions — the anatomy image/name at the top and the
+      "Found in" map card at the bottom should fade out before touching
+      the vine canopy/fern corners, same as Collection
+- [x] Scroll Settings all the way down — shouldn't leave a large empty gap
+      before the fern corners
 - [ ] Background the app mid-countdown, then foreground — countdown is
       still correct
 - [ ] Force-quit the app mid-countdown, relaunch — timer resumes or
@@ -743,11 +765,13 @@ verify on your Mac:
       Dynamic Island, if supported), leave the app closed past the end
       date — confirm it switches to "Ready!"/"An egg is ready to hatch!"
       instead of ticking past zero
-- [ ] With the device in system Dark Mode, check all three Home Screen
-      widgets and the Live Activity's Lock Screen banner — text should
-      stay readable (dark text on the light pastel background) rather
-      than flipping to unreadable light/white text. The Dynamic Island's
-      own content isn't covered by this and should keep using its usual
+- [x] With the device in system Dark Mode, check all three Home Screen
+      widgets — text should stay readable (dark text on the light pastel
+      background) rather than flipping to unreadable light/white text.
+      Confirmed for the widgets specifically.
+- [ ] Same Dark Mode check, but for the Live Activity's Lock Screen banner
+      — not yet confirmed on device. The Dynamic Island's own content isn't
+      covered by either of these and should keep using its usual
       light-on-dark-chrome appearance regardless of system setting.
 - [ ] `Cmd+U` unit tests pass
 
