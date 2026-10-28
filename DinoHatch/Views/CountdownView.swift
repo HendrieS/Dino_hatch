@@ -98,7 +98,7 @@ struct CountdownView: View {
             }
             .buttonStyle(.dinoChunkyRed)
             .padding(.horizontal, 32)
-            .accessibilityHint(isTimerLockEnabled ? Text("Locked. Requires solving a math check to cancel.") : Text(""))
+            .accessibilityHint(isTimerLockEnabled ? Text("Locked. Requires solving a math check to cancel.") : Text(verbatim: ""))
             // Full screen rather than a sheet — see CollectionView's
             // matching change for Settings; same bleeding fauna background
             // reasoning applies here.
