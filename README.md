@@ -15,6 +15,23 @@ what's confirmed so far versus still open, and
 [Known alpha limitations](#known-alpha-limitations) for what's rough by
 design rather than lack of testing.
 
+## Screenshots
+
+<table>
+  <tr>
+    <td align="center"><img src="docs/screenshots/Timer.png" width="200" alt="Timer screen: a speckled egg in a nest inside a circular duration dial set to 5:00, with a Start Timer button"><br><sub>Set a timer</sub></td>
+    <td align="center"><img src="docs/screenshots/Hatch2.png" width="200" alt="A baby long-necked dinosaur breaking out of its egg in the nest"><br><sub>The egg hatches</sub></td>
+    <td align="center"><img src="docs/screenshots/Hatch.png" width="200" alt="Reveal screen: &quot;A dinosaur hatched!&quot; with an illustrated Therizinosaurus and a fun fact"><br><sub>Meet the new dinosaur</sub></td>
+    <td align="center"><img src="docs/screenshots/Collection.png" width="200" alt="Dino-pedia collection grid showing 11 of 27 dinosaurs discovered, with rarity-colored card borders"><br><sub>Build the Dino-pedia</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/screenshots/Details.png" width="200" alt="Carnotaurus detail page with its illustration, a Hold to x-ray hint, and era, diet, length and weight facts"><br><sub>Facts and X-ray view</sub></td>
+    <td align="center"><img src="docs/screenshots/Alarm.png" width="200" alt="Dino Alarm screen with a 1 day streak, wake-up time picker and weekday toggles"><br><sub>Dino alarm with streaks</sub></td>
+    <td align="center"><img src="docs/screenshots/Widgets.png" width="200" alt="iPhone Home Screen with the Quick Timer widget showing 5, 10, 15 and 30 minute buttons, next to the Dino Hatch app icon"><br><sub>Home Screen widget</sub></td>
+    <td></td>
+  </tr>
+</table>
+
 ## Requirements
 
 - A Mac with Xcode 15+ (targets iOS 17+)
