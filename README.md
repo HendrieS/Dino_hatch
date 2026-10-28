@@ -790,7 +790,7 @@ your Mac:
       — not yet confirmed on device. The Dynamic Island's own content isn't
       covered by either of these and should keep using its usual
       light-on-dark-chrome appearance regardless of system setting.
-- [ ] `Cmd+U` unit tests pass
+- [x] `Cmd+U` unit tests pass (105/105, iPhone 17 Pro Max simulator, iOS 26.5)
 
 ## Before you release
 
