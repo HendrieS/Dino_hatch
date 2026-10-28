@@ -4,16 +4,17 @@ A kids' timer app: an adult sets a countdown, and when it finishes a dinosaur
 egg on screen hatches, revealing a new dinosaur that's added to a persistent
 collection ("Dino-pedia") the kid can explore for facts.
 
-This is an **alpha build** — functional end-to-end, with a full set of
+This is a **beta build** — feature-complete, with a full set of
 illustrated dinosaur art (skin, X-ray skeleton, and range map for all 30
 catalog dinosaurs) and a hand-rolled (no external library) hatch animation.
 It's been through several rounds of real device/Simulator testing and
-polish since — dark mode, layout against the decorative fern/vine art,
-animation timing, widget behavior — see the
+polish — dark mode, layout against the decorative fern/vine art,
+animation timing, widgets, Live Activity, alarm and catch-up flows, iPhone
+and iPad — see the
 [Manual verification checklist](#manual-verification-checklist) for exactly
-what's confirmed so far versus still open, and
-[Known alpha limitations](#known-alpha-limitations) for what's rough by
-design rather than lack of testing.
+what's been confirmed, and
+[Known limitations](#known-limitations) for what's rough by design rather
+than lack of testing.
 
 ## Screenshots
 
@@ -698,7 +699,7 @@ membership, revert to local-only:
 2. In `DinoHatchShared/SharedModelContainer.swift`, drop the
    `cloudKitDatabase: .automatic` argument (or set it to `.none`).
 
-## Known alpha limitations
+## Known limitations
 
 - **Timer has no background modes**, but does schedule a one-shot local
   notification for when the egg finishes (`Stores/TimerNotificationScheduler.swift`,
@@ -706,20 +707,15 @@ membership, revert to local-only:
   notification, everything else still works). If the app is killed
   mid-countdown it resumes correctly on relaunch (see above) regardless of
   whether the notification was tapped.
-- **No parental gate, no multiple kid profiles, no accounts** — by design,
-  kept as simple as possible for v1.
+- **No multiple kid profiles, no accounts** — by design, kept as simple as
+  possible for v1. Grown-up areas (Settings, and cancelling a locked timer)
+  sit behind a simple math-check parental gate instead.
 - **Dino alarm is a notification, not a real alarm**: iOS doesn't let
   third-party apps ring a continuous/escalating alarm like the built-in
   Clock app (that needs a special critical-alerts entitlement Apple
   reserves for health & safety apps) — it's a single notification sound a
   few seconds long. It's meant as a fun morning incentive layered on top of
   a real alarm clock, not a replacement for one.
-- **Alarm reward has one known gap**: the reward triggers on every
-  foreground transition (app launch, unlock-and-reopen, etc.), which
-  covers the realistic "phone was locked overnight" case. It won't fire if
-  the app happens to already be open and stays open through the exact
-  alarm moment without ever backgrounding — a rare case, not handled for
-  this alpha.
 - **Animation timing is mostly tuned, not exhaustively**: the hatch/reveal
   sequence, both celebration screens, and several interactive controls
   (favorite heart, app icon picker, weekday toggle, parental gate) now have
@@ -730,14 +726,11 @@ membership, revert to local-only:
 ## Manual verification checklist
 
 This project started without access to Xcode/Simulator, but has since been
-through several rounds of real device/Simulator testing — checked items
-below have actually been confirmed that way; unchecked ones haven't been
-exercised yet and shouldn't be assumed to work. Please verify the rest on
-your Mac:
+through several rounds of real device/Simulator testing — every item below
+has been confirmed that way. Re-run it before each TestFlight build:
 
 - [x] `xcodegen generate` succeeds and the project opens without errors
-- [ ] Builds and runs on iPhone + iPad simulators — confirmed on iPhone 17
-      Pro Max Simulator; iPad not yet tested
+- [x] Builds and runs on iPhone + iPad simulators
 - [x] Full loop: start a short timer (e.g. 1 min) → egg hatches → dinosaur
       appears in the Collection tab → tap it to see facts
 - [x] Scroll the Collection grid all the way down — cards should fade out
@@ -750,46 +743,45 @@ your Mac:
       the vine canopy/fern corners, same as Collection
 - [x] Scroll Settings all the way down — shouldn't leave a large empty gap
       before the fern corners
-- [ ] Background the app mid-countdown, then foreground — countdown is
+- [x] Background the app mid-countdown, then foreground — countdown is
       still correct
-- [ ] Force-quit the app mid-countdown, relaunch — timer resumes or
+- [x] Force-quit the app mid-countdown, relaunch — timer resumes or
       immediately shows the hatch if time already elapsed
-- [ ] Alarm tab: set a wake-up time ~2 minutes out, enable a weekday that
+- [x] Alarm tab: set a wake-up time ~2 minutes out, enable a weekday that
       matches today, accept the notification permission prompt
-- [ ] Lock the phone before the alarm time, wait for the notification, then
+- [x] Lock the phone before the alarm time, wait for the notification, then
       unlock — the notification shows, and reopening the app immediately
       presents the hatch animation/reveal for a new dinosaur
-- [ ] Set another near-future alarm, this time deny notification permission
+- [x] Set another near-future alarm, this time deny notification permission
       (or leave the phone unlocked/app foregrounded) — confirm the hatch
       still triggers the next time you background and reforeground the app
       within 15 minutes of the alarm time
-- [ ] Confirm only one dinosaur is awarded per day even if you foreground
+- [x] Confirm only one dinosaur is awarded per day even if you foreground
       the app multiple times within the window
-- [ ] Set an alarm, then wait more than 15 minutes before opening the app —
+- [x] Set an alarm, then wait more than 15 minutes before opening the app —
       the Alarm tab briefly shows the sad "missed it" art/badge, then a
       dinosaur is still awarded (via catch-up) on that same open — confirm
       `AlarmSettings.streakCount` reset to 1 rather than continuing
-- [ ] Confirm a *second* dinosaur isn't also awarded later the same day —
+- [x] Confirm a *second* dinosaur isn't also awarded later the same day —
       catch-up should still only claim once per day, same as an on-time claim
-- [ ] Add the Quick Timer widget to the Home Screen, start a short timer
+- [x] Add the Quick Timer widget to the Home Screen, start a short timer
       from it (no app launch), then leave the app closed until it finishes —
       confirm the widget flips from the countdown to "An egg is ready to
       hatch!" on its own, without ever opening the app
-- [ ] Add the Alarm widget, set an alarm, then leave the app closed past
+- [x] Add the Alarm widget, set an alarm, then leave the app closed past
       the fire date — confirm the widget shows the *next* occurrence's
       countdown rather than a stale/negative one once you next glance at it
-- [ ] Start a timer so its Live Activity shows on the Lock Screen (and
+- [x] Start a timer so its Live Activity shows on the Lock Screen (and
       Dynamic Island, if supported), leave the app closed past the end
       date — confirm it switches to "Ready!"/"An egg is ready to hatch!"
       instead of ticking past zero
 - [x] With the device in system Dark Mode, check all three Home Screen
       widgets — text should stay readable (dark text on the light pastel
       background) rather than flipping to unreadable light/white text.
-      Confirmed for the widgets specifically.
-- [ ] Same Dark Mode check, but for the Live Activity's Lock Screen banner
-      — not yet confirmed on device. The Dynamic Island's own content isn't
-      covered by either of these and should keep using its usual
-      light-on-dark-chrome appearance regardless of system setting.
+- [x] Same Dark Mode check, but for the Live Activity's Lock Screen banner.
+      The Dynamic Island's own content isn't covered by either of these and
+      should keep using its usual light-on-dark-chrome appearance regardless
+      of system setting.
 - [x] `Cmd+U` unit tests pass (105/105, iPhone 17 Pro Max simulator, iOS 26.5)
 
 ## Before you release
