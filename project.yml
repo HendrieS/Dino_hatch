@@ -116,6 +116,9 @@ targets:
     settings:
       base:
         SWIFT_VERSION: "5.0"
+        # The test bundle has no Info.plist of its own and needs one to be
+        # code signed — let Xcode synthesize it rather than committing one.
+        GENERATE_INFOPLIST_FILE: YES
 
 schemes:
   DinoHatch:
