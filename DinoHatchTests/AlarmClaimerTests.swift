@@ -251,7 +251,9 @@ final class AlarmClaimerTests: XCTestCase {
     }
 
     func testNotCatchUpReadyOnANewDay() {
-        let now = date(day: 9, hour: 7, minute: 30) // Thursday, a fresh day
+        // Wednesday's alarm was missed (never claimed), but it's now Thursday
+        // before Thursday's own alarm — yesterday's miss mustn't carry over.
+        let now = date(day: 9, hour: 6, minute: 30)
         let ready = AlarmClaimer.isCatchUpReady(
             hour: 7, minute: 0, weekdays: [4, 5],
             lastHatchDate: nil, now: now, calendar: calendar
