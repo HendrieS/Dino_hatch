@@ -4,9 +4,9 @@ import Combine
 import WidgetKit
 
 struct RootTabView: View {
-    /// Not `private` — `FloatingNavMenu` (a separate file) binds to this
-    /// same type so it can drive `selectedTab` without RootTabView needing
-    /// to translate to/from some more generic representation.
+    /// Not `private` — `DinoTabBar` (a separate file) binds to this same
+    /// type so it can drive `selectedTab` without RootTabView needing to
+    /// translate to/from some more generic representation.
     enum Tab: Hashable {
         case timer, alarm, collection
     }
@@ -24,7 +24,7 @@ struct RootTabView: View {
     @State private var showCollectionComplete = false
     @State private var selectedTab: Tab = .timer
     /// True while `TimerHomeView` is showing its hatch animation or reveal
-    /// — see `FloatingNavMenu`'s conditional rendering below.
+    /// — see `showsTabBar` below.
     @State private var isTimerCelebrating = false
     /// True while `CollectionView` has a dinosaur's detail view pushed —
     /// same reasoning and same conditional rendering as
@@ -36,10 +36,15 @@ struct RootTabView: View {
     /// Refreshed every minute (and on every foreground transition) purely
     /// to keep the Alarm destination's missed-window badge current — unlike
     /// the timer banner's TimelineView, this needs to tick even while the
-    /// Timer screen is showing, since the badge lives on `FloatingNavMenu`,
+    /// Timer screen is showing, since the badge lives on `DinoTabBar`,
     /// which stays on screen across every tab.
     @State private var now: Date = .now
     private let minuteTimer = Timer.publish(every: 60, on: .main, in: .common).autoconnect()
+    /// Measured from `mainTabView` itself (see its `onGeometryChange`s) to
+    /// build `tabBarMetrics` — the home-indicator strip (0 on iPhone SE)
+    /// and the height between the status bar and that strip.
+    @State private var homeIndicatorInset: CGFloat = 0
+    @State private var safeAreaHeight: CGFloat = 0
 
     var body: some View {
         Group {
@@ -80,6 +85,17 @@ struct RootTabView: View {
                     )
                 }
             }
+            .environment(\.dinoTabBarMetrics, tabBarMetrics)
+            // An inset rather than an overlay, so every screen's own
+            // safe area ends at the bar's top edge — scroll views keep
+            // their last item reachable above it, and Timer/Alarm's
+            // FitScrollView only enables scrolling when content genuinely
+            // doesn't fit above the bar.
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                if showsTabBar {
+                    DinoTabBar(selectedTab: $selectedTab, showAlarmBadge: alarmWasMissedToday(at: now))
+                }
+            }
 
             if selectedTab != .timer {
                 TimelineView(.periodic(from: .now, by: 1)) { context in
@@ -95,24 +111,25 @@ struct RootTabView: View {
                     .animation(.spring(response: 0.4, dampingFraction: 0.8), value: isTimerReady(at: context.date))
                 }
             }
-
-            // Hidden during Timer's own hatching/reveal phases (full-screen
-            // celebratory moments, not "the Timer screen" itself — matching
-            // how the menu is already absent during the similarly
-            // celebratory AlarmHatchView full-screen cover) and while a
-            // dinosaur's detail view is pushed on Collection, for the same
-            // "screen the kid has drilled into" reasoning.
-            let hideForTimer = selectedTab == .timer && isTimerCelebrating
-            let hideForCollection = selectedTab == .collection && isCollectionShowingDetail
-            if !hideForTimer && !hideForCollection {
-                FloatingNavMenu(selectedTab: $selectedTab, showAlarmBadge: alarmWasMissedToday(at: now))
-            }
+        }
+        // The keyboard (Collection's search field) shouldn't push the tab
+        // bar up with it, or change the measurements below mid-typing.
+        .ignoresSafeArea(.keyboard, edges: .bottom)
+        .onGeometryChange(for: CGFloat.self) { proxy in
+            proxy.safeAreaInsets.bottom
+        } action: { inset in
+            homeIndicatorInset = inset
+        }
+        .onGeometryChange(for: CGFloat.self) { proxy in
+            proxy.size.height
+        } action: { height in
+            safeAreaHeight = height
         }
         // Tints every native control in the app (pickers, toggles, date
         // pickers, ...) green instead of system blue — no longer needed to
-        // match a tab bar label's color specifically (that bar is gone),
-        // but still the only thing giving those controls their green
-        // accent, so it stays.
+        // match a system tab bar label's color specifically (DinoTabBar
+        // sets its own colors), but still the only thing giving those
+        // controls their green accent, so it stays.
         .tint(Color.dinoGreen)
         // Attached to the outer ZStack rather than the switching Group
         // above — that Group's content changes identity on every tab
@@ -178,6 +195,31 @@ struct RootTabView: View {
                 showCollectionComplete = false
             }
         }
+    }
+
+    /// Hidden during Timer's own hatching/reveal phases (full-screen
+    /// celebratory moments, not "the Timer screen" itself — matching how
+    /// the bar is already absent during the similarly celebratory
+    /// AlarmHatchView full-screen cover) and while a dinosaur's detail view
+    /// is pushed on Collection, for the same "screen the kid has drilled
+    /// into" reasoning.
+    private var showsTabBar: Bool {
+        let hideForTimer = selectedTab == .timer && isTimerCelebrating
+        let hideForCollection = selectedTab == .collection && isCollectionShowingDetail
+        return !hideForTimer && !hideForCollection
+    }
+
+    /// The regular Timer layout needs about 650pt between the status bar
+    /// and the top of the tab bar (sign, 260pt ring, time, Start button);
+    /// anything shorter gets the compact layout. That's iPhone SE (≈580pt)
+    /// and iPad mini in landscape (≈630pt) — a 13 mini (≈660pt) still fits
+    /// the regular one.
+    private var tabBarMetrics: DinoTabBarMetrics {
+        DinoTabBarMetrics(
+            fernLift: showsTabBar ? homeIndicatorInset + 8 : 0,
+            barHeight: showsTabBar ? DinoTabBar.contentHeight + homeIndicatorInset : 0,
+            isCompact: safeAreaHeight > 0 && safeAreaHeight - DinoTabBar.contentHeight < 650
+        )
     }
 
     /// A cheap, `Equatable` stand-in for "have the alarm's settings

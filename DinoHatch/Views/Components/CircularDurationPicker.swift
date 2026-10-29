@@ -76,6 +76,9 @@ struct CircularDurationPicker: View {
             // it'll sit during the countdown, makes the picker itself feel
             // like part of the same hatch rather than a separate setup step.
             EggView(remainingFraction: 1, date: .now)
+                // EggView is drawn for the regular 260pt ring — scaled down
+                // with the compact 220pt one so it still fits inside.
+                .scaleEffect(diameter / 260)
 
             ForEach(0..<60, id: \.self) { minute in
                 if minute % 5 != 0 {

@@ -121,10 +121,10 @@ struct DinosaurDetailView: View {
         // content needs to fade to full transparency before it'd actually
         // be covered by that art rather than staying opaque right up
         // until it's abruptly clipped. The bottom needs more room than
-        // the top since the fern art (plus, on Collection, the paw
-        // button — not shown on this pushed screen, but the fern art
-        // itself is the same size) reaches further up than the vine
-        // canopy does down.
+        // the top since the fern art reaches further up than the vine
+        // canopy does down. (The tab bar is hidden on this pushed screen,
+        // so the ferns sit at the screen's bottom edge here, not lifted
+        // above the bar as on Collection itself.)
         //
         // Applied here, directly to the ScrollView, and *before*
         // `.dinoWarmBackground()` below — same ordering as CollectionView

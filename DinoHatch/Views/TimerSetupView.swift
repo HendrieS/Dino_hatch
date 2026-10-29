@@ -8,6 +8,7 @@ struct TimerSetupView: View {
     @Query private var unlockedDinosaurs: [UnlockedDinosaur]
     @State private var totalSeconds: Int = 300
     @State private var showSettings = false
+    @Environment(\.dinoTabBarMetrics) private var tabBarMetrics
 
     var body: some View {
         NavigationStack {
@@ -31,8 +32,15 @@ struct TimerSetupView: View {
                 // scroll/bounce on taller devices where the ring and button
                 // already fit without it.
                 FitScrollView {
-                    VStack(spacing: 32) {
-                        CircularDurationPicker(totalSeconds: $totalSeconds)
+                    // Compact (iPhone SE, iPad mini landscape — see
+                    // DinoTabBarMetrics.isCompact): a smaller ring and a
+                    // tighter gap, so Start Timer clears the tab bar
+                    // without scrolling.
+                    VStack(spacing: tabBarMetrics.isCompact ? 24 : 32) {
+                        CircularDurationPicker(
+                            totalSeconds: $totalSeconds,
+                            diameter: tabBarMetrics.isCompact ? 220 : 260
+                        )
                             // Small, deliberately tight gap below the sign —
                             // matches the confirmed-correct spacing from
                             // before the fix above.
@@ -68,7 +76,7 @@ struct TimerSetupView: View {
             .padding(.horizontal)
             .frame(maxWidth: 500)
             .frame(maxWidth: .infinity)
-            .dinoWarmBackground()
+            .dinoWarmBackground(fernLift: tabBarMetrics.fernLift, fernsBehindContent: true)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {

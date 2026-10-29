@@ -10,6 +10,7 @@ struct AlarmView: View {
     @State private var weekdays: Set<Int> = []
     @State private var notificationsDenied = false
     @State private var showSettings = false
+    @Environment(\.dinoTabBarMetrics) private var tabBarMetrics
 
     private let orderedWeekdays = [2, 3, 4, 5, 6, 7, 1] // Monday...Sunday
 
@@ -145,7 +146,7 @@ struct AlarmView: View {
                     // stretch of the screen felt too spread out — the
                     // second round specifically to keep the footnote at the
                     // bottom from ending up behind the fern corners (see
-                    // this VStack's own closing `.padding(.bottom, 90)` for
+                    // this VStack's own closing `.padding(.bottom, 64)` for
                     // the other half of that fix: reserving enough
                     // clearance there for FitScrollView to actually enable
                     // scrolling once content doesn't fit above the ferns,
@@ -257,18 +258,21 @@ struct AlarmView: View {
                     }
                     }
                     .padding(.bottom)
-                    // 24 -> 90: the ferns now render in front of content
-                    // (not behind it — see RootTabView's matching change),
-                    // so this needs real clearance to keep the footnote
-                    // text from ending up behind them, same reasoning as
-                    // Collection's grid and Settings' spacer row.
-                    .padding(.bottom, 90)
+                    // 24 -> 90 -> 64: the ferns render in front of content
+                    // (not behind it), so this needs real clearance to keep
+                    // the footnote text from ending up behind them, same
+                    // reasoning as Collection's grid and Settings' spacer
+                    // row. 64 since the tab bar replaced the paw button —
+                    // this now counts up from the bar's top edge, and the
+                    // ferns reach about 140pt above it instead of 166pt
+                    // above the home indicator.
+                    .padding(.bottom, 64)
                 }
             }
             .padding(.horizontal)
             .frame(maxWidth: 500)
             .frame(maxWidth: .infinity)
-            .dinoWarmBackground()
+            .dinoWarmBackground(fernLift: tabBarMetrics.fernLift)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     SupporterBadgeView()

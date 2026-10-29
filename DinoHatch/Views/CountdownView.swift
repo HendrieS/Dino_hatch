@@ -10,6 +10,14 @@ struct CountdownView: View {
     @Query private var appSettings: [AppSettings]
     @State private var hasCompleted = false
     @State private var showLockGate = false
+    @Environment(\.dinoTabBarMetrics) private var tabBarMetrics
+
+    /// Matches TimerSetupView's ring — 220 instead of 260 on short screens
+    /// (see DinoTabBarMetrics.isCompact), so starting the timer doesn't
+    /// change the ring's size.
+    private var ringDiameter: CGFloat {
+        tabBarMetrics.isCompact ? 220 : 260
+    }
 
     /// Off by default — see `AppSettings.isTimerLockEnabled`.
     private var isTimerLockEnabled: Bool {
@@ -28,7 +36,7 @@ struct CountdownView: View {
     /// whatever occupied that space, so everything below (including the
     /// Cancel Timer button) jumped up the instant the timer started.
     private var countdownContent: some View {
-        VStack(spacing: 40) {
+        VStack(spacing: tabBarMetrics.isCompact ? 28 : 40) {
             SignTitleView(text: "Dino Hatch")
                 // Experimental — see TimerSetupView's matching offset.
                 .offset(y: -40)
@@ -39,7 +47,7 @@ struct CountdownView: View {
             // here just fought that and pulled the ring back down.
 
             // Same ring + egg composition as CircularDurationPicker's setup
-            // state (260pt diameter, matching), so starting the timer feels
+            // state (same diameter, matching), so starting the timer feels
             // like a continuation rather than a completely different
             // screen — the ring's progress arc now shrinks as the egg's
             // own remainingFraction does, rather than being a separate
@@ -49,10 +57,11 @@ struct CountdownView: View {
                 VStack(spacing: 12) {
                     ZStack {
                         DialRingView(progress: engine.remainingFraction(at: context.date))
-                            .frame(width: 260, height: 260)
+                            .frame(width: ringDiameter, height: ringDiameter)
                         EggView(remainingFraction: engine.remainingFraction(at: context.date), date: context.date)
+                            .scaleEffect(ringDiameter / 260)
                     }
-                    .frame(width: 260, height: 260)
+                    .frame(width: ringDiameter, height: ringDiameter)
                     // Watches the completion Bool rather than `context.date`
                     // itself — a raw `Date` changes on every 0.1s tick, and
                     // SwiftUI logs "action tried to update multiple times
@@ -120,7 +129,7 @@ struct CountdownView: View {
         // would reintroduce the very jump this screen's title element was
         // added to prevent.
         .padding(.top, 24)
-        .dinoWarmBackground()
+        .dinoWarmBackground(fernLift: tabBarMetrics.fernLift, fernsBehindContent: true)
         // Keep the screen awake for the duration of the countdown so it
         // doesn't lock mid-timer; restored as soon as this view goes away
         // (cancelled, hatched, or navigated off).

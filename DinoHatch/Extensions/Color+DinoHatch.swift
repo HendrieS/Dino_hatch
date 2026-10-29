@@ -54,55 +54,76 @@ extension View {
     /// (e.g. Settings) still presents above all of this regardless — that's
     /// a separate presentation layer in SwiftUI, not affected by any
     /// overlay/z-ordering within the presenting view.
-    func dinoWarmBackground() -> some View {
-        background(
-            LinearGradient(
-                colors: [Color.dinoWarmBackgroundTop, Color.dinoWarmBackgroundBottom],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
+    ///
+    /// `fernLift` raises the two bottom fern clusters off the screen's
+    /// bottom edge — the tab screens pass `DinoTabBarMetrics.fernLift` so
+    /// the ferns grow up from behind the tab bar instead of mostly hiding
+    /// under it. `fernsBehindContent` paints the art behind this view's
+    /// content instead of in front — the Timer screens use it so the fern
+    /// tips sit behind the Start/Cancel button on smaller phones rather
+    /// than over it.
+    @ViewBuilder
+    func dinoWarmBackground(fernLift: CGFloat = 0, fernsBehindContent: Bool = false) -> some View {
+        let gradient = LinearGradient(
+            colors: [Color.dinoWarmBackgroundTop, Color.dinoWarmBackgroundBottom],
+            startPoint: .top,
+            endPoint: .bottom
         )
-        .overlay(
-            ZStack {
-                // Top canopy corners only for now — a tiling middle strip
-                // (to fill the gap between them on wide screens like iPad)
-                // was tried and pulled per user feedback; see task #29's
-                // history for both middle-art attempts. Leaves an open gap
-                // on very wide screens until that's revisited, same
-                // trade-off the single-image version had.
-                HStack(alignment: .top, spacing: 0) {
-                    Image("vine-canopy-left")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 190)
-                    Spacer(minLength: 0)
-                    Image("vine-canopy-right")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 170)
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                .allowsHitTesting(false)
-                Image("leaf-corner-left")
+        .ignoresSafeArea()
+
+        if fernsBehindContent {
+            background(DinoJungleArt(fernLift: fernLift))
+                .background(gradient)
+        } else {
+            background(gradient)
+                .overlay(DinoJungleArt(fernLift: fernLift))
+        }
+    }
+}
+
+/// The vine canopy and fern corner art `View.dinoWarmBackground()` paints
+/// over (or behind) a screen.
+struct DinoJungleArt: View {
+    var fernLift: CGFloat
+
+    var body: some View {
+        ZStack {
+            // Top canopy corners only for now — a tiling middle strip
+            // (to fill the gap between them on wide screens like iPad)
+            // was tried and pulled per user feedback; see task #29's
+            // history for both middle-art attempts. Leaves an open gap
+            // on very wide screens until that's revisited, same
+            // trade-off the single-image version had.
+            HStack(alignment: .top, spacing: 0) {
+                Image("vine-canopy-left")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 200, height: 200)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-                    .allowsHitTesting(false)
-                Image("leaf-corner-right")
+                    .frame(width: 190)
+                Spacer(minLength: 0)
+                Image("vine-canopy-right")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 200, height: 200)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
-                    // Nudged further into the corner than plain alignment
-                    // allows (alignment alone only gets it flush with the
-                    // edge) — bleeds it slightly past the screen bounds to
-                    // match the left cluster's tucked-in-the-corner feel.
-                    .offset(x: 24, y: 24)
-                    .allowsHitTesting(false)
+                    .frame(width: 170)
             }
-            .ignoresSafeArea()
-        )
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            Image("leaf-corner-left")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 200, height: 200)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+                .offset(y: -fernLift)
+            Image("leaf-corner-right")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 200, height: 200)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+                // Nudged further into the corner than plain alignment
+                // allows (alignment alone only gets it flush with the
+                // edge) — bleeds it slightly past the screen bounds to
+                // match the left cluster's tucked-in-the-corner feel.
+                .offset(x: 24, y: 24 - fernLift)
+        }
+        .allowsHitTesting(false)
+        .ignoresSafeArea()
     }
 }

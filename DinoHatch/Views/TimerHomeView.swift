@@ -10,8 +10,8 @@ struct TimerHomeView: View {
     /// there waiting.
     var isActive: Bool
     /// Mirrors whether `phase` is `.hatching`/`.reveal` — `RootTabView`
-    /// hides `FloatingNavMenu` while this is true, since those two phases
-    /// are full-screen celebratory moments (matching how the menu is
+    /// hides `DinoTabBar` while this is true, since those two phases
+    /// are full-screen celebratory moments (matching how the bar is
     /// already absent during the similarly celebratory `AlarmHatchView`
     /// full-screen cover) rather than "the Timer screen" a kid would
     /// expect to navigate away from mid-animation.

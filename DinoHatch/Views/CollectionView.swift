@@ -34,7 +34,7 @@ struct CollectionView: View {
     }
 
     /// Mirrors whether a dinosaur's detail view is pushed — `RootTabView`
-    /// hides `FloatingNavMenu` while this is true, same reasoning as
+    /// hides `DinoTabBar` while this is true, same reasoning as
     /// `TimerHomeView.isCelebrating`: a screen the kid has drilled into,
     /// not "the Collection screen" itself.
     @Binding var isShowingDetail: Bool
@@ -49,6 +49,7 @@ struct CollectionView: View {
 
     @State private var path = NavigationPath()
     @State private var showSettings = false
+    @Environment(\.dinoTabBarMetrics) private var tabBarMetrics
     @State private var searchText = ""
     @State private var dietFilter: Dinosaur.Diet?
     @State private var rarityFilter: Dinosaur.Rarity?
@@ -225,15 +226,19 @@ struct CollectionView: View {
                             }
                         }
                         .padding()
-                        // Just enough room for the last row to scroll clear
-                        // of the paw button — the much larger bottom fade
-                        // above is what actually keeps cards from looking
-                        // like they're hiding behind the fern corners as
-                        // they scroll past, so this no longer needs to be a
-                        // large clearance on its own (180, then 60, both
+                        // Just enough room for the last row to scroll up to
+                        // the fade below — the much larger bottom fade is
+                        // what actually keeps cards from looking like
+                        // they're hiding behind the fern corners as they
+                        // scroll past, so this doesn't need to be a large
+                        // clearance on its own (180, then 60, both
                         // confirmed on device — 180 left too much empty
-                        // space, 90 lands right in between).
-                        .padding(.bottom, 90)
+                        // space, 90 landed right in between). Now counted
+                        // from the tab bar's top edge rather than the home
+                        // indicator, so it's the fern lift + 22 (30 on
+                        // iPhone SE, 64 with a home indicator) to land the
+                        // last row in the same spot relative to the fade.
+                        .padding(.bottom, tabBarMetrics.fernLift + 22)
                     }
                     }
                     .background(
@@ -257,8 +262,8 @@ struct CollectionView: View {
                 .scrollDisabled(!isScrollable)
                 // Fades whatever's currently scrolled into view near the
                 // top/bottom edges, so cards ease out of sight passing
-                // behind the sign (top) or down toward the paw button/fern
-                // corners (bottom) instead of clipping there. Sized as a
+                // behind the sign (top) or down toward the fern corners
+                // (bottom) instead of clipping there. Sized as a
                 // fraction of this ScrollView's own measured height (via
                 // the GeometryReader below) rather than a fixed offset
                 // guessed from RootTabView, which needed the sign's exact
@@ -278,7 +283,7 @@ struct CollectionView: View {
                 //
                 // The bottom fade also isn't a single clear-at-the-edge
                 // stop like the top one — it reaches *full* transparency
-                // (`bottomFadeEnd`, 90pt from the bottom) well before the
+                // (`bottomFadeEnd`, 90pt above the ferns' base) well before the
                 // true edge, then stays fully clear the rest of the way.
                 // A plain two-stop fade only reaches full transparency
                 // exactly at the edge, so a card scrolled into the fern
@@ -300,15 +305,27 @@ struct CollectionView: View {
                         // rasterize the mask at all for that frame. Capping
                         // each at 0.5 keeps every stop validly ordered at
                         // any height (bottomFadeStart ≥ bottomFadeEnd is
-                        // preserved through the clamp since 170 ≥ 90); real
+                        // preserved through the clamp since the start is
+                        // always 80pt above the end); real
                         // layout heights are always well above these
                         // fades' 2x points, so this only ever kicks in
                         // during that transient pass, correcting itself the
                         // instant real geometry resolves.
                         let height = max(proxy.size.height, 1)
+                        // The fade is tuned against the ferns, which now
+                        // sit `fernLift` higher (above the tab bar) — so it
+                        // moves up with them. Measured from the screen's
+                        // bottom edge and converted to this ScrollView's
+                        // own frame, which may or may not extend down
+                        // behind the tab bar (its frame bottom sits
+                        // `barHeight - safeAreaInsets.bottom` above the
+                        // screen's either way). With no tab bar both terms
+                        // are 0, leaving the original 90/170.
+                        let frameBottomAboveScreen = max(tabBarMetrics.barHeight - proxy.safeAreaInsets.bottom, 0)
+                        let fadeEndAboveFrame = max(90 + tabBarMetrics.fernLift - frameBottomAboveScreen, 0)
                         let topFade = min(36 / height, 0.5)
-                        let bottomFadeStart = min(170 / height, 0.5)
-                        let bottomFadeEnd = min(90 / height, 0.5)
+                        let bottomFadeStart = min((fadeEndAboveFrame + 80) / height, 0.5)
+                        let bottomFadeEnd = min(fadeEndAboveFrame / height, 0.5)
                         LinearGradient(
                             stops: [
                                 .init(color: .clear, location: 0),
@@ -323,7 +340,7 @@ struct CollectionView: View {
                     }
                 )
             }
-            .dinoWarmBackground()
+            .dinoWarmBackground(fernLift: tabBarMetrics.fernLift)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     SupporterBadgeView()

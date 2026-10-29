@@ -13,6 +13,16 @@ import SwiftUI
 /// VoiceOver still announces the screen name.
 struct SignTitleView: View {
     let text: LocalizedStringKey
+    @Environment(\.dinoTabBarMetrics) private var tabBarMetrics
+
+    /// 160pt instead of 200 on short screens (see
+    /// `DinoTabBarMetrics.isCompact`), giving the Timer screen back the
+    /// height it needs to keep Start Timer above the tab bar — applied on
+    /// every screen, not just Timer, so the sign doesn't change size when
+    /// switching tabs. The text and its inset scale with it.
+    private var width: CGFloat {
+        tabBarMetrics.isCompact ? 160 : 200
+    }
 
     /// Matches the source art's own aspect ratio (871x648 after cropping to
     /// its content bounding box) so the sign never looks stretched.
@@ -20,7 +30,7 @@ struct SignTitleView: View {
 
     var body: some View {
         Text(text)
-            .font(.system(size: 20, weight: .bold, design: .rounded))
+            .font(.system(size: 20 * width / 200, weight: .bold, design: .rounded))
             .foregroundStyle(Color(red: 0.24, green: 0.16, blue: 0.07))
             // A crude "carved into wood" look — a light shadow below and a
             // dark shadow above, both with zero blur radius so they read as
@@ -28,8 +38,8 @@ struct SignTitleView: View {
             .shadow(color: .white.opacity(0.3), radius: 0, x: 0, y: 1)
             .shadow(color: .black.opacity(0.35), radius: 0, x: 0, y: -1)
             .multilineTextAlignment(.center)
-            .padding(.horizontal, 26)
-            .frame(width: 200, height: 200 * Self.aspectRatio)
+            .padding(.horizontal, 26 * width / 200)
+            .frame(width: width, height: width * Self.aspectRatio)
             .background(
                 Image("sign-wooden-plank")
                     .resizable()

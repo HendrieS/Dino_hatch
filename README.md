@@ -784,6 +784,28 @@ has been confirmed that way. Re-run it before each TestFlight build:
       of system setting.
 - [x] `Cmd+U` unit tests pass (105/105, iPhone 17 Pro Max simulator, iOS 26.5)
 
+### New since build 3 — not yet verified
+
+The paw button + pop-up menu was replaced by a bottom tab bar (tester
+feedback: one tap instead of two). Check before shipping build 4:
+
+- [ ] iPhone 17 Pro Max: Timer, Alarm and Collection switch with one tap;
+      the selected tab shows the green leaf highlight; the red dot still
+      appears on Alarm after a missed alarm
+- [ ] iPhone 13 mini: Start Timer (and Cancel Timer while counting) sits
+      fully above the bar, with the fern tips behind the button, not over it
+- [ ] iPhone SE: the compact layout kicks in (smaller sign and ring) and
+      Start Timer / Cancel Timer still sit above the bar without scrolling
+- [ ] Collection on the 13 mini and SE: cards fade out just before the
+      ferns, and the last row can still scroll fully into view
+- [ ] Alarm on the SE: the footnote at the bottom can be scrolled into view
+- [ ] Opening a dinosaur's details hides the bar; going back brings it back
+      without the grid jumping
+- [ ] Hatching a dinosaur hides the bar during the animation and reveal
+- [ ] Collection's search field: the keyboard doesn't push the bar up
+- [ ] iPad: the three tabs stay grouped in the middle of the bar; iPad mini
+      in landscape gets the compact Timer layout
+
 ## Before you release
 
 Steps that only make sense once, right before shipping to the App Store —
