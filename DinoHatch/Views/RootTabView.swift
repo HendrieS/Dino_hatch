@@ -343,10 +343,11 @@ struct RootTabView: View {
     /// still showing its own fullScreenCover — see the `onChange` above.
     private func checkCollectionComplete() {
         guard pendingAlarmDinosaur == nil, let settings = appSettings.first else { return }
-        let totalCatalogCount = DinosaurCatalog.all.count
-        guard unlocked.count == totalCatalogCount,
-              settings.lastCollectionCompleteCatalogSize != totalCatalogCount else { return }
-        settings.lastCollectionCompleteCatalogSize = totalCatalogCount
+        guard CollectionCompleteGate.shouldCelebrate(
+            unlockedIDs: Set(unlocked.map(\.dinosaurID)),
+            lastCelebratedCatalogSize: settings.lastCollectionCompleteCatalogSize
+        ) else { return }
+        settings.lastCollectionCompleteCatalogSize = DinosaurCatalog.all.count
         collectionCompleteMascots = mostRecentlyHatched(count: 2)
         showCollectionComplete = true
     }
