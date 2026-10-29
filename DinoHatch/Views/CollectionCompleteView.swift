@@ -1,14 +1,19 @@
 import SwiftUI
 
-/// Shown once the entire catalog (regular + Secret Rare) has been hatched —
-/// see `RootTabView`'s trigger check against
-/// `AppSettings.lastCollectionCompleteCatalogSize`. `mascots` is expected to
+/// Shown twice over a collection's life (see `CollectionCompleteGate`): once
+/// every regular dinosaur is hatched (`.allRegular`, the 27/27 moment —
+/// a star instead of the trophy, plus a teaser that secret dinosaurs are
+/// still hiding in the eggs), and again once the entire catalog, Secret
+/// Rare included, is (`.everything`). `mascots` is expected to
 /// be the two most recently hatched dinosaurs (naturally includes whichever
 /// one completed the set) rather than a hardcoded pair, so this stays
 /// correct as the catalog grows across future waves — see the call site.
 struct CollectionCompleteView: View {
     let mascots: [Dinosaur]
+    var milestone: CollectionCompleteGate.Milestone = .everything
     var onDismiss: () -> Void
+
+    private var isEverything: Bool { milestone == .everything }
 
     // Same entrance-pop-plus-haptic treatment as HatchRevealView.hasAppeared
     // — this screen is the bigger of the two celebrations (the whole
@@ -21,7 +26,7 @@ struct CollectionCompleteView: View {
             Spacer()
 
             VStack(spacing: 16) {
-                Image(systemName: "trophy.fill")
+                Image(systemName: isEverything ? "trophy.fill" : "star.fill")
                     .font(.system(size: 34))
                     .foregroundStyle(.white)
                     .padding(24)
@@ -29,11 +34,14 @@ struct CollectionCompleteView: View {
                     .scaleEffect(hasAppeared ? 1 : 0.3)
                     .opacity(hasAppeared ? 1 : 0)
 
-                Text("Collection Complete!")
+                (isEverything ? Text("Collection Complete!") : Text("You Found Every Dinosaur!"))
                     .font(.title2.bold())
+                    .multilineTextAlignment(.center)
                     .opacity(hasAppeared ? 1 : 0)
 
-                Text("You've hatched every dinosaur in the collection. Amazing work, paleontologist!")
+                (isEverything
+                    ? Text("You've hatched every dinosaur in the collection. Amazing work, paleontologist!")
+                    : Text("Amazing work, paleontologist! But some say secret dinosaurs are still hiding in the eggs..."))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
@@ -50,7 +58,7 @@ struct CollectionCompleteView: View {
                 .opacity(hasAppeared ? 1 : 0)
 
                 ZStack {
-                    Text("More dinosaurs are on their way...")
+                    (isEverything ? Text("More dinosaurs are on their way...") : Text("Keep hatching to find them!"))
                         .font(.footnote.bold())
                         .foregroundStyle(Color.dinoGreen)
                         .multilineTextAlignment(.center)
@@ -98,6 +106,10 @@ struct CollectionCompleteView: View {
     }
 }
 
-#Preview {
+#Preview("Everything") {
     CollectionCompleteView(mascots: [DinosaurCatalog.all[0], DinosaurCatalog.all[1]]) {}
+}
+
+#Preview("All regular") {
+    CollectionCompleteView(mascots: [DinosaurCatalog.all[0], DinosaurCatalog.all[1]], milestone: .allRegular) {}
 }

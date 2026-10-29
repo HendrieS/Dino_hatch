@@ -51,6 +51,12 @@ final class AppSettings {
     /// the Wave 1/2 backlog item) gets fully hatched too, instead of only
     /// ever celebrating once per install.
     var lastCollectionCompleteCatalogSize: Int?
+    /// The number of regular (non-secret) dinosaurs at which the smaller
+    /// "You Found Every Dinosaur!" celebration last played — the 27/27
+    /// moment, which teases the Secret Rare dinosaurs still to come. Nil if
+    /// never shown. Same grows-with-the-catalog reasoning as
+    /// `lastCollectionCompleteCatalogSize`.
+    var lastAllRegularCompleteCount: Int?
     /// Opt-in parental control, off by default — while true, cancelling a
     /// running timer requires solving `ParentalGateView`'s math check first
     /// (same check as reaching Settings), so a timer set for quiet time,

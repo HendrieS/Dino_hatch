@@ -497,6 +497,46 @@
         }
       }
     },
+    "Amazing work, paleontologist! But some say secret dinosaurs are still hiding in the eggs..." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Großartige Arbeit! Aber man munkelt, dass sich noch geheime Dinosaurier in den Eiern verstecken..."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Amazing work, paleontologist! But some say secret dinosaurs are still hiding in the eggs..."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Buen trabajo! Pero dicen que todavía hay dinosaurios secretos escondidos en los huevos..."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bravo, jeune paléontologue ! Mais on raconte que des dinosaures secrets se cachent encore dans les œufs..."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Knap werk, jonge paleontoloog! Maar er wordt gefluisterd dat er nog geheime dinosaurussen in de eieren verstopt zitten..."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отличная работа! Но говорят, что в яйцах ещё прячутся секретные динозавры..."
+          }
+        }
+      }
+    },
     "An egg is ready to hatch!" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -4335,6 +4375,46 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Только возраст"
+          }
+        }
+      }
+    },
+    "Keep hatching to find them!" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Brüte weiter, um sie zu finden!"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keep hatching to find them!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Sigue incubando para encontrarlos!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue à faire éclore des œufs pour les trouver !"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blijf uitbroeden om ze te vinden!"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Продолжай высиживать яйца, чтобы их найти!"
           }
         }
       }
@@ -9283,6 +9363,46 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Вы можете в любой момент изменить возраст или удалить всё (коллекцию, настройки таймера и будильника) в Настройках. Простой математический вопрос не позволяет маленьким детям случайно попасть в Настройки."
+          }
+        }
+      }
+    },
+    "You Found Every Dinosaur!" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du hast jeden Dinosaurier gefunden!"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You Found Every Dinosaur!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Has encontrado todos los dinosaurios!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu as trouvé tous les dinosaures !"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Je hebt elke dinosaurus gevonden!"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Все динозавры найдены!"
           }
         }
       }

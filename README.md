@@ -805,6 +805,11 @@ feedback: one tap instead of two). Check before shipping build 4:
 - [ ] Collection's search field: the keyboard doesn't push the bar up
 - [ ] iPad: the three tabs stay grouped in the middle of the bar; iPad mini
       in landscape gets the compact Timer layout
+- [ ] Two collection celebrations: hatching the last of the 27 regular
+      dinosaurs shows "You Found Every Dinosaur!" (star, secret-dinosaur
+      teaser); hatching the last secret one shows "Collection Complete!"
+      (trophy). Unlock All right after Reset Collection shows only the
+      trophy one. Reset Collection lets both play again
 
 ## Before you release
 

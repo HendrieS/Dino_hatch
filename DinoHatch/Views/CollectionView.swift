@@ -476,12 +476,13 @@ struct CollectionView: View {
         for record in unlocked {
             modelContext.delete(record)
         }
-        // Also forget that the Collection Complete celebration already
-        // played — otherwise re-hatching the full set after a reset stays
-        // silent, since it only ever plays once per catalog size.
+        // Also forget that the collection celebrations already played —
+        // otherwise re-hatching the set after a reset stays silent, since
+        // each only ever plays once per catalog size.
         let settings = (try? modelContext.fetch(FetchDescriptor<AppSettings>())) ?? []
         for setting in settings {
             setting.lastCollectionCompleteCatalogSize = nil
+            setting.lastAllRegularCompleteCount = nil
         }
     }
     #endif

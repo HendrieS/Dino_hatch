@@ -22,6 +22,7 @@ struct RootTabView: View {
     @State private var showWhatsNew = false
     @State private var collectionCompleteMascots: [Dinosaur] = []
     @State private var showCollectionComplete = false
+    @State private var collectionCompleteMilestone: CollectionCompleteGate.Milestone = .everything
     @State private var selectedTab: Tab = .timer
     /// True while `TimerHomeView` is showing its hatch animation or reveal
     /// — see `showsTabBar` below.
@@ -191,7 +192,7 @@ struct RootTabView: View {
             WhatsNewView(notes: whatsNewNotes)
         }
         .fullScreenCover(isPresented: $showCollectionComplete) {
-            CollectionCompleteView(mascots: collectionCompleteMascots) {
+            CollectionCompleteView(mascots: collectionCompleteMascots, milestone: collectionCompleteMilestone) {
                 showCollectionComplete = false
             }
         }
@@ -332,8 +333,10 @@ struct RootTabView: View {
         modelContext.insert(UnlockedDinosaur(dinosaurID: dinosaur.id))
     }
 
-    /// Fires the first time the *entire* catalog (regular + Secret Rare) is
-    /// hatched, whether that happened via the timer or the alarm — both
+    /// Fires the first time every regular dinosaur is hatched (the 27/27
+    /// moment, teasing the Secret Rare ones) and again once the *entire*
+    /// catalog is — see `CollectionCompleteGate`. Either can happen via the
+    /// timer or the alarm — both
     /// paths insert into the same `UnlockedDinosaur` table this view already
     /// queries, so watching `unlocked.count` catches either one without
     /// needing separate logic per path. Compares against
@@ -343,11 +346,18 @@ struct RootTabView: View {
     /// still showing its own fullScreenCover — see the `onChange` above.
     private func checkCollectionComplete() {
         guard pendingAlarmDinosaur == nil, let settings = appSettings.first else { return }
-        guard CollectionCompleteGate.shouldCelebrate(
+        guard let milestone = CollectionCompleteGate.milestoneToCelebrate(
             unlockedIDs: Set(unlocked.map(\.dinosaurID)),
-            lastCelebratedCatalogSize: settings.lastCollectionCompleteCatalogSize
+            lastCelebratedCatalogSize: settings.lastCollectionCompleteCatalogSize,
+            lastCelebratedRegularCount: settings.lastAllRegularCompleteCount
         ) else { return }
-        settings.lastCollectionCompleteCatalogSize = DinosaurCatalog.all.count
+        // Either milestone covers the all-regular one — reaching the whole
+        // catalog at once shouldn't leave the smaller teaser pending.
+        settings.lastAllRegularCompleteCount = DinosaurCatalog.all.filter { !$0.isSecret }.count
+        if milestone == .everything {
+            settings.lastCollectionCompleteCatalogSize = DinosaurCatalog.all.count
+        }
+        collectionCompleteMilestone = milestone
         collectionCompleteMascots = mostRecentlyHatched(count: 2)
         showCollectionComplete = true
     }
