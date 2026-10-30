@@ -810,6 +810,10 @@ feedback: one tap instead of two). Check before shipping build 4:
       teaser); hatching the last secret one shows "Collection Complete!"
       (trophy). Unlock All right after Reset Collection shows only the
       trophy one. Reset Collection lets both play again
+- [ ] After a hatch (timer and alarm), See Details opens the dinosaur's
+      details screen; the heart works there; Done returns to the reveal,
+      and Awesome! still finishes it. Check the button clears the ferns on
+      the SE, and fits in German/French
 
 ## Before you release
 

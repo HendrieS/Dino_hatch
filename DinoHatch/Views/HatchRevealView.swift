@@ -1,8 +1,19 @@
 import SwiftUI
+import SwiftData
 
 struct HatchRevealView: View {
     let dinosaur: Dinosaur
     var onDismiss: () -> Void
+
+    @Query private var unlockedRecords: [UnlockedDinosaur]
+    /// Opens the same details screen Collection shows (facts, x-ray, map,
+    /// favorite), added after tester feedback that a freshly hatched
+    /// dinosaur could only be dismissed — not explored — from here. The
+    /// dinosaur is already saved by the time this screen shows (both the
+    /// timer and alarm flows unlock it as the hatch animation finishes), so
+    /// favoriting works right away. Done returns here rather than finishing
+    /// the reveal, so the flow still ends on Awesome!.
+    @State private var showDetails = false
 
     // Drives the reveal's entrance pop and the success haptic that
     // accompanies it — false for one frame after appearing, then flipped
@@ -37,6 +48,20 @@ struct HatchRevealView: View {
 
             Spacer()
 
+            Button {
+                showDetails = true
+            } label: {
+                Label("See Details", systemImage: "book.fill")
+                    .font(.system(.headline, design: .rounded))
+                    .foregroundStyle(Color.dinoGreenShadow)
+                    .padding(.horizontal, 20)
+                    .frame(minHeight: 44)
+                    .background(.white.opacity(0.7), in: Capsule())
+                    .overlay(Capsule().stroke(Color.dinoGreen, lineWidth: 2))
+            }
+            .buttonStyle(.plain)
+            .opacity(hasAppeared ? 1 : 0)
+
             Button("Awesome!", action: onDismiss)
                 .buttonStyle(.dinoChunkyGreen)
                 // Wider than the fun-fact text's own 32pt inset — this sits
@@ -56,9 +81,25 @@ struct HatchRevealView: View {
             }
         }
         .sensoryFeedback(.success, trigger: hasAppeared) { _, newValue in newValue }
+        .fullScreenCover(isPresented: $showDetails) {
+            NavigationStack {
+                DinosaurDetailView(
+                    dinosaur: dinosaur,
+                    unlockedAt: unlockedRecords.first(where: { $0.dinosaurID == dinosaur.id })?.unlockedAt
+                )
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button("Done") {
+                            showDetails = false
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
 #Preview {
     HatchRevealView(dinosaur: DinosaurCatalog.all[0]) {}
+        .modelContainer(for: UnlockedDinosaur.self, inMemory: true)
 }
