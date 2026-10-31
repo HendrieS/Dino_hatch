@@ -56,6 +56,10 @@ struct WhatsNewView: View {
                     .padding(.bottom, 12)
                 }
                 .padding()
+                // Room for Got it! to scroll clear of the fern corners
+                // (which render in front of content) when there are enough
+                // notes to scroll — same clearance as Collection's grid.
+                .padding(.bottom, 90)
                 .frame(maxWidth: 500)
                 .frame(maxWidth: .infinity)
             }

@@ -53,6 +53,15 @@ struct SupportUsView: View {
                         Task { await store.restorePurchases() }
                     }
                 }
+
+                // Same empty spacer row as the end of SettingsView, so
+                // Restore Purchases can scroll clear of the fern corners.
+                Section {
+                    Color.clear
+                        .frame(height: 50)
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
+                }
             }
             .navigationTitle("Support Us")
             .navigationBarTitleDisplayMode(.inline)
