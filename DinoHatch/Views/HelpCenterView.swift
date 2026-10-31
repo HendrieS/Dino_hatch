@@ -83,6 +83,17 @@ struct HelpCenterView: View {
             } footer: {
                 Text("Send us an email and we'll take a look.")
             }
+
+            // Same empty spacer row as the end of SettingsView: the fern
+            // corners render in front of content, so without it the bug
+            // report address and its footer could never scroll clear of
+            // them (tester feedback).
+            Section {
+                Color.clear
+                    .frame(height: 50)
+                    .listRowBackground(Color.clear)
+                    .listRowSeparator(.hidden)
+            }
         }
         .navigationTitle("Help Center")
         .navigationBarTitleDisplayMode(.inline)
